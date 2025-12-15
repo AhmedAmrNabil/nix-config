@@ -2,6 +2,8 @@
 
 {
 
+  nixpkgs.config.allowUnfree = true;
+
   home.username = "btngana";
   home.homeDirectory = "/home/btngana";
   programs.home-manager.enable = true;
@@ -35,7 +37,6 @@
       init.defaultBranch = "main";
     };
   };
-
 
   home.stateVersion = "25.11";
 
