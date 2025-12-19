@@ -6,6 +6,7 @@
     ./home/programs/starship.nix
     ./home/programs/foot.nix
     ./home/programs/micro.nix
+    ./home/programs/btop.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
@@ -20,13 +21,11 @@
     git
     nodejs_22
     pnpm
-    starship
     eza
     fastfetch
     zoxide
     vscode
     spotify
-    foot
     btop
       (discord.override {
             withOpenASAR = true; # can do this here too
