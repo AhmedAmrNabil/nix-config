@@ -5,6 +5,7 @@
     ./home/programs/fish.nix
     ./home/programs/starship.nix
     ./home/programs/foot.nix
+    ./home/programs/micro.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
