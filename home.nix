@@ -7,6 +7,7 @@
     ./home/programs/foot.nix
     ./home/programs/micro.nix
     ./home/programs/btop.nix
+    # ./home/programs/alactritty.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
