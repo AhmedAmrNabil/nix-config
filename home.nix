@@ -2,6 +2,8 @@
   config,
   lib,
   pkgs,
+  inputs,
+  localPkgs,
   ...
 }:
 
@@ -32,8 +34,8 @@
     eza
     zoxide
     vscode
-    spotify
     nixfmt
+    localPkgs.spotify-adblock
     (discord.override {
       withOpenASAR = true; # can do this here too
       withVencord = true;

@@ -8,11 +8,28 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ... }:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config = {
+          allowUnfree = true;
+        };
+      };
+      localPkgs = import ./pkgs {
+        inherit pkgs;
+      };
+    in
     {
       nixosConfigurations = {
         desktop-nixos = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          system = system;
           modules = [
             ./configuration.nix
           ];
@@ -20,8 +37,9 @@
       };
       homeConfigurations = {
         btngana = home-manager.lib.homeManagerConfiguration {
-          pkgs = import nixpkgs { system = "x86_64-linux"; };
+          pkgs = pkgs;
           modules = [ ./home.nix ];
+          extraSpecialArgs = { inherit inputs localPkgs; };
         };
       };
     };
