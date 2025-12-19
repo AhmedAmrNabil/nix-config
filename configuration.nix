@@ -133,6 +133,18 @@
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+
+  nix = {
+      settings = {
+        substituters = [
+          "https://nix-community.cachix.org"
+          "https://cache.nixos.org"
+        ];
+        trusted-public-keys = [
+        	"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+        ];
+      };
+    };
   
 
   # Copy the NixOS configuration file and link it from the resulting system
