@@ -16,10 +16,13 @@
     nodejs_22
     pnpm
     starship
-	  eza
+	eza
     fastfetch
+	zoxide
     vscode
     spotify
+	foot
+	btop
     (discord.override {
           withOpenASAR = true; # can do this here too
           withVencord = true;
