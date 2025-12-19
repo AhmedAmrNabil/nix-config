@@ -1,5 +1,6 @@
 if status is-interactive
     # Commands to run in interactive sessions can go here
+    export "MICRO_TRUECOLOR=1" # Enable true color support in micro editor
 
     function starship_transient_prompt_func
             starship module character
