@@ -3,6 +3,7 @@
 {
   imports = [
     ./home/programs/fish.nix
+    ./home/programs/starship.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
