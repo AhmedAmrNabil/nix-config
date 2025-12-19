@@ -1,7 +1,9 @@
 {config, lib, pkgs, ...}:
 
 {
-
+  imports = [
+    ./home/programs/fish.nix
+  ];
   nixpkgs.config.allowUnfree = true;
 
   home.username = "btngana";
@@ -16,17 +18,17 @@
     nodejs_22
     pnpm
     starship
-	eza
+    eza
     fastfetch
-	zoxide
+    zoxide
     vscode
     spotify
-	foot
-	btop
-    (discord.override {
-          withOpenASAR = true; # can do this here too
-          withVencord = true;
-    })
+    foot
+    btop
+      (discord.override {
+            withOpenASAR = true; # can do this here too
+            withVencord = true;
+      })
 
   ];
 

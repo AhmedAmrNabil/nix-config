@@ -1,0 +1,1 @@
+rofi -show drun -scroll-method 0 -drun-match-fields all -drun-display-format "{name}" -no-drun-show-actions -terminal kitty -theme "$HOME"/.config/rofi/config.rasi
