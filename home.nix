@@ -4,6 +4,7 @@
   imports = [
     ./home/programs/fish.nix
     ./home/programs/starship.nix
+    ./home/programs/foot.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
