@@ -9,6 +9,7 @@
     ./home/programs/btop.nix
     # ./home/programs/alactritty.nix
     ./home/programs/fastfetch.nix
+    ./home/programs/cava.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
