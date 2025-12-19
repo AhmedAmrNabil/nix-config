@@ -8,6 +8,7 @@
     ./home/programs/micro.nix
     ./home/programs/btop.nix
     # ./home/programs/alactritty.nix
+    ./home/programs/fastfetch.nix
   ];
   nixpkgs.config.allowUnfree = true;
 
@@ -23,7 +24,6 @@
     nodejs_22
     pnpm
     eza
-    fastfetch
     zoxide
     vscode
     spotify
