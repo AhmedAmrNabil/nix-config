@@ -1,4 +1,9 @@
-{config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -28,9 +33,10 @@
     zoxide
     vscode
     spotify
+    nixfmt
     (discord.override {
-          withOpenASAR = true; # can do this here too
-          withVencord = true;
+      withOpenASAR = true; # can do this here too
+      withVencord = true;
     })
 
   ];
@@ -39,7 +45,7 @@
     enable = true;
     settings = {
       user = {
-        name  = "AhmedAmrNabil";
+        name = "AhmedAmrNabil";
         email = "ahmedamr24680@gmail.com";
       };
       init.defaultBranch = "main";

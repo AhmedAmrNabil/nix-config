@@ -2,13 +2,18 @@
 # your system. Help is available in the configuration.nix(5) man page, on
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.systemd-boot.enable = true;
@@ -20,7 +25,7 @@
   networking.hostName = "desktop-nixos"; # Define your hostname.
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
@@ -41,7 +46,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-
   # KDE stuff
   services = {
     desktopManager.plasma6.enable = true;
@@ -49,8 +53,7 @@
     displayManager.sddm.wayland.enable = true;
   };
   security.polkit.enable = true;
-  
-  
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
@@ -70,11 +73,11 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-   users.users.btngana = {
-     isNormalUser = true;
-     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
-     shell = pkgs.fish;
-   };
+  users.users.btngana = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.fish;
+  };
   programs.fish.enable = true;
 
   # List packages installed in system profile.
@@ -86,14 +89,14 @@
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nano
     micro
-    
+
     # KDE
     kdePackages.kcalc # Calculator
     kdePackages.ksystemlog # KDE SystemLog Application
     kdePackages.sddm-kcm # Configuration module for SDDM
     kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
     kdePackages.partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
-    
+
     # Non-KDE graphical packages
     hardinfo2 # System information and benchmarks for Linux systems
     vlc # Cross-platform media player and streaming server
@@ -102,9 +105,11 @@
     microsoft-edge
   ];
 
-
   # enable flakes
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -120,13 +125,13 @@
   services.openssh.enable = true;
 
   # Nvidia stuff
-   	hardware.graphics.enable = true;
-  	services.xserver.videoDrivers = [ "nvidia" ];
-  	hardware.nvidia.open = true;  # see the note above
-  	hardware.nvidia.modesetting.enable = true;
-	environment.sessionVariables = {
-	    NIXOS_OZONE_WL = "1";
-	};
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true; # see the note above
+  hardware.nvidia.modesetting.enable = true;
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -135,17 +140,16 @@
   # networking.firewall.enable = false;
 
   nix = {
-      settings = {
-        substituters = [
-          "https://nix-community.cachix.org"
-          "https://cache.nixos.org"
-        ];
-        trusted-public-keys = [
-        	"nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-        ];
-      };
+    settings = {
+      substituters = [
+        "https://nix-community.cachix.org"
+        "https://cache.nixos.org"
+      ];
+      trusted-public-keys = [
+        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+      ];
     };
-  
+  };
 
   # Copy the NixOS configuration file and link it from the resulting system
   # (/run/current-system/configuration.nix). This is useful in case you
@@ -171,4 +175,3 @@
   # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
   system.stateVersion = "25.05"; # Did you read the comment?
 }
-
