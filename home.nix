@@ -26,11 +26,10 @@
     zoxide
     vscode
     spotify
-    btop
-      (discord.override {
-            withOpenASAR = true; # can do this here too
-            withVencord = true;
-      })
+    (discord.override {
+          withOpenASAR = true; # can do this here too
+          withVencord = true;
+    })
 
   ];
 
