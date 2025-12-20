@@ -43,10 +43,10 @@
       "format": "{name}"
     },
     {
-      "type": "btrfs",
+      "type": "disk",
       "keyColor": "bright_blue",
       "key": "",
-      "format": "{total} {used-percentage}"
+      "format": "{size-total} {size-percentage}"
     },
     {
       "type": "separator",
