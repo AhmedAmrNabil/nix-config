@@ -120,6 +120,10 @@
     "flakes"
   ];
 
+  # Enable local time synchronization
+  # to prevent issues with dual booting Windows
+  time.hardwareClockInLocalTime = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
