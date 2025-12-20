@@ -17,6 +17,7 @@
     # ./home/programs/alactritty.nix
     ./home/programs/fastfetch.nix
     ./home/programs/cava.nix
+    inputs.spicetify-nix.homeManagerModules.default
   ];
   nixpkgs.config.allowUnfree = true;
 
@@ -35,7 +36,7 @@
     zoxide
     vscode
     nixfmt
-    localPkgs.spotify-adblock
+    # localPkgs.spotify-adblock
     (discord.override {
       withOpenASAR = true; # can do this here too
       withVencord = true;
@@ -53,6 +54,20 @@
       init.defaultBranch = "main";
     };
   };
+
+  programs.spicetify =
+    let
+      spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+    in
+    {
+      enable = true;
+      theme = spicePkgs.themes.catppuccin;
+      colorScheme = "mocha";
+      enabledExtensions = with spicePkgs.extensions; [
+        adblock
+        shuffle
+      ];
+    };
 
   home.stateVersion = "25.11";
 
