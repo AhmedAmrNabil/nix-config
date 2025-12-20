@@ -31,7 +31,7 @@
         desktop-nixos = nixpkgs.lib.nixosSystem {
           system = system;
           modules = [
-            ./configuration.nix
+            ./hosts/desktop/configuration.nix
           ];
         };
       };
