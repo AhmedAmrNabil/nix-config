@@ -17,6 +17,7 @@
     # ./home/programs/alactritty.nix
     ./home/programs/fastfetch.nix
     ./home/programs/cava.nix
+    ./home/programs/vscode.nix
     inputs.spicetify-nix.homeManagerModules.default
   ];
   nixpkgs.config.allowUnfree = true;

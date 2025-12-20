@@ -1,0 +1,236 @@
+{
+  "editor.insertSpaces": false,
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', \"segoe ui\", monospace",
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "workbench.panel.defaultLocation": "right",
+  "editor.fontSize": 18,
+  "files.autoSave": "onFocusChange",
+  "terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "fish": {
+      "path": "C:\\msys64\\msys2_shell.cmd",
+      "args": [
+        "-use-full-path",
+        "-ucrt64",
+        "-defterm",
+        "-no-start",
+        "-here",
+        "-shell",
+        "fish"
+      ]
+    },
+    "arch (WSL)": {
+      "path": "C:\\Windows\\System32\\wsl.exe"
+    },
+    "Windows PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  },
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.lineHeight": 1.6,
+  "explorer.confirmDragAndDrop": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "terminal.integrated.cursorStyle": "underline",
+  "explorer.confirmDelete": false,
+  "git.openRepositoryInParentFolders": "always",
+  "editor.fontLigatures": false,
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "editor.smoothScrolling": true,
+  "vsicons.dontShowNewVersionMessage": true,
+  "terminal.integrated.defaultProfile.linux": "fish",
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "terminal.integrated.minimumContrastRatio": 1,
+
+  "C_Cpp.errorSquiggles": "enabled",
+  "catppuccin.accentColor": "sky",
+  "catppuccin.workbenchMode": "flat",
+  "catppuccin.extraBordersEnabled": true,
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "python.defaultInterpreterPath": "C:\\Users\\btngana\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "editor.fontVariations": true,
+  "markdown.preview.fontSize": 18,
+  "files.exclude": {
+    "**/tempCodeRunnerFile.py": true,
+    "**/tempCodeRunnerFile.cpp": true,
+    "**/tmp/**": true
+  },
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "codesnap.backgroundColor": "#eff1f5\t",
+  "codesnap.shutterAction": "copy",
+  "editor.minimap.enabled": false,
+  "terminal.integrated.fontSize": 16,
+  "cmake.additionalCompilerSearchDirs": [
+    "C:/msys64/mingw32/bin",
+    "C:/msys64/mingw64/bin",
+    "C:/msys64/clang32/bin",
+    "C:/msys64/clang64/bin",
+    "C:/msys64/clangarm64/bin",
+    "C:/msys64/ucrt64/bin"
+  ],
+  "C_Cpp.autocompleteAddParentheses": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "editor.unicodeHighlight.allowedCharacters": {
+    "❯": true
+  },
+  "editor.multiCursorModifier": "ctrlCmd",
+  "cmake.configureOnOpen": false,
+  "codesnap.target": "window",
+  "terminal.integrated.gpuAcceleration": "on",
+  "[cmake]": {
+    "editor.defaultFormatter": "cheshirekow.cmake-format"
+  },
+  "editor.cursorBlinking": "expand",
+  "git.autofetch": true,
+  "livePreview.hostIP": "192.168.1.5",
+  "database-client.capitalizeKeywordsWhenFormatting": true,
+  "[shellscript]": {
+    "editor.defaultFormatter": "shakram02.bash-beautify"
+  },
+  "prettier.semi": true,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "git.ignoreMissingGitWarning": true,
+  "[css]": {
+    "editor.defaultFormatter": "vscode.css-language-features"
+  },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[dockerfile]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true,
+    "**/dist/**": true
+  },
+  "search.exclude": {
+    "**/node_modules/**": true,
+    "**/dist/**": true,
+    "**/tmp/**": true,
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true
+  },
+  "extensions.autoCheckUpdates": false,
+  "search.followSymlinks": false,
+  "editor.accessibilitySupport": "off",
+  "editor.mouseWheelZoom": true,
+  "C_Cpp. intelliSenseCacheSize": 0,
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "explorer.confirmPasteNative": false,
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+  },
+  "database-client.autoSync": true,
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "githubPullRequests.pullBranch": "never",
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+
+  "codesnap.showWindowControls": false,
+  "codesnap.roundedCorners": false,
+  "C_Cpp.clang_format_sortIncludes": false,
+  "[glsl]": {
+    "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
+  },
+  "files.associations": {
+    "*.gs": "glsl",
+    "*.fdg": "json"
+  },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
+  },
+  "C_Cpp.intelliSenseUpdateDelay": 500,
+  "java.saveActions.organizeImports": false,
+  "explorer.fileNesting.patterns": {
+    "*.ts": "${capture}.js",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "tsconfig.json": "tsconfig.*.json",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.db": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.s3db": "${capture}.${extname}-*"
+  },
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+  "http.proxyStrictSSL": false,
+  "remote.autoForwardPortsSource": "hybrid",
+  "workbench.editor.empty.hint": "hidden",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "workbench.activityBar.location": "top",
+  "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++",
+  "workbench.tree.renderIndentGuides": "always",
+  "workbench.tree.indent": 15,
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "vsicons.presets.hideExplorerArrows": true,
+  "material-icon-theme.hidesExplorerArrows": true,
+  "explorer.compactFolders": false,
+  "editor.tabSize": 2,
+  "workbench.startupEditor": "none",
+  "tailwindCSS.classFunctions": ["tw", "clsx", "tw\\.[a-z-]+"],
+  "tailwindCSS.colorDecorators": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[vue]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vhdl-by-hgb.vhdl-formatter.case.keyword": "UpperCase",
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "terminal.integrated.suggest.cdPath": "off",
+  "terminal.integrated.fontFamily": "JetbrainsMono nerd font",
+  "terminal.integrated.stickyScroll.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
