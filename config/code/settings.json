@@ -232,5 +232,8 @@
   "terminal.integrated.suggest.cdPath": "off",
   "terminal.integrated.fontFamily": "JetbrainsMono nerd font",
   "terminal.integrated.stickyScroll.enabled": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  }
 }
