@@ -20,7 +20,7 @@
     bradgashler.htmltagwrap
     bradlc.vscode-tailwindcss
     # brandonkirbyson.vscode-animations
-    catppuccin.catppuccin-vsc
+    # catppuccin.catppuccin-vsc
     # cheshirekow.cmake-format
     # csstools.postcss
     # cweijan.vscode-postgresql-client2
