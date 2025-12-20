@@ -35,6 +35,13 @@
             ./hosts/desktop/configuration.nix
           ];
         };
+
+        laptop-nixos = nixpkgs.lib.nixosSystem {
+          system = system;
+          modules = [
+            ./hosts/laptop/configuration.nix
+          ];
+        };
       };
       homeConfigurations = {
         btngana = home-manager.lib.homeManagerConfiguration {
