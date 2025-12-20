@@ -37,6 +37,7 @@
     eza
     zoxide
     nixfmt
+    xournalpp
     # localPkgs.spotify-adblock
     (discord.override {
       withOpenASAR = true; # can do this here too

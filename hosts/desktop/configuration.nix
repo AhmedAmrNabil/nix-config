@@ -63,6 +63,17 @@
   };
   security.polkit.enable = true;
 
+  # Enable OpenTabletDriver for drawing tablets
+  hardware.opentabletdriver = {
+    enable = true;
+    daemon.enable = true;
+  };
+
+  # Required by OpenTabletDriver
+  hardware.uinput.enable = true;
+  boot.kernelModules = [ "uinput" ];
+  boot.blacklistedKernelModules = [ "wacom" ];
+
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
   # services.xserver.xkb.options = "eurosign:e,caps:escape";
