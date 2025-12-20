@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+  programs.vscode.enable = true;
+
   xdg.configFile."Code/User/settings.json".source =
     config.lib.file.mkOutOfStoreSymlink "/home/btngana/dotfiles/config/code/settings.json";
 
@@ -9,37 +11,36 @@
 
   programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
     adpyke.codesnap
-    alimozdemir.vscode-nuxt-dx-tools
-    antfu.goto-alias
-    arahata.linter-actionlint
+    # alimozdemir.vscode-nuxt-dx-tools
+    # antfu.goto-alias
+    # arahata.linter-actionlint
     arrterian.nix-env-selector
     bbenoist.nix
-    be5invis.vscode-custom-css
+    # be5invis.vscode-custom-css
     bradgashler.htmltagwrap
     bradlc.vscode-tailwindcss
-    brandonkirbyson.vscode-animations
+    # brandonkirbyson.vscode-animations
     catppuccin.catppuccin-vsc
-    chadalen.vscode-jetbrains-icon-theme
-    cheshirekow.cmake-format
-    csstools.postcss
-    cweijan.vscode-postgresql-client2
+    # cheshirekow.cmake-format
+    # csstools.postcss
+    # cweijan.vscode-postgresql-client2
     dbaeumer.vscode-eslint
-    dlasagno.rasi
-    dsznajder.es7-react-js-snippets
-    dtoplak.vscode-glsllint
+    # dlasagno.rasi
+    # dsznajder.es7-react-js-snippets
+    # dtoplak.vscode-glsllint
     eamodio.gitlens
     editorconfig.editorconfig
     esbenp.prettier-vscode
-    fnando.linter
-    formulahendry.auto-rename-tag
+    # fnando.linter
+    # formulahendry.auto-rename-tag
     github.copilot
     github.copilot-chat
     github.vscode-github-actions
     grapecity.gc-excelviewer
-    heybourn.headwind
-    icrawl.discord-vscode
+    # heybourn.headwind
+    # icrawl.discord-vscode
     jnoortheen.nix-ide
-    jorgeserrano.vscode-csharp-snippets
+    # jorgeserrano.vscode-csharp-snippets
     lokalise.i18n-ally
     mads-hartmann.bash-ide-vscode
     mechatroner.rainbow-csv
@@ -48,11 +49,11 @@
     ms-azuretools.vscode-containers
     ms-azuretools.vscode-docker
     ms-dotnettools.vscode-dotnet-runtime
-    ms-python.autopep8
+    # ms-python.autopep8
     ms-python.debugpy
     ms-python.python
     ms-python.vscode-pylance
-    ms-python.vscode-python-envs
+    # ms-python.vscode-python-envs
     ms-toolsai.jupyter
     ms-toolsai.jupyter-keymap
     ms-toolsai.jupyter-renderers
@@ -66,35 +67,35 @@
     ms-vscode.cmake-tools
     ms-vscode.cpptools
     ms-vscode.cpptools-extension-pack
-    ms-vscode.cpptools-themes
+    # ms-vscode.cpptools-themes
     ms-vscode.hexeditor
     ms-vscode.live-server
     ms-vscode.makefile-tools
     ms-vscode.remote-explorer
-    ms-vscode.remote-server
-    ms-vscode.vscode-typescript-next
+    # ms-vscode.remote-server
+    # ms-vscode.vscode-typescript-next
     mshr-h.veriloghdl
     naumovs.color-highlight
-    nuxt.mdc
-    nuxtr.nuxt-vscode-extentions
-    nuxtr.nuxtr-vscode
+    # nuxt.mdc
+    # nuxtr.nuxt-vscode-extentions
+    # nuxtr.nuxtr-vscode
     oderwat.indent-rainbow
-    p2l2.vhdl-by-hgb
-    pinage404.nix-extension-pack
+    # p2l2.vhdl-by-hgb
+    # pinage404.nix-extension-pack
     pkief.material-icon-theme
-    postman.postman-for-vscode
+    # postman.postman-for-vscode
     prisma.prisma
-    raczzalan.webgl-glsl-editor
-    sdras.vue-vscode-snippets
-    shakram02.bash-beautify
-    slevesque.shader
+    # raczzalan.webgl-glsl-editor
+    # sdras.vue-vscode-snippets
+    # shakram02.bash-beautify
+    # slevesque.shader
     smcpeak.default-keys-windows
-    thang-nm.catppuccin-perfect-icons
+    # thang-nm.catppuccin-perfect-icons
     tomoki1207.pdf
-    typespec.typespec-vscode
+    # typespec.typespec-vscode
     usernamehw.errorlens
-    vendicated.vencord-companion
-    vitest.explorer
+    # vendicated.vencord-companion
+    # vitest.explorer
     vscode-icons-team.vscode-icons
     vue.volar
     wix.vscode-import-cost

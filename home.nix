@@ -36,7 +36,6 @@
     pnpm
     eza
     zoxide
-    vscode
     nixfmt
     # localPkgs.spotify-adblock
     (discord.override {
