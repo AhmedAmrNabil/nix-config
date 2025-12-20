@@ -18,6 +18,7 @@
     ./home/programs/fastfetch.nix
     ./home/programs/cava.nix
     ./home/programs/vscode.nix
+    ./home/fonts.nix
     inputs.spicetify-nix.homeManagerModules.default
   ];
   nixpkgs.config.allowUnfree = true;
