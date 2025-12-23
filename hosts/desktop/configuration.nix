@@ -15,9 +15,20 @@
     ./hardware-configuration.nix
   ];
 
-  # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader = {
+    systemd-boot = {
+      enable = true;
+      edk2-uefi-shell.enable = true;
+      windows = {
+        "windows-11" = {
+          title= "Windows 11";
+          efiDeviceHandle = "FS2";
+          sortKey = "a_windows";
+        };
+      };
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   # use the latest kernel
   boot.kernelPackages = pkgs.linuxPackages_latest;
@@ -111,14 +122,9 @@
     micro
 
     # KDE
-    kdePackages.kcalc # Calculator
-    kdePackages.ksystemlog # KDE SystemLog Application
     kdePackages.sddm-kcm # Configuration module for SDDM
-    kdePackages.isoimagewriter # Optional: Program to write hybrid ISO files onto USB disks
     kdePackages.partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
 
-    # Non-KDE graphical packages
-    hardinfo2 # System information and benchmarks for Linux systems
     vlc # Cross-platform media player and streaming server
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
@@ -184,6 +190,20 @@
       "noatime"
     ];
     "/persist".options = [ "compress=zstd" ];
+  };
+
+  # Mounting windows stuff:
+
+  fileSystems."/d" = {
+    device = "/dev/disk/by-uuid/01DAB93F51B44DA0";
+    fsType = "ntfs";
+    options = [ "windows_names" "uid=1000" "gid=100" "umask=022" "big_writes" "nofail" "x-systemd.device-timeout=3s" ];
+  };
+
+  fileSystems."/e" = {
+    device = "/dev/disk/by-uuid/7A5AE84D5AE807A9";
+    fsType = "ntfs";
+    options = [ "windows_names" "uid=1000" "gid=100" "umask=022" "big_writes" "nofail" "x-systemd.device-timeout=3s" ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system
