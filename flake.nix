@@ -26,41 +26,31 @@
       localPkgs = import ./pkgs {
         inherit pkgs;
       };
+
+      mkSystem =
+        host:
+        nixpkgs.lib.nixosSystem {
+          inherit system;
+          modules = [ ./hosts/${host}/configuration.nix ];
+        };
+
+      mkHome =
+        profile:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [ ./home/profiles/${profile}.nix ];
+          extraSpecialArgs = { inherit inputs localPkgs; };
+        };
     in
     {
       nixosConfigurations = {
-        desktop-nixos = nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = [
-            ./hosts/desktop/configuration.nix
-          ];
-        };
-
-        laptop-nixos = nixpkgs.lib.nixosSystem {
-          system = system;
-          modules = [
-            ./hosts/laptop/configuration.nix
-          ];
-        };
+        desktop-nixos = mkSystem "desktop";
+        laptop-nixos = mkSystem "laptop";
       };
       homeConfigurations = {
-        "desktop-nixos" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          modules = [ ./home/profiles/desktop.nix ];
-          extraSpecialArgs = { inherit inputs localPkgs; };
-        };
-
-        "laptop-nixos" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          modules = [ ./home/profiles/desktop.nix ];
-          extraSpecialArgs = { inherit inputs localPkgs; };
-        };
-
-        "wsl-nixos" = home-manager.lib.homeManagerConfiguration {
-          pkgs = pkgs;
-          modules = [ ./home/profiles/wsl.nix ];
-          extraSpecialArgs = { inherit inputs localPkgs; };
-        };
+        "desktop-nixos" = mkHome "desktop";
+        "laptop-nixos" = mkHome "laptop";
+        "wsl-nixos" = mkHome "wsl";
       };
     };
 }
