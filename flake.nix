@@ -44,9 +44,21 @@
         };
       };
       homeConfigurations = {
-        btngana = home-manager.lib.homeManagerConfiguration {
+        "desktop-nixos" = home-manager.lib.homeManagerConfiguration {
           pkgs = pkgs;
-          modules = [ ./home.nix ];
+          modules = [ ./home/profiles/desktop.nix ];
+          extraSpecialArgs = { inherit inputs localPkgs; };
+        };
+
+        "laptop-nixos" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          modules = [ ./home/profiles/desktop.nix ];
+          extraSpecialArgs = { inherit inputs localPkgs; };
+        };
+
+        "wsl-nixos" = home-manager.lib.homeManagerConfiguration {
+          pkgs = pkgs;
+          modules = [ ./home/profiles/wsl.nix ];
           extraSpecialArgs = { inherit inputs localPkgs; };
         };
       };

@@ -251,5 +251,26 @@
     "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
     "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
   },
-  "terminal.integrated.suggest.enabled": false
+  "terminal.integrated.suggest.enabled": false,
+  "nix.serverPath": "nixd",
+  "nixEnvSelector.useFlakes": true,
+  "nix.enableLanguageServer": true,
+  "nix.serverSettings": {
+    "nixd": {
+      "formatting": {
+        "command": ["nixfmt"]
+      },
+      "options": {
+        // By default, this entry will be read from `import <nixpkgs> { }`.
+        // You can write arbitrary Nix expressions here, to produce valid "options" declaration result.
+        // Tip: for flake-based configuration, utilize `builtins.getFlake`
+        "nixos": {
+          "expr": "(builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").nixosConfigurations.<name>.options"
+        },
+        "home-manager": {
+          "expr": "(builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").homeConfigurations.<name>.options"
+        }
+      }
+    }
+  }
 }
