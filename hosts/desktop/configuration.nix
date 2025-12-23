@@ -110,12 +110,7 @@
     shell = pkgs.fish;
   };
 
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      ls = "eza --icons --hyperlink --color=always --group-directories-first";
-    };
-  };
+  programs.fish.enable = true;
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).

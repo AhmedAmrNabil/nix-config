@@ -18,7 +18,6 @@
     nodejs_22
     pnpm
     eza
-    zoxide
     nixfmt
     nixd
   ];
