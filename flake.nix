@@ -17,12 +17,14 @@
     }@inputs:
     let
       system = "x86_64-linux";
+      
       pkgs = import nixpkgs {
         inherit system;
         config = {
           allowUnfree = true;
         };
       };
+
       localPkgs = import ./pkgs {
         inherit pkgs;
       };
@@ -31,15 +33,23 @@
         host:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = [ ./hosts/${host}/configuration.nix ];
+          modules = [
+            ./hosts/${host}/configuration.nix
+          ];
+          specialArgs = { inherit inputs system localPkgs; };
         };
 
       mkHome =
-        profile:
+        host:
+        let
+          systemCfg = mkSystem host;
+        in
         home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [ ./home/profiles/${profile}.nix ];
-          extraSpecialArgs = { inherit inputs localPkgs; };
+          inherit (systemCfg) pkgs;
+          extraSpecialArgs = { inherit inputs system localPkgs; };
+          modules = [
+            ./home/profiles/${host}.nix
+          ];
         };
     in
     {
@@ -48,9 +58,9 @@
         laptop-nixos = mkSystem "laptop";
       };
       homeConfigurations = {
-        "desktop-nixos" = mkHome "desktop";
-        "laptop-nixos" = mkHome "laptop";
-        "wsl-nixos" = mkHome "wsl";
+        desktop-nixos = mkHome "desktop";
+        laptop-nixos = mkHome "laptop";
+        wsl-nixos = mkHome "wsl";
       };
     };
 }

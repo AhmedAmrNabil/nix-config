@@ -9,13 +9,10 @@
     ./programs/fastfetch.nix
   ];
 
-  nixpkgs.config.allowUnfree = true;
-
   home.username = "btngana";
   home.homeDirectory = "/home/btngana";
   programs.home-manager.enable = true;
 
-  # CLI-first tools available everywhere (desktop, laptop, WSL)
   home.packages = with pkgs; [
     git
     nodejs_22

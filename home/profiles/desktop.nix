@@ -7,6 +7,7 @@
     ../programs/foot.nix
     ../programs/vscode.nix
     ../programs/cava.nix
+    ../programs/alacritty.nix
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
