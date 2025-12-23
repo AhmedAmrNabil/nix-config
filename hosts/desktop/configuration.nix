@@ -16,17 +16,7 @@
   ];
 
   boot.loader = {
-    systemd-boot = {
-      enable = true;
-      edk2-uefi-shell.enable = true;
-      windows = {
-        "windows-11" = {
-          title = "Windows 11";
-          efiDeviceHandle = "FS2";
-          sortKey = "a_windows";
-        };
-      };
-    };
+    systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
   };
 
