@@ -5,7 +5,12 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
 
@@ -20,15 +25,24 @@
   };
 
   environment.systemPackages = with pkgs; [
-     nano
-     micro
-     wget
+    nano
+    micro
+    wget
   ];
- 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  environment.shellAliases = {
+    l = null;
+    ls = null;
+    ll = null;
+  };
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 
   # enable remote vscode
-  programs.nix-ld.enable = true;  
+  programs.nix-ld.enable = true;
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It's perfectly fine and recommended to leave
