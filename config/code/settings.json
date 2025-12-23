@@ -243,6 +243,13 @@
     "/tmp/postman-folder-post-response.instructions.md": true,
     "/tmp/postman-folder-pre-request.instructions.md": true,
     "/tmp/postman-http-request-post-response.instructions.md": true,
-    "/tmp/postman-http-request-pre-request.instructions.md": true
-  }
+    "/tmp/postman-http-request-pre-request.instructions.md": true,
+    "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-collections-post-response.instructions.md": true,
+    "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-collections-pre-request.instructions.md": true,
+    "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-folder-post-response.instructions.md": true,
+    "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-folder-pre-request.instructions.md": true,
+    "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
+    "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
+  },
+  "terminal.integrated.suggest.enabled": false
 }
