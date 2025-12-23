@@ -1,4 +1,11 @@
-{ config, lib, pkgs, inputs, localPkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  inputs,
+  localPkgs,
+  ...
+}:
 
 {
   imports = [
@@ -22,6 +29,8 @@
       withOpenASAR = true;
       withVencord = true;
     })
+
+    vlc
   ];
 
   programs.spicetify =

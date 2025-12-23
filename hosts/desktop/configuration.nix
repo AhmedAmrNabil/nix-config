@@ -125,7 +125,6 @@
     kdePackages.sddm-kcm # Configuration module for SDDM
     kdePackages.partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
 
-    vlc # Cross-platform media player and streaming server
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
     microsoft-edge
