@@ -18,12 +18,7 @@
   wsl.defaultUser = "btngana";
   wsl.wslConf.network.hostname = "wsl-nixos";
 
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      ls = "eza --icons --hyperlink --color=always --group-directories-first";
-    };
-  };
+  programs.fish.enable = true;
 
   users.users.btngana = {
     shell = pkgs.fish;

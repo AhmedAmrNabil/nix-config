@@ -95,12 +95,7 @@
     ];
   };
 
-  programs.fish = {
-    enable = true;
-    shellAliases = {
-      ls = "eza --icons --hyperlink --color=always --group-directories-first";
-    };
-  };
+  programs.fish.enable = true;
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;
