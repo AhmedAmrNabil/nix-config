@@ -6,7 +6,7 @@
     enableFishIntegration = true;
     enableTransience = true;
     settings = {
-      format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
+      format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$nix_shell$character";
       directory = {
         style = "blue";
         truncation_length = 100;
@@ -44,6 +44,10 @@
         style = "bright-black";
         detect_extensions = [ ];
         detect_files = [ ];
+      };
+      nix_shell = {
+        format = "[$name]($style) ";
+        style = "bright-black";
       };
       hostname = {
         ssh_symbol = "";
