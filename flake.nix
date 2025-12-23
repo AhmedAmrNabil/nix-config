@@ -6,18 +6,20 @@
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
   };
 
   outputs =
     {
       self,
       nixpkgs,
+      nixos-wsl,
       home-manager,
       ...
     }@inputs:
     let
       system = "x86_64-linux";
-      
+
       pkgs = import nixpkgs {
         inherit system;
         config = {
@@ -35,7 +37,8 @@
           inherit system;
           modules = [
             ./hosts/${host}/configuration.nix
-          ];
+          ]
+          ++ (if host == "wsl" then [ nixos-wsl.nixosModules.default ] else [ ]);
           specialArgs = { inherit inputs system localPkgs; };
         };
 
@@ -56,6 +59,7 @@
       nixosConfigurations = {
         desktop-nixos = mkSystem "desktop";
         laptop-nixos = mkSystem "laptop";
+        wsl-nixos = mkSystem "wsl";
       };
       homeConfigurations = {
         desktop-nixos = mkHome "desktop";
