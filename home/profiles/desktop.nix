@@ -15,6 +15,7 @@
     ../programs/vscode.nix
     ../programs/cava.nix
     ../programs/alacritty.nix
+    ../programs/open-tablet-driver.nix
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
