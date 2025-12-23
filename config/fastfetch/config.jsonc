@@ -10,7 +10,13 @@
     }
   },
   "display": {
-    "separator": "   "
+    "separator": "   ",
+    "temp": {
+      "unit": "C"
+    },
+    "key":{
+      "type": "icon"
+    }
   },
   "modules": [
     {
@@ -27,26 +33,23 @@
     {
       "type": "cpu",
       "keyColor": "bright_red",
-      "key": "",
       "format": "{name}"
     },
     {
       "type": "memory",
       "keyColor": "bright_yellow",
-      "key": "",
       "format": "{total}"
     },
     {
       "type": "gpu",
       "keyColor": "bright_green",
-      "key": "󰍹",
       "format": "{name}"
     },
     {
       "type": "disk",
       "keyColor": "bright_blue",
-      "key": "",
-      "format": "{size-total} {size-percentage}"
+      "format": "{size-total} {size-percentage}",
+      "folders": [ "/" ]
     },
     {
       "type": "separator",
@@ -55,33 +58,30 @@
     {
       "type": "os",
       "keyColor": "bright_red",
-      "key": "",
+      "keyIcon": "",
       "format": "{name} {version-id}"
     },
     {
       "type": "uptime",
-      "keyColor": "bright_yellow",
-      "key": "󱑍"
+      "keyColor": "bright_yellow"
     },
     { 
       "type": "packages", 
       "keyColor": "bright_green", 
-      "key": "󰏗",
+      "keyIcon": "󰏗",
       "format": "{nix-system} nix, {nix-user} home"
     },
     {
       "type": "de",
-      "key": ""
+      "keyColor": "bright_cyan"
     },
     {
       "type": "terminal",
-      "keyColor": "bright_blue",
-      "key": ""
+      "keyColor": "bright_blue"
     },
     {
       "type": "shell",
-      "keyColor": "bright_magenta",
-      "key": ""
+      "keyColor": "bright_magenta"
     }
   ]
 }
