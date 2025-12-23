@@ -44,6 +44,8 @@
       withVencord = true;
     })
 
+    nixd # nix lsp
+
   ];
 
   programs.git = {
