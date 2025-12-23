@@ -136,12 +136,6 @@
     microsoft-edge
   ];
 
-  # enable flakes
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
   # Enable local time synchronization
   # to prevent issues with dual booting Windows
   time.hardwareClockInLocalTime = true;
@@ -174,16 +168,20 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
-  nix = {
-    settings = {
-      substituters = [
-        "https://nix-community.cachix.org"
-        "https://cache.nixos.org"
-      ];
-      trusted-public-keys = [
-        "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-      ];
-    };
+  nix.settings = {
+    substituters = [
+      "https://nix-community.cachix.org"
+      "https://cache.nixos.org"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+
+    # enablke nix flakes
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
   };
 
   # add zstd compression to file systems
