@@ -1,7 +1,12 @@
 { config, lib, ... }:
 
 {
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ls = "eza --icons --hyperlink --color=always --group-directories-first";
+    };
+  };
 
   xdg.configFile."fish/config.fish" = lib.mkForce {
     source = config.lib.file.mkOutOfStoreSymlink "/home/btngana/dotfiles/config/fish/config.fish";

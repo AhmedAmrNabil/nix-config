@@ -5,24 +5,24 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
 
-	boot.loader.systemd-boot = {
-	  enable = true;
-	  configurationLimit = 10;
-	  editor = false;
-	  memtest86.enable = false;
-	};
-	
+  boot.loader.systemd-boot = {
+    enable = true;
+    configurationLimit = 10;
+    editor = false;
+    memtest86.enable = false;
+  };
+
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "laptop-nixos"; # Define your hostname.
-  networking.wireless.enable = false;  # Enables wireless support via wpa_supplicant.
+  networking.wireless.enable = false; # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -85,19 +85,21 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-	# Enable the fish shell
-	programs.fish.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.btngana = {
     isNormalUser = true;
-    description = "btngana";
-	  shell = pkgs.fish;
-    extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-      kdePackages.kate
-    #  thunderbird
+    shell = pkgs.fish;
+    extraGroups = [
+      "networkmanager"
+      "wheel"
     ];
+  };
+
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ls = "eza --icons --hyperlink --color=always --group-directories-first";
+    };
   };
 
   # Enable automatic login for the user.
@@ -119,8 +121,8 @@
     google-chrome
     kdePackages.sddm-kcm # Configuration module for SDDM
 
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -149,5 +151,8 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "25.05"; # Did you read the comment?
-	nix.settings.experimental-features = ["nix-command" "flakes"];
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
 }

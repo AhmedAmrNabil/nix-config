@@ -21,7 +21,7 @@
       edk2-uefi-shell.enable = true;
       windows = {
         "windows-11" = {
-          title= "Windows 11";
+          title = "Windows 11";
           efiDeviceHandle = "FS2";
           sortKey = "a_windows";
         };
@@ -109,7 +109,13 @@
     extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
     shell = pkgs.fish;
   };
-  programs.fish.enable = true;
+
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ls = "eza --icons --hyperlink --color=always --group-directories-first";
+    };
+  };
 
   # List packages installed in system profile.
   # You can use https://search.nixos.org/ to find more packages (and options).
@@ -196,13 +202,29 @@
   fileSystems."/d" = {
     device = "/dev/disk/by-uuid/01DAB93F51B44DA0";
     fsType = "ntfs";
-    options = [ "windows_names" "uid=1000" "gid=100" "umask=022" "big_writes" "nofail" "x-systemd.device-timeout=3s" ];
+    options = [
+      "windows_names"
+      "uid=1000"
+      "gid=100"
+      "umask=022"
+      "big_writes"
+      "nofail"
+      "x-systemd.device-timeout=3s"
+    ];
   };
 
   fileSystems."/e" = {
     device = "/dev/disk/by-uuid/7A5AE84D5AE807A9";
     fsType = "ntfs";
-    options = [ "windows_names" "uid=1000" "gid=100" "umask=022" "big_writes" "nofail" "x-systemd.device-timeout=3s" ];
+    options = [
+      "windows_names"
+      "uid=1000"
+      "gid=100"
+      "umask=022"
+      "big_writes"
+      "nofail"
+      "x-systemd.device-timeout=3s"
+    ];
   };
 
   # Copy the NixOS configuration file and link it from the resulting system

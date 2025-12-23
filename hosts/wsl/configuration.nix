@@ -18,7 +18,12 @@
   wsl.defaultUser = "btngana";
   wsl.wslConf.network.hostname = "wsl-nixos";
 
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+    shellAliases = {
+      ls = "eza --icons --hyperlink --color=always --group-directories-first";
+    };
+  };
 
   users.users.btngana = {
     shell = pkgs.fish;
@@ -28,6 +33,7 @@
     nano
     micro
     wget
+    eza
   ];
 
   environment.shellAliases = {
