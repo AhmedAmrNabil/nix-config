@@ -5,7 +5,6 @@
     enable = true;
     enableFishIntegration = true;
     enableTransience = true;
-    configPath = "/home/btngana/dotfiles/config/starship/starship.toml";
     settings = {
       format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$character";
       directory = {
