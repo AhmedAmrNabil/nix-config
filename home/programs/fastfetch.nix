@@ -18,12 +18,8 @@
 
       display = {
         separator = "   ";
-        temp = {
-          unit = "C";
-        };
-        key = {
-          type = "icon";
-        };
+        temp.unit = "C";
+        key.type = "icon";
       };
 
       modules = [
@@ -73,9 +69,9 @@
           type = "uptime";
           keyColor = "bright_yellow";
         }
-        { 
-          type = "packages"; 
-          keyColor = "bright_green"; 
+        {
+          type = "packages";
+          keyColor = "bright_green";
           keyIcon = "󰏗";
           format = "{nix-system} nix, {nix-user} home";
         }
