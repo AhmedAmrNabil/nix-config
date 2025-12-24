@@ -5,7 +5,7 @@
     settings = {
       logo = {
         type = "file";
-        source = "~/dotfiles/config/fastfetch/logos/nix.txt";
+        source = "~/.config/fastfetch/logos/nix.txt";
         color = {
           "1" = "bright_blue";
           "2" = "bright_cyan";
@@ -90,4 +90,8 @@
       ];
     };
   };
+
+  xdg.configFile."fastfetch/logos/nix.txt".source =
+    config.lib.file.mkOutOfStoreSymlink
+      "/home/btngana/dotfiles/config/fastfetch/logos/nix.txt";
 }
