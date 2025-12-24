@@ -19,6 +19,8 @@
     inputs.spicetify-nix.homeManagerModules.default
   ];
 
+  xdg.enable = true;
+
   # Desktop/laptop need fontconfig and GUI-focused extras
   fonts.fontconfig.enable = true;
 
@@ -34,6 +36,7 @@
     vlc
     gdu
     direnv
+	localsend
   ];
 
   programs.spicetify =

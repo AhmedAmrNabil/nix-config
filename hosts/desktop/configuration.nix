@@ -118,7 +118,21 @@
 
     wayland-utils # Wayland utilities
     wl-clipboard # Command-line copy/paste utilities for Wayland
-    microsoft-edge
+    (microsoft-edge.overrideAttrs (old: {
+      desktopItems = (old.desktopItems or [ ]) ++ [
+        (makeDesktopItem {
+          name = "microsoft-edge-custom";
+          desktopName = "Microsoft Edge (Autoscroll)";
+          genericName = "Web Browser";
+          exec = "${old.pname or "microsoft-edge"} %U --enable-blink-features=MiddleClickAutoscroll";
+          icon = "microsoft-edge";
+          categories = [
+            "Network"
+            "WebBrowser"
+          ];
+        })
+      ];
+    }))
   ];
 
   # Enable local time synchronization
