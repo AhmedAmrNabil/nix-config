@@ -1,11 +1,29 @@
-{ config, lib, ... }:
+{
+  # config,
+  # lib,
+  ...
+}:
 {
   programs.fastfetch = {
     enable = true;
     settings = {
       logo = {
-        type = "file";
-        source = "~/.config/fastfetch/logos/nix.txt";
+        type = "data";
+        source = ''
+$5             ___   __
+$4      /¯\$5    \  \ /  ;
+$4      \  \$5    \  v  /
+$4   /¯¯¯   ¯¯¯¯\$5\   /  $6/\
+$4  ’————————————·$5\  \ $6/  ;
+$3       /¯¯;      $5\ /$6/  /_
+$3 _____/  /        $5‘$6/     \
+$3 \      /$1,        $6/  /¯¯¯¯
+$3  ¯¯/  /$1/ \      $6/__/     
+$3   .  / $1\  \$2·————————————.
+$3    \/  $1/   \$2\_____   ___/
+$1       /  ,  \$2     \  \
+$1       \_/ \__\$2     \_/
+        '';
         color = {
           "1" = "bright_blue";
           "2" = "bright_cyan";
@@ -90,8 +108,4 @@
       ];
     };
   };
-
-  xdg.configFile."fastfetch/logos/nix.txt".source =
-    config.lib.file.mkOutOfStoreSymlink
-      "/home/btngana/dotfiles/config/fastfetch/logos/nix.txt";
 }
