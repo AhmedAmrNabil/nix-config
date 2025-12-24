@@ -606,10 +606,10 @@
       ],
       "AbsoluteModeSettings": {
         "Display": {
-          "Width": 3968.0,
-          "Height": 1152.0,
-          "X": 1984.0,
-          "Y": 576.0,
+          "Width": 4480.0,
+          "Height": 1552.0,
+          "X": 2240.0,
+          "Y": 776.0,
           "Rotation": 0.0
         },
         "Tablet": {
