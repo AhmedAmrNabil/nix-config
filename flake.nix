@@ -20,8 +20,12 @@
     let
       system = "x86_64-linux";
 
+      overlays = [
+        (import ./overlays/xournalpp.nix)
+      ];
+
       pkgs = import nixpkgs {
-        inherit system;
+        inherit system overlays;
         config = {
           allowUnfree = true;
         };
@@ -37,6 +41,8 @@
           inherit system;
           modules = [
             ./hosts/${host}/configuration.nix
+            # Apply overlays to NixOS
+            { nixpkgs.overlays = overlays; }
           ]
           ++ (if host == "wsl" then [ nixos-wsl.nixosModules.default ] else [ ]);
           specialArgs = { inherit inputs system localPkgs; };
