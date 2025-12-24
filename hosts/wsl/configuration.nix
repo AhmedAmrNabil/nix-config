@@ -19,6 +19,7 @@
   wsl.wslConf.network.hostname = "wsl-nixos";
   wsl.wslConf.automount.root = "/";
   wsl.docker-desktop.enable = true;
+  wsl.startMenuLaunchers = true;
 
   programs.fish.enable = true;
 
