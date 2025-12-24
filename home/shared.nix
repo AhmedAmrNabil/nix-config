@@ -7,7 +7,6 @@
     ./programs/micro.nix
     ./programs/btop.nix
     ./programs/fastfetch.nix
-    ./programs/foot.nix
   ];
 
   home.username = "btngana";
