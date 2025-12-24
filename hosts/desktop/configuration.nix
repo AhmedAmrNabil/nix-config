@@ -3,8 +3,8 @@
 # https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
   ...
 }:
@@ -145,6 +145,7 @@
   hardware.nvidia.modesetting.enable = true;
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
+    CHROMIUM_FLAGS = "--enable-blink-features=MiddleClickAutoscroll";
   };
 
   # Open ports in the firewall.
