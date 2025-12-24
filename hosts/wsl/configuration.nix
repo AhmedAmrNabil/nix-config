@@ -17,6 +17,8 @@
   wsl.enable = true;
   wsl.defaultUser = "btngana";
   wsl.wslConf.network.hostname = "wsl-nixos";
+  wsl.wslConf.automount.root = "/";
+  wsl.docker-desktop.enable = true;
 
   programs.fish.enable = true;
 
