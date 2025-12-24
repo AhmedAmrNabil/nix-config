@@ -32,6 +32,8 @@
     })
 
     vlc
+    gdu
+    direnv
   ];
 
   programs.spicetify =
