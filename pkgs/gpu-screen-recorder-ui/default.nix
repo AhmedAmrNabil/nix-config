@@ -4,19 +4,22 @@
   fetchgit,
   meson,
   ninja,
-  pkg-config,
-  wayland,
-  wayland-protocols,
   wayland-scanner,
-  libglvnd,
-  xorg,
+  wayland,
+  wrapperDir ? "/run/wrappers/bin",
+  makeWrapper,
+  gitUpdater,
+  pkg-config,
+  gpu-screen-recorder,
   libdrm,
   libpulseaudio,
-  gitUpdater,
-  libcap,
-  linuxHeaders,
-  libGL,
-  makeWrapper,
+  libXrender,
+  libX11,
+  libXrandr,
+  libXcomposite,
+  libXi,
+  libXcursor,
+  libglvnd,
 }:
 
 stdenv.mkDerivation rec {
@@ -24,62 +27,64 @@ stdenv.mkDerivation rec {
   version = "1.8.3";
 
   src = fetchgit {
-    url = "https://repo.dec05eba.com/${pname}";
-    rev = "refs/tags/${version}";
-    fetchSubmodules = true;
+    url = "https://repo.dec05eba.com/gpu-screen-recorder-ui";
+    tag = version;
     hash = "sha256-KB4N5DwzPKYhqIi+IlvkS6ZRh3ByFPCfF75Hg+na7Q8=";
   };
+
+  postPatch = ''
+    substituteInPlace depends/mglpp/depends/mgl/src/gl.c \
+      --replace-fail "libGL.so.1" "${lib.getLib libglvnd}/lib/libGL.so.1" \
+      --replace-fail "libGLX.so.0" "${lib.getLib libglvnd}/lib/libGLX.so.0" \
+      --replace-fail "libEGL.so.1" "${lib.getLib libglvnd}/lib/libEGL.so.1"
+
+    substituteInPlace extra/gpu-screen-recorder-ui.service \
+      --replace-fail "ExecStart=${meta.mainProgram}" "ExecStart=$out/bin/${meta.mainProgram}"
+  '';
 
   nativeBuildInputs = [
     meson
     ninja
     pkg-config
-    wayland-protocols
     makeWrapper
   ];
+
   buildInputs = [
-    libcap
-    linuxHeaders
+    libX11
+    libXrender
+    libXrandr
+    libXcomposite
+    libXi
+    libXcursor
     libglvnd
     libdrm
     libpulseaudio
     wayland
     wayland-scanner
-    wayland.dev
-    libGL
-    xorg.libX11
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXcomposite
-    xorg.libXfixes
-    xorg.libXext
-    xorg.libXi
-    xorg.libXcursor
   ];
-
-  strictDeps = true;
 
   mesonFlags = [
     (lib.mesonBool "systemd" true)
     (lib.mesonBool "capabilities" false)
   ];
 
-  passthru.updateScript = gitUpdater {
-    url = "https://repo.dec05eba.com/${pname}";
-    rev-prefix = "";
-  };
+  postInstall =
+    let
+      gpu-screen-recorder-wrapped = gpu-screen-recorder.override {
+        inherit wrapperDir;
+      };
+    in
+    ''
+      wrapProgram "$out/bin/${meta.mainProgram}" \
+        --prefix PATH : "${wrapperDir}" \
+        --suffix PATH : "${
+          lib.makeBinPath [
+            gpu-screen-recorder-wrapped
+          ]
+        }"
+    '';
 
-  postFixup = ''
-    wrapProgram $out/bin/gsr-ui \
-      --prefix LD_LIBRARY_PATH : ${
-        lib.makeLibraryPath [
-          libglvnd
-          libGL
-          libdrm
-          xorg.libX11
-        ]
-      }
-  '';
+  passthru.updateScript = gitUpdater { };
 
   meta = with lib; {
     description = "A fullscreen overlay UI for GPU Screen Recorder in the style of ShadowPlay";
@@ -89,5 +94,4 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     mainProgram = "gsr-ui";
   };
-
 }

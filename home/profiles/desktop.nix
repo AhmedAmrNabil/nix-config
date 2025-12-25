@@ -29,7 +29,6 @@
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     xournalpp
-    localPkgs.gpu-screen-recorder-ui
     # localPkgs.gpu-screen-recorder-notification
     (discord.override {
       withOpenASAR = true;

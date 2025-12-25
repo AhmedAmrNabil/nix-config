@@ -4,8 +4,9 @@
 
 {
   # config,
-  # lib,
+  lib,
   pkgs,
+  localPkgs,
   ...
 }:
 
@@ -121,7 +122,22 @@
     microsoft-edge
     gpu-screen-recorder-gtk
     gpu-screen-recorder # Nvidia GPU screen recorder
+    localPkgs.gpu-screen-recorder-ui
   ];
+
+  security.wrappers.gsr-kms-server = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_sys_admin+ep";
+    source = lib.getExe' pkgs.gpu-screen-recorder "gsr-kms-server";
+  };
+
+  security.wrappers.gsr-global-hotkeys = {
+    owner = "root";
+    group = "root";
+    capabilities = "cap_setuid+ep";
+    source = lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-global-hotkeys";
+  };
 
   # Enable local time synchronization
   # to prevent issues with dual booting Windows
