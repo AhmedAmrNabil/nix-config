@@ -6,7 +6,9 @@
 # commands such as:
 #     nix-build -A mypackage
 
-{ pkgs ? import <nixpkgs> { } }:
+{
+  pkgs ? import <nixpkgs> { },
+}:
 
 {
   # The `lib`, `modules`, and `overlay` names are special
@@ -14,4 +16,6 @@
   modules = import ./modules; # NixOS modules
   overlays = import ./overlays; # nixpkgs overlays
   spotify-adblock = pkgs.callPackage ./spotify-adblock { };
+  gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui { };
+  gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification { };
 }

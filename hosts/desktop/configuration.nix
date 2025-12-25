@@ -107,6 +107,9 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  # Nvidia GPU screen recorder
+  programs.gpu-screen-recorder.enable = true;
+
   environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nano
@@ -133,6 +136,8 @@
         })
       ];
     }))
+
+    gpu-screen-recorder-gtk
   ];
 
   # Enable local time synchronization
