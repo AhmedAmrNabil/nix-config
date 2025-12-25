@@ -49,11 +49,11 @@
     in
     {
       enable = true;
-      theme = spicePkgs.themes.catppuccin;
-      colorScheme = "mocha";
+      theme = spicePkgs.themes.text;
       enabledExtensions = with spicePkgs.extensions; [
         adblock
         shuffle
+        oneko
       ];
     };
 
