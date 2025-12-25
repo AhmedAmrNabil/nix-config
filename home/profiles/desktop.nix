@@ -1,10 +1,10 @@
 {
-  config,
-  lib,
+  # config,
+  # lib,
   pkgs,
   inputs,
   localPkgs,
-  hilorioze,
+  # hilorioze,
   system,
   ...
 }:
@@ -29,18 +29,19 @@
   home.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
     xournalpp
-    # localPkgs.gpu-screen-recorder-ui
+    localPkgs.gpu-screen-recorder-ui
     # localPkgs.gpu-screen-recorder-notification
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
     })
-    hilorioze.packages.${system}.gpu-screen-recorder-ui
-    hilorioze.packages.${system}.gpu-screen-recorder-notification
+    # hilorioze.packages.${system}.gpu-screen-recorder-ui
+    # hilorioze.packages.${system}.gpu-screen-recorder-notification
     vlc
     gdu
     direnv
     localsend
+    fzf
   ];
 
   programs.spicetify =

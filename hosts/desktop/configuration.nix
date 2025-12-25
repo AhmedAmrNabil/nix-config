@@ -107,9 +107,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Nvidia GPU screen recorder
-  programs.gpu-screen-recorder.enable = true;
-
   environment.systemPackages = with pkgs; [
     # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nano
@@ -123,6 +120,7 @@
     wl-clipboard # Command-line copy/paste utilities for Wayland
     microsoft-edge
     gpu-screen-recorder-gtk
+    gpu-screen-recorder # Nvidia GPU screen recorder
   ];
 
   # Enable local time synchronization

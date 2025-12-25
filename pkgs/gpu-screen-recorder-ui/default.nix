@@ -15,7 +15,8 @@
   gitUpdater,
   libcap,
   linuxHeaders,
-  makeWrapper
+  libGL,
+  makeWrapper,
 }:
 
 stdenv.mkDerivation rec {
@@ -45,6 +46,7 @@ stdenv.mkDerivation rec {
     wayland
     wayland-scanner
     wayland.dev
+    libGL
     xorg.libX11
     xorg.libXrandr
     xorg.libXrender
@@ -67,6 +69,18 @@ stdenv.mkDerivation rec {
     rev-prefix = "";
   };
 
+  postFixup = ''
+    wrapProgram $out/bin/gsr-ui \
+      --prefix LD_LIBRARY_PATH : ${
+        lib.makeLibraryPath [
+          libglvnd
+          libGL
+          libdrm
+          xorg.libX11
+        ]
+      }
+  '';
+
   meta = with lib; {
     description = "A fullscreen overlay UI for GPU Screen Recorder in the style of ShadowPlay";
     homepage = "https://git.dec05eba.com/gpu-screen-recorder-ui/";
@@ -75,4 +89,5 @@ stdenv.mkDerivation rec {
     maintainers = [ ];
     mainProgram = "gsr-ui";
   };
+
 }
