@@ -56,4 +56,27 @@
         shuffle
       ];
     };
+
+  xdg.desktopEntries.microsoft-edge-autoscroll = {
+    name = "Microsoft Edge (Autoscroll)";
+    genericName = "Web Browser";
+    exec = "microsoft-edge --enable-blink-features=MiddleClickAutoscroll %U";
+    icon = "microsoft-edge";
+    categories = [
+      "Network"
+      "WebBrowser"
+    ];
+  };
+
+  xdg.desktopEntries.discord-autoscroll = {
+    name = "Discord (Autoscroll)";
+    genericName = "Chat Client";
+    exec = "discord --enable-blink-features=MiddleClickAutoscroll %U";
+    icon = "discord";
+    categories = [
+      "Network"
+      "InstantMessaging"
+    ];
+  };
+
 }
