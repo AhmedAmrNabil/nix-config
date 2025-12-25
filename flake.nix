@@ -7,6 +7,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
+    hilorioze.url = "github:hilorioze/nur-packages";
   };
 
   outputs =
@@ -15,6 +16,7 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
+      hilorioze,
       ...
     }@inputs:
     let
@@ -45,7 +47,14 @@
             { nixpkgs.overlays = overlays; }
           ]
           ++ (if host == "wsl" then [ nixos-wsl.nixosModules.default ] else [ ]);
-          specialArgs = { inherit inputs system localPkgs; };
+          specialArgs = {
+            inherit
+              inputs
+              system
+              localPkgs
+              hilorioze
+              ;
+          };
         };
 
       mkHome =
@@ -55,7 +64,14 @@
         in
         home-manager.lib.homeManagerConfiguration {
           inherit (systemCfg) pkgs;
-          extraSpecialArgs = { inherit inputs system localPkgs; };
+          extraSpecialArgs = {
+            inherit
+              inputs
+              system
+              localPkgs
+              hilorioze
+              ;
+          };
           modules = [
             ./home/profiles/${host}.nix
           ];

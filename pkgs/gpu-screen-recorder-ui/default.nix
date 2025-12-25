@@ -13,6 +13,9 @@
   libdrm,
   libpulseaudio,
   gitUpdater,
+  libcap,
+  linuxHeaders,
+  makeWrapper
 }:
 
 stdenv.mkDerivation rec {
@@ -21,7 +24,7 @@ stdenv.mkDerivation rec {
 
   src = fetchgit {
     url = "https://repo.dec05eba.com/${pname}";
-    rev = version;
+    rev = "refs/tags/${version}";
     fetchSubmodules = true;
     hash = "sha256-KB4N5DwzPKYhqIi+IlvkS6ZRh3ByFPCfF75Hg+na7Q8=";
   };
@@ -30,9 +33,18 @@ stdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
+    wayland-protocols
+    makeWrapper
   ];
   buildInputs = [
+    libcap
+    linuxHeaders
     libglvnd
+    libdrm
+    libpulseaudio
+    wayland
+    wayland-scanner
+    wayland.dev
     xorg.libX11
     xorg.libXrandr
     xorg.libXrender
@@ -41,10 +53,6 @@ stdenv.mkDerivation rec {
     xorg.libXext
     xorg.libXi
     xorg.libXcursor
-    libdrm
-    wayland
-    wayland-scanner
-    libpulseaudio
   ];
 
   strictDeps = true;
