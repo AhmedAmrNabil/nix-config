@@ -162,7 +162,11 @@
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true; # see the note above
   hardware.nvidia.modesetting.enable = true;
-  hardware.opengl.enable = true;
+  hardware.opengl = {
+    enable = true;
+    driSupport32Bit = true;
+  };
+
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     CHROMIUM_FLAGS = "--enable-blink-features=MiddleClickAutoscroll";
