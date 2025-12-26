@@ -15,6 +15,7 @@
   apps.vscode.enable = true;
   apps.cava.enable = true;
   apps.spotify.enable = true;
+  apps.tailscale.enable = true;
 
   home-manager.users.${username} =
     { pkgs, ... }:

@@ -13,5 +13,6 @@
     ./cava
     ./alacritty
     ./spotify
+    ./tailscale
   ];
 }
