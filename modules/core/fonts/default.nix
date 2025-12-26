@@ -23,19 +23,59 @@ in
     # Optional: Enable fontconfig tweaks
     fonts.fontconfig = {
       enable = true;
-    };
-
-    home-manager.users.${username} =
-      { config, lib, ... }:
-      {
-        xdg.configFile."fontconfig/fonts.conf" = lib.mkForce {
-          source = config.lib.file.mkOutOfStoreSymlink (builtins.toString "/fonts.conf");
-        };
-
-        xdg.configFile."fontconfig/conf.d/90-arabic.conf" = lib.mkForce {
-          source = config.lib.file.mkOutOfStoreSymlink (builtins.toString "/90-arabic.conf");
-        };
+      defaultFonts = {
+        monospace = [
+          "JetBrains Mono nerd font"
+          "Noto Sans"
+          "Noto Naskh Arabic"
+        ];
+        sansSerif = [
+          "Noto Sans Display"
+          "Segoe UI"
+          "Noto Naskh Arabic"
+        ];
+        serif = [
+          "Noto Serif"
+          "Segoe UI"
+          "Noto Naskh Arabic"
+        ];
       };
+      subpixel.rgba = "rgb";
+      hinting = {
+        enable = true;
+        style = "slight";
+      };
+      antialias = true;
+      localConf = ''
+                <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+        <fontconfig>
+            <match target="pattern">
+                <test name="lang" compare="contains">
+                    <string>ar</string>
+                </test>
+                <test qual="any" name="family">
+                    <string>sans-serif</string>
+                </test>
+                <edit name="family" mode="prepend" binding="strong">
+                    <string>Noto Naskh Arabic</string>
+                </edit>
+            </match>
+
+            <match target="pattern">
+                <test name="lang" compare="contains">
+                    <string>ar</string>
+                </test>
+                <test qual="any" name="family">
+                    <string>serif</string>
+                </test>
+                <edit name="family" mode="prepend" binding="strong">
+                    <string>Noto Naskh Arabic</string>
+                </edit>
+            </match>
+        </fontconfig>
+      '';
+    };
 
   };
 }
