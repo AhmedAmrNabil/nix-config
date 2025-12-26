@@ -123,6 +123,7 @@
     gpu-screen-recorder-gtk
     gpu-screen-recorder # Nvidia GPU screen recorder
     localPkgs.gpu-screen-recorder-ui
+    localPkgs.gpu-screen-recorder-notification
   ];
 
   security.wrappers.gsr-kms-server = {

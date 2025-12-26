@@ -1,14 +1,16 @@
-{ lib
-, stdenv
-, fetchgit
-, meson
-, ninja
-, pkg-config
-, wayland
-, wayland-scanner
-, libglvnd
-, xorg
-, gitUpdater
+{
+  lib,
+  stdenv,
+  fetchgit,
+  meson,
+  ninja,
+  pkg-config,
+  wayland,
+  wayland-scanner,
+  libglvnd,
+  xorg,
+  gitUpdater,
+  makeWrapper,
 }:
 
 stdenv.mkDerivation rec {
@@ -16,16 +18,16 @@ stdenv.mkDerivation rec {
   version = "1.1.0";
 
   src = fetchgit {
-    url = "https://repo.dec05eba.com/${pname}";
-    rev = version;
-    fetchSubmodules = true;
+    url = "https://repo.dec05eba.com/gpu-screen-recorder-notification";
+    tag = version;
     hash = "sha256-ODifZ046DEBNiGT3+S6pQyF8ekrb6LIHWton8nv1MBo=";
   };
 
-  nativeBuildInputs = [ 
-    meson 
-    ninja 
+  nativeBuildInputs = [
+    meson
+    ninja
     pkg-config
+    makeWrapper
   ];
   buildInputs = [
     libglvnd
@@ -39,10 +41,16 @@ stdenv.mkDerivation rec {
 
   strictDeps = true;
 
-  passthru.updateScript = gitUpdater {
-    url = "https://repo.dec05eba.com/${pname}";
-    rev-prefix = "";
-  };
+  postInstall = ''
+    wrapProgram "$out/bin/${meta.mainProgram}" \
+      --prefix LD_LIBRARY_PATH : "${
+        lib.makeLibraryPath [
+          libglvnd
+        ]
+      }"
+  '';
+
+  passthru.updateScript = gitUpdater { };
 
   meta = with lib; {
     description = "Notification in the style of ShadowPlay";
