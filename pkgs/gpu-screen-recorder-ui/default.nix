@@ -33,11 +33,6 @@ stdenv.mkDerivation rec {
   };
 
   postPatch = ''
-    substituteInPlace depends/mglpp/depends/mgl/src/gl.c \
-      --replace-fail "libGL.so.1" "${lib.getLib libglvnd}/lib/libGL.so.1" \
-      --replace-fail "libGLX.so.0" "${lib.getLib libglvnd}/lib/libGLX.so.0" \
-      --replace-fail "libEGL.so.1" "${lib.getLib libglvnd}/lib/libEGL.so.1"
-
     substituteInPlace extra/gpu-screen-recorder-ui.service \
       --replace-fail "ExecStart=${meta.mainProgram}" "ExecStart=$out/bin/${meta.mainProgram}"
   '';
@@ -80,6 +75,13 @@ stdenv.mkDerivation rec {
         --suffix PATH : "${
           lib.makeBinPath [
             gpu-screen-recorder-wrapped
+          ]
+        }" \
+        --prefix LD_LIBRARY_PATH : "${
+          lib.makeLibraryPath [
+            libglvnd
+            libdrm
+            libX11
           ]
         }"
     '';
