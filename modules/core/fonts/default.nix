@@ -1,14 +1,26 @@
 {
+  config,
+  lib,
   pkgs,
   ...
 }:
+let
+  cfg = config.core.fonts;
+in
 {
-  fonts.packages = with pkgs; [
-    noto-fonts
-  ];
+  options.core.fonts = {
+    enable = lib.mkEnableOption "Enable default font packages and configurations";
+  };
 
-  # Optional: Enable fontconfig tweaks
-  fonts.fontconfig = {
-    enable = true;
+  config = lib.mkIf cfg.enable {
+
+    fonts.packages = with pkgs; [
+      noto-fonts
+    ];
+
+    # Optional: Enable fontconfig tweaks
+    fonts.fontconfig = {
+      enable = true;
+    };
   };
 }

@@ -11,6 +11,15 @@
 }:
 
 {
+
+  # --------- Modules --------------
+  apps.gpu-screen-recorder.enable = true;
+  apps.open-tablet-driver.enable = true;
+  core.fonts.enable = true;
+  de.kde.enable = true;
+
+  # --------------------------------
+
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
