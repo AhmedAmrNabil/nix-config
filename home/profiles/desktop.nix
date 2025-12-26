@@ -18,10 +18,6 @@
   home-manager.users.${username} =
     { pkgs, inputs, ... }:
     {
-
-      imports = [
-        ../programs/open-tablet-driver.nix
-      ];
       home.packages = with pkgs; [
         nerd-fonts.jetbrains-mono
         xournalpp

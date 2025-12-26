@@ -59,6 +59,7 @@
                 sharedModules = with inputs; [
                   spicetify-nix.homeManagerModules.default
                 ];
+                backupFileExtension = ".hm-bak";
               };
             }
           ]
