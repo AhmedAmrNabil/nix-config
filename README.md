@@ -231,7 +231,7 @@ nix flake check
 
 ## 🔧 Customization
 
-### Adding a New Program
+### Adding a New Program with config
 
 1. Create `modules/apps/myprogram/default.nix`:
 ```nix
@@ -239,19 +239,19 @@ nix flake check
 {
   programs.myprogram = {
     enable = true;
-    # ... options
+    # ... config options ...
   };
 }
 ```
 
 2. Import in `modules/apps/default.nix`.
 
-### Adding GUI Apps to Desktop Only
+### Adding an Application without config
 
 Edit `home/profiles/desktop.nix`:
 ```nix
 home.packages = with pkgs; [
-  # Add your GUI apps here
+  # Add your apps here
   firefox
   obsidian
 ];
@@ -259,33 +259,11 @@ home.packages = with pkgs; [
 
 ### Creating a New Host
 
-1. Copy an existing host: `cp -r hosts/desktop hosts/myhost`
-2. Update `hardware-configuration.nix` (generate with `nixos-generate-config`)
-3. Add to `flake.nix`:
+1. Copy an existing host: `cp -r /etc/nixos hosts/myhost/`
+2. Add to `flake.nix`:
 ```nix
 nixosConfigurations.myhost-nixos = mkSystem "myhost";
-homeConfigurations.myhost-nixos = mkHome "myhost";
 ```
-
----
-
-## 🐛 Troubleshooting
-
-| Issue | Solution |
-|-------|----------|
-| "Git tree is dirty" warning | Commit or stash changes before rebuild |
-| Flake eval error | Run with `--show-trace` for details |
-| GUI apps in WSL | Use `wsl-nixos` profile (intentionally headless) |
-| NVIDIA issues | Check `hardware.nvidia.open` compatibility |
-
-```fish
-# Debug flake evaluation
-nix build .#nixosConfigurations.desktop-nixos.config.system.build.toplevel --show-trace
-
-# Check Home Manager news
-home-manager news
-```
-
 ---
 
 ## 📚 Resources

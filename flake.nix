@@ -71,37 +71,12 @@
               ;
           };
         };
-
-      mkHome =
-        host:
-        let
-          systemCfg = mkSystem host;
-        in
-        home-manager.lib.homeManagerConfiguration {
-          inherit (systemCfg) pkgs;
-          extraSpecialArgs = {
-            inherit
-              inputs
-              system
-              localPkgs
-              hilorioze
-              ;
-          };
-          modules = [
-            ./home/profiles/${host}.nix
-          ];
-        };
     in
     {
       nixosConfigurations = {
         desktop-nixos = mkSystem "desktop";
         laptop-nixos = mkSystem "laptop";
         wsl-nixos = mkSystem "wsl";
-      };
-      homeConfigurations = {
-        # desktop-nixos = mkHome "desktop";
-        laptop-nixos = mkHome "laptop";
-        wsl-nixos = mkHome "wsl";
       };
     };
 }
