@@ -21,10 +21,20 @@ in
           enableFishIntegration = true;
           enableTransience = true;
           settings = {
-            format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$line_break$python$nix_shell$character";
+            format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
             directory = {
               style = "blue";
               truncation_length = 100;
+            };
+            fill = {
+              symbol = " ";
+            };
+            time = {
+              format = "[󱑍 $time]($style)";
+              style = "bright-black";
+              time_format = "%I:%M %p";
+              use_12hr = true;
+              disabled = false;
             };
             character = {
               success_symbol = "[❯](purple)";
@@ -78,8 +88,8 @@ in
         };
 
         programs.fish.functions.starship_transient_prompt_func = ''
-            starship module character
-          '';
+          starship module character
+        '';
       };
   };
 }
