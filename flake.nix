@@ -37,6 +37,8 @@
         inherit pkgs;
       };
 
+      username = "btngana";
+
       mkSystem =
         host:
         nixpkgs.lib.nixosSystem {
@@ -46,6 +48,19 @@
             ./modules
             # Apply overlays to NixOS
             { nixpkgs.overlays = overlays; }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager = {
+                useGlobalPkgs = true;
+                useUserPackages = true;
+                extraSpecialArgs = {
+                  inherit inputs localPkgs system;
+                };
+                sharedModules = with inputs; [
+                  spicetify-nix.homeManagerModules.default
+                ];
+              };
+            }
           ]
           ++ (if host == "wsl" then [ nixos-wsl.nixosModules.default ] else [ ]);
           specialArgs = {
@@ -54,6 +69,7 @@
               system
               localPkgs
               hilorioze
+              username
               ;
           };
         };
@@ -85,7 +101,7 @@
         wsl-nixos = mkSystem "wsl";
       };
       homeConfigurations = {
-        desktop-nixos = mkHome "desktop";
+        # desktop-nixos = mkHome "desktop";
         laptop-nixos = mkHome "laptop";
         wsl-nixos = mkHome "wsl";
       };

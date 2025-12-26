@@ -12,17 +12,28 @@
 
 {
 
-  # --------- Modules --------------
+  # --------- Modules ------------------
   apps.gpu-screen-recorder.enable = true;
   apps.open-tablet-driver.enable = true;
   core.fonts.enable = true;
   de.kde.enable = true;
+  # -------------------------------------
 
-  # --------------------------------
+  # -------- Users --------
+  programs.fish.enable = true;
+  users.users.btngana = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" ];
+    shell = pkgs.fish;
+  };
+  # -----------------------
 
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+
+    # profiles
+    ../../home/profiles/desktop.nix
   ];
 
   boot.loader = {
@@ -51,14 +62,6 @@
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
-
-  users.users.btngana = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-    shell = pkgs.fish;
-  };
-
-  programs.fish.enable = true;
 
   nixpkgs.config.allowUnfree = true;
 

@@ -2,5 +2,13 @@
   imports = [
     ./gpu-screen-recorder
     ./open-tablet-driver
+    ./fish
+    ./vscode
+    ./starship
+    ./fastfetch
+    ./btop
+    ./zoxide
+    ./micro
+    ./foot
   ];
 }

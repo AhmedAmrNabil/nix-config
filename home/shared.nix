@@ -1,37 +1,39 @@
-{ config, lib, pkgs, inputs, localPkgs, ... }:
+{
+  username,
+  ...
+}:
 
 {
   imports = [
-    ./programs/fish.nix
-    ./programs/starship.nix
-    ./programs/micro.nix
-    ./programs/btop.nix
-    ./programs/fastfetch.nix
+    ../modules
   ];
+  apps.fish.enable = true;
+  apps.starship.enable = true;
+  apps.fastfetch.enable = true;
+  apps.btop.enable = true;
+  apps.zoxide.enable = true;
+  apps.micro.enable = true;
 
-  home.username = "btngana";
-  home.homeDirectory = "/home/btngana";
-  programs.home-manager.enable = true;
-
-  home.packages = with pkgs; [
-    git
-    nodejs_22
-    pnpm
-    eza
-    nixfmt
-    nixd
-  ];
-
-  programs.git = {
-    enable = true;
-    settings = {
-      user = {
-        name = "AhmedAmrNabil";
-        email = "ahmedamr24680@gmail.com";
+  home-manager.users.${username} =
+    { pkgs, ... }:
+    {
+      home.packages = with pkgs; [
+        nodejs_22
+        pnpm
+        eza
+        nixfmt
+        nixd
+      ];
+      programs.git = {
+        enable = true;
+        settings = {
+          user = {
+            name = "AhmedAmrNabil";
+            email = "ahmedamr24680@gmail.com";
+          };
+          init.defaultBranch = "main";
+        };
       };
-      init.defaultBranch = "main";
+      home.stateVersion = "25.11";
     };
-  };
-
-  home.stateVersion = "25.11";
 }
