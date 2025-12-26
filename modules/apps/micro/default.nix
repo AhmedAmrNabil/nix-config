@@ -23,10 +23,8 @@ in
           };
         };
         xdg.configFile."micro/colorschemes" = {
-          source = config.lib.file.mkOutOfStoreSymlink (builtins.toString ./colorschemes);
-          recursive = true;
+          source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/micro/colorschemes";
         };
       };
-
   };
 }
