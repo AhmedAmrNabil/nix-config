@@ -12,5 +12,6 @@
     ./foot
     ./cava
     ./alacritty
+    ./spotify
   ];
 }

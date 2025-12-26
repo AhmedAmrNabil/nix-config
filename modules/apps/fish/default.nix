@@ -21,7 +21,6 @@ in
           shellAliases = {
             ls = "eza --icons --hyperlink --color=always --group-directories-first";
             clock = "tty-clock -tcDBC 4";
-            hrs = "home-manager switch --flake ~/dotfiles#(hostname)";
             nrs = "sudo nixos-rebuild switch --flake ~/dotfiles#(hostname)";
             wsl-nix-clean = "sudo nix-env --delete-generations old;sudo nix-collect-garbage -d";
           };

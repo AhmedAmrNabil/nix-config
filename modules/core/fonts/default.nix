@@ -17,6 +17,7 @@ in
 
     fonts.packages = with pkgs; [
       noto-fonts
+      nerd-fonts.jetbrains-mono
     ];
 
     # Optional: Enable fontconfig tweaks

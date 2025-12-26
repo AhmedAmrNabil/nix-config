@@ -11,42 +11,23 @@
   ];
 
   apps.foot.enable = true;
+  apps.alacritty.enable = true;
   apps.vscode.enable = true;
   apps.cava.enable = true;
-  apps.alacritty.enable = true;
-
+  apps.spotify.enable = true;
 
   home-manager.users.${username} =
-    { pkgs, inputs, ... }:
+    { pkgs, ... }:
     {
       home.packages = with pkgs; [
-        nerd-fonts.jetbrains-mono
         xournalpp
         (discord.override {
           withOpenASAR = true;
           withVencord = true;
         })
         vlc
-        gdu
-        direnv
         localsend
-        fzf
-        tree
       ];
-
-      programs.spicetify =
-        let
-          spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-        in
-        {
-          enable = true;
-          theme = spicePkgs.themes.text;
-          enabledExtensions = with spicePkgs.extensions; [
-            adblock
-            shuffle
-            oneko
-          ];
-        };
 
       xdg.desktopEntries.microsoft-edge-autoscroll = {
         name = "Microsoft Edge (Autoscroll)";

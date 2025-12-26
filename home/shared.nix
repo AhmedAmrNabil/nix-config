@@ -23,6 +23,10 @@
         eza
         nixfmt
         nixd
+        gdu
+        direnv
+        fzf
+        tree
       ];
       programs.git = {
         enable = true;
