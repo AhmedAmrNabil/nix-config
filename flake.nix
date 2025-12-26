@@ -23,7 +23,7 @@
       system = "x86_64-linux";
 
       overlays = [
-        (import ./overlays/xournalpp.nix)
+        (import ./overlays/xournalpp)
       ];
 
       pkgs = import nixpkgs {

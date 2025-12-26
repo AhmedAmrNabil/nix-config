@@ -13,6 +13,7 @@
   apps.foot.enable = true;
   apps.vscode.enable = true;
   apps.cava.enable = true;
+  apps.alacritty.enable = true;
 
 
   home-manager.users.${username} =
@@ -31,9 +32,6 @@
         localsend
         fzf
         tree
-        vscode
-        cava
-        foot
       ];
 
       programs.spicetify =

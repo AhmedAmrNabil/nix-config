@@ -11,5 +11,6 @@
     ./micro
     ./foot
     ./cava
+    ./alacritty
   ];
 }
