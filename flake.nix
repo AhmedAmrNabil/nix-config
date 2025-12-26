@@ -30,7 +30,7 @@
         inherit system overlays;
       };
 
-      localPkgs = import ./pkgs {
+      localPkgs = import ./packages {
         inherit pkgs;
       };
 
