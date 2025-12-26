@@ -6,14 +6,17 @@
 # https://github.com/nix-community/NixOS-WSL
 
 {
-  config,
-  lib,
   pkgs,
   ...
 }:
 
 {
 
+  imports = [
+    ../../home/profiles/wsl.nix
+  ];
+
+  core.nix-cfg.enable = true;
   wsl.enable = true;
   wsl.defaultUser = "btngana";
   wsl.wslConf.network.hostname = "wsl-nixos";
@@ -31,11 +34,6 @@
     nano
     micro
     wget
-  ];
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
   ];
 
   # enable remote vscode
