@@ -19,10 +19,10 @@ in
         programs.vscode.enable = true;
 
         xdg.configFile."Code/User/settings.json".source =
-          config.lib.file.mkOutOfStoreSymlink "/home/btngana/dotfiles/config/code/settings.json";
+          config.lib.file.mkOutOfStoreSymlink ( builtins.toString ./settings.json);
 
         xdg.configFile."Code/User/keybindings.json".source =
-          config.lib.file.mkOutOfStoreSymlink "/home/btngana/dotfiles/config/code/keybindings.json";
+          config.lib.file.mkOutOfStoreSymlink ( builtins.toString ./keybindings.json);
 
         programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
           adpyke.codesnap

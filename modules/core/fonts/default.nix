@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }:
 let
@@ -22,5 +23,18 @@ in
     fonts.fontconfig = {
       enable = true;
     };
+
+    home-manager.users.${username} =
+      { config, lib, ... }:
+      {
+        xdg.configFile."fontconfig/fonts.conf" = lib.mkForce {
+          source = config.lib.file.mkOutOfStoreSymlink (builtins.toString "/fonts.conf");
+        };
+
+        xdg.configFile."fontconfig/conf.d/90-arabic.conf" = lib.mkForce {
+          source = config.lib.file.mkOutOfStoreSymlink (builtins.toString "/90-arabic.conf");
+        };
+      };
+
   };
 }

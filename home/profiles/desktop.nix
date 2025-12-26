@@ -12,6 +12,7 @@
 
   apps.foot.enable = true;
   apps.vscode.enable = true;
+  apps.cava.enable = true;
 
 
   home-manager.users.${username} =
@@ -19,7 +20,6 @@
     {
 
       imports = [
-        ../fonts.nix
         ../programs/open-tablet-driver.nix
       ];
       home.packages = with pkgs; [

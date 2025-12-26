@@ -10,5 +10,6 @@
     ./zoxide
     ./micro
     ./foot
+    ./cava
   ];
 }
