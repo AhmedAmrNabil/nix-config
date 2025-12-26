@@ -41,6 +41,7 @@
     direnv
     localsend
     fzf
+    tree
   ];
 
   programs.spicetify =

@@ -43,6 +43,7 @@
           inherit system;
           modules = [
             ./hosts/${host}/configuration.nix
+            ./modules
             # Apply overlays to NixOS
             { nixpkgs.overlays = overlays; }
           ]

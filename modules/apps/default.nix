@@ -1,0 +1,5 @@
+{
+  imports = [
+    ./gpu-screen-recorder
+  ];
+}
