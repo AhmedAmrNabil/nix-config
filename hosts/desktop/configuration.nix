@@ -14,6 +14,7 @@
   apps.open-tablet-driver.enable = true;
   core.fonts.enable = true;
   de.kde.enable = true;
+  core.nix-cfg.enable = true;
   # -------------------------------------
 
   # -------- Users --------
@@ -60,31 +61,18 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  nixpkgs.config.allowUnfree = true;
-
   environment.systemPackages = with pkgs; [
-    # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     nano
     micro
 
-    wayland-utils # Wayland utilities
-    wl-clipboard # Command-line copy/paste utilities for Wayland
+    wayland-utils
+    wl-clipboard
     microsoft-edge
   ];
 
   # Enable local time synchronization
   # to prevent issues with dual booting Windows
   time.hardwareClockInLocalTime = true;
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
@@ -100,28 +88,6 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-  };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
-
-  nix.settings = {
-    substituters = [
-      "https://nix-community.cachix.org"
-      "https://cache.nixos.org"
-    ];
-    trusted-public-keys = [
-      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    ];
-
-    # enablke nix flakes
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
   };
 
   # add zstd compression to file systems

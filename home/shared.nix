@@ -7,6 +7,7 @@
   imports = [
     ../modules
   ];
+
   apps.fish.enable = true;
   apps.starship.enable = true;
   apps.fastfetch.enable = true;

@@ -28,9 +28,6 @@
 
       pkgs = import nixpkgs {
         inherit system overlays;
-        config = {
-          allowUnfree = true;
-        };
       };
 
       localPkgs = import ./pkgs {
