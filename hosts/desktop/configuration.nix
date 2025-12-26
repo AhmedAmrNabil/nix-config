@@ -4,9 +4,9 @@
 
 {
   # config,
-  lib,
+  # lib,
   pkgs,
-  localPkgs,
+  # localPkgs,
   ...
 }:
 
@@ -37,57 +37,15 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   hardware.bluetooth.enable = true;
 
-  # Select internationalisation properties.
-  # i18n.defaultLocale = "en_US.UTF-8";
   # console = {
   #   font = "Lat2-Terminus16";
   #   keyMap = "us";
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-  ];
-
-  # Optional: Enable fontconfig tweaks
-  fonts.fontconfig = {
-    enable = true;
-  };
-
-
-  # Enable OpenTabletDriver for drawing tablets
-  hardware.opentabletdriver = {
-    enable = true;
-    daemon.enable = true;
-  };
-
-  # Required by OpenTabletDriver
-  hardware.uinput.enable = true;
-  boot.kernelModules = [ "uinput" ];
-  boot.blacklistedKernelModules = [ "wacom" ];
-
-  # Configure keymap in X11
-  # services.xserver.xkb.layout = "us";
-  # services.xserver.xkb.options = "eurosign:e,caps:escape";
-
-  # Enable CUPS to print documents.
-  # services.printing.enable = true;
-
-  # Enable sound.
-  # services.pulseaudio.enable = true;
-  # OR
-  # services.pipewire = {
-  #   enable = true;
-  #   pulse.enable = true;
-  # };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.libinput.enable = true;
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.btngana = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+    extraGroups = [ "wheel" ];
     shell = pkgs.fish;
   };
 
