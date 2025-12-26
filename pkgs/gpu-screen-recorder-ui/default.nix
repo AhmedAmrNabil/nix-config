@@ -32,11 +32,6 @@ stdenv.mkDerivation rec {
     hash = "sha256-JyaBR/UCCQXrSM7gsqSQc/v+vFoqE6ygqsLqXUHVTJk=";
   };
 
-  postPatch = ''
-    substituteInPlace extra/gpu-screen-recorder-ui.service \
-      --replace-fail "ExecStart=${meta.mainProgram}" "ExecStart=$out/bin/${meta.mainProgram}"
-  '';
-
   nativeBuildInputs = [
     meson
     ninja
@@ -59,7 +54,8 @@ stdenv.mkDerivation rec {
   ];
 
   mesonFlags = [
-    (lib.mesonBool "systemd" true)
+    # will enable systemd in the module later
+    # (lib.mesonBool "systemd" true)
     (lib.mesonBool "capabilities" false)
   ];
 
