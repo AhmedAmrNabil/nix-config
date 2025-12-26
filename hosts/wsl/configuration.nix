@@ -31,14 +31,7 @@
     nano
     micro
     wget
-    eza
   ];
-
-  environment.shellAliases = {
-    l = null;
-    ls = null;
-    ll = null;
-  };
 
   nix.settings.experimental-features = [
     "nix-command"
