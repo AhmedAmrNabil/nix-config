@@ -23,6 +23,7 @@ in
     };
     security.polkit.enable = true;
 
+    programs.kdeconnect.enable = true;
     environment.systemPackages = with pkgs.kdePackages; [
       sddm-kcm # Configuration module for SDDM
       partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
