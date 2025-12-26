@@ -127,24 +127,22 @@ nix flake show
 ### Apply Configuration
 
 ```bash
-# NixOS system (pick your profile)
+# NixOS + Home Manager combined (pick your profile)
 sudo nixos-rebuild switch --flake .#desktop-nixos
 sudo nixos-rebuild switch --flake .#laptop-nixos
 sudo nixos-rebuild switch --flake .#wsl-nixos
-
-# Home Manager (pick your profile)
-home-manager switch --flake .#desktop-nixos
-home-manager switch --flake .#laptop-nixos
-home-manager switch --flake .#wsl-nixos
 ```
+
+> [!TIP]
+> Home Manager is integrated as a NixOS module, so a single `nixos-rebuild switch`
+> applies both system and user configuration changes.
 
 ### Fish Shell Shortcuts
 
-Once configured, use these aliases:
+Once configured, use this alias:
 
 ```bash
 nrs   # → sudo nixos-rebuild switch --flake ~/dotfiles#(hostname)
-hrs   # → home-manager switch --flake ~/dotfiles#(hostname)
 ```
 
 ---
@@ -165,68 +163,52 @@ dotfiles/
 │   └── wsl/
 │       └── configuration.nix
 │
-├── home/                     # 🏠 Home Manager modules
-│   ├── shared.nix            # Common to ALL profiles
-│   ├── fonts.nix             # Font configuration
-│   ├── profiles/
-│   │   ├── desktop.nix       # GUI apps + shared
-│   │   └── wsl.nix           # Shared only (headless)
-│   └── programs/
-│       ├── fish.nix          # Shell config
-│       ├── starship.nix      # Prompt
-│       ├── vscode.nix        # Editor
-│       ├── foot.nix          # Terminal
-│       ├── alacritty.nix     # Alt terminal
-│       ├── btop.nix          # System monitor
-│       ├── cava.nix          # Audio visualizer
-│       ├── micro.nix         # Text editor
-│       └── fastfetch.nix     # System info
+├── modules/                  # 🔧 NixOS + Home Manager modules
+│   ├── apps/                 # Application configs (fish, vscode, btop, etc.)
+│   ├── core/                 # Core system configuration
+│   └── de/                   # Desktop environment configs
 │
-├── config/                   # ⚙️ App configuration files
+├── home/                     # 🏠 Home Manager profiles
+│   ├── shared.nix            # Common to ALL profiles
+│   └── profiles/
+│       ├── desktop.nix       # GUI apps + shared
+│       └── wsl.nix           # Shared only (headless)
+│
+├── config/                   # ⚙️ Config files not yet converted to Nix
 │   ├── hypr/                 # Hyprland WM
-│   ├── alacritty/            # Terminal
-│   ├── btop/                 # System monitor
-│   ├── cava/                 # Audio visualizer
-│   ├── foot/                 # Terminal
 │   ├── mako/                 # Notifications
-│   ├── micro/                # Editor
 │   └── rofi/                 # Launcher
 │
 ├── pkgs/                     # 📦 Custom packages
-│   └── spotify-adblock/
 │
 └── overlays/                 # 🔄 Nixpkgs overlays
 ```
+
+
 
 ---
 
 ## ⚙️ Key Configuration Highlights
 
-### Desktop Features
+### Modular Architecture
 
-```nix
-# KDE Plasma 6 with Wayland
-services.desktopManager.plasma6.enable = true;
-services.displayManager.sddm.wayland.enable = true;
+Configuration is organized into composable modules:
 
-# NVIDIA with open drivers
-hardware.nvidia.open = true;
-hardware.nvidia.modesetting.enable = true;
+| Module | Purpose |
+|--------|--------|
+| `modules/apps/` | Application configs (fish, vscode, btop, spotify, etc.) |
+| `modules/core/` | Core system settings (networking, users, locale) |
+| `modules/de/` | Desktop environments (Plasma, Hyprland) |
 
-# Drawing tablet support
-hardware.opentabletdriver.enable = true;
 
-```
+
 ---
 
 ## 🛠️ Common Commands
 
-```fish
+```bash
 # Update all flake inputs
 nix flake update
-
-# Update specific input
-nix flake lock --update-input nixpkgs
 
 # Build without switching (test)
 sudo nixos-rebuild build --flake .#desktop-nixos
@@ -251,7 +233,7 @@ nix flake check
 
 ### Adding a New Program
 
-1. Create `home/programs/myprogram.nix`:
+1. Create `modules/apps/myprogram/default.nix`:
 ```nix
 { config, pkgs, ... }:
 {
@@ -262,7 +244,7 @@ nix flake check
 }
 ```
 
-2. Import in the appropriate profile (`desktop.nix` for GUI, `shared.nix` for CLI).
+2. Import in `modules/apps/default.nix`.
 
 ### Adding GUI Apps to Desktop Only
 
@@ -312,6 +294,10 @@ home-manager news
 - [Home Manager Manual](https://nix-community.github.io/home-manager/)
 - [Nix Flakes Guide](https://nixos.wiki/wiki/Flakes)
 - [Catppuccin Theme](https://catppuccin.com/)
+
+## 🙏 Credits
+
+- Structure heavily inspired by [Keenan Weaver's nix-config](https://github.com/keenanweaver/nix-config)
 
 ---
 
