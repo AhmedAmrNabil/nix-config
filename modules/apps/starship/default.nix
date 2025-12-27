@@ -22,7 +22,7 @@ in
           enableBashIntegration = true;
           enableTransience = true;
           settings = {
-            format = "$username$hostname$\{custom.shell\}$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
+            format = "$username$hostname$shell$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
             directory = {
               style = "blue";
               truncation_length = 100;
@@ -38,11 +38,12 @@ in
               use_12hr = true;
               disabled = false;
             };
-            custom.shell = {
-              when = "[ -n \"$BASH_VERSION\" ]";
-              format = "[$symbol]($style) ";
-              symbol = "";
+            shell = {
+              fish_indicator = "";
+              bash_indicator = " ";
               style = "bright-black";
+              format = "[$indicator]($style) ";
+              disabled = false;
             };
             character = {
               success_symbol = "[❯](purple)";
