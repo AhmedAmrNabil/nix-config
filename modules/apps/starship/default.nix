@@ -42,7 +42,7 @@ in
               fish_indicator = "";
               bash_indicator = " ";
               style = "bright-black";
-              format = "[$indicator]($style) ";
+              format = "[$indicator]($style)";
               disabled = false;
             };
             character = {
