@@ -35,6 +35,9 @@
     micro
     wget
   ];
+  systemd.tmpfiles.rules = [
+    "L+ /tmp/.X11-unix - - - - /wslg/.X11-unix"
+  ];
 
   # enable remote vscode
   programs.nix-ld.enable = true;
