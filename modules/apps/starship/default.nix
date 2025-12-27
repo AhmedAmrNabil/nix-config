@@ -19,9 +19,10 @@ in
         programs.starship = {
           enable = true;
           enableFishIntegration = true;
+          enableBashIntegration = true;
           enableTransience = true;
           settings = {
-            format = "$username$hostname$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
+            format = "$username$hostname$\{custom.shell\}$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
             directory = {
               style = "blue";
               truncation_length = 100;
@@ -35,6 +36,12 @@ in
               time_format = "%I:%M %p";
               use_12hr = true;
               disabled = false;
+            };
+            custom.shell = {
+              when = "[ -n \"$BASH_VERSION\" ]";
+              format = "[$symbol]($style) ";
+              symbol = "";
+              style = "bright-black";
             };
             character = {
               success_symbol = "[❯](purple)";

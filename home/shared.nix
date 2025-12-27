@@ -9,6 +9,7 @@
   ];
 
   apps.fish.enable = true;
+  apps.bash.enable = true;
   apps.starship.enable = true;
   apps.fastfetch.enable = true;
   apps.btop.enable = true;

@@ -14,5 +14,6 @@
     ./alacritty
     ./spotify
     ./tailscale
+    ./bash
   ];
 }
