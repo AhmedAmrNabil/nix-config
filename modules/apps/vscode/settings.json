@@ -89,7 +89,8 @@
   "C_Cpp.autocompleteAddParentheses": true,
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "editor.unicodeHighlight.allowedCharacters": {
-    "❯": true
+    "❯": true,
+    "❮": true
   },
   "editor.multiCursorModifier": "ctrlCmd",
   "cmake.configureOnOpen": false,
