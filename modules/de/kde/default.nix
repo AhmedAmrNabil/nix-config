@@ -14,7 +14,6 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    # KDE stuff
     services = {
       desktopManager.plasma6.enable = true;
       displayManager.sddm.enable = true;
@@ -22,6 +21,8 @@ in
       xserver.enable = true;
     };
     security.polkit.enable = true;
+
+    powerManagement.enable = true;
 
     programs.kdeconnect.enable = true;
     environment.systemPackages = with pkgs.kdePackages; [

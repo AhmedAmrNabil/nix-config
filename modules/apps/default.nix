@@ -15,5 +15,6 @@
     ./spotify
     ./tailscale
     ./bash
+    ./obs
   ];
 }
