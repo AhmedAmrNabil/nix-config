@@ -26,6 +26,7 @@ in
             directory = {
               style = "blue";
               truncation_length = 100;
+              read_only = " ";
             };
             fill = {
               symbol = " ";
