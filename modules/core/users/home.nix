@@ -20,7 +20,7 @@
         email = "ahmedamr24680@gmail.com";
       };
       init.defaultBranch = "main";
+      push.autoSetupRemote = true;
     };
   };
-  
 }
