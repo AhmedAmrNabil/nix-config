@@ -26,6 +26,7 @@
     users.enable = true;
     kernel.enable = true;
     boot.enable = true;
+    hardware.nvidia.enable = true;
   };
   de.kde.enable = true;
 
@@ -64,18 +65,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-  # Nvidia stuff
-  hardware.graphics = {
-    enable = true;
-    enable32Bit = true;
-  };
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia.open = true; # see the note above
-  hardware.nvidia.modesetting.enable = true;
-
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
 
   # add zstd compression to file systems
   fileSystems = {
