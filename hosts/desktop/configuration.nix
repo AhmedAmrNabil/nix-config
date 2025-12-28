@@ -24,6 +24,7 @@
     fonts.enable = true;
     nix-cfg.enable = true;
     users.enable = true;
+    kernel.enable = true;
   };
   de.kde.enable = true;
 
@@ -32,9 +33,6 @@
     systemd-boot.configurationLimit = 5;
     efi.canTouchEfiVariables = true;
   };
-
-  # use the latest kernel
-  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
   # Pick only one of the below networking options.
