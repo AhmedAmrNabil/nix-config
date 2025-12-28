@@ -57,6 +57,7 @@
                   spicetify-nix.homeManagerModules.default
                 ];
                 backupFileExtension = ".hm-bak";
+                users.${username}.home.stateVersion = "25.11";
               };
             }
           ]
