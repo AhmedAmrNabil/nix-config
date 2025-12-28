@@ -8,6 +8,7 @@
     ./fastfetch
     ./fish
     ./foot
+    ./git
     ./gpu-screen-recorder
     ./micro
     ./obs

@@ -36,6 +36,11 @@
 
       username = "btngana";
 
+      gitConfig = {
+        userName = "AhmedAmrNabil";
+        userEmail = "ahmedamr24680@gmail.com";
+      };
+
       mkSystem =
         host:
         nixpkgs.lib.nixosSystem {
@@ -51,7 +56,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit inputs localPkgs system;
+                  inherit inputs localPkgs system gitConfig;
                 };
                 sharedModules = with inputs; [
                   spicetify-nix.homeManagerModules.default
