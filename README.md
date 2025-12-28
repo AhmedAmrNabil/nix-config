@@ -163,23 +163,22 @@ dotfiles/
 │   └── wsl/
 │       └── configuration.nix
 │
-├── modules/                  # 🔧 NixOS + Home Manager modules
+├── modules/                  # 🔧 NixOS modules (apps, core, de)
 │   ├── apps/                 # Application configs (fish, vscode, btop, etc.)
 │   ├── core/                 # Core system configuration
 │   └── de/                   # Desktop environment configs
 │
-├── home/                     # 🏠 Home Manager profiles
+├── profiles/                 # 👤 User/Device Profiles (NixOS Modules)
 │   ├── shared.nix            # Common to ALL profiles
-│   └── profiles/
-│       ├── desktop.nix       # GUI apps + shared
-│       └── wsl.nix           # Shared only (headless)
+│   ├── desktop.nix           # GUI apps + shared
+│   └── wsl.nix               # Shared only (headless)
 │
 ├── config/                   # ⚙️ Config files not yet converted to Nix
 │   ├── hypr/                 # Hyprland WM
 │   ├── mako/                 # Notifications
 │   └── rofi/                 # Launcher
 │
-├── pkgs/                     # 📦 Custom packages
+├── packages/                 # 📦 Custom packages
 │
 └── overlays/                 # 🔄 Nixpkgs overlays
 ```
@@ -248,7 +247,7 @@ nix flake check
 
 ### Adding an Application without config
 
-Edit `home/profiles/desktop.nix`:
+Edit `profiles/desktop.nix`:
 ```nix
 home.packages = with pkgs; [
   # Add your apps here
