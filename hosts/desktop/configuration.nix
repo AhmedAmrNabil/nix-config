@@ -14,7 +14,7 @@
     ./hardware-configuration.nix
 
     # profiles
-    ../../home/profiles/desktop.nix
+    ../../profiles/desktop.nix
   ];
 
   # --------- Modules ------------------

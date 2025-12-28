@@ -13,7 +13,7 @@
 {
 
   imports = [
-    ../../home/profiles/wsl.nix
+    ../../profiles/wsl.nix
   ];
 
   core.nix-cfg.enable = true;

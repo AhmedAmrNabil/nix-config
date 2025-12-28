@@ -6,8 +6,7 @@
 {
 
   imports = [
-    ../shared.nix
-    ../../modules
+    ./shared.nix
   ];
 
   apps.foot.enable = true;
