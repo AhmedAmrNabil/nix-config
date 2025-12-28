@@ -25,14 +25,9 @@
     nix-cfg.enable = true;
     users.enable = true;
     kernel.enable = true;
+    boot.enable = true;
   };
   de.kde.enable = true;
-
-  boot.loader = {
-    systemd-boot.enable = true;
-    systemd-boot.configurationLimit = 5;
-    efi.canTouchEfiVariables = true;
-  };
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
   # Pick only one of the below networking options.
