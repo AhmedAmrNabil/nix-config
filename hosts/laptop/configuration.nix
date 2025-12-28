@@ -92,14 +92,11 @@
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.btngana = {
     isNormalUser = true;
-    shell = pkgs.fish;
     extraGroups = [
       "networkmanager"
       "wheel"
     ];
   };
-
-  programs.fish.enable = true;
 
   # Enable automatic login for the user.
   services.displayManager.autoLogin.enable = true;

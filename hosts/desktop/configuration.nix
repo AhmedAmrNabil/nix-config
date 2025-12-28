@@ -18,11 +18,9 @@
   # -------------------------------------
 
   # -------- Users --------
-  programs.fish.enable = true;
   users.users.btngana = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
-    shell = pkgs.fish;
   };
   # -----------------------
 

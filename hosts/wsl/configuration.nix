@@ -24,12 +24,6 @@
   wsl.docker-desktop.enable = true;
   wsl.startMenuLaunchers = true;
 
-  programs.fish.enable = true;
-
-  users.users.btngana = {
-    shell = pkgs.fish;
-  };
-
   environment.systemPackages = with pkgs; [
     nano
     micro

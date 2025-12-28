@@ -8,7 +8,10 @@
     ../modules
   ];
 
-  apps.fish.enable = true;
+  apps.fish = {
+    enable = true;
+    loginShell = true;
+  };
   apps.bash.enable = true;
   apps.starship.enable = true;
   apps.fastfetch.enable = true;

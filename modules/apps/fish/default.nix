@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   username,
   ...
 }:
@@ -10,12 +11,23 @@ in
 {
   options.apps.fish = {
     enable = lib.mkEnableOption "Fish shell with custom configuration";
+    loginShell = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Set fish as the login shell for the user.";
+    };
   };
   config = lib.mkIf cfg.enable {
+
+    programs.fish.enable = true;
+
+    users.users."${username}" = lib.mkIf cfg.loginShell {
+      shell = pkgs.fish;
+    };
+
     home-manager.users.${username} =
       { ... }:
       {
-
         programs.fish = {
           enable = true;
           shellAliases = {
