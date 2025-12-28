@@ -8,6 +8,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     hilorioze.url = "github:hilorioze/nur-packages";
+    hyprland.url = "github:hyprwm/Hyprland";
   };
 
   outputs =

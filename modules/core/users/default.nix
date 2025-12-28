@@ -19,6 +19,7 @@ in
       extraGroups = [
         "wheel"
         "networkmanager"
+        "input"
       ];
     };
 

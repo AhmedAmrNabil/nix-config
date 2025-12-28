@@ -27,6 +27,7 @@
     kernel.enable = true;
     boot.enable = true;
     hardware.nvidia.enable = true;
+    hardware.ddcci.enable = true;
   };
   de.kde.enable = true;
 
