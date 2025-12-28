@@ -17,6 +17,7 @@
   apps.tailscale.enable = true;
   apps.obs.enable = true;
   apps.docker.enable = true;
+  apps.steam.enable = true;
 
   home-manager.users.${username} =
     { pkgs, ... }:

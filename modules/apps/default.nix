@@ -15,6 +15,7 @@
     ./open-tablet-driver
     ./spotify
     ./starship
+    ./steam
     ./tailscale
     ./vscode
     ./zoxide
