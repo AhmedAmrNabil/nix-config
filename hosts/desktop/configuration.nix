@@ -21,16 +21,11 @@
   programs.fish.enable = true;
   users.users.btngana = {
     isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
+    extraGroups = [ "wheel" ];
     shell = pkgs.fish;
   };
   # -----------------------
 
-  # Docker support
-  virtualisation.docker = {
-    enable = true;
-    storageDriver = "btrfs";
-  };
 
   imports = [
     # Include the results of the hardware scan.

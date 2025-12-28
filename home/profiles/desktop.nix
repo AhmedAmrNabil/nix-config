@@ -17,6 +17,7 @@
   apps.spotify.enable = true;
   apps.tailscale.enable = true;
   apps.obs.enable = true;
+  apps.docker.enable = true;
 
   home-manager.users.${username} =
     { pkgs, ... }:

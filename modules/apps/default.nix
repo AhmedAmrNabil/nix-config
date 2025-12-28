@@ -1,20 +1,21 @@
 {
   imports = [
-    ./gpu-screen-recorder
-    ./open-tablet-driver
-    ./fish
-    ./vscode
-    ./starship
-    ./fastfetch
-    ./btop
-    ./zoxide
-    ./micro
-    ./foot
-    ./cava
     ./alacritty
-    ./spotify
-    ./tailscale
     ./bash
+    ./btop
+    ./cava
+    ./docker
+    ./fastfetch
+    ./fish
+    ./foot
+    ./gpu-screen-recorder
+    ./micro
     ./obs
+    ./open-tablet-driver
+    ./spotify
+    ./starship
+    ./tailscale
+    ./vscode
+    ./zoxide
   ];
 }
