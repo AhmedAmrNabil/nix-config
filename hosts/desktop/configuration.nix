@@ -9,22 +9,6 @@
 
 {
 
-  # --------- Modules ------------------
-  apps.gpu-screen-recorder.enable = true;
-  apps.open-tablet-driver.enable = true;
-  core.fonts.enable = true;
-  de.kde.enable = true;
-  core.nix-cfg.enable = true;
-  # -------------------------------------
-
-  # -------- Users --------
-  users.users.btngana = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" ];
-  };
-  # -----------------------
-
-
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
@@ -32,6 +16,16 @@
     # profiles
     ../../home/profiles/desktop.nix
   ];
+
+  # --------- Modules ------------------
+  apps.gpu-screen-recorder.enable = true;
+  apps.open-tablet-driver.enable = true;
+  core = {
+    fonts.enable = true;
+    nix-cfg.enable = true;
+    users.enable = true;
+  };
+  de.kde.enable = true;
 
   boot.loader = {
     systemd-boot.enable = true;
