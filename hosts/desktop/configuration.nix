@@ -66,7 +66,6 @@
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
 
-
   # add zstd compression to file systems
   fileSystems = {
     "/".options = [ "compress=zstd" ];
@@ -94,14 +93,16 @@
     ];
   };
 
-  fileSystems."/e" = {
+  fileSystems."/home/btngana/Games" = {
     device = "/dev/disk/by-uuid/7A5AE84D5AE807A9";
     fsType = "ntfs";
     options = [
       "windows_names"
       "uid=1000"
       "gid=100"
-      "umask=022"
+      "umask=000"
+      "exec"
+      "rw"
       "big_writes"
       "nofail"
       "x-systemd.device-timeout=3s"
