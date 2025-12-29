@@ -9,6 +9,7 @@
   apps = {
     bash.enable = true;
     btop.enable = true;
+    direnv.enable = true;
     fastfetch.enable = true;
     fish = {
       enable = true;

@@ -4,6 +4,7 @@
     ./bash
     ./btop
     ./cava
+    ./direnv
     ./docker
     ./fastfetch
     ./fish
