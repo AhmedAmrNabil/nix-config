@@ -13,6 +13,7 @@
     ./micro
     ./obs
     ./open-tablet-driver
+    ./plymouth
     ./spotify
     ./starship
     ./steam

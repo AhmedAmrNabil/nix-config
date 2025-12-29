@@ -8,17 +8,19 @@
   imports = [
     ./shared.nix
   ];
-
-  apps.foot.enable = true;
-  apps.alacritty.enable = true;
-  apps.vscode.enable = true;
-  apps.cava.enable = true;
-  apps.spotify.enable = true;
-  apps.tailscale.enable = true;
-  apps.obs.enable = true;
-  apps.docker.enable = true;
-  apps.steam.enable = true;
-  apps.virt-manager.enable = true;
+  apps = {
+    foot.enable = true;
+    alacritty.enable = true;
+    vscode.enable = true;
+    cava.enable = true;
+    spotify.enable = true;
+    tailscale.enable = true;
+    obs.enable = true;
+    docker.enable = true;
+    steam.enable = true;
+    virt-manager.enable = true;
+    plymouth.enable = true;
+  };
 
   home-manager.users.${username} =
     { pkgs, ... }:
