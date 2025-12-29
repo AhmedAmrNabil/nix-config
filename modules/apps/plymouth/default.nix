@@ -15,17 +15,12 @@ in
     boot = {
       plymouth = {
         enable = true;
-        # theme = "rings";
-        # themePackages = with pkgs; [
-        #   # By default we would install all themes
-        #   (adi1090x-plymouth-themes.override {
-        #     selected_themes = [ "rings" ];
-        #   })
-        # ];
-        font = "${pkgs.hack-font}/share/fonts/truetype/Hack-Regular.ttf";
+        theme = "breeze";
         logo = "${pkgs.nixos-icons}/share/icons/hicolor/64x64/apps/nix-snowflake-white.png";
+        extraConfig = ''
+          DeviceScale = 1;
+        '';
       };
-      # Enable "Silent boot"
       consoleLogLevel = 3;
       initrd.verbose = false;
       kernelParams = [
