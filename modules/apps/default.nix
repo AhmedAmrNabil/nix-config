@@ -17,6 +17,7 @@
     ./starship
     ./steam
     ./tailscale
+    ./virt-manager
     ./vscode
     ./zoxide
   ];

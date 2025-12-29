@@ -18,6 +18,7 @@
   apps.obs.enable = true;
   apps.docker.enable = true;
   apps.steam.enable = true;
+  apps.virt-manager.enable = true;
 
   home-manager.users.${username} =
     { pkgs, ... }:
