@@ -38,6 +38,17 @@ in
           sddm-kcm
           partitionmanager
         ];
+
+        # Remove unused packages
+        environment.plasma6.excludePackages =
+          with pkgs.kdePackages;
+          [
+            elisa
+            kate
+            okular
+            khelpcenter
+            kinfocenter
+          ];
       }
 
       # Conditional auto-login + kwallet PAM config
