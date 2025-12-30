@@ -14,9 +14,12 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} =
-      { config, pkgs, ... }:
+      { config, pkgsUnstable, ... }:
       {
-        programs.vscode.enable = true;
+        programs.vscode = {
+          enable = true;
+          package = pkgsUnstable.vscode;
+        };
 
         xdg.configFile."Code/User/settings.json".source =
           config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/settings.json";
@@ -24,7 +27,7 @@ in
         xdg.configFile."Code/User/keybindings.json".source =
           config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/keybindings.json";
 
-        programs.vscode.profiles.default.extensions = with pkgs.vscode-extensions; [
+        programs.vscode.profiles.default.extensions = with pkgsUnstable.vscode-extensions; [
           adpyke.codesnap
           # alimozdemir.vscode-nuxt-dx-tools
           # antfu.goto-alias

@@ -3,11 +3,11 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager/release-25.11";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
-    hilorioze.url = "github:hilorioze/nur-packages";
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
@@ -17,7 +17,6 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
-      hilorioze,
       ...
     }@inputs:
     let
@@ -29,6 +28,10 @@
 
       pkgs = import nixpkgs {
         inherit system overlays;
+      };
+      pkgsUnstable = import inputs.nixpkgs-unstable {
+        inherit system overlays;
+        config.allowUnfree = true;
       };
 
       localPkgs = import ./packages {
@@ -57,7 +60,13 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 extraSpecialArgs = {
-                  inherit inputs localPkgs system gitConfig;
+                  inherit
+                    inputs
+                    localPkgs
+                    system
+                    pkgsUnstable
+                    gitConfig
+                    ;
                 };
                 sharedModules = with inputs; [
                   spicetify-nix.homeManagerModules.default
@@ -73,7 +82,6 @@
               inputs
               system
               localPkgs
-              hilorioze
               username
               ;
           };
