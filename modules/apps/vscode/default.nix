@@ -14,21 +14,16 @@ in
 
   config = lib.mkIf cfg.enable {
     home-manager.users.${username} =
-      { config, pkgsUnstable, ... }:
+      {
+        config,
+        pkgs,
+        ...
+      }:
       {
         programs.vscode = {
           enable = true;
-          package = pkgsUnstable.vscode;
-        };
-
-        xdg.configFile."Code/User/settings.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/settings.json";
-
-        xdg.configFile."Code/User/keybindings.json".source =
-          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/keybindings.json";
-
-        programs.vscode.profiles.default.extensions =
-          with pkgsUnstable.nix-vscode-extensions.vscode-marketplace; [
+          mutableExtensionsDir = true;
+          profiles.default.extensions = with pkgs.nix-vscode-extensions.vscode-marketplace; [
             adpyke.codesnap
             alimozdemir.vscode-nuxt-dx-tools
             antfu.goto-alias
@@ -56,15 +51,14 @@ in
             fireblast.hyprlang-vscode
             fnando.linter
             formulahendry.auto-rename-tag
-            github.copilot
-            github.copilot-chat
+            # github.copilot
+            # github.copilot-chat
             github.vscode-github-actions
             grapecity.gc-excelviewer
             heybourn.headwind
             icrawl.discord-vscode
             jeff-hykin.better-nix-syntax
             jnoortheen.nix-ide
-            jorgeserrano.vscode-csharp-snippets
             kdl-org.kdl
             lokalise.i18n-ally
             mads-hartmann.bash-ide-vscode
@@ -126,6 +120,13 @@ in
             wix.vscode-import-cost
             yuyichao.digitaljs
           ];
+        };
+
+        xdg.configFile."Code/User/settings.json".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/settings.json";
+
+        xdg.configFile."Code/User/keybindings.json".source =
+          config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/keybindings.json";
       };
   };
 }
