@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  username,
   ...
 }:
 let
@@ -10,24 +11,47 @@ in
 {
   options.de.kde = {
     enable = lib.mkEnableOption "KDE Plasma Desktop Environment";
-  };
 
-  config = lib.mkIf cfg.enable {
-
-    services = {
-      desktopManager.plasma6.enable = true;
-      displayManager.sddm.enable = true;
-      displayManager.sddm.wayland.enable = true;
-      xserver.enable = true;
+    autoLogin = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = "Enable automatic login for the KDE desktop environment.";
     };
-    security.polkit.enable = true;
-
-    powerManagement.enable = true;
-
-    programs.kdeconnect.enable = true;
-    environment.systemPackages = with pkgs.kdePackages; [
-      sddm-kcm # Configuration module for SDDM
-      partitionmanager # Optional: Manage the disk devices, partitions and file systems on your computer
-    ];
   };
+
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        services = {
+          desktopManager.plasma6.enable = true;
+          displayManager.sddm.enable = true;
+          displayManager.sddm.wayland.enable = true;
+          xserver.enable = true;
+        };
+
+        security.polkit.enable = true;
+        powerManagement.enable = true;
+
+        programs.kdeconnect.enable = true;
+
+        environment.systemPackages = with pkgs.kdePackages; [
+          sddm-kcm
+          partitionmanager
+        ];
+      }
+
+      # Conditional auto-login + kwallet PAM config
+      (lib.mkIf cfg.autoLogin {
+        services.displayManager.autoLogin = {
+          enable = true;
+          user = username;
+        };
+
+        security.pam.services.${username}.kwallet = {
+          enable = true;
+          package = pkgs.kdePackages.kwallet-pam;
+        };
+      })
+    ]
+  );
 }

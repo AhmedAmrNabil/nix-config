@@ -26,7 +26,10 @@
     kernel.enable = true;
     boot.enable = true;
   };
-  de.kde.enable = true;
+  de.kde = {
+    enable = true;
+    autoLogin = true;
+  };
 
   # entries limit override
   boot.loader.systemd-boot.configurationLimit = lib.mkForce 1;
