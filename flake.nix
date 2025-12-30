@@ -9,6 +9,7 @@
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     hyprland.url = "github:hyprwm/Hyprland";
+    nix-vscode-extensions.url = "github:nix-community/nix-vscode-extensions";
   };
 
   outputs =
@@ -17,6 +18,7 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
+      nix-vscode-extensions,
       ...
     }@inputs:
     let
@@ -24,6 +26,7 @@
 
       overlays = [
         (import ./overlays/xournalpp)
+        nix-vscode-extensions.overlays.default
       ];
 
       pkgs = import nixpkgs {
