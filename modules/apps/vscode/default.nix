@@ -17,11 +17,13 @@ in
       {
         config,
         pkgs,
+        pkgsUnstable,
         ...
       }:
       {
         programs.vscode = {
           enable = true;
+          package = pkgsUnstable.vscode;
           mutableExtensionsDir = true;
           profiles.default.extensions = with pkgs.nix-vscode-extensions.vscode-marketplace; [
             adpyke.codesnap
@@ -51,8 +53,6 @@ in
             fireblast.hyprlang-vscode
             fnando.linter
             formulahendry.auto-rename-tag
-            # github.copilot
-            # github.copilot-chat
             github.vscode-github-actions
             grapecity.gc-excelviewer
             heybourn.headwind
