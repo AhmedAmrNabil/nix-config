@@ -6,6 +6,7 @@
     ./cava
     ./direnv
     ./docker
+    ./eza
     ./fastfetch
     ./fish
     ./foot

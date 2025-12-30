@@ -15,6 +15,7 @@
       enable = true;
       loginShell = true;
     };
+    eza.enable = true;
     micro.enable = true;
     starship.enable = true;
     zoxide.enable = true;
