@@ -19,20 +19,28 @@ in
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
-        home-manager.users.${username} = {
-          programs.eza = {
-            enable = true;
-            icons = "always";
-            extraOptions = [
-              "--hyperlink"
-              "--color=always"
-              "--group-directories-first"
+        home-manager.users.${username} =
+          { pkgs, ... }:
+          {
+            programs.eza = {
+              enable = true;
+              icons = "always";
+              extraOptions = [
+                "--hyperlink"
+                "--color=always"
+                "--group-directories-first"
+              ];
+              enableFishIntegration = true;
+              enableBashIntegration = true;
+              git = true;
+            };
+            programs.fish.plugins = [
+              {
+                name = "eza-remove-default-ls-completion";
+                src = pkgs.writeTextDir "completions/ls.fish" "";
+              }
             ];
-            enableFishIntegration = true;
-            enableBashIntegration = true;
-            git = true;
           };
-        };
       }
       (lib.mkIf cfg.enableTree {
         home-manager.users.${username} = {
