@@ -41,9 +41,6 @@ in
           wsl-nix-clean = "sudo nix-env --delete-generations old;sudo nix-collect-garbage -d";
         };
         shellInit = ''
-          set -gx EDITOR micro
-          set -gx VISUAL micro
-          set -gx MICRO_TRUECOLOR 1
           fish_config theme choose "Catppuccin Mocha"
         '';
       };
