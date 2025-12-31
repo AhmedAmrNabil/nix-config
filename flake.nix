@@ -74,7 +74,7 @@
                 sharedModules = with inputs; [
                   spicetify-nix.homeManagerModules.default
                 ];
-                backupFileExtension = ".hm-bak";
+                backupFileExtension = "hm-bak";
                 users.${username}.home.stateVersion = "25.11";
               };
             }
