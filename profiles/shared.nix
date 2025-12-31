@@ -20,5 +20,6 @@
     starship.enable = true;
     zoxide.enable = true;
     git.enable = true;
+    nh.enable = true;
   };
 }

@@ -13,6 +13,7 @@
     ./git
     ./gpu-screen-recorder
     ./micro
+    ./nh
     ./obs
     ./open-tablet-driver
     ./plymouth
