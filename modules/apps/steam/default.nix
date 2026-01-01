@@ -2,7 +2,6 @@
   config,
   lib,
   pkgs,
-  username,
   ...
 }:
 let
@@ -18,7 +17,7 @@ let
       Name=Steam (Gamescope)
       Comment=Steam Big Picture in Gamescope
       Exec=env __GLX_VENDOR_LIBRARY_NAME=nvidia \
-        ${lib.getExe pkgs.gamescope} -W 2560 -H 1440 -r 180 -f --sdr-gamut-wideness 1 -e -- \
+        ${lib.getExe pkgs.gamescope} -W 2560 -H 1440 -r 180 -c DP-1 -f --sdr-gamut-wideness 1 -e -- \
         ${lib.getExe pkgs.steam} -tenfoot
       Type=Application
       EOF
@@ -42,6 +41,7 @@ in
     environment.systemPackages = with pkgs; [
       mangohud
       gamescope-wsi
+      protonup-qt
     ];
 
     programs.gamemode.enable = true;
@@ -49,17 +49,5 @@ in
     services.displayManager.sessionPackages = [
       steamGamescopeSession
     ];
-
-    home-manager.users.${username} = {
-      xdg.desktopEntries.steam-gamescope = {
-        name = "Steam (gamescope)";
-        genericName = "Steam";
-        exec = "env __GLX_VENDOR_LIBRARY_NAME=nvidia ${lib.getExe pkgs.gamescope} -W 2560 -H 1440 -r 180 -f --sdr-gamut-wideness 1 -e -- ${lib.getExe pkgs.steam} -tenfoot";
-        icon = "steam";
-        categories = [
-          "Game"
-        ];
-      };
-    };
   };
 }
