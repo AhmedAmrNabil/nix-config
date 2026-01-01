@@ -4,6 +4,7 @@
 
 {
   pkgs,
+  username,
   ...
 }:
 {
@@ -12,13 +13,23 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
-    # profiles
-    ../../profiles/desktop.nix
+    ../../modules
   ];
 
   # --------- Modules ------------------
-  apps.gpu-screen-recorder.enable = true;
-  apps.open-tablet-driver.enable = true;
+  apps = {
+    docker.enable = true;
+    fish.enable = true;
+    gpu-screen-recorder.enable = true;
+    nh.enable = true;
+    obs.enable = true;
+    open-tablet-driver.enable = true;
+    plymouth.enable = true;
+    steam.enable = true;
+    tailscale.enable = true;
+    virt-manager.enable = true;
+  };
+
   core = {
     fonts.enable = true;
     nix-cfg.enable = true;
@@ -29,6 +40,13 @@
     hardware.ddcci.enable = true;
   };
   de.kde.enable = true;
+
+  # --------- Home manager ------------------
+  home-manager.users.${username}.imports = [
+    ../../home/profiles/desktop.nix
+  ];
+
+  # --------- System configuration ------------------
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
   # Pick only one of the below networking options.

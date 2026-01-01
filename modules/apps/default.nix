@@ -1,28 +1,14 @@
 {
   imports = [
-    ./alacritty
-    ./bash
-    ./btop
-    ./cava
-    ./direnv
     ./docker
-    ./eza
-    ./fastfetch
     ./fish
-    ./foot
-    ./git
     ./gpu-screen-recorder
-    ./micro
     ./nh
     ./obs
     ./open-tablet-driver
     ./plymouth
-    ./spotify
-    ./starship
     ./steam
     ./tailscale
     ./virt-manager
-    ./vscode
-    ./zoxide
   ];
 }

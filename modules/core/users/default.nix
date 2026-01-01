@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  pkgs,
   ...
 }:
 let
@@ -12,6 +13,7 @@ in
     enable = lib.mkEnableOption "User account management";
   };
   config = lib.mkIf cfg.enable {
+    programs.fish.enable = true;
     users.users."${username}" = {
       isNormalUser = true;
       description = "User ${username}";
@@ -21,6 +23,7 @@ in
         "networkmanager"
         "input"
       ];
+      shell = pkgs.fish;
     };
 
     home-manager.users."${username}" = {

@@ -1,0 +1,19 @@
+{
+  imports = [
+    ./alacritty
+    ./bash
+    ./btop
+    ./cava
+    ./direnv
+    ./eza
+    ./fastfetch
+    ./fish
+    ./foot
+    ./git
+    ./micro
+    ./spotify
+    ./starship
+    ./vscode
+    ./zoxide
+  ];
+}
