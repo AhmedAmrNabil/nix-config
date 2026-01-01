@@ -9,7 +9,6 @@
   pkgs,
   ...
 }:
-
 {
 
   imports = [
@@ -24,10 +23,10 @@
   wsl.docker-desktop.enable = true;
   wsl.startMenuLaunchers = true;
 
-  environment.systemPackages = with pkgs; [
-    nano
-    micro
-    wget
+  environment.systemPackages = [
+    pkgs.nano
+    pkgs.micro
+    pkgs.wget
   ];
   systemd.tmpfiles.rules = [
     "L+ /tmp/.X11-unix - - - - /wslg/.X11-unix"

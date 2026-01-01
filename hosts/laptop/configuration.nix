@@ -3,12 +3,10 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 {
-  # config,
   pkgs,
   lib,
   ...
 }:
-
 {
   imports = [
     # Include the results of the hardware scan.
@@ -78,12 +76,11 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    micro
-    git
-    efibootmgr
-    # google-chrome
-    microsoft-edge
+  environment.systemPackages = [
+    pkgs.micro
+    pkgs.git
+    pkgs.efibootmgr
+    pkgs.microsoft-edge
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -33,15 +33,15 @@ in
   config = lib.mkIf cfg.enable {
     programs.steam = {
       enable = true;
-      remotePlay.openFirewall = true; # For Steam Remote Play
+      remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       gamescopeSession.enable = true;
     };
 
-    environment.systemPackages = with pkgs; [
-      mangohud
-      gamescope-wsi
-      protonup-qt
+    environment.systemPackages = [
+      pkgs.mangohud
+      pkgs.gamescope-wsi
+      pkgs.protonup-qt
     ];
 
     programs.gamemode.enable = true;

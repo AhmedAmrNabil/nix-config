@@ -6,6 +6,7 @@
   ...
 }:
 let
+  inherit (pkgs) kdePackages;
   cfg = config.de.kde;
 in
 {
@@ -24,8 +25,10 @@ in
       {
         services = {
           desktopManager.plasma6.enable = true;
-          displayManager.sddm.enable = true;
-          displayManager.sddm.wayland.enable = true;
+          displayManager.sddm = {
+            enable = true;
+            wayland.enable = true;
+          };
           xserver.enable = true;
         };
 
@@ -34,21 +37,19 @@ in
 
         programs.kdeconnect.enable = true;
 
-        environment.systemPackages = with pkgs.kdePackages; [
-          sddm-kcm
-          partitionmanager
+        environment.systemPackages = [
+          kdePackages.sddm-kcm
+          kdePackages.partitionmanager
         ];
 
         # Remove unused packages
-        environment.plasma6.excludePackages =
-          with pkgs.kdePackages;
-          [
-            elisa
-            kate
-            okular
-            khelpcenter
-            kinfocenter
-          ];
+        environment.plasma6.excludePackages = [
+          kdePackages.elisa
+          kdePackages.kate
+          kdePackages.okular
+          kdePackages.khelpcenter
+          kdePackages.kinfocenter
+        ];
       }
 
       # Conditional auto-login + kwallet PAM config
@@ -60,7 +61,7 @@ in
 
         security.pam.services.${username}.kwallet = {
           enable = true;
-          package = pkgs.kdePackages.kwallet-pam;
+          package = kdePackages.kwallet-pam;
         };
       })
     ]

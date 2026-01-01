@@ -21,8 +21,8 @@ in
           cudaSupport = true;
         }
       );
-      plugins = with pkgs.obs-studio-plugins; [
-        droidcam-obs
+      plugins = [
+        pkgs.obs-studio-plugins.droidcam-obs
       ];
     };
   };

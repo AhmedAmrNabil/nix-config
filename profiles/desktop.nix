@@ -24,15 +24,16 @@
 
   home-manager.users.${username} =
     { pkgs, ... }:
+
     {
-      home.packages = with pkgs; [
-        xournalpp
-        (discord.override {
+      home.packages = [
+        pkgs.xournalpp
+        (pkgs.discord.override {
           withOpenASAR = true;
           withVencord = true;
         })
-        vlc
-        localsend
+        pkgs.vlc
+        pkgs.localsend
       ];
 
       xdg.desktopEntries.microsoft-edge-autoscroll = {

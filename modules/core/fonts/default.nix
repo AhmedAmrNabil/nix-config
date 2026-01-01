@@ -5,18 +5,19 @@
   ...
 }:
 let
+  inherit (lib) mkEnableOption mkIf;
   cfg = config.core.fonts;
 in
 {
   options.core.fonts = {
-    enable = lib.mkEnableOption "Enable default font packages and configurations";
+    enable = mkEnableOption "Enable default font packages and configurations";
   };
 
-  config = lib.mkIf cfg.enable {
+  config = mkIf cfg.enable {
 
-    fonts.packages = with pkgs; [
-      noto-fonts
-      nerd-fonts.jetbrains-mono
+    fonts.packages = [
+      pkgs.noto-fonts
+      pkgs.nerd-fonts.jetbrains-mono
     ];
 
     # Optional: Enable fontconfig tweaks

@@ -6,7 +6,6 @@
   pkgs,
   ...
 }:
-
 {
 
   imports = [
@@ -62,13 +61,12 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  environment.systemPackages = with pkgs; [
-    nano
-    micro
-
-    wayland-utils
-    wl-clipboard
-    microsoft-edge
+  environment.systemPackages = [
+    pkgs.nano
+    pkgs.micro
+    pkgs.wayland-utils
+    pkgs.wl-clipboard
+    pkgs.microsoft-edge
   ];
 
   # Enable local time synchronization

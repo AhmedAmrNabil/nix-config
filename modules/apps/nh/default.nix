@@ -13,8 +13,8 @@ in
     enable = lib.mkEnableOption "nh with aliases";
   };
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = with pkgs; [
-      nh
+    environment.systemPackages = [
+      pkgs.nh
     ];
     environment.sessionVariables = {
       NH_FLAKE = "/home/${username}/dotfiles";

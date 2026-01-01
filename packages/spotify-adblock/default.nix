@@ -1,9 +1,7 @@
 {
   spotify,
-  stdenv,
   rustPlatform,
   fetchFromGitHub,
-  xorg,
   zip,
   unzip,
 }: let
@@ -34,17 +32,6 @@
       mkdir -p $out/lib
       install -D --mode=644 --strip target/release/libspotifyadblock.so $out/lib
     '';
-  };
-spotifywm = stdenv.mkDerivation {
-    name = "spotifywm";
-    src = fetchFromGitHub {
-      owner = "dasj";
-      repo = "spotifywm";
-      rev = "8624f539549973c124ed18753881045968881745";
-      hash = "sha256-AsXqcoqUXUFxTG+G+31lm45gjP6qGohEnUSUtKypew0=";
-    };
-    buildInputs = [xorg.libX11];
-    installPhase = "mv spotifywm.so $out";
   };
 in
   spotify.overrideAttrs (
