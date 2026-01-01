@@ -91,7 +91,7 @@
 
   # Mounting windows stuff:
 
-  fileSystems."/d" = {
+  fileSystems."/home/btngana/hdd" = {
     device = "/dev/disk/by-uuid/01DAB93F51B44DA0";
     fsType = "ntfs";
     options = [
@@ -105,7 +105,22 @@
     ];
   };
 
-  fileSystems."/home/btngana/Games" = {
+  # Bind mount Videos and Downloads from hdd to home
+  fileSystems."/home/btngana/Videos" = {
+    device = "/home/btngana/hdd/Videos";
+    fsType = "none";
+    options = [ "bind" ];
+    depends = [ "/home/btngana/hdd" ];
+  };
+
+  fileSystems."/home/btngana/Downloads" = {
+    device = "/home/btngana/hdd/Downloads";
+    fsType = "none";
+    options = [ "bind" ];
+    depends = [ "/home/btngana/hdd" ];
+  };
+
+  fileSystems."/home/btngana/crucial" = {
     device = "/dev/disk/by-uuid/7A5AE84D5AE807A9";
     fsType = "ntfs";
     options = [
