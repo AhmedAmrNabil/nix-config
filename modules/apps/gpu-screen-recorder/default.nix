@@ -3,7 +3,6 @@
   pkgs,
   localPkgs,
   config,
-  username,
   ...
 }:
 let
@@ -36,24 +35,17 @@ in
       source = lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-global-hotkeys";
     };
 
-    home-manager.users."${username}" =
-      { ... }:
-      {
-        systemd.user.services.gpu-screen-recorder-ui = {
-          Unit = {
-            Description = "GPU Screen Recorder UI";
-            After = [ "graphical.target" ];
-          };
-          Install = {
-            WantedBy = [ "default.target" ];
-          };
-          Service = {
-            ExecStart = "${lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-ui"} launch-daemon";
-            Restart = "on-failure";
-            RestartSec = "5s";
-            KillSignal = "SIGINT";
-          };
-        };
+    systemd.user.services.gpu-screen-recorder-ui = {
+      description = "GPU Screen Recorder UI";
+      after = [ "graphical-session.target" ];
+      wantedBy = [ "graphical-session.target" ];
+
+      serviceConfig = {
+        ExecStart = "${lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-ui"} launch-daemon";
+        Restart = "on-failure";
+        RestartSec = "5s";
+        KillSignal = "SIGINT";
       };
+    };
   };
 }
