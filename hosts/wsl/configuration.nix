@@ -10,7 +10,14 @@
   ...
 }:
 {
-  core.nix-cfg.enable = true;
+  imports = [
+    ../../modules
+  ];
+  core = {
+    nix-cfg.enable = true;
+    users.enable = true;
+  };
+  apps.nh.enable = true;
   wsl.enable = true;
   wsl.defaultUser = "btngana";
   wsl.wslConf.network.hostname = "wsl-nixos";
