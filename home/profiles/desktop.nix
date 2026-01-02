@@ -16,14 +16,14 @@
     open-tablet-driver.enable = true;
   };
 
-  home.packages = [
-    pkgs.xournalpp
-    (pkgs.discord.override {
+  home.packages = with pkgs;[
+    xournalpp
+    (discord.override {
       withOpenASAR = true;
       withVencord = true;
     })
-    pkgs.vlc
-    pkgs.localsend
+    vlc
+    localsend
   ];
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {

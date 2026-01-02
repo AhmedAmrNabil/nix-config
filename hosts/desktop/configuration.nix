@@ -4,7 +4,6 @@
 
 {
   pkgs,
-  username,
   ...
 }:
 {
@@ -12,7 +11,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
     ../../modules
   ];
 
@@ -39,11 +37,6 @@
     hardware.ddcci.enable = true;
   };
   de.kde.enable = true;
-
-  # --------- Home manager ------------------
-  # home-manager.users.${username}.imports = [
-  #   ../../home/profiles/desktop.nix
-  # ];
 
   # --------- System configuration ------------------
 
