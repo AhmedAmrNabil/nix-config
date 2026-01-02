@@ -10,11 +10,6 @@
   ...
 }:
 {
-
-  imports = [
-    ../../profiles/wsl.nix
-  ];
-
   core.nix-cfg.enable = true;
   wsl.enable = true;
   wsl.defaultUser = "btngana";

@@ -1,7 +1,6 @@
 {
   imports = [
     ./docker
-    ./fish
     ./gpu-screen-recorder
     ./nh
     ./obs

@@ -26,10 +26,6 @@ in
       shell = pkgs.fish;
     };
 
-    home-manager.users."${username}" = {
-      imports = [ ./home.nix ];
-    };
-
     assertions = [
       {
         assertion = username != null;

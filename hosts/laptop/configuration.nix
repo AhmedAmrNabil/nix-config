@@ -11,12 +11,18 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-
-    # profile
-    ../../profiles/laptop.nix
   ];
 
   # --------- Modules ------------------
+  apps = {
+    docker.enable = true;
+    gpu-screen-recorder.enable = true;
+    nh.enable = true;
+    obs.enable = true;
+    open-tablet-driver.enable = true;
+    plymouth.enable = true;
+    tailscale.enable = true;
+  };
   core = {
     fonts.enable = true;
     nix-cfg.enable = true;

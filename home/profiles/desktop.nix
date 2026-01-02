@@ -13,6 +13,7 @@
     vscode.enable = true;
     cava.enable = true;
     spotify.enable = true;
+    open-tablet-driver.enable = true;
   };
 
   home.packages = [

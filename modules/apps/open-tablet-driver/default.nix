@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  username,
   ...
 }:
 let
@@ -23,9 +22,5 @@ in
     hardware.uinput.enable = true;
     boot.kernelModules = [ "uinput" ];
     boot.blacklistedKernelModules = [ "wacom" ];
-
-    home-manager.users.${username}.imports = [
-      ./home.nix
-    ];
   };
 }

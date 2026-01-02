@@ -117,9 +117,9 @@ in
     };
 
     xdg.configFile."Code/User/settings.json".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/settings.json";
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/vscode/settings.json";
 
     xdg.configFile."Code/User/keybindings.json".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/modules/apps/vscode/keybindings.json";
+      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/vscode/keybindings.json";
   };
 }

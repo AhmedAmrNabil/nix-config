@@ -46,7 +46,7 @@
         config.allowUnfree = true;
       };
       pkgsUnstable = import inputs.nixpkgs-unstable {
-        inherit system;
+        inherit system overlays;
         config.allowUnfree = true;
       };
 
@@ -62,19 +62,6 @@
       commonModules = [
         ./modules
         { nixpkgs.overlays = overlays; }
-        home-manager.nixosModules.home-manager
-        {
-          home-manager = {
-            useGlobalPkgs = true;
-            useUserPackages = true;
-            extraSpecialArgs = {
-              inherit inputs localPkgs system pkgsUnstable gitConfig;
-            };
-            sharedModules = [ inputs.spicetify-nix.homeManagerModules.default ];
-            backupFileExtension = "hm-bak";
-            users.${username}.home.stateVersion = "25.11";
-          };
-        }
       ];
 
       specialArgs = { inherit inputs system localPkgs username; };
@@ -84,12 +71,33 @@
           inherit system specialArgs;
           modules = [ ./hosts/${host}/configuration.nix ] ++ commonModules ++ extraModules;
         };
+
+      # Home Manager standalone configuration
+      homeExtraSpecialArgs = {
+        inherit inputs localPkgs system pkgsUnstable gitConfig username;
+      };
+
+      mkHome = profile:
+        home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          extraSpecialArgs = homeExtraSpecialArgs;
+          modules = [
+            ./home/profiles/${profile}.nix
+            inputs.spicetify-nix.homeManagerModules.default
+          ];
+        };
     in
     {
       nixosConfigurations = {
         desktop-nixos = mkSystem "desktop" [];
         laptop-nixos = mkSystem "laptop" [];
         wsl-nixos = mkSystem "wsl" [ nixos-wsl.nixosModules.default ];
+      };
+
+      homeConfigurations = {
+        "${username}@desktop-nixos" = mkHome "desktop";
+        "${username}@laptop-nixos" = mkHome "laptop";
+        "${username}@wsl-nixos" = mkHome "wsl";
       };
     };
 }

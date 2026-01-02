@@ -11,6 +11,7 @@
     ./foot
     ./git
     ./micro
+    ./open-tablet-driver
     ./spotify
     ./starship
     ./vscode

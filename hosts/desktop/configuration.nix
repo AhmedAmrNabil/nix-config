@@ -19,7 +19,6 @@
   # --------- Modules ------------------
   apps = {
     docker.enable = true;
-    fish.enable = true;
     gpu-screen-recorder.enable = true;
     nh.enable = true;
     obs.enable = true;
@@ -42,9 +41,9 @@
   de.kde.enable = true;
 
   # --------- Home manager ------------------
-  home-manager.users.${username}.imports = [
-    ../../home/profiles/desktop.nix
-  ];
+  # home-manager.users.${username}.imports = [
+  #   ../../home/profiles/desktop.nix
+  # ];
 
   # --------- System configuration ------------------
 
