@@ -39,6 +39,10 @@ in
       description = "GPU Screen Recorder UI";
       after = [ "graphical-session.target" ];
       wantedBy = [ "graphical-session.target" ];
+      path = [
+        localPkgs.gpu-screen-recorder-ui
+        localPkgs.gpu-screen-recorder-notification
+      ];
 
       serviceConfig = {
         ExecStart = "${lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-ui"} launch-daemon";
