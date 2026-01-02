@@ -11,11 +11,15 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ../../modules
   ];
 
   # --------- Modules ------------------
   apps = {
-    docker.enable = true;
+    docker = {
+      enable = true;
+      storageDriver = "overlay2";
+    };
     gpu-screen-recorder.enable = true;
     nh.enable = true;
     obs.enable = true;

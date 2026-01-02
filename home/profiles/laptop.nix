@@ -2,9 +2,7 @@
   pkgs,
   ...
 }:
-
 {
-
   imports = [
     ./shared.nix
   ];
@@ -13,16 +11,9 @@
     vscode.enable = true;
     cava.enable = true;
     spotify.enable = true;
-    tailscale.enable = true;
-    docker = {
-      enable = true;
-      storageDriver = "overlay2";
-    };
-    plymouth.enable = true;
   };
 
-  home.packages = with pkgs;[
-    xournalpp
+  home.packages = with pkgs; [
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
