@@ -15,7 +15,6 @@ in
       enable = true;
       shellAliases = {
         clock = "tty-clock -tcDBC 4";
-        wsl-nix-clean = "sudo nix-env --delete-generations old;sudo nix-collect-garbage -d";
       };
     };
   };
