@@ -121,5 +121,8 @@ in
 
     xdg.configFile."Code/User/keybindings.json".source =
       config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/vscode/keybindings.json";
+    home.shellAliases = {
+      nce = "code --new-window ${config.home.homeDirectory}/dotfiles";
+    };
   };
 }

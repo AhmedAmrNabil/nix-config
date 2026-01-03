@@ -262,7 +262,7 @@
         "command": ["nixfmt"]
       },
       "nixpkgs": {
-        "expr": "import (builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").inputs.nixpkgs {}"
+        "expr": "import (builtins.getFlake \"/home/btngana/dotfiles\").inputs.nixpkgs {}"
       },
       "options": {
         // By default, this entry will be read from `import <nixpkgs> { }`.
@@ -270,6 +270,9 @@
         // Tip: for flake-based configuration, utilize `builtins.getFlake`
         "nixos": {
           "expr": "(builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").nixosConfigurations.desktop-nixos.options"
+        },
+        "home-manager": {
+          "expr": "(builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").homeConfigurations.\"btngana@desktop-nixos\".options"
         }
       }
     }
