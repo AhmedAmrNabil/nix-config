@@ -37,6 +37,7 @@
     hardware.ddcci.enable = true;
   };
   de.kde.enable = true;
+  de.hyprland.enable = true;
 
   # --------- System configuration ------------------
 
@@ -143,6 +144,7 @@
       "x-systemd.device-timeout=3s"
     ];
   };
+
 
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.

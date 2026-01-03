@@ -16,7 +16,10 @@
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-vscode-extensions = {
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -61,12 +64,21 @@
 
       commonModules = [
         ./modules
+        inputs.hyprland.nixosModules.default
         { nixpkgs.overlays = overlays; }
       ];
 
-      specialArgs = { inherit inputs system localPkgs username; };
+      specialArgs = {
+        inherit
+          inputs
+          system
+          localPkgs
+          username
+          ;
+      };
 
-      mkSystem = host: extraModules:
+      mkSystem =
+        host: extraModules:
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
           modules = [ ./hosts/${host}/configuration.nix ] ++ commonModules ++ extraModules;
@@ -74,10 +86,18 @@
 
       # Home Manager standalone configuration
       homeExtraSpecialArgs = {
-        inherit inputs localPkgs system pkgsUnstable gitConfig username;
+        inherit
+          inputs
+          localPkgs
+          system
+          pkgsUnstable
+          gitConfig
+          username
+          ;
       };
 
-      mkHome = profile:
+      mkHome =
+        profile:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           extraSpecialArgs = homeExtraSpecialArgs;
@@ -89,8 +109,8 @@
     in
     {
       nixosConfigurations = {
-        desktop-nixos = mkSystem "desktop" [];
-        laptop-nixos = mkSystem "laptop" [];
+        desktop-nixos = mkSystem "desktop" [ ];
+        laptop-nixos = mkSystem "laptop" [ ];
         wsl-nixos = mkSystem "wsl" [ nixos-wsl.nixosModules.default ];
       };
 
