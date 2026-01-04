@@ -16,7 +16,7 @@
     open-tablet-driver.enable = true;
   };
 
-  home.packages = with pkgs;[
+  home.packages = with pkgs; [
     xournalpp
     (discord.override {
       withOpenASAR = true;

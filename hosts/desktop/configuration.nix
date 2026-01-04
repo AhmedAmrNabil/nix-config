@@ -72,12 +72,23 @@
   #   useXkbConfig = true; # use xkb.options in tty.
   # };
 
-  environment.systemPackages = [
-    pkgs.nano
-    pkgs.micro
-    pkgs.wayland-utils
-    pkgs.wl-clipboard
-    pkgs.microsoft-edge
+  environment.systemPackages = with pkgs; [
+    nano
+    micro
+    wayland-utils
+    wl-clipboard
+    microsoft-edge
+    (lutris.override {
+      extraPkgs =
+        pkgs: with pkgs; [
+          wineWowPackages.stable
+          winetricks
+          gamemode
+        ];
+      extraLibraries = pkgs: [
+        pkgs.gamemode
+      ];
+    })
   ];
 
   # Enable local time synchronization
