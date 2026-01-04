@@ -24,6 +24,7 @@
     })
     vlc
     localsend
+    transmission_4-qt
   ];
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
