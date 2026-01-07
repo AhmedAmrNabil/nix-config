@@ -36,5 +36,6 @@
     gdu
     direnv
     fzf
+    python3
   ];
 }
