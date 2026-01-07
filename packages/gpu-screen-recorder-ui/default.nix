@@ -55,7 +55,7 @@ stdenv.mkDerivation rec {
 
   mesonFlags = [
     # will enable systemd in the module later
-    # (lib.mesonBool "systemd" true)
+    (lib.mesonBool "systemd" false)
     (lib.mesonBool "capabilities" false)
   ];
 
@@ -89,7 +89,9 @@ stdenv.mkDerivation rec {
     homepage = "https://git.dec05eba.com/gpu-screen-recorder-ui/";
     license = lib.licenses.gpl3Only;
     platforms = lib.platforms.linux;
-    maintainers = [ ];
+    maintainers = with lib.maintainers; [
+      AhmedAmrNabil
+    ];
     mainProgram = "gsr-ui";
   };
 }

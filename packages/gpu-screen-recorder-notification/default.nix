@@ -57,7 +57,9 @@ stdenv.mkDerivation rec {
     homepage = "https://git.dec05eba.com/gpu-screen-recorder-notification/";
     license = lib.licenses.gpl3Only;
     platforms = lib.platforms.linux;
-    maintainers = [ ];
+    maintainers = with lib.maintainers; [
+      AhmedAmrNabil
+    ];
     mainProgram = "gsr-notify";
   };
 }

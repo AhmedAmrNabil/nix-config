@@ -1,6 +1,5 @@
 {
   lib,
-  pkgs,
   localPkgs,
   config,
   ...
@@ -15,18 +14,12 @@ in
 
   config = lib.mkIf cfg.enable {
 
-    environment.systemPackages = with pkgs; [
-      gpu-screen-recorder-gtk
-      gpu-screen-recorder
-      localPkgs.gpu-screen-recorder-ui
-      localPkgs.gpu-screen-recorder-notification
+    environment.systemPackages = with localPkgs; [
+      gpu-screen-recorder-ui
+      gpu-screen-recorder-notification
     ];
-    security.wrappers.gsr-kms-server = {
-      owner = "root";
-      group = "root";
-      capabilities = "cap_sys_admin+ep";
-      source = lib.getExe' pkgs.gpu-screen-recorder "gsr-kms-server";
-    };
+
+    programs.gpu-screen-recorder.enable = true;
 
     security.wrappers.gsr-global-hotkeys = {
       owner = "root";
@@ -37,13 +30,11 @@ in
 
     systemd.user.services.gpu-screen-recorder-ui = {
       description = "GPU Screen Recorder UI";
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
+      wantedBy = [ "default.target" ];
       path = [
         localPkgs.gpu-screen-recorder-ui
         localPkgs.gpu-screen-recorder-notification
       ];
-
       serviceConfig = {
         ExecStart = "${lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-ui"} launch-daemon";
         Restart = "on-failure";
