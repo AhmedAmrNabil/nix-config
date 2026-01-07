@@ -24,6 +24,10 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # vader-mapper = {
+    #   url = "path:/home/btngana/vader-test";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
   outputs =
@@ -65,6 +69,7 @@
       commonModules = [
         ./modules
         inputs.hyprland.nixosModules.default
+        # inputs.vader-mapper.nixosModules.default
         { nixpkgs.overlays = overlays; }
       ];
 

@@ -39,6 +39,8 @@
   de.kde.enable = true;
   de.hyprland.enable = true;
 
+  # services.vaderMapper.enable = true;
+
   # --------- System configuration ------------------
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
