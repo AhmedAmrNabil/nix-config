@@ -29,6 +29,11 @@ in
       '';
     };
 
+    programs.nix-index.enable = true;
+    home.packages = with pkgs; [
+      comma
+    ];
+
     xdg.configFile."fish/themes/Catppuccin Mocha.theme".source =
       "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
   };
