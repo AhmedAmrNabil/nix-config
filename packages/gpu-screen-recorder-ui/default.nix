@@ -82,7 +82,9 @@ stdenv.mkDerivation rec {
         }"
     '';
 
-  passthru.updateScript = gitUpdater { };
+  passthru.updateScript = gitUpdater {
+    url = "https://repo.dec05eba.com/gpu-screen-recorder-ui";
+  };
 
   meta = {
     description = "A fullscreen overlay UI for GPU Screen Recorder in the style of ShadowPlay";

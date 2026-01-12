@@ -50,7 +50,9 @@ stdenv.mkDerivation rec {
       }"
   '';
 
-  passthru.updateScript = gitUpdater { };
+  passthru.updateScript = gitUpdater {
+    url = "https://repo.dec05eba.com/gpu-screen-recorder-notification";
+  };
 
   meta = {
     description = "Notification in the style of ShadowPlay";
