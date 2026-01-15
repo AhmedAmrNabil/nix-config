@@ -36,7 +36,10 @@
     hardware.nvidia.enable = true;
     hardware.ddcci.enable = true;
   };
-  de.kde.enable = true;
+  de.kde = {
+    enable = true;
+    autoLogin = true;
+  };
   de.hyprland.enable = true;
 
   # services.vaderMapper.enable = true;
