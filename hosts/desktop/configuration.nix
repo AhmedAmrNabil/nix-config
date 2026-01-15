@@ -94,6 +94,7 @@
         pkgs.gamemode
       ];
     })
+    distrobox
   ];
 
   # Enable local time synchronization
