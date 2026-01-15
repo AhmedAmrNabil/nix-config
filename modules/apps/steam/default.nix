@@ -31,20 +31,27 @@ in
     enable = lib.mkEnableOption "Steam support";
   };
   config = lib.mkIf cfg.enable {
+
+    programs.gamemode.enable = true;
     programs.steam = {
       enable = true;
+      package = pkgs.steam.override {
+        extraPkgs = (
+          pkgs: with pkgs; [
+            gamemode
+          ]
+        );
+      };
       remotePlay.openFirewall = true;
       dedicatedServer.openFirewall = true;
       gamescopeSession.enable = true;
     };
 
-    environment.systemPackages = [
-      pkgs.mangohud
-      pkgs.gamescope-wsi
-      pkgs.protonup-qt
+    environment.systemPackages = with pkgs; [
+      mangohud
+      gamescope-wsi
+      protonup-qt
     ];
-
-    programs.gamemode.enable = true;
 
     services.displayManager.sessionPackages = [
       steamGamescopeSession
