@@ -124,5 +124,8 @@
         "${username}@laptop-nixos" = mkHome "laptop";
         "${username}@wsl-nixos" = mkHome "wsl";
       };
+
+      # export nixpkgs to use with nix shell
+      legacyPackages.${system} = pkgs;
     };
 }

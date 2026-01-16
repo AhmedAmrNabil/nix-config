@@ -18,4 +18,5 @@
   spotify-adblock = pkgs.callPackage ./spotify-adblock { };
   gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui { };
   gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification { };
+  wps-fonts = pkgs.callPackage ./wps-fonts { };
 }

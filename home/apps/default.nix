@@ -15,6 +15,7 @@
     ./spotify
     ./starship
     ./vscode
+    ./wps-office
     ./zoxide
   ];
 }

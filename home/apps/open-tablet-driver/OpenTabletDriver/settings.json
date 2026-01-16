@@ -614,12 +614,12 @@
         },
         "Tablet": {
           "Width": 254.0,
-          "Height": 158.75,
+          "Height": 142.875,
           "X": 127.0,
-          "Y": 79.375,
+          "Y": 79.37501,
           "Rotation": 180.0
         },
-        "EnableClipping": true,
+        "EnableClipping": false,
         "EnableAreaLimiting": false,
         "LockAspectRatio": false
       },
