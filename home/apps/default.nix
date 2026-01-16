@@ -11,11 +11,11 @@
     ./foot
     ./git
     ./micro
+    ./only-office
     ./open-tablet-driver
     ./spotify
     ./starship
     ./vscode
-    ./wps-office
     ./zoxide
   ];
 }
