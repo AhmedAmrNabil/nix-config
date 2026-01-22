@@ -4,6 +4,7 @@
 
 {
   pkgs,
+  inputs,
   ...
 }:
 {
@@ -95,6 +96,9 @@
       ];
     })
     distrobox
+    inputs.winapps.packages.x86_64-linux.winapps
+    inputs.winapps.packages.x86_64-linux.winapps-launcher
+    freerdp
   ];
 
   # Enable local time synchronization

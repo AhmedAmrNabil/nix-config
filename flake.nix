@@ -24,6 +24,10 @@
       url = "github:nix-community/nix-vscode-extensions";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    winapps = {
+      url = "github:winapps-org/winapps";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # vader-mapper = {
     #   url = "path:/home/btngana/vader-test";
     #   inputs.nixpkgs.follows = "nixpkgs";
