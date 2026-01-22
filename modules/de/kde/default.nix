@@ -40,6 +40,7 @@ in
         environment.systemPackages = [
           kdePackages.sddm-kcm
           kdePackages.partitionmanager
+          pkgs.unrar
         ];
 
         # Remove unused packages
