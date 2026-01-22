@@ -280,5 +280,7 @@
   "vscode_custom_css.imports": [
     "file:///home/btngana/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
   ],
-  "terminal.integrated.lineHeight": 1
+  "terminal.integrated.lineHeight": 1,
+  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
+  "terminal.integrated.shellIntegration.enabled": false
 }
