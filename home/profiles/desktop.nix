@@ -14,7 +14,7 @@
     cava.enable = true;
     spotify.enable = true;
     open-tablet-driver.enable = true;
-    wps-office.enable = true;
+    only-office.enable = true;
   };
 
   home.packages = with pkgs; [
