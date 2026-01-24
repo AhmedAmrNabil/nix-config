@@ -210,12 +210,9 @@
   "workbench.list.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "workbench.activityBar.location": "top",
-  "C_Cpp.default.compilerPath": "C:\\msys64\\ucrt64\\bin\\g++",
   "workbench.tree.renderIndentGuides": "always",
   "workbench.tree.indent": 15,
   "github.copilot.nextEditSuggestions.enabled": true,
-  "vsicons.presets.hideExplorerArrows": true,
-  "material-icon-theme.hidesExplorerArrows": true,
   "explorer.compactFolders": false,
   "editor.tabSize": 2,
   "workbench.startupEditor": "none",
@@ -282,5 +279,7 @@
   ],
   "terminal.integrated.lineHeight": 1,
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-  "terminal.integrated.shellIntegration.enabled": false
+  "terminal.integrated.shellIntegration.enabled": false,
+  "vsicons.presets.hideExplorerArrows": true,
+  "material-icon-theme.hidesExplorerArrows": true
 }
