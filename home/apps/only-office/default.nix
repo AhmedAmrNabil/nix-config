@@ -23,8 +23,6 @@ in
 
       install -m644 ${pkgs.corefonts}/share/fonts/truetype/* "$fontDir/"
       install -m644 ${localPkgs.wps-fonts}/share/fonts/truetype/* "$fontDir/"
-
-      chmod 555 "$fontDir"
     '';
   };
 }
