@@ -26,6 +26,7 @@
     vlc
     localsend
     transmission_4-qt
+    blender
   ];
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
