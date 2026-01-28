@@ -173,6 +173,31 @@
     depends = [ "/home/btngana/crucial" ];
   };
 
+  # Mounting windows partition for save files
+  fileSystems."/mnt/windows" = {
+    device = "/dev/disk/by-uuid/54E4AE95E4AE793E";
+    fsType = "ntfs";
+    options = [
+      "windows_names"
+      "uid=1000"
+      "gid=100"
+      "umask=000"
+      "exec"
+      "rw"
+      "big_writes"
+      "nofail"
+      "x-systemd.device-timeout=3s"
+    ];
+  };
+
+  fileSystems."/home/btngana/wineprefixes/claire/drive_c/users/Public/Documents" =
+    {
+      device = "/mnt/windows/Users/Public/Documents";
+      fsType = "none";
+      options = [ "bind" ];
+      depends = [ "/mnt/windows" ];
+    };
+
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.
   #
