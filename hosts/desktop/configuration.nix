@@ -5,6 +5,7 @@
 {
   pkgs,
   inputs,
+  localPkgs,
   ...
 }:
 {
@@ -26,6 +27,7 @@
     steam.enable = true;
     tailscale.enable = true;
     virt-manager.enable = true;
+    flydigictl.enable = true;
   };
 
   core = {
@@ -190,13 +192,12 @@
     ];
   };
 
-  fileSystems."/home/btngana/wineprefixes/claire/drive_c/users/Public/Documents" =
-    {
-      device = "/mnt/windows/Users/Public/Documents";
-      fsType = "none";
-      options = [ "bind" ];
-      depends = [ "/mnt/windows" ];
-    };
+  fileSystems."/home/btngana/wineprefixes/claire/drive_c/users/Public/Documents" = {
+    device = "/mnt/windows/Users/Public/Documents";
+    fsType = "none";
+    options = [ "bind" ];
+    depends = [ "/mnt/windows" ];
+  };
 
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.

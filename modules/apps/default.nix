@@ -1,6 +1,7 @@
 {
   imports = [
     ./docker
+    ./flydigictl
     ./gpu-screen-recorder
     ./nh
     ./obs

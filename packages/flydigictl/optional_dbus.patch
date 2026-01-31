@@ -1,0 +1,19 @@
+diff --git a/pkg/commands/root.go b/pkg/commands/root.go
+index ccaa602..2d0e881 100644
+--- a/pkg/commands/root.go
++++ b/pkg/commands/root.go
+@@ -28,6 +28,14 @@ var rootCmd = &cobra.Command{
+ 	Short:        "Control Flydigi gamepads",
+ 	SilenceUsage: true,
+ 	PersistentPreRun: func(cmd *cobra.Command, args []string) {
++		// Skip D-Bus connection for commands that don't need it
++		// Check if this command or any parent is completion/help/version
++		for c := cmd; c != nil; c = c.Parent() {
++			switch c.Name() {
++			case "completion", "help", "version":
++				return
++			}
++		}
+ 		if err := connectDBus(); err != nil {
+ 			log.Fatalf("failed to connect to dbus service: %s", err)
+ 		}

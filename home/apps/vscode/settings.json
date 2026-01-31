@@ -281,5 +281,6 @@
   "terminal.integrated.shellIntegration.decorationsEnabled": "never",
   "terminal.integrated.shellIntegration.enabled": false,
   "vsicons.presets.hideExplorerArrows": true,
-  "material-icon-theme.hidesExplorerArrows": true
+  "material-icon-theme.hidesExplorerArrows": true,
+  "chat.viewSessions.orientation": "stacked"
 }

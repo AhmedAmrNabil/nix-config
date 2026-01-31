@@ -28,10 +28,10 @@
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # vader-mapper = {
-    #   url = "path:/home/btngana/vader-test";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
+    flydigictl = {
+      url = "path:/home/btngana/coding/flydigictl";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -73,7 +73,7 @@
       commonModules = [
         ./modules
         inputs.hyprland.nixosModules.default
-        # inputs.vader-mapper.nixosModules.default
+        inputs.flydigictl.nixosModules.default
         { nixpkgs.overlays = overlays; }
       ];
 
