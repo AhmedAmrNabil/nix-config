@@ -27,6 +27,10 @@
     zoxide.enable = true;
     git.enable = true;
   };
+  
+  home.shellAliases = {
+    restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
+  };
 
   home.packages = with pkgs; [
     nodejs_22
