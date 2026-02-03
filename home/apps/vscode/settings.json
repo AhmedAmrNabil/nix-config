@@ -266,10 +266,10 @@
         // You can write arbitrary Nix expressions here, to produce valid "options" declaration result.
         // Tip: for flake-based configuration, utilize `builtins.getFlake`
         "nixos": {
-          "expr": "(builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").nixosConfigurations.desktop-nixos.options"
+          "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").nixosConfigurations.desktop-nixos.options"
         },
         "home-manager": {
-          "expr": "(builtins.getFlake \"/home/btngana/dotfiles/flake.nix\").homeConfigurations.\"btngana@desktop-nixos\".options"
+          "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").homeConfigurations.\"btngana@desktop-nixos\".options"
         }
       }
     }
