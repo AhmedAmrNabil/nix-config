@@ -2,6 +2,7 @@
   imports = [
     ./alacritty
     ./bash
+    ./bat
     ./btop
     ./cava
     ./direnv

@@ -17,17 +17,18 @@
 
   apps = {
     bash.enable = true;
+    bat.enable = true;
     btop.enable = true;
     direnv.enable = true;
+    eza.enable = true;
     fastfetch.enable = true;
     fish.enable = true;
-    eza.enable = true;
+    git.enable = true;
     micro.enable = true;
     starship.enable = true;
     zoxide.enable = true;
-    git.enable = true;
   };
-  
+
   home.shellAliases = {
     restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
   };
@@ -41,5 +42,6 @@
     direnv
     fzf
     python3
+    jq
   ];
 }
