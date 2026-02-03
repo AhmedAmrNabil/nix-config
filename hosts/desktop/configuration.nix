@@ -42,7 +42,6 @@
     enable = true;
     autoLogin = true;
   };
-  de.hyprland.enable = true;
 
   # services.vaderMapper.enable = true;
 
