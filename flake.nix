@@ -28,10 +28,6 @@
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    flydigictl = {
-      url = "path:/home/btngana/coding/flydigictl";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs =
@@ -73,7 +69,6 @@
       commonModules = [
         ./modules
         inputs.hyprland.nixosModules.default
-        inputs.flydigictl.nixosModules.default
         { nixpkgs.overlays = overlays; }
       ];
 
@@ -83,6 +78,7 @@
           system
           localPkgs
           username
+          pkgsUnstable
           ;
       };
 

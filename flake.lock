@@ -97,23 +97,6 @@
         "type": "github"
       }
     },
-    "flydigictl": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1769902273,
-        "narHash": "sha256-ql8CrdTyC7fUNtHeheFQEiAXSOBmx2oOjyT8OvmGrt8=",
-        "path": "/home/btngana/coding/flydigictl",
-        "type": "path"
-      },
-      "original": {
-        "path": "/home/btngana/coding/flydigictl",
-        "type": "path"
-      }
-    },
     "gitignore": {
       "inputs": {
         "nixpkgs": [
@@ -592,7 +575,6 @@
     },
     "root": {
       "inputs": {
-        "flydigictl": "flydigictl",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "nix-vscode-extensions": "nix-vscode-extensions",
