@@ -15,9 +15,10 @@ in
 
   config = mkIf cfg.enable {
 
-    fonts.packages = [
-      pkgs.noto-fonts
-      pkgs.nerd-fonts.jetbrains-mono
+    fonts.packages = with pkgs;[
+      noto-fonts
+      nerd-fonts.jetbrains-mono
+      noto-fonts-color-emoji
     ];
 
     # Optional: Enable fontconfig tweaks
