@@ -28,6 +28,7 @@
     transmission_4-qt
     blender
     teams-for-linux
+    postman
   ];
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
