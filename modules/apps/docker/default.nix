@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  pkgsUnstable,
   ...
 }:
 let
@@ -20,6 +21,7 @@ in
     virtualisation.docker = {
       enable = true;
       storageDriver = cfg.storageDriver;
+      package = pkgsUnstable.docker; # Use the latest Docker package (as stable have a bug with buildx plugin)
     };
     users.users."${username}".extraGroups = [ "docker" ];
   };
