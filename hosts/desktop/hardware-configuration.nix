@@ -43,7 +43,11 @@
       options = [ "fmask=0022" "dmask=0022" ];
     };
 
-  swapDevices = [ ];
+  fileSystems."/swap" =
+    { device = "/dev/disk/by-uuid/2b9d4cde-3908-427c-936f-ff16eebf8045";
+      fsType = "btrfs";
+      options = [ "subvol=@swap" ];
+    };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

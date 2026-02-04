@@ -52,6 +52,9 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
+  # Option 1: Open port 5432 in firewall for PostgreSQL
+  networking.firewall.allowedTCPPorts = [ 5432 ];
+
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
 
@@ -71,12 +74,6 @@
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
   };
-
-  # console = {
-  #   font = "Lat2-Terminus16";
-  #   keyMap = "us";
-  #   useXkbConfig = true; # use xkb.options in tty.
-  # };
 
   environment.systemPackages = with pkgs; [
     nano
@@ -101,6 +98,10 @@
     freerdp
   ];
 
+  programs.nix-ld = {
+    enable = true;
+  };
+
   # Enable local time synchronization
   # to prevent issues with dual booting Windows
   time.hardwareClockInLocalTime = true;
@@ -117,7 +118,15 @@
       "noatime"
     ];
     "/persist".options = [ "compress=zstd" ];
+    "/swap".options = [ "noatime" ];
   };
+
+  swapDevices = [
+    {
+      device = "/swap/swapfile";
+      size = 16384; # 16GB in MB
+    }
+  ];
 
   # Mounting windows stuff:
 
