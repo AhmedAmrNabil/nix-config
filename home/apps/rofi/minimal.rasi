@@ -3,7 +3,7 @@
 configuration {
     combi-modes: [ drun, run ];
     display-drun:"Applications";
-    display-run:"Commands";
+    display-run:"❯";
 }
 
 *{
@@ -15,21 +15,19 @@ configuration {
 window {
     border-radius: 24px;
     padding: 24px;
-    width: 40%;
     background-color: @background;
     location: center;
     border: 2px solid;
     border-color: @border-color;
     children: [ inputbar, listview ];
     transparency: "real";
+    width: 25em;
 }
 
 listview {
     line-height: 2.5em;
-    lines: 5;
-    columns: 4;
+    lines: 6;
     fixed-height: true;
-    fixed-columns: true;
     scrollbar: false;
     flow: horizontal;
     background-color: transparent;
@@ -42,6 +40,7 @@ entry {
     padding: 6px;
     background-color: transparent;
 }
+
 inputbar {
     padding: 8px;
     margin: 0 0 16px 0;
@@ -60,7 +59,7 @@ prompt {
 
 element {
   orientation: vertical;
-  children: [ element-icon, element-text ];
+  children: [  element-text ];
   spacing: 8px;
   padding: 12px 16px;
   border-radius: 12px;
@@ -69,22 +68,14 @@ element {
 
 }
 
-element-icon {
-    size: 2.5em;
-    background-color: transparent;
-}
-
 element-text {
     vertical-align: 0.5;
-    horizontal-align: 0.5;
-    expand: true;
     background-color: transparent;
     highlight: None;
 }
 
 element selected {
     background-color: @selected-background;
-    border-radius: 12px;
 }
 
 element-text selected {

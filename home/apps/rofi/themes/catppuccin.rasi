@@ -29,6 +29,7 @@
     background: #1e1e2e;
     background-full: #1e1e2e;
     selected-background: rgba(137, 180, 250, 0.2);
+
     foreground-color: #cdd6f4;
     light-foreground: #6c7086;
     selected-color: #89b4fa;
