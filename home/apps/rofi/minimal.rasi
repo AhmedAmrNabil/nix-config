@@ -25,7 +25,6 @@ window {
 }
 
 listview {
-    line-height: 2.5em;
     lines: 6;
     fixed-height: true;
     scrollbar: false;

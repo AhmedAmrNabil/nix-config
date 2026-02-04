@@ -1,92 +1,23 @@
-@theme "themes/catppuccin.rasi"
-
-configuration {
-    combi-modes: [ drun, run ];
-    display-drun:"Applications";
-    display-run:"Commands";
-}
-
-*{
-    font: "JetBrainsMono Nerd font Medium 12";
-    text-color: @foreground-color;
-    background-color: @background;
-}
-
-window {
-    border-radius: 24px;
-    padding: 24px;
-    width: 40%;
-    background-color: @background;
-    location: center;
-    border: 2px solid;
-    border-color: @border-color;
-    children: [ inputbar, listview ];
-    transparency: "real";
-}
+@import "dotfiles/home/apps/rofi/minimal.rasi"
 
 listview {
-    line-height: 2.5em;
     lines: 5;
     columns: 4;
     fixed-height: true;
     fixed-columns: true;
-    scrollbar: false;
     flow: horizontal;
-    background-color: transparent;
 }
 
-entry {
-    placeholder: "Search...";
-    placeholder-color: @light-foreground;
-    cursor: text;
-    padding: 6px;
-    background-color: transparent;
-}
-inputbar {
-    padding: 8px;
-    margin: 0 0 16px 0;
-    border-radius: 16px;
-    border: 2px solid;
-    border-color: @border-color;
-    background-color: transparent;
-}
-
-prompt {
-    padding: 0px 10px;
-    text-color: @selected-color;
-    background-color: transparent;
-    vertical-align: 0.5;
+window {
+    width: 40em;
 }
 
 element {
-  orientation: vertical;
-  children: [ element-icon, element-text ];
-  spacing: 8px;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background-color: transparent;
-  text-role: "name";
-
+    children: [ element-icon, element-text ];
+    background-color: transparent;
 }
 
 element-icon {
     size: 2.5em;
     background-color: transparent;
-}
-
-element-text {
-    vertical-align: 0.5;
-    horizontal-align: 0.5;
-    expand: true;
-    background-color: transparent;
-    highlight: None;
-}
-
-element selected {
-    background-color: @selected-background;
-    border-radius: 12px;
-}
-
-element-text selected {
-    text-color: @selected-color;
 }
