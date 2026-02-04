@@ -1,0 +1,34 @@
+@import "dotfiles/home/apps/rofi/minimal.rasi"
+
+listview {
+    columns:                     4;
+    lines:                       1;
+    cycle:                       true;
+    layout:                      vertical;
+    spacing:                     16px;
+}
+
+window {
+    width:inherit;
+}
+
+element {
+    children: [ element-icon, element-text ];
+    background-color: transparent;
+}
+
+element selected {
+    background-color: @background;
+    border-radius: 12px;
+    border: 2px solid;
+    border-color: @selected-color;
+}
+
+element-text{
+    horizontal-align: 0.5;
+}
+
+element-icon {
+    size: 10em;
+    background-color: transparent;
+}

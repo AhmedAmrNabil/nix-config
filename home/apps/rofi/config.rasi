@@ -17,6 +17,10 @@ element {
     background-color: transparent;
 }
 
+element-text{
+    horizontal-align: 0.5;
+}
+
 element-icon {
     size: 2.5em;
     background-color: transparent;
