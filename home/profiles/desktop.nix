@@ -8,13 +8,14 @@
   ];
 
   apps = {
-    foot.enable = true;
     alacritty.enable = true;
-    vscode.enable = true;
     cava.enable = true;
-    spotify.enable = true;
-    open-tablet-driver.enable = true;
+    foot.enable = true;
     only-office.enable = true;
+    open-tablet-driver.enable = true;
+    rofi.enable = true;
+    spotify.enable = true;
+    vscode.enable = true;
   };
 
   home.packages = with pkgs; [
@@ -29,6 +30,8 @@
     blender
     teams-for-linux
     postman
+    devenv
+    avalonia-ilspy
   ];
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
