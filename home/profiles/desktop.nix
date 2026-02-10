@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgsUnstable,
   ...
 }:
 {
@@ -18,21 +19,28 @@
     vscode.enable = true;
   };
 
-  home.packages = with pkgs; [
-    xournalpp
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-    })
-    vlc
-    localsend
-    transmission_4-qt
-    blender
-    teams-for-linux
-    postman
-    devenv
-    avalonia-ilspy
-  ];
+  home.packages =
+    with pkgs;
+    [
+      xournalpp
+      (discord.override {
+        withOpenASAR = true;
+        withVencord = true;
+      })
+      vlc
+      localsend
+      transmission_4-qt
+      blender
+      teams-for-linux
+      postman
+      devenv
+      avalonia-ilspy
+      usbutils
+      obsidian
+    ]
+    ++ (with pkgsUnstable; [
+      antigravity
+    ]);
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
     name = "Microsoft Edge (Autoscroll)";

@@ -282,5 +282,6 @@
   "terminal.integrated.shellIntegration.enabled": false,
   "vsicons.presets.hideExplorerArrows": true,
   "material-icon-theme.hidesExplorerArrows": true,
-  "chat.viewSessions.orientation": "stacked"
+  "chat.viewSessions.orientation": "stacked",
+  "loccy.annotations.showMissingTranslationsWarning": false
 }
