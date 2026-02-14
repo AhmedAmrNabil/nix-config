@@ -37,6 +37,7 @@
       avalonia-ilspy
       usbutils
       obsidian
+      arduino-ide
     ]
     ++ (with pkgsUnstable; [
       antigravity

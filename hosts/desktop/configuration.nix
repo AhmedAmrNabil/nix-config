@@ -206,6 +206,19 @@
     depends = [ "/mnt/windows" ];
   };
 
+  fileSystems."/mnt/archlinux" = {
+    device = "/dev/disk/by-uuid/04fbc268-2d20-4d0c-a1a7-0f373fc1f869";
+    fsType = "btrfs";
+    options = [
+      "compress=zstd"
+      "noatime"
+      "subvol=@home"
+      "rw"
+      "nofail"
+      "x-systemd.device-timeout=3s"
+    ];
+  };
+
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.
   #
