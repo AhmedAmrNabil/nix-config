@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -16,8 +17,11 @@ in
       enable32Bit = true;
     };
     services.xserver.videoDrivers = [ "nvidia" ];
-    hardware.nvidia.open = true; # see the note above
-    hardware.nvidia.modesetting.enable = true;
+    hardware.nvidia = {
+      open = true;
+      modesetting.enable = true;
+      nvidiaSettings = true;
+    };
 
     environment.sessionVariables = {
       NIXOS_OZONE_WL = "1";
