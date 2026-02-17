@@ -4,7 +4,6 @@
 
 {
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -25,7 +24,7 @@
     plymouth.enable = true;
     steam.enable = true;
     tailscale.enable = true;
-    virt-manager.enable = true;
+    # virt-manager.enable = true;
     flydigictl.enable = true;
   };
 
@@ -52,8 +51,8 @@
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
-  # Option 1: Open port 5432 in firewall for PostgreSQL
-  networking.firewall.allowedTCPPorts = [ 5432 ];
+  # Open port 5432 in firewall for PostgreSQL
+  # networking.firewall.allowedTCPPorts = [ 5432 ];
 
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
@@ -71,10 +70,23 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
+    extraConfig.pipewire."10-clock" = {
+      "context.properties" = {
+        "default.clock.rate" = 48000;
+        "default.clock.allowed-rates" = [
+          44100
+          48000
+          96000
+        ];
+        "default.clock.quantum" = 32;
+        "default.clock.min-quantum" = 32;
+        "default.clock.max-quantum" = 2048;
+      };
+    };
   };
-
+  boot.kernel.sysctl = {
+    "dev.hpet.max-user-freq" = 2048;
+  };
   environment.systemPackages = with pkgs; [
     nano
     micro
@@ -93,9 +105,6 @@
       ];
     })
     distrobox
-    inputs.winapps.packages.x86_64-linux.winapps
-    inputs.winapps.packages.x86_64-linux.winapps-launcher
-    freerdp
   ];
 
   programs.nix-ld = {
