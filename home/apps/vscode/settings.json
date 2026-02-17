@@ -284,5 +284,6 @@
   "material-icon-theme.hidesExplorerArrows": true,
   "chat.viewSessions.orientation": "stacked",
   "loccy.annotations.showMissingTranslationsWarning": false,
-  "platformio-ide.useBuiltinPIOCore": false
+  "platformio-ide.useBuiltinPIOCore": false,
+  "scm.repositories.selectionMode": "single"
 }
