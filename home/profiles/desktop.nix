@@ -24,7 +24,6 @@
     [
       xournalpp
       (discord.override {
-        withOpenASAR = true;
         withVencord = true;
       })
       vlc
