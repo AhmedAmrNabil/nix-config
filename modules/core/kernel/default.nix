@@ -13,6 +13,6 @@ in
   };
   config = lib.mkIf cfg.enable {
     # use the latest kernel
-    boot.kernelPackages = pkgs.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_6_18;
   };
 }
