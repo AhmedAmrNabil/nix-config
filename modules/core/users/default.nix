@@ -22,6 +22,7 @@ in
         "wheel"
         "networkmanager"
         "input"
+        "dialout"
       ];
       shell = pkgs.fish;
     };

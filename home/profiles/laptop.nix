@@ -20,6 +20,10 @@
     })
     vlc
     localsend
+    arduino-ide
+    arduino-cli
+    # platformio-core
+    platformio
   ];
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {

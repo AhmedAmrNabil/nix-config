@@ -283,5 +283,6 @@
   "vsicons.presets.hideExplorerArrows": true,
   "material-icon-theme.hidesExplorerArrows": true,
   "chat.viewSessions.orientation": "stacked",
-  "loccy.annotations.showMissingTranslationsWarning": false
+  "loccy.annotations.showMissingTranslationsWarning": false,
+  "platformio-ide.useBuiltinPIOCore": false
 }
