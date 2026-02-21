@@ -28,6 +28,7 @@ in
           displayManager.sddm = {
             enable = true;
             wayland.enable = true;
+            theme = "catppuccin-mocha-sky";
           };
           xserver.enable = true;
         };
@@ -41,6 +42,12 @@ in
           kdePackages.sddm-kcm
           kdePackages.partitionmanager
           pkgs.unrar
+          (pkgs.catppuccin-sddm.override {
+            flavor = "mocha";
+            accent = "sky";
+            font = "JetBrainsMono Nerd Font";
+            fontSize = "9";
+          })
         ];
 
         # Remove unused packages
