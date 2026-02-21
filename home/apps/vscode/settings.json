@@ -285,5 +285,9 @@
   "chat.viewSessions.orientation": "stacked",
   "loccy.annotations.showMissingTranslationsWarning": false,
   "platformio-ide.useBuiltinPIOCore": false,
-  "scm.repositories.selectionMode": "single"
+  "scm.repositories.selectionMode": "single",
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "cmake.buildDirectory": "${workspaceFolder}/build"
 }
