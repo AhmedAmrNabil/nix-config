@@ -23,9 +23,6 @@
     with pkgs;
     [
       xournalpp
-      (discord.override {
-        withVencord = true;
-      })
       vlc
       localsend
       transmission_4-qt
@@ -40,6 +37,10 @@
     ]
     ++ (with pkgsUnstable; [
       antigravity
+      (discord.override {
+        withVencord = true;
+        enableAutoscroll = true;
+      })
     ]);
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
@@ -50,17 +51,6 @@
     categories = [
       "Network"
       "WebBrowser"
-    ];
-  };
-
-  xdg.desktopEntries.discord-autoscroll = {
-    name = "Discord (Autoscroll)";
-    genericName = "Chat Client";
-    exec = "discord --enable-blink-features=MiddleClickAutoscroll %U";
-    icon = "discord";
-    categories = [
-      "Network"
-      "InstantMessaging"
     ];
   };
 }

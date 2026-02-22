@@ -17,6 +17,7 @@
     (discord.override {
       withOpenASAR = true;
       withVencord = true;
+      enableAutoscroll = true;
     })
     vlc
     localsend
@@ -34,17 +35,6 @@
     categories = [
       "Network"
       "WebBrowser"
-    ];
-  };
-
-  xdg.desktopEntries.discord-autoscroll = {
-    name = "Discord (Autoscroll)";
-    genericName = "Chat Client";
-    exec = "discord --enable-blink-features=MiddleClickAutoscroll %U";
-    icon = "discord";
-    categories = [
-      "Network"
-      "InstantMessaging"
     ];
   };
 }
