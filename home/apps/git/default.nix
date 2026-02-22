@@ -2,6 +2,7 @@
   config,
   lib,
   gitConfig,
+  pkgsUnstable,
   ...
 }:
 let
@@ -14,6 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.git = {
       enable = true;
+      package = pkgsUnstable.git;
       settings = {
         user = {
           name = gitConfig.userName;
