@@ -27,6 +27,11 @@ in
       shell = pkgs.fish;
     };
 
+    security.sudo.enable = true;
+    security.sudo.extraConfig = ''
+      Defaults pwfeedback
+    '';
+
     assertions = [
       {
         assertion = username != null;
