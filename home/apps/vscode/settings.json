@@ -33,6 +33,16 @@
         "fish"
       ]
     },
+    "bash": {
+      "path": "C:\\msys64\\msys2_shell.cmd",
+      "args": [
+        "-use-full-path",
+        "-ucrt64",
+        "-defterm",
+        "-no-start",
+        "-here"
+      ]
+    },
     "arch (WSL)": {
       "path": "C:\\Windows\\System32\\wsl.exe"
     },
