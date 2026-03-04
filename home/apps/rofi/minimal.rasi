@@ -4,6 +4,7 @@ configuration {
     combi-modes: [ drun, run ];
     display-drun:"Applications";
     display-run:"❯";
+	drun-display-format: "{icon} {name}";
 }
 
 *{
