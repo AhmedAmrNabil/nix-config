@@ -184,6 +184,11 @@
     ];
   };
 
+  # fix steam compatdata to be on linux instead of ntfs partiton
+  systemd.tmpfiles.rules = [
+    "L /home/btngana/crucial/SteamLibrary/steamapps/compatdata - - - - /home/btngana/.steam/steam/steamapps/compatdata"
+  ];
+
   fileSystems."/home/btngana/Games" = {
     device = "/home/btngana/crucial/Games";
     fsType = "none";
