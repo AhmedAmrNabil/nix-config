@@ -34,6 +34,8 @@
       usbutils
       obsidian
       arduino-ide
+      slack
+      zoom-us
     ]
     ++ (with pkgsUnstable; [
       antigravity
