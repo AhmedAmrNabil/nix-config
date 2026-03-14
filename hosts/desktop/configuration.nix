@@ -105,7 +105,10 @@
       ];
     })
     distrobox
+    scrcpy
   ];
+
+  programs.adb.enable = true; # enable adb for android development
 
   programs.nix-ld = {
     enable = true;
