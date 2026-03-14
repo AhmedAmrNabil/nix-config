@@ -54,7 +54,6 @@
   "editor.lineHeight": 1.6,
   "explorer.confirmDragAndDrop": false,
   "security.workspace.trust.untrustedFiles": "open",
-  "terminal.integrated.cursorStyle": "underline",
   "explorer.confirmDelete": false,
   "git.openRepositoryInParentFolders": "always",
   "editor.fontLigatures": false,
@@ -299,5 +298,6 @@
   "[xml]": {
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
-  "cmake.buildDirectory": "${workspaceFolder}/build"
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+  "terminal.integrated.cursorStyle": "line"
 }
