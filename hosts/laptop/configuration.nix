@@ -16,14 +16,14 @@
 
   # --------- Modules ------------------
   apps = {
-    docker = {
-      enable = true;
-      storageDriver = "overlay2";
-    };
+    # docker = {
+    #   enable = true;
+    #   storageDriver = "overlay2";
+    # };
     # gpu-screen-recorder.enable = true;
     nh.enable = true;
     # obs.enable = true;
-    open-tablet-driver.enable = true;
+    # open-tablet-driver.enable = true;
     plymouth.enable = true;
     tailscale.enable = true;
   };
@@ -88,12 +88,12 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = [
-    pkgs.micro
-    pkgs.git
-    pkgs.efibootmgr
-    pkgs.microsoft-edge
-    pkgs.kdePackages.print-manager
+  environment.systemPackages = with pkgs; [
+    micro
+    git
+    efibootmgr
+    microsoft-edge
+    kdePackages.print-manager
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -109,10 +109,12 @@
     memoryPercent = 50; # ~4 GB compressed
   };
 
-   swapDevices = [{
-    device = "/swapfile";
-    size = 8 * 1024; # 8GB
-  }];
+  swapDevices = [
+    {
+      device = "/swapfile";
+      size = 8 * 1024; # 8GB
+    }
+  ];
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [ avrdude ];
