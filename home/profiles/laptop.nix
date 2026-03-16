@@ -11,6 +11,7 @@
     vscode.enable = true;
     cava.enable = true;
     spotify.enable = true;
+    rofi.enable = true;
   };
 
   home.packages = with pkgs; [
