@@ -126,6 +126,8 @@
       };
 
       # export nixpkgs to use with nix shell
-      legacyPackages.${system} = pkgs;
+      legacyPackages.${system} = pkgs // {
+        unstable = pkgsUnstable;
+      };
     };
 }
