@@ -71,7 +71,7 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.autopep8"
   },
-  "python.defaultInterpreterPath": "C:\\Users\\btngana\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+  "python.defaultInterpreterPath": "/home/btngana/.local/state/nix/profile/bin/python",
   "editor.fontVariations": true,
   "markdown.preview.fontSize": 18,
   "files.exclude": {
@@ -299,5 +299,13 @@
     "editor.defaultFormatter": "redhat.vscode-xml"
   },
   "cmake.buildDirectory": "${workspaceFolder}/build",
-  "terminal.integrated.cursorStyle": "line"
+  "terminal.integrated.cursorStyle": "line",
+  "[just]": {
+    "editor.defaultFormatter": "nefrob.vscode-just-syntax"
+  },
+  "update.showReleaseNotes": false,
+  "update.mode": "none",
+  "[kotlin]": {
+    "editor.defaultFormatter": "esafirm.kotlin-formatter"
+  }
 }
