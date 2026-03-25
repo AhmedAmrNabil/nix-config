@@ -36,6 +36,7 @@
       arduino-ide
       slack
       zoom-us
+      handbrake
     ]
     ++ (with pkgsUnstable; [
       antigravity
