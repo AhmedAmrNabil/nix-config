@@ -1,248 +1,85 @@
 {
-  "editor.insertSpaces": false,
-  "editor.fontFamily": "'JetBrainsMono Nerd Font', \"segoe ui\", monospace",
-  "terminal.integrated.defaultProfile.windows": "PowerShell",
-  "workbench.panel.defaultLocation": "right",
-  "editor.fontSize": 18,
-  "files.autoSave": "onFocusChange",
-  "terminal.integrated.profiles.windows": {
-    "PowerShell": {
-      "source": "PowerShell",
-      "icon": "terminal-powershell"
-    },
-    "Command Prompt": {
-      "path": [
-        "${env:windir}\\Sysnative\\cmd.exe",
-        "${env:windir}\\System32\\cmd.exe"
-      ],
-      "args": [],
-      "icon": "terminal-cmd"
-    },
-    "Git Bash": {
-      "source": "Git Bash"
-    },
-    "fish": {
-      "path": "C:\\msys64\\msys2_shell.cmd",
-      "args": [
-        "-use-full-path",
-        "-ucrt64",
-        "-defterm",
-        "-no-start",
-        "-here",
-        "-shell",
-        "fish"
-      ]
-    },
-    "bash": {
-      "path": "C:\\msys64\\msys2_shell.cmd",
-      "args": [
-        "-use-full-path",
-        "-ucrt64",
-        "-defterm",
-        "-no-start",
-        "-here"
-      ]
-    },
-    "arch (WSL)": {
-      "path": "C:\\Windows\\System32\\wsl.exe"
-    },
-    "Windows PowerShell": {
-      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
-    }
+  "[c]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "workbench.iconTheme": "material-icon-theme",
-  "editor.lineHeight": 1.6,
-  "explorer.confirmDragAndDrop": false,
-  "security.workspace.trust.untrustedFiles": "open",
-  "explorer.confirmDelete": false,
-  "git.openRepositoryInParentFolders": "always",
-  "editor.fontLigatures": false,
-  "workbench.colorTheme": "Catppuccin Mocha",
-  "editor.smoothScrolling": true,
-  "vsicons.dontShowNewVersionMessage": true,
-  "terminal.integrated.defaultProfile.linux": "fish",
-  "editor.unicodeHighlight.nonBasicASCII": false,
-  "terminal.integrated.minimumContrastRatio": 1,
-
-  "C_Cpp.errorSquiggles": "enabled",
-  "catppuccin.accentColor": "sky",
-  "catppuccin.workbenchMode": "flat",
-  "catppuccin.extraBordersEnabled": true,
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.autopep8"
-  },
-  "python.defaultInterpreterPath": "/home/btngana/.local/state/nix/profile/bin/python",
-  "editor.fontVariations": true,
-  "markdown.preview.fontSize": 18,
-  "files.exclude": {
-    "**/tempCodeRunnerFile.py": true,
-    "**/tempCodeRunnerFile.cpp": true,
-    "**/tmp/**": true
-  },
-  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "codesnap.backgroundColor": "#eff1f5\t",
-  "codesnap.shutterAction": "copy",
-  "editor.minimap.enabled": false,
-  "terminal.integrated.fontSize": 16,
-  "cmake.additionalCompilerSearchDirs": [
-    "C:/msys64/mingw32/bin",
-    "C:/msys64/mingw64/bin",
-    "C:/msys64/clang32/bin",
-    "C:/msys64/clang64/bin",
-    "C:/msys64/clangarm64/bin",
-    "C:/msys64/ucrt64/bin"
-  ],
-  "C_Cpp.autocompleteAddParentheses": true,
-  "terminal.integrated.enableMultiLinePasteWarning": "never",
-  "editor.unicodeHighlight.allowedCharacters": {
-    "❯": true,
-    "❮": true
-  },
-  "editor.multiCursorModifier": "ctrlCmd",
-  "cmake.configureOnOpen": false,
-  "codesnap.target": "window",
-  "terminal.integrated.gpuAcceleration": "on",
   "[cmake]": {
     "editor.defaultFormatter": "cheshirekow.cmake-format"
   },
-  "editor.cursorBlinking": "expand",
-  "git.autofetch": true,
-  "livePreview.hostIP": "192.168.1.5",
-  "database-client.capitalizeKeywordsWhenFormatting": true,
-  "[shellscript]": {
-    "editor.defaultFormatter": "shakram02.bash-beautify"
+  "[cpp]": {
+    "editor.defaultFormatter": "ms-vscode.cpptools"
   },
-  "prettier.semi": true,
-  "javascript.updateImportsOnFileMove.enabled": "always",
-  "git.ignoreMissingGitWarning": true,
   "[css]": {
     "editor.defaultFormatter": "vscode.css-language-features"
   },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "vscode.typescript-language-features"
+  "[dockercompose]": {
+    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
-  "files.watcherExclude": {
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true,
-    "**/node_modules/**": true,
-    "**/tmp/**": true,
-    "**/dist/**": true
+  "[glsl]": {
+    "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
   },
-  "search.exclude": {
-    "**/node_modules/**": true,
-    "**/dist/**": true,
-    "**/tmp/**": true,
-    "**/.git/objects/**": true,
-    "**/.git/subtree-cache/**": true
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
   },
-  "extensions.autoCheckUpdates": false,
-  "search.followSymlinks": false,
-  "editor.accessibilitySupport": "off",
-  "editor.mouseWheelZoom": true,
-  "C_Cpp. intelliSenseCacheSize": 0,
-  "[cpp]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools"
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java"
   },
-  "[c]": {
-    "editor.defaultFormatter": "ms-vscode.cpptools"
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[properties]": {
-    "editor.defaultFormatter": "foxundermoon.shell-format"
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
   },
-  "[snippets]": {
+  "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "explorer.confirmPasteNative": false,
-  "[javascript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "[just]": {
+    "editor.defaultFormatter": "nefrob.vscode-just-syntax"
+  },
+  "[kotlin]": {
+    "editor.defaultFormatter": "esafirm.kotlin-formatter"
+  },
+  "[nix]": {
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  },
+  "[properties]": {
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8"
+  },
+  "[shellscript]": {
+    "editor.defaultFormatter": "shakram02.bash-beautify"
+  },
+  "[snippets]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[dockercompose]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  },
-  "database-client.autoSync": true,
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "githubPullRequests.pullBranch": "never",
-  "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
-  },
-
-  "codesnap.showWindowControls": false,
-  "codesnap.roundedCorners": false,
-  "C_Cpp.clang_format_sortIncludes": false,
-  "[glsl]": {
-    "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
-  },
-  "files.associations": {
-    "*.gs": "glsl",
-    "*.fdg": "json"
-  },
-  "[java]": {
-    "editor.defaultFormatter": "redhat.java"
-  },
-  "C_Cpp.intelliSenseUpdateDelay": 500,
-  "java.saveActions.organizeImports": false,
-  "explorer.fileNesting.patterns": {
-    "*.ts": "${capture}.js",
-    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
-    "*.jsx": "${capture}.js",
-    "*.tsx": "${capture}.ts",
-    "tsconfig.json": "tsconfig.*.json",
-    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
-    "*.sqlite": "${capture}.${extname}-*",
-    "*.db": "${capture}.${extname}-*",
-    "*.sqlite3": "${capture}.${extname}-*",
-    "*.db3": "${capture}.${extname}-*",
-    "*.sdb": "${capture}.${extname}-*",
-    "*.s3db": "${capture}.${extname}-*"
-  },
-  "gitlens.ai.model": "vscode",
-  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
-  "http.proxyStrictSSL": false,
-  "remote.autoForwardPortsSource": "hybrid",
-  "workbench.editor.empty.hint": "hidden",
-  "typescript.updateImportsOnFileMove.enabled": "always",
-  "editor.cursorSmoothCaretAnimation": "on",
-  "workbench.list.smoothScrolling": true,
-  "terminal.integrated.smoothScrolling": true,
-  "workbench.activityBar.location": "top",
-  "workbench.tree.renderIndentGuides": "always",
-  "workbench.tree.indent": 15,
-  "github.copilot.nextEditSuggestions.enabled": true,
-  "explorer.compactFolders": false,
-  "editor.tabSize": 2,
-  "workbench.startupEditor": "none",
-  "tailwindCSS.classFunctions": ["tw", "clsx", "tw\\.[a-z-]+"],
-  "tailwindCSS.colorDecorators": true,
-  "diffEditor.ignoreTrimWhitespace": false,
   "[vue]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "vhdl-by-hgb.vhdl-formatter.case.keyword": "UpperCase",
-  "editor.gotoLocation.multipleDefinitions": "goto",
-  "workbench.layoutControl.enabled": false,
-  "window.commandCenter": false,
-  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
-  "terminal.integrated.suggest.cdPath": "off",
-  "terminal.integrated.fontFamily": "JetbrainsMono nerd font",
-  "terminal.integrated.stickyScroll.enabled": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
   },
+  "C_Cpp. intelliSenseCacheSize": 0,
+  "C_Cpp.autocompleteAddParentheses": true,
+  "C_Cpp.clang_format_fallbackStyle": "{ BasedOnStyle: Google, IndentWidth: 4, ColumnLimit: 0}",
+  "C_Cpp.clang_format_sortIncludes": false,
+  "C_Cpp.errorSquiggles": "enabled",
+  "C_Cpp.intelliSenseUpdateDelay": 500,
+  "catppuccin.accentColor": "sky",
+  "catppuccin.extraBordersEnabled": true,
+  "catppuccin.workbenchMode": "flat",
   "chat.instructionsFilesLocations": {
     ".github/instructions": true,
     "/tmp/postman-collections-post-response.instructions.md": true,
@@ -258,54 +95,219 @@
     "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-post-response.instructions.md": true,
     "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
   },
-  "terminal.integrated.suggest.enabled": false,
-  "nixEnvSelector.useFlakes": true,
+  "chat.viewSessions.orientation": "stacked",
+  "cmake.additionalCompilerSearchDirs": [
+    "C:/msys64/clang32/bin",
+    "C:/msys64/clang64/bin",
+    "C:/msys64/clangarm64/bin",
+    "C:/msys64/mingw32/bin",
+    "C:/msys64/mingw64/bin",
+    "C:/msys64/ucrt64/bin"
+  ],
+  "cmake.buildDirectory": "${workspaceFolder}/build",
+  "cmake.configureOnOpen": false,
+  "codesnap.backgroundColor": "#eff1f5\t",
+  "codesnap.roundedCorners": false,
+  "codesnap.showWindowControls": false,
+  "codesnap.shutterAction": "copy",
+  "codesnap.target": "window",
+  "database-client.autoSync": true,
+  "database-client.capitalizeKeywordsWhenFormatting": true,
+  "diffEditor.ignoreTrimWhitespace": false,
+  "editor.accessibilitySupport": "off",
+  "editor.cursorBlinking": "expand",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontFamily": "'JetBrainsMono Nerd Font', \"segoe ui\", monospace",
+  "editor.fontLigatures": false,
+  "editor.fontSize": 18,
+  "editor.fontVariations": true,
+  "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.insertSpaces": false,
+  "editor.lineHeight": 1.6,
+  "editor.minimap.enabled": false,
+  "editor.mouseWheelZoom": true,
+  "editor.multiCursorModifier": "ctrlCmd",
+  "editor.smoothScrolling": true,
+  "editor.tabSize": 2,
+  "editor.unicodeHighlight.allowedCharacters": {
+    "❮": true,
+    "❯": true
+  },
+  "editor.unicodeHighlight.nonBasicASCII": false,
+  "explorer.compactFolders": false,
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmPasteNative": false,
+  "explorer.fileNesting.patterns": {
+    "*.db": "${capture}.${extname}-*",
+    "*.db3": "${capture}.${extname}-*",
+    "*.js": "${capture}.js.map, ${capture}.min.js, ${capture}.d.ts",
+    "*.jsx": "${capture}.js",
+    "*.s3db": "${capture}.${extname}-*",
+    "*.sdb": "${capture}.${extname}-*",
+    "*.sqlite": "${capture}.${extname}-*",
+    "*.sqlite3": "${capture}.${extname}-*",
+    "*.ts": "${capture}.js",
+    "*.tsx": "${capture}.ts",
+    "package.json": "package-lock.json, yarn.lock, pnpm-lock.yaml, bun.lockb, bun.lock",
+    "tsconfig.json": "tsconfig.*.json"
+  },
+  "extensions.autoCheckUpdates": false,
+  "files.associations": {
+    "*.fdg": "json",
+    "*.gs": "glsl"
+  },
+  "files.autoSave": "onFocusChange",
+  "files.exclude": {
+    "**/tempCodeRunnerFile.cpp": true,
+    "**/tempCodeRunnerFile.py": true,
+    "**/tmp/**": true
+  },
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true
+  },
+  "git.autofetch": true,
+  "git.ignoreMissingGitWarning": true,
+  "git.openRepositoryInParentFolders": "always",
+  "github.copilot.nextEditSuggestions.enabled": true,
+  "githubPullRequests.pullBranch": "never",
+  "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
+  "gitlens.ai.model": "vscode",
+  "gitlens.ai.vscode.model": "copilot:gpt-4.1",
+  "http.proxyStrictSSL": false,
+  "java.saveActions.organizeImports": false,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "livePreview.hostIP": "192.168.1.5",
+  "loccy.annotations.showMissingTranslationsWarning": false,
+  "markdown.preview.fontSize": 18,
+  "material-icon-theme.hidesExplorerArrows": true,
   "nix.enableLanguageServer": true,
   "nix.serverPath": "nixd",
   "nix.serverSettings": {
     "nixd": {
       "formatting": {
-        "command": ["nixfmt"]
+        "command": [
+          "nixfmt"
+        ]
       },
       "nixpkgs": {
         "expr": "import (builtins.getFlake \"/home/btngana/dotfiles\").inputs.nixpkgs {}"
       },
       "options": {
+        "home-manager": {
+          "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").homeConfigurations.\"btngana@desktop-nixos\".options"
+        },
         // By default, this entry will be read from `import <nixpkgs> { }`.
         // You can write arbitrary Nix expressions here, to produce valid "options" declaration result.
         // Tip: for flake-based configuration, utilize `builtins.getFlake`
         "nixos": {
           "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").nixosConfigurations.desktop-nixos.options"
-        },
-        "home-manager": {
-          "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").homeConfigurations.\"btngana@desktop-nixos\".options"
         }
       }
     }
   },
+  "nixEnvSelector.useFlakes": true,
+  "platformio-ide.useBuiltinPIOCore": false,
+  "prettier.semi": true,
+  "python.defaultInterpreterPath": "/home/btngana/.local/state/nix/profile/bin/python",
+  "remote.autoForwardPortsSource": "hybrid",
+  "scm.repositories.selectionMode": "single",
+  "search.exclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/dist/**": true,
+    "**/node_modules/**": true,
+    "**/tmp/**": true
+  },
+  "search.followSymlinks": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "tailwindCSS.classFunctions": [
+    "clsx",
+    "tw",
+    "tw\\.[a-z-]+"
+  ],
+  "tailwindCSS.colorDecorators": true,
+  "terminal.integrated.cursorStyle": "line",
+  "terminal.integrated.defaultProfile.linux": null,
+  "terminal.integrated.defaultProfile.windows": "PowerShell",
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  "terminal.integrated.fontFamily": "JetbrainsMono nerd font",
+  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.gpuAcceleration": "on",
+  "terminal.integrated.lineHeight": 1,
+  "terminal.integrated.minimumContrastRatio": 1,
+  "terminal.integrated.profiles.windows": {
+    "arch (WSL)": {
+      "path": "C:\\Windows\\System32\\wsl.exe"
+    },
+    "bash": {
+      "args": [
+        "-defterm",
+        "-here",
+        "-no-start",
+        "-ucrt64",
+        "-use-full-path"
+      ],
+      "path": "C:\\msys64\\msys2_shell.cmd"
+    },
+    "Command Prompt": {
+      "args": [],
+      "icon": "terminal-cmd",
+      "path": [
+        "${env:windir}\\Sysnative\\cmd.exe",
+        "${env:windir}\\System32\\cmd.exe"
+      ]
+    },
+    "fish": {
+      "args": [
+        "-defterm",
+        "-here",
+        "-no-start",
+        "-shell",
+        "-ucrt64",
+        "-use-full-path",
+        "fish"
+      ],
+      "path": "C:\\msys64\\msys2_shell.cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "PowerShell": {
+      "icon": "terminal-powershell",
+      "source": "PowerShell"
+    },
+    "Windows PowerShell": {
+      "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    }
+  },
+  "terminal.integrated.shellIntegration.enabled": false,
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.stickyScroll.enabled": false,
+  "terminal.integrated.suggest.cdPath": "off",
+  "terminal.integrated.suggest.enabled": false,
+  "update.mode": "none",
+  "update.showReleaseNotes": false,
+  "vhdl-by-hgb.vhdl-formatter.case.keyword": "UpperCase",
   "vscode_custom_css.imports": [
     "file:///home/btngana/.vscode/extensions/brandonkirbyson.vscode-animations-2.0.7/dist/updateHandler.js"
   ],
-  "terminal.integrated.lineHeight": 1,
-  "terminal.integrated.shellIntegration.decorationsEnabled": "never",
-  "terminal.integrated.shellIntegration.enabled": false,
+  "vsicons.dontShowNewVersionMessage": true,
   "vsicons.presets.hideExplorerArrows": true,
-  "material-icon-theme.hidesExplorerArrows": true,
-  "chat.viewSessions.orientation": "stacked",
-  "loccy.annotations.showMissingTranslationsWarning": false,
-  "platformio-ide.useBuiltinPIOCore": false,
-  "scm.repositories.selectionMode": "single",
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
-  },
-  "cmake.buildDirectory": "${workspaceFolder}/build",
-  "terminal.integrated.cursorStyle": "line",
-  "[just]": {
-    "editor.defaultFormatter": "nefrob.vscode-just-syntax"
-  },
-  "update.showReleaseNotes": false,
-  "update.mode": "none",
-  "[kotlin]": {
-    "editor.defaultFormatter": "esafirm.kotlin-formatter"
-  }
+  "window.commandCenter": false,
+  "workbench.activityBar.location": "top",
+  "workbench.colorTheme": "Catppuccin Mocha",
+  "workbench.editor.empty.hint": "hidden",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.layoutControl.enabled": false,
+  "workbench.list.smoothScrolling": true,
+  "workbench.panel.defaultLocation": "right",
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 15,
+  "workbench.tree.renderIndentGuides": "always"
 }
