@@ -35,7 +35,6 @@ in
       enabledExtensions = [
         spicePkgs.extensions.adblock
         spicePkgs.extensions.shuffle
-        spicePkgs.extensions.oneko
       ];
     };
   };
