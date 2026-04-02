@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -21,6 +20,7 @@ in
       open = true;
       modesetting.enable = true;
       nvidiaSettings = true;
+      package = config.boot.kernelPackages.nvidiaPackages.beta;
     };
 
     environment.sessionVariables = {
