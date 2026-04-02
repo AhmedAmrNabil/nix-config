@@ -1,6 +1,6 @@
 {
   config,
-  pkgs,
+  pkgsUnstable,
   lib,
   ...
 }:
@@ -13,6 +13,6 @@ in
   };
   config = lib.mkIf cfg.enable {
     # use the latest kernel
-    boot.kernelPackages = pkgs.linuxPackages_6_18;
+    boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
   };
 }
