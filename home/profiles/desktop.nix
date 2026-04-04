@@ -1,8 +1,17 @@
 {
   pkgs,
   pkgsUnstable,
+  lib,
   ...
 }:
+let
+
+  windowsIconPkg = pkgs.runCommand "windows-logo-icon" { } ''
+    mkdir -p $out/share/icons/hicolor/256x256/apps
+    cp ${./windows-11.png} $out/share/icons/hicolor/256x256/apps/windows-logo.png
+  '';
+
+in
 {
   imports = [
     ./shared.nix
@@ -37,6 +46,7 @@
       slack
       zoom-us
       handbrake
+      windowsIconPkg
     ]
     ++ (with pkgsUnstable; [
       antigravity
@@ -56,4 +66,15 @@
       "WebBrowser"
     ];
   };
+
+  xdg.desktopEntries.reboot-to-windows = {
+    name = "Reboot to Windows";
+    comment = "Restart the system and boot into Windows";
+    icon = "windows-logo";
+    exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
+    categories = [ "System" ];
+    terminal = false;
+  };
+
+  gtk.enable = lib.mkDefault true;
 }
