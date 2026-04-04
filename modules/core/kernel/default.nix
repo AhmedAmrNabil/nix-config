@@ -14,5 +14,9 @@ in
   config = lib.mkIf cfg.enable {
     # use the latest kernel
     boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
+
+    boot.kernelModules = [
+      "ntsync"
+    ];
   };
 }
