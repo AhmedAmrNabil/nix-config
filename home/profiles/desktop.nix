@@ -38,7 +38,6 @@ in
       blender
       teams-for-linux
       postman
-      devenv
       avalonia-ilspy
       usbutils
       obsidian
