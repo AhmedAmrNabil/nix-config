@@ -114,6 +114,12 @@
     enable = true;
   };
 
+  # Enable platformio udev rules for esp32 development
+  services.udev.packages = [
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
+
   # Enable local time synchronization
   # to prevent issues with dual booting Windows
   time.hardwareClockInLocalTime = true;
