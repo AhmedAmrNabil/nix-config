@@ -15,7 +15,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.vscode = {
       enable = true;
-      package = pkgsUnstable.vscode.fhsWithPackages (ps: with ps; [ avrdude ]);
+      package = pkgsUnstable.vscode;
       mutableExtensionsDir = true;
     };
 
