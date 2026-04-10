@@ -14,7 +14,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.cava.enable = true;
     xdg.configFile."cava/config" = {
-      source = config.lib.file.mkOutOfStoreSymlink (builtins.toString ./config);
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/cava/config";
     };
   };
 }
