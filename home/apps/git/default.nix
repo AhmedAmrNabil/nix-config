@@ -16,18 +16,18 @@ in
     programs.git = {
       enable = true;
       package = pkgsUnstable.git;
-      aliases = {
-        ci = "commit";
-        co = "checkout";
-        st = "status";
-        br = "branch";
-        lg = "log --graph --oneline --all";
-        aa = "add .";
-        cm = "commit -m";
-        amend = "commit --amend --no-edit";
-        undo = "reset --soft HEAD~1";
-      };
       settings = {
+        alias = {
+          ci = "commit";
+          co = "checkout";
+          st = "status";
+          br = "branch";
+          lg = "log --graph --oneline --all";
+          aa = "add .";
+          cm = "commit -m";
+          amend = "commit --amend --no-edit";
+          undo = "reset --soft HEAD~1";
+        };
         user = {
           name = gitConfig.userName;
           email = gitConfig.userEmail;
