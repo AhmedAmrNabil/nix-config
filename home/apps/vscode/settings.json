@@ -213,7 +213,7 @@
   "platformio-ide.useBuiltinPIOCore": false,
   "platformio-ide.useBuiltinPython": false,
   "prettier.semi": true,
-  "python.defaultInterpreterPath": "/home/btngana/.local/state/nix/profile/bin/python",
+  "python.defaultInterpreterPath": "/nix/store/qwb5ygz9k8gs5ql9bpxbrsrv12r1icgm-python3-3.13.12/bin/python",
   "remote.autoForwardPortsSource": "hybrid",
   "scm.repositories.selectionMode": "single",
   "search.exclude": {
@@ -300,5 +300,7 @@
   "workbench.tree.indent": 15,
   "workbench.tree.renderIndentGuides": "always",
   "idf.hasWalkthroughBeenShown": true,
-  "cmake.showConfigureWithDebuggerNotification": false
+  "cmake.showConfigureWithDebuggerNotification": false,
+  "cmake.automaticReconfigure": false,
+  "cmake.configureOnEdit": false
 }
