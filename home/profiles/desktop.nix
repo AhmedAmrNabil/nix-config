@@ -35,7 +35,7 @@ in
       vlc
       localsend
       transmission_4-qt
-      blender
+      (blender.override { cudaSupport = true; })
       teams-for-linux
       postman
       avalonia-ilspy
