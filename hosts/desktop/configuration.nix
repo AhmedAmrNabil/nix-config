@@ -108,6 +108,11 @@
     })
     distrobox
     scrcpy
+    mangohud
+    (pkgs.writeShellScriptBin "mangohud-nvidia" ''
+      export LD_PRELOAD=/run/opengl-driver/lib/libnvidia-ml.so.1
+      exec ${pkgs.mangohud}/bin/mangohud "$@"
+    '')
   ];
 
   programs.adb.enable = true; # enable adb for android development
@@ -217,6 +222,7 @@
   # fix steam compatdata to be on linux instead of ntfs partiton
   systemd.tmpfiles.rules = [
     "L /home/btngana/crucial/SteamLibrary/steamapps/compatdata - - - - /home/btngana/.steam/steam/steamapps/compatdata"
+    "L /home/btngana/hdd/SteamLibrary/steamapps/compatdata - - - - /home/btngana/.steam/steam/steamapps/compatdata2"
   ];
 
   fileSystems."/home/btngana/Games" = {
