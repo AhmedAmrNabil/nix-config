@@ -92,7 +92,7 @@ in
             type = "os";
             keyColor = "bright_red";
             keyIcon = "";
-            format = "{name} {version-id}";
+            format = "{name} {version-id} ({kernel-release})";
           }
           {
             type = "uptime";
