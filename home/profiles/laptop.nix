@@ -1,5 +1,6 @@
 {
   pkgs,
+  pkgsUnstable,
   ...
 }:
 {
@@ -22,11 +23,12 @@
     })
     vlc
     localsend
+    impala
+  ] ++ (with pkgsUnstable; [
     arduino-ide
     arduino-cli
-    # platformio-core
     platformio
-  ];
+  ]);
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
     name = "Microsoft Edge (Autoscroll)";
