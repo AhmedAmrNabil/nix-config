@@ -4,14 +4,6 @@
   lib,
   ...
 }:
-let
-
-  windowsIconPkg = pkgs.runCommand "windows-logo-icon" { } ''
-    mkdir -p $out/share/icons/hicolor/256x256/apps
-    cp ${./windows-11.png} $out/share/icons/hicolor/256x256/apps/windows-logo.png
-  '';
-
-in
 {
   imports = [
     ./shared.nix
@@ -41,7 +33,6 @@ in
       usbutils
       obsidian
       handbrake
-      windowsIconPkg
       libreoffice
       (blender.override { cudaSupport = true; })
     ]
@@ -70,7 +61,7 @@ in
   xdg.desktopEntries.reboot-to-windows = {
     name = "Reboot to Windows";
     comment = "Restart the system and boot into Windows";
-    icon = "windows-logo";
+    icon = "${./windows-11.png}";
     exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
     categories = [ "System" ];
     terminal = false;
