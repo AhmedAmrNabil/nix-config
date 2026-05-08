@@ -20,10 +20,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-vscode-extensions = {
-      url = "github:nix-community/nix-vscode-extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     winapps = {
       url = "github:winapps-org/winapps";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +32,6 @@
       nixpkgs,
       nixos-wsl,
       home-manager,
-      nix-vscode-extensions,
       ...
     }@inputs:
     let
@@ -44,7 +39,6 @@
 
       overlays = [
         (import ./overlays/xournalpp)
-        nix-vscode-extensions.overlays.default
       ];
 
       # Evaluate pkgs once and reuse
@@ -53,7 +47,7 @@
         config.allowUnfree = true;
       };
       pkgsUnstable = import inputs.nixpkgs-unstable {
-        inherit system overlays;
+        inherit system;
         config.allowUnfree = true;
       };
 
