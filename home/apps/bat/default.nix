@@ -13,7 +13,7 @@ in
   config = lib.mkIf cfg.enable {
     programs.bat.enable = true;
     home.shellAliases = {
-      cat = "bat --paging=never";
+      cat = "bat --paging=never -p";
     };
   };
 }
