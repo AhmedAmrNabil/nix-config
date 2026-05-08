@@ -15,20 +15,23 @@
     rofi.enable = true;
   };
 
-  home.packages = with pkgs; [
-    (discord.override {
-      withOpenASAR = true;
-      withVencord = true;
-      enableAutoscroll = true;
-    })
-    vlc
-    localsend
-    impala
-  ] ++ (with pkgsUnstable; [
-    arduino-ide
-    arduino-cli
-    platformio
-  ]);
+  home.packages =
+    with pkgs;
+    [
+      vlc
+      localsend
+      impala
+    ]
+    ++ (with pkgsUnstable; [
+      arduino-ide
+      arduino-cli
+      platformio
+      (discord.override {
+        withOpenASAR = true;
+        withVencord = true;
+        enableAutoscroll = true;
+      })
+    ]);
 
   xdg.desktopEntries.microsoft-edge-autoscroll = {
     name = "Microsoft Edge (Autoscroll)";
