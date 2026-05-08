@@ -35,20 +35,20 @@ in
       vlc
       localsend
       transmission_4-qt
-      (blender.override { cudaSupport = true; })
       teams-for-linux
       postman
       avalonia-ilspy
       usbutils
       obsidian
-      arduino-ide
-      slack
-      zoom-us
       handbrake
       windowsIconPkg
       libreoffice
+      (blender.override { cudaSupport = true; })
     ]
     ++ (with pkgsUnstable; [
+      arduino-ide
+      arduino-cli
+      platformio
       antigravity
       (discord.override {
         withVencord = true;
@@ -75,6 +75,4 @@ in
     categories = [ "System" ];
     terminal = false;
   };
-
-  gtk.enable = lib.mkDefault true;
 }
