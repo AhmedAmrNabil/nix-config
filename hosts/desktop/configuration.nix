@@ -19,6 +19,7 @@
   # --------- Modules ------------------
   apps = {
     docker.enable = true;
+    flydigictl.enable = true;
     gpu-screen-recorder.enable = true;
     nh.enable = true;
     obs.enable = true;
@@ -27,24 +28,24 @@
     steam.enable = true;
     tailscale.enable = true;
     # virt-manager.enable = true;
-    flydigictl.enable = true;
   };
 
   core = {
-    fonts.enable = true;
-    nix-cfg.enable = true;
-    users.enable = true;
-    kernel.enable = true;
+    audio.enable = true;
     boot.enable = true;
-    hardware.nvidia.enable = true;
+    fonts.enable = true;
     hardware.ddcci.enable = true;
+    hardware.nvidia.enable = true;
+    kernel.enable = true;
+    nix-cfg.enable = true;
+    nix-ld.enable = true;
+    users.enable = true;
   };
+
   de.kde = {
     enable = true;
     autoLogin = true;
   };
-
-  # services.vaderMapper.enable = true;
 
   # --------- System configuration ------------------
 
@@ -64,31 +65,6 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   hardware.bluetooth.enable = true;
 
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    extraConfig.pipewire."10-clock" = {
-      "context.properties" = {
-        "default.clock.rate" = 48000;
-        "default.clock.allowed-rates" = [
-          44100
-          48000
-          96000
-        ];
-        "default.clock.quantum" = 32;
-        "default.clock.min-quantum" = 32;
-        "default.clock.max-quantum" = 2048;
-      };
-    };
-  };
-  boot.kernel.sysctl = {
-    "dev.hpet.max-user-freq" = 2048;
-  };
   environment.systemPackages = with pkgs; [
     nano
     micro
@@ -116,17 +92,6 @@
   ];
 
   programs.adb.enable = true; # enable adb for android development
-
-  programs.nix-ld = {
-    enable = true;
-    libraries = with pkgsUnstable; [
-      stdenv.cc.cc.lib
-      cudaPackages.cudatoolkit
-      cudaPackages.cudnn
-      libGL
-      zlib
-    ];
-  };
 
   # Enable platformio udev rules for esp32 development
   services.udev.packages = [
