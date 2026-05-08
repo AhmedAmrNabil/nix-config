@@ -13,6 +13,10 @@ in
   };
   config = lib.mkIf cfg.enable {
 
+    environment.systemPackages = with pkgs; [
+      ffmpeg
+    ];
+
     programs.obs-studio = {
       enable = true;
       enableVirtualCamera = true;
@@ -21,8 +25,14 @@ in
           cudaSupport = true;
         }
       );
-      plugins = [
-        pkgs.obs-studio-plugins.droidcam-obs
+      plugins = with pkgs.obs-studio-plugins;  [
+        droidcam-obs
+        wlrobs
+        obs-backgroundremoval
+        obs-pipewire-audio-capture
+        obs-vaapi
+        obs-gstreamer
+        obs-vkcapture
       ];
     };
   };
