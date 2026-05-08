@@ -46,6 +46,7 @@ in
       zoom-us
       handbrake
       windowsIconPkg
+      libreoffice
     ]
     ++ (with pkgsUnstable; [
       antigravity
