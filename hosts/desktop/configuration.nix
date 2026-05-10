@@ -108,15 +108,33 @@
 
   # serve /nix/store to laptop
 
-  services.nix-serve = {
-    enable = true;
-    secretKeyFile = "/var/cache-priv-key.pem";
-  };
+  # services.nix-serve = {
+  #   enable = true;
+  #   secretKeyFile = "/var/cache-priv-key.pem";
+  # };
 
-  networking.firewall.allowedTCPPorts = [ 5000 ];
+  networking.firewall.allowedTCPPorts = [
+    5000
+    5005
+  ];
   # fix /nix/store too many open files issue with nix-serve
   systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
   systemd.services.nix-serve.serviceConfig.Environment = "HOME=/home/${username}";
+
+  networking.firewall.allowedUDPPorts = [
+    53
+    67
+  ];
+
+  services.create_ap = {
+    enable = true;
+    settings = {
+      INTERNET_IFACE = "enp42s0";
+      WIFI_IFACE = "wlp41s0";
+      SSID = "Mostafa";
+      PASSPHRASE = "12345678";
+    };
+  };
 
   # add zstd compression to file systems
   fileSystems = {
