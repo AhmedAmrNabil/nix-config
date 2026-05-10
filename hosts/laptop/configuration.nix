@@ -47,6 +47,19 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.firewall.allowedTCPPorts = [ 5000 5005 ];
+
+  # hotspot
+  services.create_ap = {
+    enable = true;
+    settings = {
+      INTERNET_IFACE = "wlp0s20f3";
+      WIFI_IFACE = "wlp0s20f3";
+      SSID = "Mostafa";
+      PASSPHRASE = "12345678";
+      CHANNEL = "2";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Africa/Cairo";
