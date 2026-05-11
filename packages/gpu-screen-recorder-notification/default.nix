@@ -48,13 +48,12 @@ stdenv.mkDerivation rec {
 
   mesonFlags = [
     "--buildtype=release"
-    "-Dstrip=true"
   ];
 
   postInstall = ''
     wrapProgram "$out/bin/${meta.mainProgram}" \
       --prefix XDG_DATA_DIRS : "${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}" \
-      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath buildInputs}"
+      --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libglvnd ]}"
   '';
 
   passthru.updateScript = gitUpdater {
