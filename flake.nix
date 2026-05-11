@@ -123,5 +123,7 @@
       legacyPackages.${system} = pkgs // {
         unstable = pkgsUnstable;
       };
+
+      packages.${system} = localPkgs;
     };
 }
