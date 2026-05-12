@@ -20,7 +20,13 @@
   apps = {
     docker.enable = true;
     flydigictl.enable = true;
-    gpu-screen-recorder.enable = true;
+    gpu-screen-recorder = {
+      enable = true;
+      ui = {
+        enable = true;
+        autoStart = true;
+      };
+    };
     nh.enable = true;
     obs.enable = true;
     open-tablet-driver.enable = true;
