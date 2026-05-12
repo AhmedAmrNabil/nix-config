@@ -1,8 +1,13 @@
 {
-  lib,
   fetchgit,
   gitUpdater,
+  gsettings-desktop-schemas,
+  lib,
   libglvnd,
+  libx11,
+  libxext,
+  libxrandr,
+  libxrender,
   makeWrapper,
   meson,
   ninja,
@@ -11,17 +16,15 @@
   stdenv,
   wayland-scanner,
   wayland,
-  gsettings-desktop-schemas,
-  xorg,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpu-screen-recorder-notification";
   version = "1.2.3";
 
   src = fetchgit {
     url = "https://repo.dec05eba.com/gpu-screen-recorder-notification";
-    tag = version;
+    tag = finalAttrs.version;
     hash = "sha256-tzyrI4B5JWiUOpaww/2oGAvYgNKGb63eap1NKy5uysU=";
   };
 
@@ -35,39 +38,37 @@ stdenv.mkDerivation rec {
   buildInputs = [
     libglvnd
     pango
-    xorg.libX11
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXext
+    libx11
+    libxrandr
+    libxrender
+    libxext
     wayland
     wayland-scanner
     gsettings-desktop-schemas
   ];
 
+  __structuredAttrs = true;
   strictDeps = true;
 
-  mesonFlags = [
-    "--buildtype=release"
-  ];
+  mesonBuildType = "release";
 
   postInstall = ''
-    wrapProgram "$out/bin/${meta.mainProgram}" \
+    wrapProgram "$out/bin/${finalAttrs.meta.mainProgram}" \
       --prefix XDG_DATA_DIRS : "${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}" \
       --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libglvnd ]}"
   '';
 
-  passthru.updateScript = gitUpdater {
-    url = "https://repo.dec05eba.com/gpu-screen-recorder-notification";
-  };
+  passthru.updateScript = gitUpdater { };
 
   meta = {
-    description = "Notification in the style of ShadowPlay.";
-    homepage = "https://git.dec05eba.com/gpu-screen-recorder-notification";
+    description = "Notification in the style of ShadowPlay";
+    homepage = "https://git.dec05eba.com/gpu-screen-recorder-notification/about";
     license = lib.licenses.gpl3Only;
-    platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [
-      AhmedAmrNabil
-    ];
     mainProgram = "gsr-notify";
+    maintainers = with lib.maintainers; [
+      AhmedAmr
+    ];
+    platforms = [ "x86_64-linux" ];
+    sourceProvenance = with lib.sourceTypes; [ fromSource ];
   };
-}
+})
