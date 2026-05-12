@@ -4,6 +4,10 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-local = {
+      url = "path:/home/btngana/coding/nixpkgs";
+      flake = false;
+    };
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -51,6 +55,11 @@
         config.allowUnfree = true;
       };
 
+      pkgsLocal = import inputs.nixpkgs-local {
+        inherit system overlays;
+        config.allowUnfree = true;
+      };
+
       localPkgs = import ./packages { inherit pkgs; };
 
       username = "btngana";
@@ -68,11 +77,13 @@
 
       specialArgs = {
         inherit
+          gitConfig
           inputs
-          system
           localPkgs
-          username
+          pkgsLocal
           pkgsUnstable
+          system
+          username
           ;
       };
 
@@ -86,11 +97,12 @@
       # Home Manager standalone configuration
       homeExtraSpecialArgs = {
         inherit
+          gitConfig
           inputs
           localPkgs
-          system
+          pkgsLocal
           pkgsUnstable
-          gitConfig
+          system
           username
           ;
       };
