@@ -1,13 +1,24 @@
 {
-  lib,
   dbus,
+  desktop-file-utils,
   fetchgit,
   gitUpdater,
   gpu-screen-recorder,
+  gpu-screen-recorder-notification,
+  gsettings-desktop-schemas,
+  lib,
   libcap,
   libdrm,
   libglvnd,
   libpulseaudio,
+  libx11,
+  libxcomposite,
+  libxcursor,
+  libxext,
+  libxfixes,
+  libxi,
+  libxrandr,
+  libxrender,
   linuxHeaders,
   makeWrapper,
   meson,
@@ -17,19 +28,16 @@
   stdenv,
   wayland-scanner,
   wayland,
-  gsettings-desktop-schemas,
   wrapperDir ? "/run/wrappers/bin",
-  xorg,
-  desktop-file-utils,
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation (finalAttrs: {
   pname = "gpu-screen-recorder-ui";
   version = "1.11.8";
 
   src = fetchgit {
     url = "https://repo.dec05eba.com/gpu-screen-recorder-ui";
-    tag = version;
+    tag = finalAttrs.version;
     hash = "sha256-wDoeDiUAQHggJr3qaRoY5Q3Hw4JuuZ7Etw/Up6Ypp/o=";
   };
 
@@ -42,14 +50,14 @@ stdenv.mkDerivation rec {
   ];
 
   buildInputs = [
-    xorg.libX11
-    xorg.libXrandr
-    xorg.libXrender
-    xorg.libXcomposite
-    xorg.libXfixes
-    xorg.libXext
-    xorg.libXi
-    xorg.libXcursor
+    libx11
+    libxrandr
+    libxrender
+    libxcomposite
+    libxfixes
+    libxext
+    libxi
+    libxcursor
     libglvnd
     libpulseaudio
     libdrm
@@ -62,9 +70,14 @@ stdenv.mkDerivation rec {
     gsettings-desktop-schemas
   ];
 
+  __structuredAttrs = true;
+  strictDeps = true;
+
+  mesonBuildType = "release";
+
   mesonFlags = [
+    # should be handled in the nixos module
     (lib.mesonBool "capabilities" false)
-    "--buildtype=release"
   ];
 
   postInstall =
@@ -74,25 +87,29 @@ stdenv.mkDerivation rec {
       };
     in
     ''
-      wrapProgram "$out/bin/${meta.mainProgram}" \
+      wrapProgram "$out/bin/${finalAttrs.meta.mainProgram}" \
+        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libglvnd ]}" \
         --prefix XDG_DATA_DIRS : "${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}" \
         --prefix PATH : "${wrapperDir}" \
-        --suffix PATH : "${lib.makeBinPath [ gpu-screen-recorder-wrapped ]}" \
-        --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libglvnd ]}"
+        --suffix PATH : "${
+          lib.makeBinPath [
+            gpu-screen-recorder-wrapped
+            gpu-screen-recorder-notification
+          ]
+        }"
     '';
 
-  passthru.updateScript = gitUpdater {
-    url = "https://repo.dec05eba.com/gpu-screen-recorder-ui";
-  };
+  passthru.updateScript = gitUpdater { };
 
   meta = {
-    description = "A fullscreen overlay UI for GPU Screen Recorder in the style of ShadowPlay";
-    homepage = "https://git.dec05eba.com/gpu-screen-recorder-ui";
+    description = "Fullscreen overlay UI for GPU Screen Recorder in the style of ShadowPlay";
+    homepage = "https://git.dec05eba.com/gpu-screen-recorder-ui/about";
     license = lib.licenses.gpl3Only;
-    platforms = lib.platforms.linux;
-    maintainers = with lib.maintainers; [
-      AhmedAmrNabil
-    ];
     mainProgram = "gsr-ui";
+    maintainers = with lib.maintainers; [
+      AhmedAmr
+    ];
+    platforms = [ "x86_64-linux" ];
+    sourceProvenance = with lib.sourceTypes; [ fromSource ];
   };
-}
+})
