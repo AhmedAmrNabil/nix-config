@@ -2,45 +2,72 @@
   lib,
   localPkgs,
   config,
+  pkgs,
   ...
 }:
 let
   cfg = config.apps.gpu-screen-recorder;
+  package = cfg.package.override {
+    inherit (config.security) wrapperDir;
+  };
+
+  uiPackage = cfg.uiPackage.override {
+    gpu-screen-recorder = package;
+    inherit (config.security) wrapperDir;
+  };
 in
 {
   options.apps.gpu-screen-recorder = {
     enable = lib.mkEnableOption "GPU Screen Recorder (with UI + hotkeys)";
-  };
 
-  config = lib.mkIf cfg.enable {
+    package = lib.mkPackageOption pkgs "gpu-screen-recorder" { };
 
-    environment.systemPackages = with localPkgs; [
-      gpu-screen-recorder-ui
-      gpu-screen-recorder-notification
-    ];
+    ui = {
+      enable = lib.mkEnableOption "the GPU Screen Recorder overlay UI";
+      package = lib.mkPackageOption localPkgs "gpu-screen-recorder-ui" { };
+      notifPackage = lib.mkPackageOption localPkgs "gpu-screen-recorder-notification" { };
 
-    programs.gpu-screen-recorder.enable = true;
-
-    security.wrappers.gsr-global-hotkeys = {
-      owner = "root";
-      group = "root";
-      capabilities = "cap_setuid+ep";
-      source = lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-global-hotkeys";
-    };
-
-    systemd.user.services.gpu-screen-recorder-ui = {
-      description = "GPU Screen Recorder UI";
-      wantedBy = [ "default.target" ];
-      path = [
-        localPkgs.gpu-screen-recorder-ui
-        localPkgs.gpu-screen-recorder-notification
-      ];
-      serviceConfig = {
-        ExecStart = "${lib.getExe' localPkgs.gpu-screen-recorder-ui "gsr-ui"} launch-daemon";
-        Restart = "on-failure";
-        RestartSec = "5s";
-        KillSignal = "SIGINT";
+      autoStart = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = ''
+          Whether to start the GPU Screen Recorder overlay UI automatically
+          on login via a systemd user service.
+        '';
       };
     };
   };
+
+  config = lib.mkIf cfg.enable (
+    lib.mkMerge [
+      {
+        programs.gpu-screen-recorder.enable = true;
+      }
+
+      (lib.mkIf cfg.ui.enable {
+        environment.systemPackages = [
+          cfg.uiPackage
+          cfg.notifPackage
+        ];
+
+        security.wrappers."gsr-global-hotkeys" = {
+          owner = "root";
+          group = "root";
+          capabilities = "cap_setuid+ep";
+          source = lib.getExe' uiPackage "gsr-global-hotkeys";
+        };
+
+        systemd.user.services."gpu-screen-recorder-ui" = lib.mkIf cfg.ui.autoStart {
+          description = "GPU Screen Recorder UI";
+          wantedBy = [ "graphical-session.target" ];
+          partOf = [ "graphical-session.target" ];
+          serviceConfig = {
+            ExecStart = "${lib.getExe' uiPackage "gsr-ui"} launch-daemon";
+            Restart = "on-failure";
+          };
+        };
+      })
+    ]
+  );
+
 }
