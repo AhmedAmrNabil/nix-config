@@ -10,15 +10,17 @@
   pkgs ? import <nixpkgs> { },
 }:
 
-{
+rec {
   # # The `lib`, `modules`, and `overlay` names are special
   # lib = import ./lib { inherit pkgs; }; # functions
   # modules = import ./modules; # NixOS modules
   # overlays = import ./overlays; # nixpkgs overlays
 
   spotify-adblock = pkgs.callPackage ./spotify-adblock { };
-  gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui { };
   gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification { };
+  gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui {
+    inherit gpu-screen-recorder-notification;
+  };
   wps-fonts = pkgs.callPackage ./wps-fonts { };
   flydigictl = pkgs.callPackage ./flydigictl { };
 }
