@@ -34,6 +34,17 @@
       handbrake
       libreoffice
       (blender.override { cudaSupport = true; })
+      (pkgs.writeShellScriptBin "gdu-clean" ''
+        IGNORE=$(
+          findmnt --raw --noheadings --output TARGET,FSTYPE \
+            | awk '$2 == "fuseblk" {print $1}' \
+            | paste -sd "," -
+        )
+
+        IGNORE="$IGNORE,/run,/mnt"
+
+        exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE"
+      '')
     ]
     ++ (with pkgsUnstable; [
       arduino-ide
