@@ -107,7 +107,19 @@
     in
     {
       nixosConfigurations = {
-        desktop-nixos = mkSystem "desktop" [ ];
+        desktop-nixos = mkSystem "desktop" [
+          {
+            virtualisation.vmVariant = {
+              virtualisation.memorySize = 8192; # 8GB
+              virtualisation.cores = 4;
+              virtualisation.qemu.options = [
+                "-vga none"
+                "-device virtio-vga-gl"
+                "-display sdl,gl=on"
+              ];
+            };
+          }
+        ];
         laptop-nixos = mkSystem "laptop" [ ];
         wsl-nixos = mkSystem "wsl" [ nixos-wsl.nixosModules.default ];
       };
