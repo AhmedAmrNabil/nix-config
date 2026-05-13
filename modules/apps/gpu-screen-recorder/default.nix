@@ -1,6 +1,5 @@
 {
   lib,
-  localPkgs,
   config,
   pkgs,
   ...
@@ -24,8 +23,8 @@ in
 
     ui = {
       enable = lib.mkEnableOption "the GPU Screen Recorder overlay UI";
-      package = lib.mkPackageOption localPkgs "gpu-screen-recorder-ui" { };
-      notifPackage = lib.mkPackageOption localPkgs "gpu-screen-recorder-notification" { };
+      package = lib.mkPackageOption pkgs "gpu-screen-recorder-ui" { };
+      notifPackage = lib.mkPackageOption pkgs "gpu-screen-recorder-notification" { };
 
       autoStart = lib.mkOption {
         type = lib.types.bool;

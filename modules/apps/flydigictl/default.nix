@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  localPkgs,
+  pkgs,
   ...
 }:
 let
@@ -12,9 +12,8 @@ in
     enable = lib.mkEnableOption "Flydigictl service and CLI tool";
   };
   config = lib.mkIf cfg.enable {
-    environment.systemPackages = [ localPkgs.flydigictl ];
-    services.dbus.packages = [ localPkgs.flydigictl ];
-    systemd.packages = [ localPkgs.flydigictl ];
-
+    environment.systemPackages = [ pkgs.flydigictl ];
+    services.dbus.packages = [ pkgs.flydigictl ];
+    systemd.packages = [ pkgs.flydigictl ];
   };
 }

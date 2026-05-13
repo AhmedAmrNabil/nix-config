@@ -35,17 +35,11 @@ in
         ];
         trusted-substituters = ["https://hyprland.cachix.org"];
 
-        # enablke nix flakes
+        # enable nix flakes
         experimental-features = [
           "nix-command"
           "flakes"
         ];
-      };
-    };
-    nixpkgs = {
-      config = {
-        allowUnfree = true;
-        allowBroken = false;
       };
     };
   };

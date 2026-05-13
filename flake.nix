@@ -34,6 +34,8 @@
     {
       self,
       nixpkgs,
+      nixpkgs-unstable,
+      nixpkgs-local,
       nixos-wsl,
       home-manager,
       ...
@@ -43,6 +45,7 @@
 
       overlays = [
         (import ./overlays/xournalpp)
+        (final: prev: import ./packages { pkgs = final; })
       ];
 
       # Evaluate pkgs once and reuse
@@ -50,17 +53,16 @@
         inherit system overlays;
         config.allowUnfree = true;
       };
-      pkgsUnstable = import inputs.nixpkgs-unstable {
-        inherit system;
-        config.allowUnfree = true;
-      };
 
-      pkgsLocal = import inputs.nixpkgs-local {
+      pkgsUnstable = import nixpkgs-unstable {
         inherit system overlays;
         config.allowUnfree = true;
       };
 
-      localPkgs = import ./packages { inherit pkgs; };
+      pkgsLocal = import nixpkgs-local {
+        inherit system overlays;
+        config.allowUnfree = true;
+      };
 
       username = "btngana";
 
@@ -72,14 +74,13 @@
       commonModules = [
         ./modules
         inputs.hyprland.nixosModules.default
-        { nixpkgs.overlays = overlays; }
+        { nixpkgs.pkgs = pkgs; }
       ];
 
       specialArgs = {
         inherit
           gitConfig
           inputs
-          localPkgs
           pkgsLocal
           pkgsUnstable
           system
@@ -94,24 +95,11 @@
           modules = [ ./hosts/${host}/configuration.nix ] ++ commonModules ++ extraModules;
         };
 
-      # Home Manager standalone configuration
-      homeExtraSpecialArgs = {
-        inherit
-          gitConfig
-          inputs
-          localPkgs
-          pkgsLocal
-          pkgsUnstable
-          system
-          username
-          ;
-      };
-
       mkHome =
         profile:
         home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          extraSpecialArgs = homeExtraSpecialArgs;
+          extraSpecialArgs = specialArgs;
           modules = [
             ./home/profiles/${profile}.nix
             inputs.spicetify-nix.homeManagerModules.default
@@ -136,6 +124,6 @@
         unstable = pkgsUnstable;
       };
 
-      packages.${system} = localPkgs;
+      packages.${system} = pkgs;
     };
 }
