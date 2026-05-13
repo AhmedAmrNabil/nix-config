@@ -514,6 +514,19 @@
         "type": "github"
       }
     },
+    "nixpkgs-local": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1778547612,
+        "narHash": "sha256-9M2GV3XXjpcA2pUnxbg060Tiadw7QucfEmR/Feppsy4=",
+        "path": "/home/btngana/coding/nixpkgs",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/btngana/coding/nixpkgs",
+        "type": "path"
+      }
+    },
     "nixpkgs-unstable": {
       "locked": {
         "lastModified": 1776548001,
@@ -559,6 +572,7 @@
         "hyprland": "hyprland",
         "nixos-wsl": "nixos-wsl",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-local": "nixpkgs-local",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "spicetify-nix": "spicetify-nix",
         "winapps": "winapps"
