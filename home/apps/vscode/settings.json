@@ -210,7 +210,6 @@
     }
   },
   "nixEnvSelector.useFlakes": true,
-  "platformio-ide.useBuiltinPIOCore": false,
   "platformio-ide.useBuiltinPython": false,
   "prettier.semi": true,
   "remote.autoForwardPortsSource": "hybrid",
@@ -301,5 +300,9 @@
   "idf.hasWalkthroughBeenShown": true,
   "cmake.showConfigureWithDebuggerNotification": false,
   "cmake.automaticReconfigure": false,
-  "cmake.configureOnEdit": false
+  "cmake.configureOnEdit": false,
+  "typescript.experimental.useTsgo": true,
+  "platformio-ide.useBuiltinPIOCore": false,
+  "platformio-ide.customPATH": "/home/btngana/.platformio/penv/bin",
+  "idf.enableCCache": true
 }
