@@ -48,7 +48,6 @@
         (final: prev: import ./packages { pkgs = final; })
       ];
 
-      # Evaluate pkgs once and reuse
       pkgs = import nixpkgs {
         inherit system overlays;
         config.allowUnfree = true;
@@ -122,6 +121,7 @@
       # export nixpkgs to use with nix shell
       legacyPackages.${system} = pkgs // {
         unstable = pkgsUnstable;
+        local = pkgsLocal;
       };
 
       packages.${system} = pkgs;
