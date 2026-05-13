@@ -1,6 +1,6 @@
 {
   config,
-  pkgsUnstable,
+  pkgs,
   lib,
   ...
 }:
@@ -12,8 +12,7 @@ in
     enable = lib.mkEnableOption "Kernel configuration management";
   };
   config = lib.mkIf cfg.enable {
-    # use the latest kernel
-    boot.kernelPackages = pkgsUnstable.linuxPackages_latest;
+    boot.kernelPackages = pkgs.linuxPackages_7;
 
     boot.kernelModules = [
       "ntsync"
