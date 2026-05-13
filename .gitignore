@@ -1,0 +1,4 @@
+# I am surprised how long i didn't need a gitignore xd
+
+# for nix vm
+*.qcow2
