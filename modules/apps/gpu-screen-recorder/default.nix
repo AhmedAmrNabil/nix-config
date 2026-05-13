@@ -11,7 +11,7 @@ let
     inherit (config.security) wrapperDir;
   };
 
-  uiPackage = cfg.uiPackage.override {
+  uiPackage = cfg.ui.package.override {
     gpu-screen-recorder = package;
     inherit (config.security) wrapperDir;
   };
@@ -46,8 +46,8 @@ in
 
       (lib.mkIf cfg.ui.enable {
         environment.systemPackages = [
-          cfg.uiPackage
-          cfg.notifPackage
+          cfg.ui.package
+          cfg.ui.notifPackage
         ];
 
         security.wrappers."gsr-global-hotkeys" = {

@@ -5,7 +5,7 @@
 {
   pkgs,
   username,
-  pkgsUnstable,
+  localPkgs,
   ...
 }:
 {
@@ -24,6 +24,8 @@
       enable = true;
       ui = {
         enable = true;
+        package = localPkgs.gpu-screen-recorder-ui;
+        notifPackage = localPkgs.gpu-screen-recorder-notification;
         autoStart = true;
       };
     };
