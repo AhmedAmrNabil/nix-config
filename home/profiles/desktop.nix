@@ -33,6 +33,7 @@
       obsidian
       handbrake
       libreoffice
+      element-desktop
       (blender.override { cudaSupport = true; })
       (pkgs.writeShellScriptBin "gdu-clean" ''
         IGNORE=$(
