@@ -11,10 +11,6 @@ in
     enable = lib.mkEnableOption "OpenTabletDriver for drawing tablets";
   };
   config = lib.mkIf cfg.enable {
-    xdg.configFile."OpenTabletDriver/settings.json" = lib.mkForce {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/open-tablet-driver/OpenTabletDriver/settings.json";
-    };
-
     xdg.configFile."OpenTabletDriver/Configurations" = lib.mkForce {
       source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/open-tablet-driver/OpenTabletDriver/Configurations";
       recursive = true;
