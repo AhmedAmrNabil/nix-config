@@ -54,6 +54,8 @@
     autoLogin = true;
   };
 
+  de.hyprland.enable = true;
+
   # --------- System configuration ------------------
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
