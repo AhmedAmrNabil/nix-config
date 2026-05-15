@@ -2,3 +2,4 @@
 
 # for nix vm
 *.qcow2
+test-cfg

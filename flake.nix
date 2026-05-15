@@ -100,7 +100,7 @@
           inherit pkgs;
           extraSpecialArgs = specialArgs;
           modules = [
-            ./home/profiles/${profile}.nix
+            ./hosts/${profile}/home.nix
             inputs.spicetify-nix.homeManagerModules.default
           ];
         };

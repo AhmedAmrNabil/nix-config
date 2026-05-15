@@ -5,7 +5,7 @@
 }:
 {
   imports = [
-    ../apps
+    ./apps
   ];
 
   # Required for standalone home-manager
