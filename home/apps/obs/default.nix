@@ -1,7 +1,7 @@
 {
   config,
   lib,
-  pkgs,
+  pkgsUnstable,
   ...
 }:
 let
@@ -12,20 +12,14 @@ in
     enable = lib.mkEnableOption "OBS studio with plugins";
   };
   config = lib.mkIf cfg.enable {
-
-    environment.systemPackages = with pkgs; [
-      ffmpeg
-    ];
-
     programs.obs-studio = {
       enable = true;
-      enableVirtualCamera = true;
       package = (
-        pkgs.obs-studio.override {
+        pkgsUnstable.obs-studio.override {
           cudaSupport = true;
         }
       );
-      plugins = with pkgs.obs-studio-plugins;  [
+      plugins = with pkgsUnstable.obs-studio-plugins; [
         droidcam-obs
         wlrobs
         obs-backgroundremoval

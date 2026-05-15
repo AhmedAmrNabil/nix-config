@@ -17,7 +17,10 @@
 
   # --------- Modules ------------------
   apps = {
-    docker.enable = true;
+    docker = {
+      enable = true;
+      storageDriver = "overlay2";
+    };
     flydigictl.enable = true;
     gpu-screen-recorder = {
       enable = true;
@@ -27,7 +30,6 @@
       };
     };
     nh.enable = true;
-    obs.enable = true;
     open-tablet-driver.enable = true;
     plymouth.enable = true;
     steam.enable = true;
