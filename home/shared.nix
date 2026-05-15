@@ -4,10 +4,6 @@
   ...
 }:
 {
-  imports = [
-    ./apps
-  ];
-
   # Required for standalone home-manager
   home.username = username;
   home.homeDirectory = "/home/${username}";

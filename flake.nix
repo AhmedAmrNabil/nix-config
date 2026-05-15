@@ -22,7 +22,7 @@
     };
     hyprland = {
       url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
     winapps = {
       url = "github:winapps-org/winapps";
@@ -70,12 +70,6 @@
         userEmail = "ahmedamr24680@gmail.com";
       };
 
-      commonModules = [
-        ./modules
-        inputs.hyprland.nixosModules.default
-        { nixpkgs.pkgs = pkgs; }
-      ];
-
       specialArgs = {
         inherit
           gitConfig
@@ -91,7 +85,12 @@
         host: extraModules:
         nixpkgs.lib.nixosSystem {
           inherit system specialArgs;
-          modules = [ ./hosts/${host}/configuration.nix ] ++ commonModules ++ extraModules;
+          modules = [
+            { nixpkgs.pkgs = pkgs; }
+            ./hosts/${host}/configuration.nix
+            inputs.hyprland.nixosModules.default
+          ]
+          ++ extraModules;
         };
 
       mkHome =
@@ -101,6 +100,7 @@
           extraSpecialArgs = specialArgs;
           modules = [
             ./hosts/${profile}/home.nix
+            ./home/apps
             inputs.spicetify-nix.homeManagerModules.default
           ];
         };
@@ -110,12 +110,14 @@
         desktop-nixos = mkSystem "desktop" [
           {
             virtualisation.vmVariant = {
+              de.kde.autoLogin = pkgs.lib.mkForce false;
+              users.users."${username}".password = "password"; # just for the vm, not used anywhere else
               virtualisation.memorySize = 8192; # 8GB
               virtualisation.cores = 4;
               virtualisation.qemu.options = [
                 "-vga none"
                 "-device virtio-vga-gl"
-                "-display sdl,gl=on"
+                "-display gtk,gl=on"
               ];
             };
           }
