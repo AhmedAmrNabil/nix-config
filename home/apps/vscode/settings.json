@@ -45,7 +45,8 @@
     "editor.defaultFormatter": "esafirm.kotlin-formatter"
   },
   "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide"
+    "editor.defaultFormatter": "jnoortheen.nix-ide",
+    "editor.tabSize": 2
   },
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -210,7 +211,6 @@
     }
   },
   "nixEnvSelector.useFlakes": true,
-  "platformio-ide.useBuiltinPython": false,
   "prettier.semi": true,
   "remote.autoForwardPortsSource": "hybrid",
   "scm.repositories.selectionMode": "single",
@@ -302,7 +302,12 @@
   "cmake.automaticReconfigure": false,
   "cmake.configureOnEdit": false,
   "typescript.experimental.useTsgo": true,
+  "idf.enableCCache": true,
+  "platformio-ide.disablePIOHomeStartup": true,
   "platformio-ide.useBuiltinPIOCore": false,
-  "platformio-ide.customPATH": "/home/btngana/.platformio/penv/bin",
-  "idf.enableCCache": true
+  "platformio-ide.useBuiltinPython": false,
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "latex-workshop.formatting.latex": "latexindent",
 }
