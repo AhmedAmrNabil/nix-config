@@ -11,7 +11,7 @@ let
 in
 {
   options.de.hyprland = {
-    enable = lib.mkEnableOption "Hyprland with customizations";
+    enable = lib.mkEnableOption "Hyprland with UWSM and kwallet support";
   };
   config = lib.mkIf cfg.enable {
     programs.hyprland = {
@@ -27,5 +27,14 @@ in
       enable = true;
       package = pkgs.kdePackages.kwallet-pam;
     };
+
+    # enable --password-store=kwallet6 for the browser
+    nixpkgs.overlays = [
+      (final: prev: {
+        microsoft-edge = prev.microsoft-edge.override {
+          commandLineArgs = "--password-store=kwallet6";
+        };
+      })
+    ];
   };
 }
