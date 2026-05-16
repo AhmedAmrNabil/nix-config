@@ -22,5 +22,10 @@ in
       # make sure to also set the portal package, so that they are in sync
       portalPackage = hyprlandPackages.xdg-desktop-portal-hyprland;
     };
+
+    security.pam.services.sddm.kwallet = {
+      enable = true;
+      package = pkgs.kdePackages.kwallet-pam;
+    };
   };
 }
