@@ -20,6 +20,8 @@
     vscode.enable = true;
   };
 
+  de.hyprland.enable = true;
+
   home.packages =
     with pkgs;
     [

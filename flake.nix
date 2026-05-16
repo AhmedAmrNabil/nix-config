@@ -100,7 +100,7 @@
           extraSpecialArgs = specialArgs;
           modules = [
             ./hosts/${profile}/home.nix
-            ./home/apps
+            ./home
             inputs.spicetify-nix.homeManagerModules.default
           ];
         };

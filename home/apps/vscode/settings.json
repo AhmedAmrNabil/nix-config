@@ -310,4 +310,7 @@
     "editor.defaultFormatter": "James-Yu.latex-workshop"
   },
   "latex-workshop.formatting.latex": "latexindent",
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  }
 }

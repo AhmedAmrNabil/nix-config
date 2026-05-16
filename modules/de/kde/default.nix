@@ -51,12 +51,12 @@ in
         ];
 
         # Remove unused packages
-        environment.plasma6.excludePackages = [
-          kdePackages.elisa
-          kdePackages.kate
-          kdePackages.okular
-          kdePackages.khelpcenter
-          kdePackages.kinfocenter
+        environment.plasma6.excludePackages = with kdePackages; [
+          elisa
+          kate
+          okular
+          khelpcenter
+          kinfocenter
         ];
       }
 
