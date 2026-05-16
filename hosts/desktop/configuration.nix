@@ -4,6 +4,7 @@
 
 {
   pkgs,
+  pkgsUnstable,
   username,
   ...
 }:
@@ -12,7 +13,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ../../modules
   ];
 
   # --------- Modules ------------------
@@ -30,6 +30,7 @@
       };
     };
     nh.enable = true;
+    obs.enable = true;
     open-tablet-driver.enable = true;
     plymouth.enable = true;
     steam.enable = true;

@@ -19,6 +19,7 @@ in
           cudaSupport = true;
         }
       );
+      enableVirtualCamera = true;
       plugins = with pkgsUnstable.obs-studio-plugins; [
         droidcam-obs
         wlrobs

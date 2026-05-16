@@ -12,7 +12,6 @@
     ./foot
     ./git
     ./micro
-    ./obs
     ./only-office
     ./open-tablet-driver
     ./rofi

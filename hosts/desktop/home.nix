@@ -12,7 +12,6 @@
     alacritty.enable = true;
     cava.enable = true;
     foot.enable = true;
-    obs.enable = true;
     only-office.enable = true;
     open-tablet-driver.enable = true;
     rofi.enable = true;

@@ -88,6 +88,7 @@
           modules = [
             { nixpkgs.pkgs = pkgs; }
             ./hosts/${host}/configuration.nix
+            ./modules
             inputs.hyprland.nixosModules.default
           ]
           ++ extraModules;
