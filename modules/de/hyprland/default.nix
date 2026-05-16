@@ -28,6 +28,12 @@ in
       package = pkgs.kdePackages.kwallet-pam;
     };
 
+    environment.systemPackages = [
+      (pkgs.writeShellScriptBin "kwallet-init" ''
+        ${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init
+      '')
+    ];
+
     # enable --password-store=kwallet6 for the browser
     nixpkgs.overlays = [
       (final: prev: {
