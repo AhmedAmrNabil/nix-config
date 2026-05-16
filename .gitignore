@@ -4,3 +4,4 @@
 *.qcow2
 result
 test-cfg
+.vscode/
