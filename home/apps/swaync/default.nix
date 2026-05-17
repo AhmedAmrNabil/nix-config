@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  self,
   ...
 }:
 let
@@ -15,8 +14,8 @@ in
     services.swaync.enable = true;
 
     # will currently have impure file for customization
-    xdg.configFile."swaync/config.json" = {
-      source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${self}/home/apps/swaync/config.json");
+    xdg.configFile."swaync/config.json" = lib.mkForce {
+      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/swaync/config.json";
     };
   };
 }

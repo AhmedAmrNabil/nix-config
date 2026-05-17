@@ -78,7 +78,6 @@
           pkgsUnstable
           system
           username
-          self # for folder path
           ;
       };
 
