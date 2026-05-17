@@ -1,9 +1,10 @@
 {
-  lib,
   config,
+  lib,
   pkgs,
   ...
 }:
+
 let
   cfg = config.apps.gpu-screen-recorder;
   package = cfg.package.override {
@@ -17,7 +18,7 @@ let
 in
 {
   options.apps.gpu-screen-recorder = {
-    enable = lib.mkEnableOption "GPU Screen Recorder (with UI + hotkeys)";
+    enable = lib.mkEnableOption "the GPU Screen Recorder application";
 
     package = lib.mkPackageOption pkgs "gpu-screen-recorder" { };
 
@@ -26,9 +27,7 @@ in
       package = lib.mkPackageOption pkgs "gpu-screen-recorder-ui" { };
       notifPackage = lib.mkPackageOption pkgs "gpu-screen-recorder-notification" { };
 
-      autoStart = lib.mkOption {
-        type = lib.types.bool;
-        default = false;
+      autoStart = lib.mkEnableOption "" // {
         description = ''
           Whether to start the GPU Screen Recorder overlay UI automatically
           on login via a systemd user service.
@@ -40,7 +39,14 @@ in
   config = lib.mkIf cfg.enable (
     lib.mkMerge [
       {
-        programs.gpu-screen-recorder.enable = true;
+        environment.systemPackages = [ cfg.package ];
+
+        security.wrappers."gsr-kms-server" = {
+          owner = "root";
+          group = "root";
+          capabilities = "cap_sys_admin+ep";
+          source = lib.getExe' package "gsr-kms-server";
+        };
       }
 
       (lib.mkIf cfg.ui.enable {
