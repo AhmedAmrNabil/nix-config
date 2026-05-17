@@ -6,6 +6,7 @@
   libglvnd,
   libx11,
   libxext,
+  libxkbcommon,
   libxrandr,
   libxrender,
   makeWrapper,
@@ -20,12 +21,12 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "gpu-screen-recorder-notification";
-  version = "1.2.3";
+  version = "1.3.0";
 
   src = fetchgit {
     url = "https://repo.dec05eba.com/gpu-screen-recorder-notification";
     tag = finalAttrs.version;
-    hash = "sha256-tzyrI4B5JWiUOpaww/2oGAvYgNKGb63eap1NKy5uysU=";
+    hash = "sha256-32d6GlX00fStQOu9h/fgOoUjKsZd+/xp7O4nlAeEYII=";
   };
 
   nativeBuildInputs = [
@@ -41,6 +42,7 @@ stdenv.mkDerivation (finalAttrs: {
     libx11
     libxrandr
     libxrender
+    libxkbcommon
     libxext
     wayland
     wayland-scanner
