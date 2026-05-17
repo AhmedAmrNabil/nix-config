@@ -1,0 +1,22 @@
+{
+  config,
+  lib,
+  self,
+  ...
+}:
+let
+  cfg = config.apps.swaync;
+in
+{
+  options.apps.swaync = {
+    enable = lib.mkEnableOption "Swaync with custom config";
+  };
+  config = lib.mkIf cfg.enable {
+    services.swaync.enable = true;
+
+    # will currently have impure file for customization
+    xdg.configFile."swaync/config.json" = {
+      source = lib.mkForce (config.lib.file.mkOutOfStoreSymlink "${self}/home/apps/swaync/config.json");
+    };
+  };
+}

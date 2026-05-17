@@ -17,6 +17,7 @@
     ./rofi
     ./spotify
     ./starship
+    ./swaync
     ./vscode
     ./zoxide
   ];
