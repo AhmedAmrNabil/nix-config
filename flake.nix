@@ -81,6 +81,13 @@
           ;
       };
 
+      # replace nixpkgs modules with local ones
+      # for local nixpkgs development
+      replaceModules =
+        modulePaths:
+        [ { disabledModules = modulePaths; } ]
+        ++ map (p: "${nixpkgs-local}/nixos/modules/${p}") modulePaths;
+
       mkSystem =
         host: extraModules:
         nixpkgs.lib.nixosSystem {
@@ -90,6 +97,9 @@
             ./hosts/${host}/configuration.nix
             ./modules
             inputs.hyprland.nixosModules.default
+          ]
+          ++ replaceModules [
+            # "programs/gpu-screen-recorder.nix"
           ]
           ++ extraModules;
         };
