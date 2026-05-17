@@ -24,10 +24,7 @@
     flydigictl.enable = true;
     gpu-screen-recorder = {
       enable = true;
-      ui = {
-        enable = true;
-        autoStart = true;
-      };
+      ui.enable = true;
     };
     nh.enable = true;
     obs.enable = true;

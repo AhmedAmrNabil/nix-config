@@ -26,13 +26,6 @@ in
       enable = lib.mkEnableOption "the GPU Screen Recorder overlay UI";
       package = lib.mkPackageOption pkgs "gpu-screen-recorder-ui" { };
       notifPackage = lib.mkPackageOption pkgs "gpu-screen-recorder-notification" { };
-
-      autoStart = lib.mkEnableOption "" // {
-        description = ''
-          Whether to start the GPU Screen Recorder overlay UI automatically
-          on login via a systemd user service.
-        '';
-      };
     };
   };
 
@@ -62,15 +55,6 @@ in
           source = lib.getExe' uiPackage "gsr-global-hotkeys";
         };
 
-        systemd.user.services."gpu-screen-recorder-ui" = lib.mkIf cfg.ui.autoStart {
-          description = "GPU Screen Recorder UI";
-          wantedBy = [ "graphical-session.target" ];
-          partOf = [ "graphical-session.target" ];
-          serviceConfig = {
-            ExecStart = "${lib.getExe' uiPackage "gsr-ui"} launch-daemon";
-            Restart = "on-failure";
-          };
-        };
       })
     ]
   );
