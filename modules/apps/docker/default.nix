@@ -16,10 +16,12 @@ in
       default = "btrfs";
       description = "The storage driver to use for Docker.";
     };
+    enableOnBoot = lib.mkEnableOption "the Docker service on boot.";
   };
   config = lib.mkIf cfg.enable {
     virtualisation.docker = {
       enable = true;
+      enableOnBoot = cfg.enableOnBoot;
       storageDriver = cfg.storageDriver;
       package = pkgsUnstable.docker; # Use the latest Docker package (as stable have a bug with buildx plugin)
     };
