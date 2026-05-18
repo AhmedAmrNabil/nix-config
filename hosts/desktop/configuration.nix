@@ -4,7 +4,6 @@
 
 {
   pkgs,
-  pkgsUnstable,
   username,
   ...
 }:
@@ -60,6 +59,11 @@
   # Pick only one of the below networking options.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+
+  # disable unused services to speed up boot time
+  systemd.services.Networkmanager-wait-online.enable = false;
+  services.fwupd.enable = false;
+  networking.modemmanager.enable = false;
 
   # Open port 5432 in firewall for PostgreSQL
   # networking.firewall.allowedTCPPorts = [ 5432 ];
