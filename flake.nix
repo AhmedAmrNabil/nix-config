@@ -93,6 +93,12 @@
             ./hosts/${host}/configuration.nix
             ./modules
             inputs.hyprland.nixosModules.default
+            (
+              { lib, ... }:
+              {
+                nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
+              }
+            )
           ]
           ++ replaceModules [
             # "programs/gpu-screen-recorder.nix"
