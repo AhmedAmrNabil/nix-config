@@ -11,12 +11,7 @@ in
     enable = lib.mkEnableOption "Bash shell with custom configuration";
   };
   config = lib.mkIf cfg.enable {
-    programs.bash = {
-      enable = true;
-      shellAliases = {
-        clock = "tty-clock -tcDBC 4";
-      };
-    };
+    programs.bash.enable = true;
   };
 
 }

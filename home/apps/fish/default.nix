@@ -21,9 +21,6 @@ in
   config = lib.mkIf cfg.enable {
     programs.fish = {
       enable = true;
-      shellAliases = {
-        clock = "tty-clock -tcDBC 4";
-      };
       shellInit = ''
         fish_config theme choose "Catppuccin Mocha"
       '';

@@ -98,12 +98,12 @@ in
             type = "uptime";
             keyColor = "bright_yellow";
           }
-          {
-            type = "packages";
-            keyColor = "bright_green";
-            keyIcon = "󰏗";
-            format = "{nix-system} nix, {nix-user} home";
-          }
+          # {
+          #   type = "packages";
+          #   keyColor = "bright_green";
+          #   keyIcon = "󰏗";
+          #   format = "{nix-system} nix, {nix-user} home";
+          # }
           {
             type = "de";
             keyColor = "bright_cyan";
