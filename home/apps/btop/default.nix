@@ -6,11 +6,9 @@
 }:
 let
   cfg = config.apps.btop;
-  catppuccin-btop = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "btop";
-    rev = "f437574b600f1c6d932627050b15ff5153b58fa3";
-    hash = "sha256-mEGZwScVPWGu+Vbtddc/sJ+mNdD2kKienGZVUcTSl+c=";
+  catppuccinBtop = pkgs.fetchurl {
+    url="https://raw.githubusercontent.com/catppuccin/btop/refs/heads/main/themes/catppuccin_mocha.theme";
+    hash="sha256-THRpq5vaKCwf9gaso3ycC4TNDLZtBB5Ofh/tOXkfRkQ=";
   };
 in
 {
@@ -27,7 +25,7 @@ in
         shown_boxes = "cpu mem net proc gpu0";
       };
       themes = {
-        catppuccin_mocha = builtins.readFile "${catppuccin-btop}/themes/catppuccin_mocha.theme";
+        catppuccin_mocha = builtins.readFile "${catppuccinBtop}";
       };
     };
   };
