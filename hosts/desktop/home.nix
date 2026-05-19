@@ -21,9 +21,17 @@
 
   de.hyprland.enable = true;
 
+  programs.nix-index.enable = true; # enable nix-index for faster package searching
+
+  home.shellAliases = {
+    "..." = "cd ../..";
+    clock = "tty-clock -tcDBC 4";
+  };
+
   home.packages =
     with pkgs;
     [
+      comma
       xournalpp
       vlc
       localsend
@@ -48,6 +56,7 @@
 
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE"
       '')
+      tty-clock
     ]
     ++ (with pkgsUnstable; [
       arduino-ide

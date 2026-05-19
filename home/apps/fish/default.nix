@@ -7,31 +7,23 @@
 let
   cfg = config.apps.fish;
 
-  catppuccin-fish = pkgs.fetchFromGitHub {
-    owner = "catppuccin";
-    repo = "fish";
-    rev = "af622a6e247806f6260c00c6d261aa22680e5201";
-    hash = "sha256-KD/sWXSXYVlV+n7ft4vKFYpIMBB3PSn6a6jz+ZIMZvQ=";
+  catppuccinFish = pkgs.fetchurl {
+    url = "https://raw.githubusercontent.com/catppuccin/fish/refs/heads/main/themes/catppuccin-mocha.theme";
+    hash = "sha256-hLXJH83AkaWcHpikaUGEGZQf5XMlG5rViO0Wb9tOyIw=";
   };
 in
 {
   options.apps.fish = {
-    enable = lib.mkEnableOption "Fish shell with custom configuration";
+    enable = lib.mkEnableOption "fish shell with custom configuration";
   };
   config = lib.mkIf cfg.enable {
     programs.fish = {
       enable = true;
       shellInit = ''
-        fish_config theme choose "Catppuccin Mocha"
+        fish_config theme choose "catppuccin"
       '';
     };
 
-    programs.nix-index.enable = true;
-    home.packages = with pkgs; [
-      comma
-    ];
-
-    xdg.configFile."fish/themes/Catppuccin Mocha.theme".source =
-      "${catppuccin-fish}/themes/Catppuccin Mocha.theme";
+    xdg.configFile."fish/themes/catppuccin.theme".source = "${catppuccinFish}";
   };
 }
