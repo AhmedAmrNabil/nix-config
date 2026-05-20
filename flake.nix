@@ -61,14 +61,8 @@
 
       username = "btngana";
 
-      gitConfig = {
-        userName = "AhmedAmrNabil";
-        userEmail = "ahmedamr24680@gmail.com";
-      };
-
       specialArgs = {
         inherit
-          gitConfig
           inputs
           pkgsLocal
           pkgsUnstable

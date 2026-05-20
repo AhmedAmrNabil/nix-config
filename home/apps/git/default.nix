@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  gitConfig,
   pkgsUnstable,
   ...
 }:
@@ -29,8 +28,8 @@ in
           undo = "reset --soft HEAD~1";
         };
         user = {
-          name = gitConfig.userName;
-          email = gitConfig.userEmail;
+          name = "AhmedAmrNabil";
+          email = "ahmedamr24680@gmail.com";
         };
         init.defaultBranch = "main";
         push.autoSetupRemote = true;
