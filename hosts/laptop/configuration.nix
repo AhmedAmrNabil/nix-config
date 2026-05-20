@@ -5,7 +5,6 @@
 {
   pkgs,
   lib,
-  pkgsUnstable,
   ...
 }:
 {
@@ -119,6 +118,11 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
+
+  # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
+  environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
+    CommandLineFlagSecurityWarningsEnabled = false;
+  };
 
   zramSwap = {
     enable = true;

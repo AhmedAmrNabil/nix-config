@@ -98,6 +98,11 @@
     '')
   ];
 
+  # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
+  environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
+    CommandLineFlagSecurityWarningsEnabled = false;
+  };
+
   programs.adb.enable = true; # enable adb for android development
 
   # Enable platformio udev rules for esp32 development
