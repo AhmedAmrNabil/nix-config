@@ -33,14 +33,5 @@ in
         ${pkgs.kdePackages.kwallet-pam}/libexec/pam_kwallet_init
       '')
     ];
-
-    # enable --password-store=kwallet6 for the browser
-    nixpkgs.overlays = [
-      (final: prev: {
-        microsoft-edge = prev.microsoft-edge.override {
-          commandLineArgs = "--password-store=kwallet6";
-        };
-      })
-    ];
   };
 }

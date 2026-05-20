@@ -46,6 +46,7 @@
       element-desktop
       (blender.override { cudaSupport = true; })
       (pkgs.writeShellScriptBin "gdu-clean" ''
+        #bash
         IGNORE=$(
           findmnt --raw --noheadings --output TARGET,FSTYPE \
             | awk '$2 == "fuseblk" {print $1}' \
@@ -57,6 +58,9 @@
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE"
       '')
       tty-clock
+      wayland-utils
+      wl-clipboard
+      microsoft-edge
     ]
     ++ (with pkgsUnstable; [
       arduino-ide
@@ -68,17 +72,6 @@
         enableAutoscroll = true;
       })
     ]);
-
-  xdg.desktopEntries.microsoft-edge-autoscroll = {
-    name = "Microsoft Edge (Autoscroll)";
-    genericName = "Web Browser";
-    exec = "microsoft-edge --enable-blink-features=MiddleClickAutoscroll %U";
-    icon = "microsoft-edge";
-    categories = [
-      "Network"
-      "WebBrowser"
-    ];
-  };
 
   xdg.desktopEntries.reboot-to-windows = {
     name = "Reboot to Windows";

@@ -78,10 +78,6 @@
 
   environment.systemPackages = with pkgs; [
     nano
-    micro
-    wayland-utils
-    wl-clipboard
-    microsoft-edge
     (lutris.override {
       extraPkgs =
         pkgs: with pkgs; [

@@ -39,8 +39,7 @@
     let
       system = "x86_64-linux";
 
-      overlays = [
-        (import ./overlays/xournalpp)
+      overlays = (import ./overlays) ++ [
         (final: prev: import ./packages { pkgs = final; })
       ];
 

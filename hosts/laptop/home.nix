@@ -33,17 +33,6 @@
       })
     ]);
 
-  xdg.desktopEntries.microsoft-edge-autoscroll = {
-    name = "Microsoft Edge (Autoscroll)";
-    genericName = "Web Browser";
-    exec = "microsoft-edge --enable-blink-features=MiddleClickAutoscroll %U";
-    icon = "microsoft-edge";
-    categories = [
-      "Network"
-      "WebBrowser"
-    ];
-  };
-
   xdg.desktopEntries.reboot-to-windows = {
     name = "Reboot to Windows";
     comment = "Restart the system and boot into Windows";
