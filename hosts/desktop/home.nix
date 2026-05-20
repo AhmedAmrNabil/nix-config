@@ -55,7 +55,7 @@
 
         IGNORE="$IGNORE,/run,/mnt"
 
-        exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE"
+        exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
       '')
       tty-clock
       wayland-utils
