@@ -2,6 +2,7 @@
   config,
   lib,
   username,
+  inputs,
   ...
 }:
 let
@@ -46,5 +47,7 @@ in
       automatic = true;
       dates = "daily";
     };
+
+    nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
   };
 }
