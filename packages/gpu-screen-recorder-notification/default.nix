@@ -70,7 +70,7 @@ stdenv.mkDerivation (finalAttrs: {
     maintainers = with lib.maintainers; [
       AhmedAmr
     ];
-    platforms = [ "x86_64-linux" ];
+    platforms = lib.platforms.linux;
     sourceProvenance = with lib.sourceTypes; [ fromSource ];
   };
 })
