@@ -132,12 +132,7 @@
         "${username}@wsl-nixos" = mkHome "wsl";
       };
 
-      # export nixpkgs to use with nix shell
-      legacyPackages.${system} = pkgs // {
-        unstable = pkgsUnstable;
-        local = pkgsLocal;
-      };
-
-      packages.${system} = pkgs;
+      # for building packages with nix build .#packageName
+      packages.${system} = import ./packages { pkgs = pkgs; };
     };
 }
