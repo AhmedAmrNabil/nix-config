@@ -31,7 +31,6 @@
   home.packages =
     with pkgs;
     [
-      comma
       xournalpp
       vlc
       localsend
@@ -39,12 +38,11 @@
       teams-for-linux
       postman
       avalonia-ilspy
-      usbutils
       obsidian
       handbrake
-      libreoffice
+      # libreoffice
       element-desktop
-      (blender.override { cudaSupport = true; })
+      # (blender.override { cudaSupport = true; })
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
@@ -58,15 +56,10 @@
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
       '')
       tty-clock
-      wayland-utils
-      wl-clipboard
+
       microsoft-edge
     ]
     ++ (with pkgsUnstable; [
-      arduino-ide
-      arduino-cli
-      platformio
-      antigravity
       (discord.override {
         withVencord = true;
         enableAutoscroll = true;

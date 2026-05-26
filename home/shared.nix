@@ -35,9 +35,12 @@
     nixfmt
     nixd
     gdu
-    direnv
     fzf
     python3
     jq
+    comma
+    usbutils
+    wayland-utils
+    wl-clipboard
   ];
 }
