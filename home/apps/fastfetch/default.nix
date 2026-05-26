@@ -46,7 +46,7 @@ in
         };
 
         display = {
-          separator = "   ";
+          separator = "   ";
           temp.unit = "C";
           key.type = "icon";
         };
@@ -92,11 +92,16 @@ in
             type = "os";
             keyColor = "bright_red";
             keyIcon = "";
-            format = "{name} {version-id} ({kernel-release})";
+            format = "{name} {version-id}";
+          }
+          {
+            type = "kernel";
+            keyColor = "bright_yellow";
+            keyIcon = "";
           }
           {
             type = "uptime";
-            keyColor = "bright_yellow";
+            keyColor = "bright_green";
           }
           # {
           #   type = "packages";
