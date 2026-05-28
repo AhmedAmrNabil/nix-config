@@ -64,6 +64,7 @@
         withVencord = true;
         enableAutoscroll = true;
       })
+      prismlauncher-9
     ]);
 
   xdg.desktopEntries.reboot-to-windows = {
