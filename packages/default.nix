@@ -32,6 +32,6 @@ rec {
   
   prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/wrapped.nix {
     prismlauncher-unwrapped = prismlauncher-9-unwrapped;
-    jdks = [ pkgs.jdk17 ];
+    jdks = [ pkgs.jdk17 pkgs.jdk25 ];
   };
 }
