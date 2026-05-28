@@ -3,12 +3,10 @@
   lib,
   pkgs,
   pkgsUnstable,
-  inputs,
   ...
 }:
 let
   cfg = config.de.hyprland;
-  hyprlandPackages = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   options.de.hyprland = {
