@@ -23,6 +23,8 @@ in
         "networkmanager"
         "input"
         "dialout"
+        "audio"
+        "video"
       ];
       shell = pkgs.fish;
     };
