@@ -8,6 +8,8 @@
 
 {
   pkgs ? import <nixpkgs> { },
+  libnbtplusplus,
+  ...
 }:
 
 rec {
@@ -23,4 +25,13 @@ rec {
   };
   wps-fonts = pkgs.callPackage ./wps-fonts { };
   flydigictl = pkgs.callPackage ./flydigictl { };
+  
+  prismlauncher-9-unwrapped = pkgs.callPackage ./prism-launcher-9/unwrapped.nix {
+    inherit libnbtplusplus;
+  };
+  
+  prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/wrapped.nix {
+    prismlauncher-unwrapped = prismlauncher-9-unwrapped;
+    jdks = [ pkgs.jdk17 ];
+  };
 }

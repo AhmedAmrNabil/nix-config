@@ -24,6 +24,10 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    libnbtplusplus = {
+      url = "github:PrismLauncher/libnbtplusplus";
+      flake = false;
+    };
   };
 
   outputs =
@@ -40,7 +44,13 @@
       system = "x86_64-linux";
 
       overlays = (import ./overlays) ++ [
-        (final: prev: import ./packages { pkgs = final; })
+        (
+          final: prev:
+          import ./packages {
+            libnbtplusplus = inputs.libnbtplusplus;
+            pkgs = final;
+          }
+        )
       ];
 
       pkgs = import nixpkgs {
@@ -133,6 +143,9 @@
       };
 
       # for building packages with nix build .#packageName
-      packages.${system} = import ./packages { pkgs = pkgs; };
+      packages.${system} = import ./packages {
+        pkgs = pkgs;
+        libnbtplusplus = inputs.libnbtplusplus;
+      };
     };
 }
