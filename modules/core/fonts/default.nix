@@ -5,17 +5,33 @@
   ...
 }:
 let
-  inherit (lib) mkEnableOption mkIf;
   cfg = config.core.fonts;
+
+  arabicFont = "Noto Naskh Arabic";
+  emojiFont = "Noto Color Emoji";
+
+  mkArabicMatch = target: ''
+    <match target="pattern">
+            <test name="lang" compare="contains">
+                <string>ar</string>
+            </test>
+            <test qual="any" name="family">
+                <string>${target}</string>
+            </test>
+            <edit name="family" mode="prepend" binding="strong">
+                <string>${arabicFont}</string>
+            </edit>
+        </match>
+  '';
 in
 {
   options.core.fonts = {
-    enable = mkEnableOption "Enable default font packages and configurations";
+    enable = lib.mkEnableOption "Enable default font packages and configurations";
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
 
-    fonts.packages = with pkgs;[
+    fonts.packages = with pkgs; [
       noto-fonts
       nerd-fonts.jetbrains-mono
       noto-fonts-color-emoji
@@ -29,17 +45,20 @@ in
         monospace = [
           "JetBrains Mono nerd font"
           "Noto Sans"
-          "Noto Naskh Arabic"
+          arabicFont
+          emojiFont
         ];
         sansSerif = [
           "Noto Sans Display"
           "Segoe UI"
-          "Noto Naskh Arabic"
+          arabicFont
+          emojiFont
         ];
         serif = [
           "Noto Serif"
           "Segoe UI"
-          "Noto Naskh Arabic"
+          arabicFont
+          emojiFont
         ];
       };
       subpixel.rgba = "rgb";
@@ -52,29 +71,9 @@ in
         <?xml version="1.0"?>
         <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
         <fontconfig>
-            <match target="pattern">
-                <test name="lang" compare="contains">
-                    <string>ar</string>
-                </test>
-                <test qual="any" name="family">
-                    <string>sans-serif</string>
-                </test>
-                <edit name="family" mode="prepend" binding="strong">
-                    <string>Noto Naskh Arabic</string>
-                </edit>
-            </match>
-
-            <match target="pattern">
-                <test name="lang" compare="contains">
-                    <string>ar</string>
-                </test>
-                <test qual="any" name="family">
-                    <string>serif</string>
-                </test>
-                <edit name="family" mode="prepend" binding="strong">
-                    <string>Noto Naskh Arabic</string>
-                </edit>
-            </match>
+            ${mkArabicMatch "sans-serif"}
+            ${mkArabicMatch "serif"}
+            ${mkArabicMatch "monospace"}
         </fontconfig>
       '';
     };
