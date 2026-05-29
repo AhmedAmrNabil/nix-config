@@ -18,19 +18,19 @@ rec {
   # modules = import ./modules; # NixOS modules
   # overlays = import ./overlays; # nixpkgs overlays
 
-  spotify-adblock = pkgs.callPackage ./spotify-adblock { };
-  gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification { };
-  gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui {
+  spotify-adblock = pkgs.callPackage ./spotify-adblock/package.nix { };  
+  wps-fonts = pkgs.callPackage ./wps-fonts/package.nix { };
+  flydigictl = pkgs.callPackage ./flydigictl/package.nix { };
+  
+  gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification/package.nix { };
+  gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui/package.nix {
     inherit gpu-screen-recorder-notification;
   };
-  wps-fonts = pkgs.callPackage ./wps-fonts { };
-  flydigictl = pkgs.callPackage ./flydigictl { };
   
   prismlauncher-9-unwrapped = pkgs.callPackage ./prism-launcher-9/unwrapped.nix {
     inherit libnbtplusplus;
   };
-  
-  prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/wrapped.nix {
+  prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/wrapper.nix {
     prismlauncher-unwrapped = prismlauncher-9-unwrapped;
     jdks = [ pkgs.jdk17 pkgs.jdk25 ];
   };
