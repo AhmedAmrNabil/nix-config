@@ -59,6 +59,7 @@
 
       microsoft-edge
       prismlauncher-9
+      jdk25
     ]
     ++ (with pkgsUnstable; [
       (discord.override {

@@ -96,6 +96,7 @@
       export LD_PRELOAD=/run/opengl-driver/lib/libnvidia-ml.so.1
       exec ${pkgs.mangohud}/bin/mangohud "$@"
     '')
+    deskflow
   ];
 
   # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
@@ -128,6 +129,10 @@
   networking.firewall.allowedTCPPorts = [
     5000
     5005
+    24800 # deskflow
+    25565
+    80
+    443
   ];
   # fix /nix/store too many open files issue with nix-serve
   systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
@@ -136,6 +141,8 @@
   networking.firewall.allowedUDPPorts = [
     53
     67
+    24800 # deskflow
+    25565
   ];
 
   services.create_ap = {
