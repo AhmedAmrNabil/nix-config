@@ -30,7 +30,7 @@ in
         cursor = {
           style = "underline";
         };
-        colors = {
+        colors-dark = {
           alpha = 0.90;
           foreground = "cdd6f4"; # Text
           background = "1e1e2e"; # Base

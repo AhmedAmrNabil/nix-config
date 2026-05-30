@@ -60,6 +60,8 @@
       microsoft-edge
       prismlauncher-9
       jdk25
+      kdePackages.kdialog
+      hydra-check
     ]
     ++ (with pkgsUnstable; [
       (discord.override {

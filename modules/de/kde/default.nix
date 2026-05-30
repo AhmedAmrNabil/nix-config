@@ -25,11 +25,7 @@ in
       {
         services = {
           desktopManager.plasma6.enable = true;
-          displayManager.sddm = {
-            enable = true;
-            wayland.enable = true;
-            theme = "catppuccin-mocha-sky";
-          };
+          displayManager.plasma-login-manager.enable = true;
           xserver.enable = true;
         };
 
@@ -42,12 +38,6 @@ in
           kdePackages.sddm-kcm
           kdePackages.partitionmanager
           pkgs.unrar
-          (pkgs.catppuccin-sddm.override {
-            flavor = "mocha";
-            accent = "sky";
-            font = "JetBrainsMono Nerd Font";
-            fontSize = "9";
-          })
         ];
 
         # Remove unused packages
@@ -57,6 +47,7 @@ in
           okular
           khelpcenter
           kinfocenter
+          qrca
         ];
       }
 
