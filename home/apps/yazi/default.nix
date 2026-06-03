@@ -26,13 +26,6 @@ let
     ];
     hash = "sha256-cVm41Oy1vA/8yU9LkFxIggIi9HQtpe31bxBk0SArJVw=";
   };
-
-  patchedToml = (pkgs.formats.toml { }).generate "starship.toml" (
-    config.programs.starship.settings
-    // {
-      format = "$directory$git_branch$git_state$git_status$cmd_duration";
-    }
-  );
 in
 {
   options.apps.yazi = {
@@ -75,6 +68,18 @@ in
             run = ''piper -- eza -TL=3 --color=always --icons=always --group-directories-first --no-quotes "$1"'';
           }
         ];
+        opener.edit = [
+          {
+            run = "$EDITOR %s";
+            desc = "Open with ${config.home.sessionVariables.EDITOR}";
+            block = true;
+          }
+          {
+            run = "code %s";
+            desc = "Open with VS Code";
+            orphan = true;
+          }
+        ];
       };
 
       plugins = {
@@ -85,7 +90,7 @@ in
           package = "${starship-plugin}";
           setup = true;
           settings = {
-            config_file = "${patchedToml}";
+            hide_flags = true;
           };
         };
       };
@@ -105,6 +110,11 @@ in
             on = [ "-" ];
             run = "plugin zoom -1";
             desc = "Zoom out hovered file";
+          }
+          {
+            on = [ "<Enter>" ];
+            run = "plugin smart-enter";
+            desc = "Enter the child directory, or open the file";
           }
         ];
       };
