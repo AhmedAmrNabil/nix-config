@@ -17,6 +17,7 @@
     rofi.enable = true;
     spotify.enable = true;
     vscode.enable = true;
+    yazi.enable = true;
   };
 
   de.hyprland.enable = true;
