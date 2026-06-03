@@ -6,23 +6,6 @@
 }:
 let
   cfg = config.core.fonts;
-
-  arabicFont = "Noto Naskh Arabic";
-  emojiFont = "Noto Color Emoji";
-
-  mkArabicMatch = target: ''
-    <match target="pattern">
-            <test name="lang" compare="contains">
-                <string>ar</string>
-            </test>
-            <test qual="any" name="family">
-                <string>${target}</string>
-            </test>
-            <edit name="family" mode="prepend" binding="strong">
-                <string>${arabicFont}</string>
-            </edit>
-        </match>
-  '';
 in
 {
   options.core.fonts = {
@@ -44,21 +27,21 @@ in
       defaultFonts = {
         monospace = [
           "JetBrains Mono nerd font"
-          "Noto Sans"
-          arabicFont
-          emojiFont
+          "Noto Sans Mono"
+          "Noto Naskh Arabic"
+          "Noto Color Emoji"
         ];
         sansSerif = [
           "Noto Sans Display"
           "Segoe UI"
-          arabicFont
-          emojiFont
+          "Noto Naskh Arabic"
+          "Noto Color Emoji"
         ];
         serif = [
           "Noto Serif"
           "Segoe UI"
-          arabicFont
-          emojiFont
+          "Noto Naskh Arabic"
+          "Noto Color Emoji"
         ];
       };
       subpixel.rgba = "rgb";
@@ -67,15 +50,7 @@ in
         style = "slight";
       };
       antialias = true;
-      localConf = ''
-        <?xml version="1.0"?>
-        <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
-        <fontconfig>
-            ${mkArabicMatch "sans-serif"}
-            ${mkArabicMatch "serif"}
-            ${mkArabicMatch "monospace"}
-        </fontconfig>
-      '';
+      localConf = builtins.readFile ./90-arabic.conf;
     };
 
   };
