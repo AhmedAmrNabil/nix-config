@@ -23,6 +23,7 @@ let
     rev = "0f9204b";
     sparseCheckout = [
       "catppuccin-mocha.yazi"
+      "catppuccin-latte.yazi"
     ];
     hash = "sha256-cVm41Oy1vA/8yU9LkFxIggIi9HQtpe31bxBk0SArJVw=";
   };
@@ -40,7 +41,7 @@ in
       theme = {
         flavor = {
           dark = "catppuccin-mocha";
-          light = "catppuccin-mocha";
+          light = "catppuccin-latte";
         };
       };
 
@@ -97,6 +98,7 @@ in
 
       flavors = {
         catppuccin-mocha = "${yazi-catpuccin-flavour}/catppuccin-mocha.yazi";
+        catppuccin-latte = "${yazi-catpuccin-flavour}/catppuccin-latte.yazi";
       };
 
       keymap = {
