@@ -39,7 +39,7 @@
     audio.enable = true;
     boot.enable = true;
     fonts.enable = true;
-    hardware.ddcci.enable = true;
+    hardware.ddcci.enable = false;
     hardware.nvidia.enable = true;
     kernel.enable = true;
     nix-cfg.enable = true;

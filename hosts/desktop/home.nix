@@ -57,12 +57,12 @@
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
       '')
       tty-clock
-
       microsoft-edge
       prismlauncher-9
       jdk25
       kdePackages.kdialog
       hydra-check
+      killall
     ]
     ++ (with pkgsUnstable; [
       (discord.override {
