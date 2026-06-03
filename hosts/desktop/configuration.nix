@@ -12,6 +12,7 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    ./filesystems.nix
   ];
 
   # --------- Modules ------------------
@@ -28,7 +29,7 @@
     nh.enable = true;
     obs.enable = true;
     open-tablet-driver.enable = true;
-    plymouth.enable = true;
+    plymouth.enable = false;
     steam.enable = true;
     tailscale.enable = true;
     # virt-manager.enable = true;
@@ -126,33 +127,21 @@
   # };
 
   networking.firewall.allowedTCPPorts = [
-    5000
-    5005
     24800 # deskflow
-    25565
-    80
-    443
+    25565 # minecraft
+    80 # http
+    443 # https
   ];
   # fix /nix/store too many open files issue with nix-serve
   systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
   systemd.services.nix-serve.serviceConfig.Environment = "HOME=/home/${username}";
 
   networking.firewall.allowedUDPPorts = [
-    53
-    67
+    53 # dns
+    67 # dhcp
     24800 # deskflow
-    25565
+    25565 # minecraft
   ];
-
-  services.create_ap = {
-    enable = true;
-    settings = {
-      INTERNET_IFACE = "enp42s0";
-      WIFI_IFACE = "wlp41s0";
-      SSID = "Mostafa";
-      PASSPHRASE = "12345678";
-    };
-  };
 
   # add zstd compression to file systems
   fileSystems = {
@@ -172,103 +161,6 @@
       size = 16384; # 16GB in MB
     }
   ];
-
-  # Mounting windows stuff:
-
-  fileSystems."/home/btngana/hdd" = {
-    device = "/dev/disk/by-uuid/01DAB93F51B44DA0";
-    fsType = "ntfs";
-    options = [
-      "windows_names"
-      "uid=1000"
-      "gid=100"
-      "umask=022"
-      "big_writes"
-      "nofail"
-      "x-systemd.device-timeout=3s"
-    ];
-  };
-
-  # Bind mount Videos and Downloads from hdd to home
-  fileSystems."/home/btngana/Videos" = {
-    device = "/home/btngana/hdd/Videos";
-    fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/home/btngana/hdd" ];
-  };
-
-  fileSystems."/home/btngana/Downloads" = {
-    device = "/home/btngana/hdd/Downloads";
-    fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/home/btngana/hdd" ];
-  };
-
-  fileSystems."/home/btngana/crucial" = {
-    device = "/dev/disk/by-uuid/7A5AE84D5AE807A9";
-    fsType = "ntfs";
-    options = [
-      "windows_names"
-      "uid=1000"
-      "gid=100"
-      "umask=000"
-      "exec"
-      "rw"
-      "big_writes"
-      "nofail"
-      "x-systemd.device-timeout=3s"
-    ];
-  };
-
-  # fix steam compatdata to be on linux instead of ntfs partiton
-  systemd.tmpfiles.rules = [
-    "L /home/btngana/crucial/SteamLibrary/steamapps/compatdata - - - - /home/btngana/.steam/steam/steamapps/compatdata"
-    "L /home/btngana/hdd/SteamLibrary/steamapps/compatdata - - - - /home/btngana/.steam/steam/steamapps/compatdata2"
-  ];
-
-  fileSystems."/home/btngana/Games" = {
-    device = "/home/btngana/crucial/Games";
-    fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/home/btngana/crucial" ];
-  };
-
-  # Mounting windows partition for save files
-  fileSystems."/mnt/windows" = {
-    device = "/dev/disk/by-uuid/54E4AE95E4AE793E";
-    fsType = "ntfs";
-    options = [
-      "windows_names"
-      "uid=1000"
-      "gid=100"
-      "umask=000"
-      "exec"
-      "rw"
-      "big_writes"
-      "nofail"
-      "x-systemd.device-timeout=3s"
-    ];
-  };
-
-  fileSystems."/home/btngana/wineprefixes/claire/drive_c/users/Public/Documents" = {
-    device = "/mnt/windows/Users/Public/Documents";
-    fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/mnt/windows" ];
-  };
-
-  fileSystems."/mnt/archlinux" = {
-    device = "/dev/disk/by-uuid/04fbc268-2d20-4d0c-a1a7-0f373fc1f869";
-    fsType = "btrfs";
-    options = [
-      "compress=zstd"
-      "noatime"
-      "subvol=@home"
-      "rw"
-      "nofail"
-      "x-systemd.device-timeout=3s"
-    ];
-  };
 
   # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
   # and migrated your data accordingly.
