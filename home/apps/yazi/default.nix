@@ -35,8 +35,8 @@ in
   config = lib.mkIf cfg.enable {
     programs.yazi = {
       enable = true;
-      enableFishIntegration = config.apps.fish.enable;
-      enableBashIntegration = config.apps.bash.enable;
+      enableBashIntegration = config.programs.bash.enable;
+      enableFishIntegration = config.programs.fish.enable;
       shellWrapperName = "y";
       theme = {
         flavor = {
