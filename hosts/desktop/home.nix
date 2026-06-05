@@ -4,10 +4,6 @@
   ...
 }:
 {
-  imports = [
-    ../../home/shared.nix
-  ];
-
   apps = {
     alacritty.enable = true;
     cava.enable = true;

@@ -19,13 +19,13 @@ in
       mutableExtensionsDir = true;
     };
 
-    xdg.configFile."Code/User/settings.json".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/vscode/settings.json";
+    xdg.configFile."Code/User/settings.json".source = config.lib.utils.mkMutableSymlink ./settings.json;
 
     xdg.configFile."Code/User/keybindings.json".source =
-      config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/apps/vscode/keybindings.json";
+      config.lib.utils.mkMutableSymlink ./keybindings.json;
+
     home.shellAliases = {
-      nce = "code --new-window ${config.home.homeDirectory}/dotfiles";
+      nce = "code --new-window ${config.lib.utils.configPath}";
     };
   };
 }
