@@ -2,12 +2,13 @@
   config,
   inputs,
   lib,
+  configPath,
   ...
 }:
 {
   #  credits to ncfavier for this util function
   config.lib.utils = {
-    configPath = "${config.home.homeDirectory}/dotfiles";
+    configPath = configPath;
     mkMutableSymlink =
       path:
       config.lib.file.mkOutOfStoreSymlink (

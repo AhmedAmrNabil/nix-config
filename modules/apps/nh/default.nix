@@ -3,6 +3,7 @@
   pkgs,
   lib,
   username,
+  configPath ? "/home/${username}/dotfiles",
   ...
 }:
 let
@@ -17,7 +18,7 @@ in
       pkgs.nh
     ];
     environment.sessionVariables = {
-      NH_FLAKE = "/home/${username}/dotfiles";
+      NH_FLAKE = configPath;
     };
     environment.shellAliases = {
       nrs = "nh os switch";

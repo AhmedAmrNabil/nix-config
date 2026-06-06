@@ -43,6 +43,10 @@
     let
       system = "x86_64-linux";
 
+      username = "btngana";
+
+      configPath = "/home/${username}/dotfiles";
+
       overlays = (import ./overlays) ++ [
         (
           final: prev:
@@ -68,7 +72,6 @@
         config.allowUnfree = true;
       };
 
-      username = "btngana";
 
       specialArgs = {
         inherit
@@ -77,6 +80,7 @@
           pkgsUnstable
           system
           username
+          configPath
           ;
       };
 
