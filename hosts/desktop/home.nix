@@ -9,7 +9,6 @@
     cava.enable = true;
     foot.enable = true;
     only-office.enable = true;
-    open-tablet-driver.enable = true;
     rofi.enable = true;
     spotify.enable = true;
     vscode.enable = true;

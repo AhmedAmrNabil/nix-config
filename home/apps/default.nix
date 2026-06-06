@@ -13,7 +13,6 @@
     ./git
     ./micro
     ./only-office
-    ./open-tablet-driver
     ./rofi
     ./spotify
     ./starship
