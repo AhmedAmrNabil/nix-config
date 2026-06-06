@@ -2,7 +2,6 @@
   config,
   pkgs,
   lib,
-  username,
   ...
 }:
 let
@@ -18,11 +17,10 @@ in
     ];
 
     xdg.configFile."rofi/themes" = lib.mkForce {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/${username}/dotfiles/home/apps/rofi/themes";
+      source = config.lib.utils.mkMutableSymlink ./themes;
       recursive = true;
     };
-    xdg.configFile."rofi/config.rasi" = lib.mkForce {
-      source = config.lib.file.mkOutOfStoreSymlink "/home/${username}/dotfiles/home/apps/rofi/config.rasi";
-    };
+
+    xdg.configFile."rofi/config.rasi".source = config.lib.utils.mkMutableSymlink ./config.rasi;
   };
 }

@@ -14,9 +14,7 @@ in
   };
   config = lib.mkIf cfg.enable {
 
-    xdg.configFile."hypr/hyprland.lua" = {
-      source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dotfiles/home/de/hyprland/hyprland.lua";
-    };
+    xdg.configFile."hypr/hyprland.lua".source = config.lib.utils.mkMutableSymlink ./hyprland.lua;
 
     services.hyprpaper = {
       enable = true;
