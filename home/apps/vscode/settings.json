@@ -324,5 +324,9 @@
       "name": "Qt-6.11.0-linux-g++-x86_64_from_PATH",
       "path": "/run/current-system/sw/bin/qtpaths"
     }
-  ]
+  ],
+  "[qml]": {
+    "editor.defaultFormatter": "Delgan.qml-format"
+  },
+  "qt-qml.doNotAskForQmllsDownload": true
 }
