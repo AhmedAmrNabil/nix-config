@@ -30,15 +30,16 @@
   };
 
   home.packages = with pkgs; [
+    comma
+    fzf
+    gdu
+    jq
+    killall
+    nixd
+    nixfmt
     nodejs_22
     pnpm
-    nixfmt
-    nixd
-    gdu
-    fzf
     python3
-    jq
-    comma
     usbutils
     wayland-utils
     wl-clipboard

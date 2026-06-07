@@ -27,18 +27,20 @@
   home.packages =
     with pkgs;
     [
-      xournalpp
-      vlc
-      localsend
-      transmission_4-qt
-      teams-for-linux
-      postman
-      avalonia-ilspy
-      obsidian
-      handbrake
-      # libreoffice
       element-desktop
-      # (blender.override { cudaSupport = true; })
+      handbrake
+      jdk25
+      kdePackages.kdialog
+      libnotify
+      localsend
+      microsoft-edge
+      obsidian
+      postman
+      prismlauncher-9
+      transmission_4-qt
+      tty-clock
+      vlc
+      xournalpp
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
@@ -51,14 +53,6 @@
 
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
       '')
-      tty-clock
-      microsoft-edge
-      prismlauncher-9
-      jdk25
-      kdePackages.kdialog
-      hydra-check
-      killall
-      libnotify
     ]
     ++ (with pkgsUnstable; [
       (discord.override {

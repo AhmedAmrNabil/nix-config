@@ -4,7 +4,6 @@
 
 {
   pkgs,
-  username,
   ...
 }:
 {
@@ -39,11 +38,11 @@
     audio.enable = true;
     boot.enable = true;
     fonts.enable = true;
-    hardware.ddcci.enable = false;
+    hardware.ddcci.enable = true;
     hardware.nvidia.enable = true;
     kernel.enable = true;
     nix-cfg.enable = true;
-    nix-ld.enable = true;
+    nix-ld.enable = false; # not needed for now
     users.enable = true;
   };
 
@@ -57,8 +56,6 @@
   # --------- System configuration ------------------
 
   networking.hostName = "desktop-nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # disable unused services to speed up boot time
@@ -66,15 +63,9 @@
   services.fwupd.enable = false;
   networking.modemmanager.enable = false;
 
-  # Open port 5432 in firewall for PostgreSQL
-  # networking.firewall.allowedTCPPorts = [ 5432 ];
-
-  # Set your time zone.
   time.timeZone = "Africa/Cairo";
+  time.hardwareClockInLocalTime = true;
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
   hardware.bluetooth.enable = true;
 
   environment.systemPackages = with pkgs; [
@@ -93,12 +84,9 @@
     distrobox
     scrcpy
     mangohud
-    (pkgs.writeShellScriptBin "mangohud-nvidia" ''
-      export LD_PRELOAD=/run/opengl-driver/lib/libnvidia-ml.so.1
-      exec ${pkgs.mangohud}/bin/mangohud "$@"
-    '')
     deskflow
     android-tools
+    krisp-patcher
   ];
 
   # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
@@ -112,12 +100,21 @@
     pkgs.openocd
   ];
 
-  # Enable local time synchronization
-  # to prevent issues with dual booting Windows
-  time.hardwareClockInLocalTime = true;
-
-  # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+
+  networking.firewall.allowedTCPPorts = [
+    24800 # deskflow
+    25565 # minecraft
+    80 # http
+    443 # https
+  ];
+
+  networking.firewall.allowedUDPPorts = [
+    53 # dns
+    67 # dhcp
+    24800 # deskflow
+    25565 # minecraft
+  ];
 
   # serve /nix/store to laptop
 
@@ -126,22 +123,9 @@
   #   secretKeyFile = "/var/cache-priv-key.pem";
   # };
 
-  networking.firewall.allowedTCPPorts = [
-    24800 # deskflow
-    25565 # minecraft
-    80 # http
-    443 # https
-  ];
   # fix /nix/store too many open files issue with nix-serve
-  systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
-  systemd.services.nix-serve.serviceConfig.Environment = "HOME=/home/${username}";
-
-  networking.firewall.allowedUDPPorts = [
-    53 # dns
-    67 # dhcp
-    24800 # deskflow
-    25565 # minecraft
-  ];
+  # systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
+  # systemd.services.nix-serve.serviceConfig.Environment = "HOME=/home/${username}";
 
   # add zstd compression to file systems
   fileSystems = {
@@ -162,9 +146,5 @@
     }
   ];
 
-  # Do NOT change this value unless you have manually inspected all the changes it would make to your configuration,
-  # and migrated your data accordingly.
-  #
-  # For more information, see `man configuration.nix` or https://nixos.org/manual/nixos/stable/options#opt-system.stateVersion .
-  system.stateVersion = "25.05"; # Did you read the comment?
+  system.stateVersion = "25.05";
 }
