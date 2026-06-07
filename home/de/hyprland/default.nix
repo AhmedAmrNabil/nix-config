@@ -16,6 +16,11 @@ in
 
     xdg.configFile."hypr/hyprland.lua".source = config.lib.utils.mkMutableSymlink ./hyprland.lua;
 
+    xdg.configFile."hypr/config" = {
+      source = config.lib.utils.mkMutableSymlink ./config;
+      recursive = true;
+    };
+
     services.hyprpaper = {
       enable = true;
       package = pkgsUnstable.hyprpaper;
