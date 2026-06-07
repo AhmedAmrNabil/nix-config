@@ -15,22 +15,25 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+
 hl.monitor({
-    output    = "DP-2",
-    mode      = "1920x1080@144",
-    position  = "0x0",
-    scale     = "auto",
-    transform = 1, -- 90 degree rotation
-    vrr       = 0, -- enable VRR
+    output = "DP-1",
+    mode = "2560x1440@180",
+    position = "1920x0",
+    scale = "auto",
+    vrr = 0, -- enable VRR
+    -- icc = "/home/btngana/Documents/27M2C5501.icm",
 })
 
 hl.monitor({
-    output   = "DP-1",
-    mode     = "2560x1440@180",
-    position = "1080x220",
-    scale    = "auto",
-    vrr      = 1, -- enable VRR
+    output    = "DP-2",
+    mode      = "1920x1080@144",
+    position  = "0x220",
+    scale     = "auto",
+    transform = 0, -- 90 degree rotation
+    vrr       = 0, -- enable VRR
 })
+
 
 
 ---------------------
@@ -67,8 +70,8 @@ end)
 
 -- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
 
-hl.env("XCURSOR_SIZE", "24")
-hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("XCURSOR_SIZE", "28")
+hl.env("HYPRCURSOR_SIZE", "28")
 
 
 -----------------------
@@ -193,6 +196,13 @@ hl.animation({ leaf = "zoomFactor", enabled = true, speed = 7, bezier = "quick" 
 --     rounding    = 0,
 -- })
 
+hl.workspace_rule({ workspace = "1", monitor = "DP-1", default = true })
+hl.workspace_rule({ workspace = "2", monitor = "DP-1" })
+hl.workspace_rule({ workspace = "3", monitor = "DP-1", })
+hl.workspace_rule({ workspace = "4", monitor = "DP-2", default = true })
+hl.workspace_rule({ workspace = "5", monitor = "DP-2" })
+hl.workspace_rule({ workspace = "6", monitor = "DP-2" })
+
 -- See https://wiki.hypr.land/Configuring/Layouts/Dwindle-Layout/ for more
 hl.config({
     dwindle = {
@@ -220,7 +230,7 @@ hl.config({
 
 hl.config({
     misc = {
-        force_default_wallpaper = 0,    -- Set to 0 or 1 to disable the anime mascot wallpapers
+        force_default_wallpaper = 0,     -- Set to 0 or 1 to disable the anime mascot wallpapers
         disable_hyprland_logo   = false, -- If true disables the random hyprland logo / anime girl background. :(
     },
 })
@@ -235,12 +245,12 @@ hl.config({
         kb_layout    = "us",
         kb_variant   = "",
         kb_model     = "",
-        kb_options   = "",
+        kb_options   = "fkeys:basic_13-24",
         kb_rules     = "",
 
         follow_mouse = 1,
 
-        sensitivity  = 0, -- -1.0 - 1.0, 0 means no modification.
+        sensitivity  = -0.2, -- -1.0 - 1.0, 0 means no modification.
 
         touchpad     = {
             natural_scroll = false,
@@ -301,8 +311,8 @@ for i = 1, 10 do
 end
 
 -- Example special workspace (scratchpad)
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + X", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + SHIFT + X", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Scroll through existing workspaces with mainMod + scroll
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
@@ -330,7 +340,24 @@ hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = tr
 hl.bind("XF86AudioPlay", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
 hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true })
 
+-- restart waybar
+hl.bind(mainMod .. " + Z", hl.dsp.exec_cmd("pkill waybar || true && waybar &"))
 
+-- locked
+hl.bind(mainMod .. " + L", hl.dsp.exec_cmd("hyprlock"))
+
+-- screenshot
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("grim -g \"$(slurp)\" - | wl-copy"))
+
+-- bind =,code:196,pass,class:^([Dd]iscord)$
+-- bind =,code:195,pass,class:^([Dd]iscord)$
+hl.bind("F17", hl.dsp.pass({
+    window = "class:^([Dd]iscord)$",
+}))
+
+hl.bind("F18", hl.dsp.pass({
+    window = "class:^([Dd]iscord)$",
+}))
 --------------------------------
 ---- WINDOWS AND WORKSPACES ----
 --------------------------------

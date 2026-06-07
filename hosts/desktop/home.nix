@@ -58,11 +58,13 @@
       kdePackages.kdialog
       hydra-check
       killall
+      libnotify
     ]
     ++ (with pkgsUnstable; [
       (discord.override {
         withVencord = true;
         enableAutoscroll = true;
+        commandLineArgs = "--ozone-platform=x11";
       })
     ]);
 

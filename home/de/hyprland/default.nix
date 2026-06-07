@@ -36,6 +36,8 @@ in
     };
 
     apps.swaync.enable = true;
+    apps.waybar.enable = true;
+    programs.hyprlock.enable = true;
 
     home.packages = with pkgs; [
       playerctl
