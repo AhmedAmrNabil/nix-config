@@ -31,7 +31,7 @@
   "hide-on-clear": false,
   "hide-on-action": true,
   "text-empty": "No Notifications",
-  "script-fail-notify": true,
+  "script-fail-notify": false,
   "scripts": {
     "example-script": {
       "exec": "echo 'Do something...'",
