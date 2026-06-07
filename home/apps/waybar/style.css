@@ -1,0 +1,79 @@
+@define-color text-primary #cdd6f4;
+@define-color text-secondary #bac2de;
+@define-color bg0 #1e1e2e;
+@define-color bg1 #181825;
+@define-color bg2 #11111b;
+@define-color s0 #313244;
+@define-color s1 #45475a;
+@define-color s2 #585b70;
+@define-color accent-color #74c7ec;
+* {
+  all: unset;
+  font-family: "JetBrains Mono Nerd Font Propo", "Noto Color Emoji", monospace;
+  font-weight: 600;
+}
+
+#waybar > box {
+  color: @text-primary;
+  font-size: 18px;
+}
+
+.modules-center {
+  border-radius: 1000px;
+  background: alpha(@bg0, 0.8);
+  padding: 8px 8px 8px 4px;
+}
+
+#workspaces {
+  margin: 0 12px;
+}
+
+#workspaces button {
+  border-radius: 1000px;
+  background-color: @s0;
+  min-width: 1.825rem;
+  min-height: 1rem;
+  margin: 0px 4px;
+}
+
+#workspaces button.visible {
+  background-color: @accent-color;
+  color: @bg0;
+  min-width: 3rem;
+}
+
+#bluetooth,
+#network,
+#tray,
+#pulseaudio,
+#clock {
+  margin: 0px 12px;
+}
+
+#pulseaudio {
+  color: #cba6f7;
+}
+
+#network {
+  color: #74c7ec;
+}
+
+#bluetooth {
+  color: #a6e3a1;
+}
+
+#clock {
+  margin-right: 0px;
+  padding: 0px 8px;
+  /* background-color: @accent-color; */
+  /* color: @bg0; */
+  border-radius: 1000px;
+}
+
+tooltip {
+  background-color: @bg0;
+  color: @text-primary;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 18px;
+}

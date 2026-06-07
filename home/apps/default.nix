@@ -18,6 +18,7 @@
     ./starship
     ./swaync
     ./vscode
+    ./waybar
     ./yazi
     ./zoxide
   ];

@@ -1,0 +1,109 @@
+{
+  "layer": "top",
+  "position": "top",
+  // "mode": "overlay",
+  "margin-top": 10,
+  "margin-left": 10,
+  "margin-right": 10,
+  "modules-center": [
+    "clock",
+    "hyprland/workspaces",
+    "tray",
+    "pulseaudio",
+    "network",
+    "bluetooth"
+  ],
+
+  "tray": {
+    "icon-size": 22,
+    "spacing": 12,
+    "icons": {
+      "discord": ""
+    }
+  },
+
+  "pulseaudio": {
+    "format": "{icon}",
+    "format-bluetooth": "{icon}",
+    "format-muted": "",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "phone-muted": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    },
+    "scroll-step": 1,
+    "on-click": "pavucontrol",
+    "ignored-sinks": ["Easy Effects Sink"]
+  },
+
+  "network": {
+    "format-ethernet": "󰈀",
+    "format-wifi": "{essid} ({signalStrength}%) ",
+    "format-disconnected": "󰖪",
+    "tooltip-format-connected": "{essid}\t{signal_strength}%\n{bssid}",
+    "tooltip-format-disconnected": "Not connected"
+  },
+
+  "bluetooth": {
+    "format": "󰂯",
+    "format-disabled": "󰂲",
+    "format-off": "󰂲",
+    "format-connected": "󰂱 {num_connections}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}"
+  },
+
+  "clock": {
+    "format": "{:%I:%M}",
+    "format-alt": "{:%a, %d. %b  %H:%M}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#f5e0dc'><b>{}</b></span>",
+        "days": "<span color='#f5c2e7'><b>{}</b></span>",
+        "weeks": "<span color='#94e2d5'><b>W{}</b></span>",
+        "weekdays": "<span color='#fab387'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "1": "",
+      "2": "󰖟",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": ""
+    },
+    "persistent-workspaces": {
+      "DP-1": ["1", "2", "3"],
+      "DP-2": ["4", "5", "6"]
+    },
+    "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1"
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 50
+  }
+}
