@@ -42,9 +42,7 @@
     }@inputs:
     let
       system = "x86_64-linux";
-
       username = "btngana";
-
       configPath = "/home/${username}/dotfiles";
 
       overlays = (import ./overlays) ++ [
@@ -71,7 +69,6 @@
         inherit system overlays;
         config.allowUnfree = true;
       };
-
 
       specialArgs = {
         inherit
