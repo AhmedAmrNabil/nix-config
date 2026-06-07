@@ -64,9 +64,14 @@
       (discord.override {
         withVencord = true;
         enableAutoscroll = true;
+        # workaround for keybinds not working in wayland
         commandLineArgs = "--ozone-platform=x11";
       })
     ]);
+
+  programs.noctalia-shell = {
+    enable = true;
+  };
 
   xdg.desktopEntries.reboot-to-windows = {
     name = "Reboot to Windows";

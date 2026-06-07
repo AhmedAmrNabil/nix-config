@@ -28,6 +28,10 @@
       url = "github:PrismLauncher/libnbtplusplus";
       flake = false;
     };
+    noctalia = {
+      url = "github:noctalia-dev/noctalia-shell";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -113,6 +117,7 @@
             ./hosts/${profile}/home.nix
             ./home
             inputs.spicetify-nix.homeManagerModules.default
+            inputs.noctalia.homeModules.default
           ];
         };
     in
