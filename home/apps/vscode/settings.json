@@ -312,5 +312,17 @@
   "latex-workshop.formatting.latex": "latexindent",
   "[lua]": {
     "editor.defaultFormatter": "sumneko.lua"
-  }
+  },
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "{hexdiff}:/**/*.*": "hexEditor.hexedit",
+    "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc": "default",
+    "*.qrc": "qt-core.qrcEditor"
+  },
+  "qt-core.additionalQtPaths": [
+    {
+      "name": "Qt-6.11.0-linux-g++-x86_64_from_PATH",
+      "path": "/run/current-system/sw/bin/qtpaths"
+    }
+  ]
 }

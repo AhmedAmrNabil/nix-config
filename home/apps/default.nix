@@ -13,6 +13,7 @@
     ./git
     ./micro
     ./only-office
+    ./quickshell
     ./rofi
     ./spotify
     ./starship

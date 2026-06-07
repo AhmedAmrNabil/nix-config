@@ -13,6 +13,7 @@
     spotify.enable = true;
     vscode.enable = true;
     yazi.enable = true;
+    quickshell.enable = true;
   };
 
   de.hyprland.enable = true;
@@ -63,9 +64,6 @@
       })
     ]);
 
-  programs.noctalia-shell = {
-    enable = true;
-  };
 
   xdg.desktopEntries.reboot-to-windows = {
     name = "Reboot to Windows";
