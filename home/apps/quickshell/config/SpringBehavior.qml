@@ -2,8 +2,8 @@ import QtQuick
 
 Behavior {
     SpringAnimation {
-        spring: 8
-        damping: 0.8
+        spring: 12
+        damping: 1.2
         mass: 2
     }
 }
