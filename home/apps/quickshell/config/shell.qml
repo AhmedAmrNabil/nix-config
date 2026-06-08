@@ -1,67 +1,88 @@
+//@ pragma UseQApplication
 import Quickshell
-import Quickshell.Wayland
 import QtQuick
+import Quickshell.Wayland
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Effects
+import Quickshell.Services.Pipewire
+import Quickshell.Widgets
+import "ViewState.qml"
 
 ShellRoot {
+    // You need a PwObjectTracker to "bind" a node before accessing its audio properties
     PanelWindow {
-        id: barWindow
-        anchors.top: true
+        id: panel
         implicitHeight: 44
+        anchors.top: true
+        anchors.left: true
+        anchors.right: true
         color: "transparent"
-        exclusionMode: ExclusionMode.Normal
-        exclusiveZone: implicitHeight
     }
 
     PanelWindow {
-        id: overlayWindow
-        property int pillState: Pill.State.Collapsed
-        visible: true
+        id: pill
+        anchors.left: true
+        anchors.right: true
         anchors.top: true
         exclusionMode: ExclusionMode.Ignore
         color: "transparent"
-        implicitHeight: pillContainer.implicitHeight
-        implicitWidth: pillContainer.implicitWidth
-        margins.top: 4
 
-        Rectangle {
-            id: pillContainer
-            implicitWidth: overlayWindow.pillState === Pill.State.Expanded ? 600 : 150
-            implicitHeight: overlayWindow.pillState === Pill.State.Expanded ? 100 : 36
-            color: Theme.mantle
-            radius: 32
-            Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+        // Follow the animated rect size, not child directly
+        implicitHeight: animatedContainer.height + 8
+        implicitWidth: animatedContainer.width + 8
 
-            SpringBehavior on implicitWidth {}
-            SpringBehavior on implicitHeight {}
+        ClippingRectangle {
+            id: animatedContainer
+            anchors.centerIn: parent
 
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    overlayWindow.pillState = overlayWindow.pillState === Pill.State.Expanded ? Pill.State.Collapsed : Pill.State.Expanded;
+            // Animate size changes
+            Behavior on width {
+                SpringAnimation {
+                    spring: 15
+                    damping: 0.8
+                    mass: 1
+                }
+            }
+            Behavior on height {
+                SpringAnimation {
+                    spring: 15
+                    damping: 0.8
+                    mass: 1
                 }
             }
 
-            CollapsedView {
-                anchors.fill: parent
-                visible: overlayWindow.pillState === Pill.State.Collapsed
-                opacity: visible ? 1 : 0
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 150
-                    }
-                }
-            }
+            // Track the loader's actual content size
+            width: loaderItem.implicitWidth + 16
+            height: loaderItem.implicitHeight + 16
 
-            ExpandedView {
-                anchors.fill: parent
-                visible: overlayWindow.pillState === Pill.State.Expanded
-                opacity: visible ? 1 : 0
-                Behavior on opacity {
-                    NumberAnimation {
-                        duration: 150
+            radius: 22
+            color: Theme.crust
+
+            Row {
+                id: child
+                anchors.centerIn: parent
+
+                Component {
+                    id: defaultPillComp
+                    DefaultPill {}
+                }
+                Component {
+                    id: audioPillComp
+                    AudioPill {}
+                }
+
+                Loader {
+                    id: loaderItem
+                    sourceComponent: {
+                        switch (ViewState.activeView) {
+                        case ViewState.Views.ViewDefault:
+                            return defaultPillComp;
+                        case ViewState.Views.ViewAudio:
+                            return audioPillComp;
+                        default:
+                            return defaultPillComp;
+                        }
                     }
                 }
             }

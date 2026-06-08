@@ -44,28 +44,32 @@ Singleton {
 
     // ── Semantic aliases ─────────────────────────────────────────────────
 
-    // Backgrounds
-    readonly property color bgApp: crust
-    readonly property color bgPill: base
-    readonly property color bgPopup: mantle
-    readonly property color bgButton: surface0
-    readonly property color bgButtonHovered: surface1
-    readonly property color bgButtonPressed: surface2
+    readonly property color primary: sky
+    readonly property color disabled: overlay2
+    readonly property color textSecondary: subtext0
 
-    // Text
-    readonly property color textPrimary: text
-    readonly property color textSecondary: subtext1
-    readonly property color textMuted: overlay0
+    // // Backgrounds
+    // readonly property color bgApp: crust
+    // readonly property color bgPill: base
+    // readonly property color bgPopup: mantle
+    // readonly property color bgButton: surface0
+    // readonly property color bgButtonHovered: surface1
+    // readonly property color bgButtonPressed: surface2
 
-    // Border
-    readonly property color borderSubtle: Qt.rgba(1, 1, 1, 0.09)
-    readonly property color borderFocus: lavender
+    // // Text
+    // readonly property color textPrimary: text
+    // readonly property color textSecondary: subtext1
+    // readonly property color textMuted: overlay0
 
-    // Icons
-    readonly property color iconWifi: blue
-    readonly property color iconBluetooth: mauve
-    readonly property color iconMedia: green
-    readonly property color iconWarning: yellow
-    readonly property color iconError: red
-    readonly property color iconSuccess: green
+    // // Border
+    // readonly property color borderSubtle: Qt.rgba(1, 1, 1, 0.09)
+    // readonly property color borderFocus: lavender
+
+    // // Icons
+    // readonly property color iconWifi: blue
+    // readonly property color iconBluetooth: mauve
+    // readonly property color iconMedia: green
+    // readonly property color iconWarning: yellow
+    // readonly property color iconError: red
+    // readonly property color iconSuccess: green
 }
