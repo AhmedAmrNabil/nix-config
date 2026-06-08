@@ -56,6 +56,7 @@ Row {
             model: SystemTray.items
             delegate: MouseArea {
                 id: trayIcon
+                visible: modelData && modelData.hasMenu
 
                 required property SystemTrayItem modelData
                 width: 20
@@ -64,6 +65,8 @@ Row {
                 Image {
                     anchors.fill: parent
                     source: trayIcon.modelData.icon
+										sourceSize.width: trayIcon.width
+										sourceSize.height: trayIcon.height
                 }
             }
         }

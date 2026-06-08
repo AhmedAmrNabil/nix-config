@@ -21,8 +21,8 @@ Rectangle {
         hoverEnabled: true    // ← Required to enable onEntered/onExited
 
         onEntered: {
-            root.width = 400;
-            root.height = 42;
+            root.width = 500;
+            root.height = 62;
         }
         onExited: {
             root.width = 100;
@@ -36,6 +36,7 @@ Rectangle {
         Media {
             visible: mouseArea.containsMouse
             anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
         }
         ColumnLayout {
             anchors.centerIn: parent

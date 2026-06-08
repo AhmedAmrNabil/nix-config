@@ -22,6 +22,8 @@ RowLayout {
             height: 42
             width: 42
             source: root.player ? root.player.trackArtUrl : ""
+            sourceSize.width: 42
+            sourceSize.height: 42
             fillMode: Image.PreserveAspectFit
         }
     }
@@ -36,6 +38,8 @@ RowLayout {
             font.pointSize: 12
             font.family: "SF Pro Rounded"
             font.weight: Font.DemiBold
+						Layout.preferredWidth: 150
+            elide: Text.ElideRight
         }
         Text {
             Layout.alignment: Qt.AlignLeft
@@ -43,6 +47,8 @@ RowLayout {
             color: Theme.textSecondary
             font.pointSize: 10
             font.family: "SF Pro Rounded"
+						Layout.preferredWidth: 150
+            elide: Text.ElideRight
         }
     }
 }
