@@ -19,6 +19,7 @@ in
       nerd-fonts.jetbrains-mono
       noto-fonts-color-emoji
       vista-fonts
+      apple-fonts
     ];
 
     # Optional: Enable fontconfig tweaks

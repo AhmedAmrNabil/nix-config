@@ -156,8 +156,8 @@
 
       devShells.${system}.default = pkgs.mkShell {
         # Required for qmlls to find the correct type declarations
-        shellHook = ''
-          export QML_IMPORT_PATH=${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml/:${pkgs.quickshell}/lib/qt-6/qml/
+        shellHook = ''#bash
+          export QML_IMPORT_PATH=${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml/:${pkgs.quickshell}/lib/qt-6/qml/:$PWD/home/apps/quickshell/config/
         '';
       };
     };
