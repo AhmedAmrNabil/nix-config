@@ -13,6 +13,7 @@ let
     "x-systemd.device-timeout=3s"
     "x-systemd.automount"
     "noauto"
+    "x-systemd.idle-timeout=60" # optional: auto-unmount when idle
   ];
 in
 {
@@ -59,7 +60,7 @@ in
 
   # Mounting windows partition for save files
   fileSystems."/mnt/windows" = {
-    device = "/dev/disk/by-uuid/54E4AE95E4AE793E";
+    device = "/dev/disk/by-uuid/3C0A93A20A93582A";
     fsType = "ntfs";
     options = ntfsOptions;
   };
@@ -67,20 +68,11 @@ in
   fileSystems."${homeDirectory}/wineprefixes/claire/drive_c/users/Public/Documents" = {
     device = "/mnt/windows/Users/Public/Documents";
     fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/mnt/windows" ];
-  };
-
-  fileSystems."/mnt/archlinux" = {
-    device = "/dev/disk/by-uuid/04fbc268-2d20-4d0c-a1a7-0f373fc1f869";
-    fsType = "btrfs";
     options = [
-      "compress=zstd"
-      "noatime"
-      "subvol=@home"
-      "rw"
-      "nofail"
-      "x-systemd.device-timeout=3s"
+      "bind"
+      "nofail" # don't block boot if /mnt/windows isn't up
+      "x-systemd.requires-mounts-for=/mnt/windows" # proper ordering without hard dep
     ];
+    depends = [ "/mnt/windows" ];
   };
 }
