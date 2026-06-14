@@ -71,6 +71,10 @@ ShellRoot {
                     id: audioPillComp
                     AudioPill {}
                 }
+                Component {
+                    id: appLauncherPillComp
+                    AppLauncherPill {}
+                }
 
                 Loader {
                     id: loaderItem
@@ -80,6 +84,8 @@ ShellRoot {
                             return defaultPillComp;
                         case ViewState.Views.ViewAudio:
                             return audioPillComp;
+                        case ViewState.Views.ViewLauncher:
+                            return appLauncherPillComp;
                         default:
                             return defaultPillComp;
                         }

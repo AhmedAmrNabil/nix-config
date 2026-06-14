@@ -18,6 +18,7 @@ RowLayout {
         Layout.preferredHeight: 42
         Layout.preferredWidth: 42
         radius: 12
+        visible: root.player && root.player.trackArtUrl
         Image {
             height: 42
             width: 42
@@ -33,12 +34,12 @@ RowLayout {
         Layout.fillWidth: true
         Text {
             Layout.alignment: Qt.AlignLeft
-            text: root.player ? root.player.trackTitle : "Not Playing"
+            text: root.player ? root.player.trackTitle : ""
             color: Theme.text
             font.pointSize: 12
             font.family: "SF Pro Rounded"
             font.weight: Font.DemiBold
-						Layout.preferredWidth: 150
+            Layout.preferredWidth: 150
             elide: Text.ElideRight
         }
         Text {
@@ -47,7 +48,7 @@ RowLayout {
             color: Theme.textSecondary
             font.pointSize: 10
             font.family: "SF Pro Rounded"
-						Layout.preferredWidth: 150
+            Layout.preferredWidth: 150
             elide: Text.ElideRight
         }
     }
