@@ -93,9 +93,10 @@
         ++ map (p: "${nixpkgs-local}/nixos/modules/${p}") modulePaths;
 
       mkSystem =
-        host: extraModules:
+        host: extraModules: extraSpecialArgs:
         nixpkgs.lib.nixosSystem {
-          inherit system specialArgs;
+          inherit system;
+          specialArgs = specialArgs // extraSpecialArgs;
           modules = [
             { nixpkgs.pkgs = pkgs; }
             ./hosts/${host}/configuration.nix
@@ -114,8 +115,9 @@
           inherit pkgs;
           extraSpecialArgs = specialArgs;
           modules = [
-            ./hosts/${profile}/home.nix
             ./home
+            ./home/shared.nix
+            ./hosts/${profile}/home.nix
             inputs.spicetify-nix.homeManagerModules.default
             inputs.noctalia.homeModules.default
           ];
@@ -123,23 +125,30 @@
     in
     {
       nixosConfigurations = {
-        desktop-nixos = mkSystem "desktop" [
+        desktop-nixos = mkSystem "desktop" [ ] { };
+        laptop-nixos = mkSystem "laptop" [ ] { };
+        wsl-nixos = mkSystem "wsl" [ nixos-wsl.nixosModules.default ] { };
+        # using nixos home manager module here for the iso
+        # as i cannot use home-manager indpendent mode
+        iso-nixos = mkSystem "iso" [
+          home-manager.nixosModules.home-manager
           {
-            virtualisation.vmVariant = {
-              de.kde.autoLogin = pkgs.lib.mkForce false;
-              users.users."${username}".password = "password"; # just for the vm, not used anywhere else
-              virtualisation.memorySize = 8192; # 8GB
-              virtualisation.cores = 4;
-              virtualisation.qemu.options = [
-                "-vga none"
-                "-device virtio-vga-gl"
-                "-display gtk,gl=on"
-              ];
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = specialArgs // {
+                username = "nixos";
+              };
+              users.nixos = {
+                imports = [
+                  ./hosts/iso/home.nix
+                  ./home
+                  inputs.spicetify-nix.homeManagerModules.default
+                ];
+              };
             };
           }
-        ];
-        laptop-nixos = mkSystem "laptop" [ ];
-        wsl-nixos = mkSystem "wsl" [ nixos-wsl.nixosModules.default ];
+        ] { username = "nixos"; };
       };
 
       homeConfigurations = {
@@ -156,7 +165,8 @@
 
       devShells.${system}.default = pkgs.mkShell {
         # Required for qmlls to find the correct type declarations
-        shellHook = ''#bash
+        shellHook = ''
+          #bash
           export QML_IMPORT_PATH=${pkgs.kdePackages.qtdeclarative}/lib/qt-6/qml/:${pkgs.quickshell}/lib/qt-6/qml/:$PWD/home/apps/quickshell/config/
         '';
       };
