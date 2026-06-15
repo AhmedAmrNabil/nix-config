@@ -32,7 +32,7 @@
     plymouth.enable = false;
     steam.enable = true;
     tailscale.enable = true;
-    # virt-manager.enable = true;
+    virt-manager.enable = true;
   };
 
   core = {
@@ -107,6 +107,7 @@
     25565 # minecraft
     80 # http
     443 # https
+	5900 # qemu
   ];
 
   networking.firewall.allowedUDPPorts = [

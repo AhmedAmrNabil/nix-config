@@ -33,6 +33,7 @@
     pnpm
     python3
     usbutils
+    pciutils
     wayland-utils
     wl-clipboard
   ];
