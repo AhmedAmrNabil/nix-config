@@ -22,7 +22,7 @@ in
     };
 
     services.hyprpaper = {
-      enable = true;
+      enable = false;
       package = pkgsUnstable.hyprpaper;
       settings = {
         wallpaper = [
