@@ -486,8 +486,8 @@
     "nixpkgs-local": {
       "flake": false,
       "locked": {
-        "lastModified": 1779486727,
-        "narHash": "sha256-R16Rv1rOOC9kf/PzKKn1HKnGDZ4TeWuBQThp/T0HE9A=",
+        "lastModified": 1781815104,
+        "narHash": "sha256-aRLJScwIx+Z2vdYq62kKpLyFz3i55U5LNJjL3nmcfNA=",
         "path": "/home/btngana/coding/nixpkgs",
         "type": "path"
       },
