@@ -182,7 +182,7 @@
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "http.proxyStrictSSL": false,
   "java.saveActions.organizeImports": false,
-  "javascript.updateImportsOnFileMove.enabled": "always",
+  "js/ts.updateImportsOnFileMove.enabled": "always",
   "livePreview.hostIP": "192.168.1.5",
   "loccy.annotations.showMissingTranslationsWarning": false,
   "markdown.preview.fontSize": 18,
