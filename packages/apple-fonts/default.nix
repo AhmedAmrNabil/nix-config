@@ -17,12 +17,12 @@ stdenvNoCC.mkDerivation {
     (fetchurl {
       url = "${baseUrl}SF-Pro.dmg";
       name = "SF-Pro-${version}.dmg";
-      hash = "sha256-W0sZkipBtrduInk0oocbFAXX1qy0Z+yk2xUyFfDWx4s=";
+      hash = "sha256-YxGk8IQ6TS5hagsFx3US0x0uqVBFnPUmzbW5CZageU8=";
     })
     (fetchurl {
       url = "${baseUrl}SF-Compact.dmg";
       name = "SF-Compact-${version}.dmg";
-      hash = "sha256-RWeq4GFt01r8NLrWvvVH5y/R5lhFMFozlzBkUY0dU0g=";
+      hash = "sha256-/lF6UYS+KQ5m/om4tLbqGFSPztGuFTlJmnEmXjMXJJ8=";
     })
     (fetchurl {
       url = "${baseUrl}SF-Mono.dmg";
@@ -43,41 +43,41 @@ stdenvNoCC.mkDerivation {
 
   installPhase = ''
     #bash
-        runHook preInstall
+    runHook preInstall
 
-        mkdir -p fonts licenses tmp
+    mkdir -p fonts licenses tmp
 
-        for archive in $srcs; do
-          # $srcs entries are store paths like /nix/store/...-SF-Pro-7.0.5.dmg
-          echo "Processing $archive"
-          7z e "$archive" -y -otmp/
-          pushd tmp/
+    for archive in $srcs; do
+      # $srcs entries are store paths like /nix/store/...-SF-Pro-7.0.5.dmg
+      echo "Processing $archive"
+      7z e "$archive" -y -otmp/
+      pushd tmp/
 
-          7z x -txar *.pkg -y
+      7z x -txar *.pkg -y
 
-          _fontname=$(grep -o -e "THE APPLE .* FONT" Resources/English.lproj/License.rtf | head -n 1)
-          cp Resources/English.lproj/License.rtf "$PWD/../licenses/LICENSE.''${_fontname// /-}"
+      _fontname=$(grep -o -e "THE APPLE .* FONT" Resources/English.lproj/License.rtf | head -n 1)
+      cp Resources/English.lproj/License.rtf "$PWD/../licenses/LICENSE.''${_fontname// /-}"
 
-          pushd *.pkg/
-          _fntver=$(grep -o -e ' version=".*">' PackageInfo)
-          _fntver="''${_fntver:10:-2}"
-          7z x Payload -y
-          7z x 'Payload~' -y
-          cp Library/Fonts/* "$PWD/../../fonts/"
-          popd  # back to tmp/
+      pushd *.pkg/
+      _fntver=$(grep -o -e ' version=".*">' PackageInfo)
+      _fntver="''${_fntver:10:-2}"
+      7z x Payload -y
+      7z x 'Payload~' -y
+      cp Library/Fonts/* "$PWD/../../fonts/"
+      popd  # back to tmp/
 
-          popd  # back to workdir
-          rm -rf tmp/{*,.*} 2>/dev/null || true
+      popd  # back to workdir
+      rm -rf tmp/{*,.*} 2>/dev/null || true
 
-          echo "Extracted $(basename $archive) version $_fntver"
-        done
+      echo "Extracted $(basename $archive) version $_fntver"
+    done
 
-        rmdir tmp/
+    rmdir tmp/
 
-        install -Dm644 -t "$out/share/licenses/apple-fonts" licenses/*
-        install -Dm644 -t "$out/share/fonts/apple-fonts" fonts/*
+    install -Dm644 -t "$out/share/licenses/apple-fonts" licenses/*
+    install -Dm644 -t "$out/share/fonts/apple-fonts" fonts/*
 
-        runHook postInstall
+    runHook postInstall
   '';
 
   meta = with lib; {

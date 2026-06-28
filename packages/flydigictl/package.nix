@@ -17,7 +17,7 @@ buildGoModule {
   src = fetchFromGitHub {
     owner = "pipe01";
     repo = "flydigictl";
-    rev = "refs/heads/master";
+    rev = "e16f35d2acced62f8e2f50206b0e65c8b0d947bc";
     hash = "sha256-wL4JRRtAUgFL3XrnQI1vZq7Nic/RFSjJhQllxCHznxU=";
   };
 
