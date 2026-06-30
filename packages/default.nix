@@ -22,6 +22,7 @@ rec {
   wps-fonts = pkgs.callPackage ./wps-fonts/package.nix { };
   flydigictl = pkgs.callPackage ./flydigictl/package.nix { };
   apple-fonts = pkgs.callPackage ./apple-fonts/package.nix { };
+  claude-desktop = pkgs.callPackage ./claude-desktop/package.nix { };
   
   gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification/package.nix { };
   gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui/package.nix {

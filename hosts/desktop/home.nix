@@ -42,6 +42,7 @@
       tty-clock
       vlc
       xournalpp
+      claude-desktop
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
@@ -63,7 +64,6 @@
         commandLineArgs = "--ozone-platform=x11";
       })
     ]);
-
 
   xdg.desktopEntries.reboot-to-windows = {
     name = "Reboot to Windows";
