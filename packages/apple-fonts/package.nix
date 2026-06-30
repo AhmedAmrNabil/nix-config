@@ -6,7 +6,7 @@
 }:
 
 let
-  version = "7.0.5";
+  version = "8.0.1";
   baseUrl = "https://devimages-cdn.apple.com/design/resources/download/";
 in
 stdenvNoCC.mkDerivation {
@@ -48,7 +48,7 @@ stdenvNoCC.mkDerivation {
     mkdir -p fonts licenses tmp
 
     for archive in $srcs; do
-      # $srcs entries are store paths like /nix/store/...-SF-Pro-7.0.5.dmg
+      # $srcs entries are store paths like /nix/store/...-SF-Pro-${version}.dmg
       echo "Processing $archive"
       7z e "$archive" -y -otmp/
       pushd tmp/
