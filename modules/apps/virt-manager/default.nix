@@ -73,7 +73,6 @@ in
     environment.systemPackages = with pkgs; [
       dnsmasq
       virtiofsd # for virtiofs shared folders
-      virtio-win
     ];
 
     boot.initrd.kernelModules = [
@@ -92,5 +91,8 @@ in
       "amd_iommu=on"
       "iommu=pt" # passthrough mode — reduces overhead for devices not being passed through
     ];
+    environment.sessionVariables = {
+      LIBVIRT_DEFAULT_URI = "qemu:///system";
+    };
   };
 }
