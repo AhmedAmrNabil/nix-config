@@ -16,6 +16,12 @@
     quickshell.enable = true;
   };
 
+  apps.devenv = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+  };
+
   de.hyprland.enable = true;
 
   programs.nix-index.enable = true; # enable nix-index for faster package searching
@@ -36,13 +42,13 @@
       localsend
       microsoft-edge
       obsidian
-      postman
       prismlauncher-9
       transmission_4-qt
       tty-clock
       vlc
       xournalpp
       claude-desktop
+      teams-for-linux
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
@@ -52,11 +58,11 @@
         )
 
         IGNORE="$IGNORE,/run,/mnt"
-
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
       '')
     ]
     ++ (with pkgsUnstable; [
+      postman
       (discord.override {
         withVencord = true;
         enableAutoscroll = true;

@@ -5,6 +5,7 @@
     ./bat
     ./btop
     ./cava
+    ./devenv
     ./direnv
     ./eza
     ./fastfetch
