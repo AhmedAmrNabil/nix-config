@@ -45,6 +45,19 @@ in
     ];
   };
 
+  apps.virt-manager = {
+    extraPrepareConfig = ''
+      #bash
+      systemctl stop home-btngana-Games.automount home-btngana-Games.mount
+      systemctl stop home-btngana-crucial.automount home-btngana-crucial.mount
+    '';
+    extraReleaseConfig = ''
+      #bash
+      systemctl start home-btngana-crucial.automount
+      systemctl start home-btngana-Games.automount
+    '';
+  };
+
   fileSystems."${homeDirectory}/Games" = {
     device = "${homeDirectory}/crucial/Games";
     fsType = "none";

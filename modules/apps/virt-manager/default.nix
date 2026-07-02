@@ -12,6 +12,16 @@ in
 {
   options.apps.virt-manager = {
     enable = mkEnableOption "Virtualization manager";
+    extraPrepareConfig = mkIf cfg.enable lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Extra config to add to prepare phase of virt-manager hook";
+    };
+    extraReleaseConfig = mkIf cfg.enable lib.mkOption {
+      type = lib.types.lines;
+      default = "";
+      description = "Extra config to add to release phase of virt-manager hook";
+    };
   };
   config = mkIf cfg.enable {
     programs.virt-manager.enable = true;
@@ -32,6 +42,7 @@ in
       hooks.qemu = {
         "win11-passthrough" = pkgs.writeShellScript "win11-passthrough" ''
           #bash
+          set -euo pipefail
           GUEST="$1"
           PHASE="$2"   # prepare / start / started / stopped / release / migrate / restore / reconnect / attach
           DISPMGR="plasmalogin"
@@ -53,8 +64,12 @@ in
               modprobe vfio
               modprobe vfio_pci
               modprobe vfio_iommu_type1
+              ${cfg.extraPrepareConfig}
               ;;
             release)
+              ${cfg.extraReleaseConfig}
+              systemctl start home-btngana-crucial.automount
+              systemctl start home-btngana-Games.automount
               modprobe -r vfio_pci
               modprobe -r vfio
               modprobe -r vfio_iommu_type1
