@@ -23,6 +23,14 @@ in
           style = "blue";
           truncation_length = 100;
           read_only = " ";
+          substitutions = {
+            "Documents" = "󰈙 ";
+            "Downloads" = " ";
+            "Music" = " ";
+            "Pictures" = " ";
+            "Videos" = " ";
+            "Desktop" = " ";
+          };
         };
         fill = {
           symbol = " ";
