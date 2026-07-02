@@ -7,13 +7,10 @@ let
     "gid=100"
     "umask=022"
     "big_writes"
-    "nofail"
     "exec"
     "rw"
+    "nofail"
     "x-systemd.device-timeout=3s"
-    "x-systemd.automount"
-    "noauto"
-    "x-systemd.idle-timeout=60" # optional: auto-unmount when idle
   ];
 in
 {
@@ -40,15 +37,24 @@ in
   };
 
   fileSystems."${homeDirectory}/crucial" = {
-    device = "/dev/disk/by-uuid/7A5AE84D5AE807A9";
+    device = "/dev/disk/by-uuid/01DD0394B2474040";
     fsType = "ntfs";
-    options = ntfsOptions;
+    options = ntfsOptions ++ [
+      "x-systemd.automount"
+      "noauto"
+    ];
   };
 
   fileSystems."${homeDirectory}/Games" = {
     device = "${homeDirectory}/crucial/Games";
     fsType = "none";
-    options = [ "bind" ];
+    options = [
+      "bind"
+      "nofail"
+      "x-systemd.device-timeout=3s"
+      "x-systemd.automount"
+      "noauto"
+    ];
     depends = [ "${homeDirectory}/crucial" ];
   };
 
@@ -57,22 +63,4 @@ in
     "L ${homeDirectory}/crucial/SteamLibrary/steamapps/compatdata - - - - ${homeDirectory}/.steam/steam/steamapps/compatdata"
     "L ${homeDirectory}/hdd/SteamLibrary/steamapps/compatdata - - - - ${homeDirectory}/.steam/steam/steamapps/compatdata2"
   ];
-
-  # Mounting windows partition for save files
-  fileSystems."/mnt/windows" = {
-    device = "/dev/disk/by-uuid/3C0A93A20A93582A";
-    fsType = "ntfs";
-    options = ntfsOptions;
-  };
-
-  fileSystems."${homeDirectory}/wineprefixes/claire/drive_c/users/Public/Documents" = {
-    device = "/mnt/windows/Users/Public/Documents";
-    fsType = "none";
-    options = [
-      "bind"
-      "nofail" # don't block boot if /mnt/windows isn't up
-      "x-systemd.requires-mounts-for=/mnt/windows" # proper ordering without hard dep
-    ];
-    depends = [ "/mnt/windows" ];
-  };
 }
