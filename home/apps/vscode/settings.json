@@ -157,7 +157,8 @@
   "extensions.autoCheckUpdates": false,
   "files.associations": {
     "*.fdg": "json",
-    "*.gs": "glsl"
+    "*.gs": "glsl",
+    "*.lock": "json"
   },
   "files.autoSave": "onFocusChange",
   "files.exclude": {
