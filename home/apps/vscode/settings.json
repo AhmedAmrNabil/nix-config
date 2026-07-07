@@ -231,7 +231,7 @@
   "terminal.integrated.defaultProfile.windows": "PowerShell",
   "terminal.integrated.enableMultiLinePasteWarning": "never",
   "terminal.integrated.fontFamily": "JetbrainsMono nerd font",
-  "terminal.integrated.fontSize": 16,
+  "terminal.integrated.fontSize": 18,
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.lineHeight": 1,
   "terminal.integrated.minimumContrastRatio": 1,
@@ -329,5 +329,17 @@
   "[qml]": {
     "editor.defaultFormatter": "Delgan.qml-format"
   },
-  "qt-qml.doNotAskForQmllsDownload": true
+  "qt-qml.doNotAskForQmllsDownload": true,
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": false,
+    "markdown": false,
+    "scminput": false,
+    "java": false
+  },
+  "sqldeveloper.telemetry.enabled": false,
+  "sqldeveloper.datagrid.fontFamily": "'Droid Sans Mono', monospace",
+  "[sql]": {
+    "editor.defaultFormatter": "cweijan.vscode-postgresql-client2"
+  }
 }
