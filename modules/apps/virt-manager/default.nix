@@ -12,17 +12,18 @@ in
 {
   options.apps.virt-manager = {
     enable = mkEnableOption "Virtualization manager";
-    extraPrepareConfig = mkIf cfg.enable lib.mkOption {
+    extraPrepareConfig = lib.mkOption {
       type = lib.types.lines;
       default = "";
       description = "Extra config to add to prepare phase of virt-manager hook";
     };
-    extraReleaseConfig = mkIf cfg.enable lib.mkOption {
+    extraReleaseConfig = lib.mkOption {
       type = lib.types.lines;
       default = "";
       description = "Extra config to add to release phase of virt-manager hook";
     };
   };
+
   config = mkIf cfg.enable {
     programs.virt-manager.enable = true;
     users.users.${username}.extraGroups = [ "libvirtd" ];
