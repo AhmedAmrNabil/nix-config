@@ -1,9 +1,6 @@
-# Edit this configuration file to define what should be installed on
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
-
 {
   pkgs,
+  pkgsUnstable,
   ...
 }:
 {
@@ -54,53 +51,10 @@
 
   de.hyprland.enable = true;
 
-  # --------- System configuration ------------------
-
+  # --------- Hostname and networking ------------------
   networking.hostName = "desktop-nixos"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
-  # disable unused services to speed up boot time
-  systemd.services.Networkmanager-wait-online.enable = false;
-  services.fwupd.enable = false;
-  networking.modemmanager.enable = false;
-
-  time.timeZone = "Africa/Cairo";
-  time.hardwareClockInLocalTime = true;
-
-  hardware.bluetooth.enable = true;
-
-  environment.systemPackages = with pkgs; [
-    nano
-    (lutris.override {
-      extraPkgs =
-        pkgs: with pkgs; [
-          wineWow64Packages.stable
-          winetricks
-          gamemode
-        ];
-      extraLibraries = pkgs: [
-        pkgs.gamemode
-      ];
-    })
-    distrobox
-    scrcpy
-    mangohud
-    deskflow
-    android-tools
-  ];
-
-  # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
-  environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
-    CommandLineFlagSecurityWarningsEnabled = false;
-  };
-
-  # Enable platformio udev rules for esp32 development
-  services.udev.packages = [
-    pkgs.platformio-core
-    pkgs.openocd
-  ];
-
-  services.openssh.enable = true;
+  networking.modemmanager.enable = false; # disable unused, speeds up boot
 
   networking.firewall.allowedTCPPorts = [
     24800 # deskflow
@@ -116,17 +70,58 @@
     25565 # minecraft
   ];
 
-  # serve /nix/store to laptop
+  hardware.bluetooth.enable = true;
 
-  # services.nix-serve = {
-  #   enable = true;
-  #   secretKeyFile = "/var/cache-priv-key.pem";
-  # };
+  # --------- Timezone and clock ------------------
+  time.timeZone = "Africa/Cairo";
+  time.hardwareClockInLocalTime = true;
 
-  # fix /nix/store too many open files issue with nix-serve
-  # systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
-  # systemd.services.nix-serve.serviceConfig.Environment = "HOME=/home/${username}";
+  # --------- Services ------------------
+  services.openssh.enable = true;
 
+  # Enable platformio udev rules for esp32 development
+  services.udev.packages = [
+    pkgs.platformio-core
+    pkgs.openocd
+  ];
+
+  # Enable local llm
+  services.ollama = {
+    enable = true;
+    package = pkgsUnstable.ollama-cuda;
+  };
+  services.open-webui.enable = true;
+
+  # disable some services that are not needed
+  systemd.services.Networkmanager-wait-online.enable = false;
+  services.fwupd.enable = false;
+
+  # --------- Packages ------------------
+  environment.systemPackages = with pkgs; [
+    nano
+    (lutris.override {
+      extraPkgs =
+        pkgs: with pkgs; [
+          wineWow64Packages.stable
+          winetricks
+          gamemode
+        ];
+      extraLibraries = pkgs: [
+        pkgs.gamemode
+      ];
+    })
+    scrcpy
+    mangohud
+    deskflow
+    android-tools
+  ];
+
+  # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
+  environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
+    CommandLineFlagSecurityWarningsEnabled = false;
+  };
+
+  # --------- Swap ------------------
   swapDevices = [
     {
       device = "/swap/swapfile";
