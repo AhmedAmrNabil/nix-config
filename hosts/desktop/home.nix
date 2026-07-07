@@ -60,15 +60,16 @@
         IGNORE="$IGNORE,/run,/mnt"
         exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
       '')
-    ]
-    ++ (with pkgsUnstable; [
-      postman
       (discord.override {
         withVencord = true;
         enableAutoscroll = true;
         # workaround for keybinds not working in wayland
         commandLineArgs = "--ozone-platform=x11";
+        vencord = pkgsUnstable.vencord;
       })
+    ]
+    ++ (with pkgsUnstable; [
+      postman
     ]);
 
   xdg.desktopEntries.reboot-to-windows = {
