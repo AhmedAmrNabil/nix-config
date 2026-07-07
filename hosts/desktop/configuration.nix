@@ -70,6 +70,11 @@
     25565 # minecraft
   ];
 
+  # loopback for ollama and open-webui
+  networking.hosts = {
+    "127.0.0.1" = [ "ollama.local" ];
+  };
+
   hardware.bluetooth.enable = true;
 
   # --------- Timezone and clock ------------------
@@ -95,7 +100,16 @@
       OLLAMA_KV_CACHE_TYPE = "q8_0"; # halves KV-cache VRAM
     };
   };
-  services.open-webui.enable = true;
+  services.open-webui = {
+    enable = true;
+    port = 9000;
+  };
+
+  # enable nginx reverse proxy for open-webui
+  services.nginx = {
+    enable = true;
+    virtualHosts."ollama.local".locations."/".proxyPass = "http://127.0.0.1:9000";
+  };
 
   # disable some services that are not needed
   systemd.services.Networkmanager-wait-online.enable = false;
