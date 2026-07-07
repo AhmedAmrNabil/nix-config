@@ -89,6 +89,11 @@
   services.ollama = {
     enable = true;
     package = pkgsUnstable.ollama-cuda;
+    environmentVariables = {
+      OLLAMA_CONTEXT_LENGTH = "65536"; # was 8192 — this is the context actually used via /v1
+      OLLAMA_NUM_PARALLEL = "1"; # KV cache = num_ctx x num_parallel; avoids VRAM blowup
+      OLLAMA_KV_CACHE_TYPE = "q8_0"; # halves KV-cache VRAM
+    };
   };
   services.open-webui.enable = true;
 
@@ -97,24 +102,29 @@
   services.fwupd.enable = false;
 
   # --------- Packages ------------------
-  environment.systemPackages = with pkgs; [
-    nano
-    (lutris.override {
-      extraPkgs =
-        pkgs: with pkgs; [
-          wineWow64Packages.stable
-          winetricks
-          gamemode
+  environment.systemPackages =
+    with pkgs;
+    [
+      nano
+      (lutris.override {
+        extraPkgs =
+          pkgs: with pkgs; [
+            wineWow64Packages.stable
+            winetricks
+            gamemode
+          ];
+        extraLibraries = pkgs: [
+          pkgs.gamemode
         ];
-      extraLibraries = pkgs: [
-        pkgs.gamemode
-      ];
-    })
-    scrcpy
-    mangohud
-    deskflow
-    android-tools
-  ];
+      })
+      scrcpy
+      mangohud
+      deskflow
+      android-tools
+    ]
+    ++ (with pkgsUnstable; [
+      claude-code
+    ]);
 
   # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
   environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
