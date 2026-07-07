@@ -14,6 +14,19 @@ let
   ];
 in
 {
+
+  # add zstd compression to file systems
+  fileSystems = {
+    "/".options = [ "compress=zstd" ];
+    "/home".options = [ "compress=zstd" ];
+    "/nix".options = [
+      "compress=zstd"
+      "noatime"
+    ];
+    "/persist".options = [ "compress=zstd" ];
+    "/swap".options = [ "noatime" ];
+  };
+
   # Mounting windows hdd for media and games:
   fileSystems."${homeDirectory}/hdd" = {
     device = "/dev/disk/by-uuid/01DAB93F51B44DA0";

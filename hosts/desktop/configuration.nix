@@ -127,18 +127,6 @@
   # systemd.services.nix-serve.serviceConfig.LimitNOFILE = 65536;
   # systemd.services.nix-serve.serviceConfig.Environment = "HOME=/home/${username}";
 
-  # add zstd compression to file systems
-  fileSystems = {
-    "/".options = [ "compress=zstd" ];
-    "/home".options = [ "compress=zstd" ];
-    "/nix".options = [
-      "compress=zstd"
-      "noatime"
-    ];
-    "/persist".options = [ "compress=zstd" ];
-    "/swap".options = [ "noatime" ];
-  };
-
   swapDevices = [
     {
       device = "/swap/swapfile";
