@@ -10,11 +10,11 @@
   kdePackages,
   lib,
   libGL,
-  libX11,
-  libXcursor,
-  libXext,
-  libXrandr,
-  libXxf86vm,
+  libx11,
+  libxcursor,
+  libxext,
+  libxrandr,
+  libxxf86vm,
   libjack2,
   libpulseaudio,
   libusb1,
@@ -91,11 +91,11 @@ symlinkJoin {
 
           ## glfw
           libGL
-          libX11
-          libXcursor
-          libXext
-          libXrandr
-          libXxf86vm
+          libx11
+          libxcursor
+          libxext
+          libxrandr
+          libxxf86vm
 
           udev # oshi
 
