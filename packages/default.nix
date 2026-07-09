@@ -8,7 +8,12 @@
 
 {
   pkgs ? import <nixpkgs> { },
-  libnbtplusplus,
+  libnbtplusplus ? pkgs.fetchFromGitHub {
+    owner = "PrismLauncher";
+    repo = "libnbtplusplus";
+    rev = "687e43031df0dc641984b4256bcca50d5b3f7de3";
+    hash = "sha256-7itkptyjoRcXfGLwg1/jxajetZ3a4mDc66+w4X6yW8s=";
+  },
   ...
 }:
 
@@ -18,14 +23,16 @@ rec {
   # modules = import ./modules; # NixOS modules
   # overlays = import ./overlays; # nixpkgs overlays
 
-  spotify-adblock = pkgs.callPackage ./spotify-adblock/package.nix { };  
+  spotify-adblock = pkgs.callPackage ./spotify-adblock/package.nix { };
   wps-fonts = pkgs.callPackage ./wps-fonts/package.nix { };
   flydigictl = pkgs.callPackage ./flydigictl/package.nix { };
   apple-fonts = pkgs.callPackage ./apple-fonts/package.nix { };
   claude-desktop = pkgs.callPackage ./claude-desktop/package.nix { };
 
   gpu-screen-recorder = pkgs.callPackage ./gpu-screen-recorder/package.nix { };
-  gpu-screen-recorder-notification = pkgs.callPackage ./gpu-screen-recorder-notification/package.nix { };
+  gpu-screen-recorder-notification =
+    pkgs.callPackage ./gpu-screen-recorder-notification/package.nix
+      { };
   gpu-screen-recorder-ui = pkgs.callPackage ./gpu-screen-recorder-ui/package.nix {
     inherit gpu-screen-recorder-notification;
   };
@@ -35,6 +42,9 @@ rec {
   };
   prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/wrapper.nix {
     prismlauncher-unwrapped = prismlauncher-9-unwrapped;
-    jdks = [ pkgs.jdk17 pkgs.jdk25 ];
+    jdks = [
+      pkgs.jdk17
+      pkgs.jdk25
+    ];
   };
 }
