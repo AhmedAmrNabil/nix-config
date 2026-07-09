@@ -48,7 +48,10 @@ stdenv.mkDerivation (finalAttrs: {
     pkg-config
     makeWrapper
     desktop-file-utils
+    wayland-scanner
   ];
+
+  depsBuildBuild = [ pkg-config ];
 
   buildInputs = [
     libx11
@@ -66,7 +69,6 @@ stdenv.mkDerivation (finalAttrs: {
     dbus
     linuxHeaders
     wayland
-    wayland-scanner
     pango
     libcap
     gsettings-desktop-schemas

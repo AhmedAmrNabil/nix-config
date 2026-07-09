@@ -34,7 +34,10 @@ stdenv.mkDerivation (finalAttrs: {
     ninja
     pkg-config
     makeWrapper
+    wayland-scanner
   ];
+
+  depsBuildBuild = [ pkg-config ];
 
   buildInputs = [
     libglvnd
@@ -45,7 +48,6 @@ stdenv.mkDerivation (finalAttrs: {
     libxkbcommon
     libxext
     wayland
-    wayland-scanner
     gsettings-desktop-schemas
   ];
 
