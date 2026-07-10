@@ -15,7 +15,7 @@
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
   "[dockerfile]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers"
   },
   "[glsl]": {
     "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
@@ -330,16 +330,13 @@
     "editor.defaultFormatter": "Delgan.qml-format"
   },
   "qt-qml.doNotAskForQmllsDownload": true,
-  "github.copilot.enable": {
-    "*": true,
-    "plaintext": false,
-    "markdown": false,
-    "scminput": false,
-    "java": false
-  },
   "sqldeveloper.telemetry.enabled": false,
   "sqldeveloper.datagrid.fontFamily": "'Droid Sans Mono', monospace",
   "[sql]": {
     "editor.defaultFormatter": "cweijan.vscode-postgresql-client2"
+  },
+  "claudeCode.preferredLocation": "panel",
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
   }
 }
