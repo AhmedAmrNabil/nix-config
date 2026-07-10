@@ -24,10 +24,6 @@
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    libnbtplusplus = {
-      url = "github:PrismLauncher/libnbtplusplus";
-      flake = false;
-    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -53,7 +49,6 @@
         (
           final: prev:
           import ./packages {
-            libnbtplusplus = inputs.libnbtplusplus;
             pkgs = final;
           }
         )
@@ -161,7 +156,6 @@
       packages.${system} =
         import ./packages {
           pkgs = pkgs;
-          libnbtplusplus = inputs.libnbtplusplus;
         }
         // {
           update-local-packages = pkgs.writeShellApplication {
