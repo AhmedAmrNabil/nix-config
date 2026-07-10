@@ -70,6 +70,7 @@
     ]
     ++ (with pkgsUnstable; [
       postman
+      jetbrains.idea
     ]);
 
   xdg.desktopEntries.reboot-to-windows = {
