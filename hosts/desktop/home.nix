@@ -81,4 +81,19 @@
     categories = [ "System" ];
     terminal = false;
   };
+
+  systemd.user.services.test-service = {
+    Unit = {
+      Description = "Test Service";
+      After = [ "network.target" ];
+    };
+    Service = {
+      Type = "simple";
+      WorkingDirectory = "/home/btngana/coding/test-service";
+      ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
+      Restart = "on-failure";
+      RestartSec = 5;
+    };
+    Install.WantedBy = [ "default.target" ];
+  };
 }
