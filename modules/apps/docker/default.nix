@@ -17,6 +17,7 @@ in
       description = "The storage driver to use for Docker.";
     };
     enableOnBoot = lib.mkEnableOption "the Docker service on boot.";
+    enableNvidia = lib.mkEnableOption "Nvidia support for Docker.";
   };
   config = lib.mkIf cfg.enable {
     virtualisation.docker = {
@@ -26,5 +27,6 @@ in
       package = pkgsUnstable.docker; # Use the latest Docker package (as stable have a bug with buildx plugin)
     };
     users.users."${username}".extraGroups = [ "docker" ];
+    hardware.nvidia-container-toolkit.enable = cfg.enableNvidia;
   };
 }

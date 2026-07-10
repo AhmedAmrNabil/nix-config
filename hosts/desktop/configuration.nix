@@ -17,6 +17,7 @@
     docker = {
       enable = true;
       storageDriver = "overlay2";
+      enableNvidia = true;
     };
     flydigictl.enable = true;
     gpu-screen-recorder = {
