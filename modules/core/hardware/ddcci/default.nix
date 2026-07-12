@@ -10,6 +10,7 @@ in
 {
   options.core.hardware.ddcci = {
     enable = lib.mkEnableOption "Enable DDC/CI for montiors";
+    enableHyprlandSpecificService = lib.mkEnableOption "Enable Hyprland specific service for DDC/CI";
   };
   config = lib.mkIf cfg.enable {
     hardware.i2c.enable = true;
@@ -23,7 +24,7 @@ in
       SUBSYSTEM=="i2c-dev", ACTION=="add", ATTR{name}=="NVIDIA i2c adapter*", TAG+="ddcci", TAG+="systemd", ENV{SYSTEMD_WANTS}+="ddcci@$kernel.service"
     '';
 
-    systemd.services."ddcci@" = {
+    systemd.services."ddcci@" = lib.mkIf cfg.enableHyprlandSpecificService {
       scriptArgs = "%i";
       after = [ "graphical.target" ];
       path = [
