@@ -146,6 +146,18 @@
     CommandLineFlagSecurityWarningsEnabled = false;
   };
 
+  # --------- Extra boot params ------------------
+  boot.kernelParams = [
+    "mem_sleep_default=deep"
+  ];
+  services.udev.extraRules = ''
+    ACTION=="add", SUBSYSTEM=="usb", KERNEL=="usb1", ATTR{power/wakeup}="enabled"
+    ACTION=="add", SUBSYSTEM=="usb", KERNEL=="usb3", ATTR{power/wakeup}="enabled"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1ea7", ATTR{idProduct}=="0907", ATTR{power/wakeup}="enabled"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0085", ATTR{power/wakeup}="enabled"
+    ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", ATTR{power/wakeup}="enabled"
+  '';
+
   # --------- Swap ------------------
   swapDevices = [
     {
