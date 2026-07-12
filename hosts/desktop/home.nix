@@ -49,6 +49,7 @@
       xournalpp
       claude-desktop
       teams-for-linux
+      uv
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
