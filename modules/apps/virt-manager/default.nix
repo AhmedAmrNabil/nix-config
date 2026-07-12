@@ -30,6 +30,8 @@ in
 
     virtualisation.libvirtd = {
       enable = true;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
       extraConfig = ''
         log_filters="3:qemu 1:libvirt"
         log_outputs="2:file:/var/log/libvirt/libvirtd.log"
