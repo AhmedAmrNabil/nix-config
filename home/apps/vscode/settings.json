@@ -12,7 +12,7 @@
     "editor.defaultFormatter": "vscode.css-language-features"
   },
   "[dockercompose]": {
-    "editor.defaultFormatter": "ms-azuretools.vscode-docker"
+    "editor.defaultFormatter": "ms-azuretools.vscode-containers"
   },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-containers"
@@ -52,7 +52,7 @@
     "editor.defaultFormatter": "foxundermoon.shell-format"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.autopep8"
+    "editor.defaultFormatter": "ms-python.black-formatter"
   },
   "[shellscript]": {
     "editor.defaultFormatter": "shakram02.bash-beautify"
@@ -338,5 +338,25 @@
   "claudeCode.preferredLocation": "panel",
   "[toml]": {
     "editor.defaultFormatter": "tamasfe.even-better-toml"
-  }
+  },
+  "yaml.disableSchemaDetection": [
+    "**/.github/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yml",
+    "**/.forgejo/workflows/*.yaml"
+  ],
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": false,
+  "indentRainbow.colors": [
+    "rgba(243, 139, 168,0.09)",
+    "rgba(250, 179, 135,0.09)",
+    "rgba(249, 226, 175,0.09)",
+    "rgba(166, 227, 161,0.09)",
+    "rgba(116, 199, 236,0.09)",
+    "rgba(203, 166, 247,0.09)"
+  ],
+  "indentRainbow.errorColor": "rgba(243, 139, 168,0.6)",
+  "indentRainbow.tabmixColor": "rgba(245, 194, 231,0.6)"
 }
