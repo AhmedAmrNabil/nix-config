@@ -70,6 +70,9 @@
       })
     ]
     ++ (with pkgsUnstable; [
+      google-antigravity-no-fhs
+      google-antigravity-ide-no-fhs
+      google-antigravity-cli
       postman
       jetbrains.idea
     ]);

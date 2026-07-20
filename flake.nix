@@ -28,6 +28,10 @@
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs =
@@ -52,6 +56,7 @@
             pkgs = final;
           }
         )
+        inputs.antigravity-nix.overlays.default
       ];
 
       pkgs = import nixpkgs {
@@ -194,6 +199,7 @@
       };
 
       devShells.${system}.default = pkgs.mkShell {
+        name = "dotfiles";
         # Required for qmlls to find the correct type declarations
         shellHook = ''
           #bash
