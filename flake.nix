@@ -32,6 +32,10 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    helium = {
+      url = "github:schembriaiden/helium-browser-nix-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -57,6 +61,7 @@
           }
         )
         inputs.antigravity-nix.overlays.default
+        inputs.helium.overlays.default
       ];
 
       pkgs = import nixpkgs {

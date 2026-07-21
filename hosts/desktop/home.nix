@@ -73,6 +73,7 @@
       google-antigravity-no-fhs
       google-antigravity-ide-no-fhs
       google-antigravity-cli
+      helium
       postman
       jetbrains.idea
     ]);
