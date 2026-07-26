@@ -74,6 +74,7 @@
       google-antigravity-ide-no-fhs
       google-antigravity-cli
       helium
+      open-scq30
       postman
       jetbrains.idea
     ]);
