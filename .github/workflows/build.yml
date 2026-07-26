@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         package:
-          - spotify-adblock
           - wps-fonts
           - flydigictl
           - apple-fonts
@@ -18,6 +17,7 @@ jobs:
           - gpu-screen-recorder-notification
           - gpu-screen-recorder-ui
           - prismlauncher-9
+          - open-scq30
       max-parallel: 4
       fail-fast: false
 
