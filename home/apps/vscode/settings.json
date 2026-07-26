@@ -21,7 +21,7 @@
     "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
   },
   "[html]": {
-    "editor.defaultFormatter": "vscode.html-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[java]": {
     "editor.defaultFormatter": "redhat.java"
@@ -33,7 +33,7 @@
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -44,9 +44,17 @@
   "[kotlin]": {
     "editor.defaultFormatter": "esafirm.kotlin-formatter"
   },
+  "[latex]": {
+    "editor.defaultFormatter": "James-Yu.latex-workshop"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  },
+  "[nginx]": {
+    "editor.defaultFormatter": "ahmadalli.vscode-nginx-conf"
+  },
   "[nix]": {
-    "editor.defaultFormatter": "jnoortheen.nix-ide",
-    "editor.tabSize": 2
+    "editor.defaultFormatter": "jnoortheen.nix-ide"
   },
   "[properties]": {
     "editor.defaultFormatter": "foxundermoon.shell-format"
@@ -54,11 +62,20 @@
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
   },
+  "[qml]": {
+    "editor.defaultFormatter": "Delgan.qml-format"
+  },
   "[shellscript]": {
     "editor.defaultFormatter": "shakram02.bash-beautify"
   },
   "[snippets]": {
     "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "[sql]": {
+    "editor.defaultFormatter": "cweijan.vscode-postgresql-client2"
+  },
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
   },
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
@@ -70,7 +87,7 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
+    "editor.defaultFormatter": "DotJoshJohnson.xml"
   },
   "C_Cpp. intelliSenseCacheSize": 0,
   "C_Cpp.autocompleteAddParentheses": true,
@@ -97,6 +114,7 @@
     "C:\\Users\\btngana\\AppData\\Local\\Temp\\postman-http-request-pre-request.instructions.md": true
   },
   "chat.viewSessions.orientation": "stacked",
+  "claudeCode.preferredLocation": "panel",
   "cmake.additionalCompilerSearchDirs": [
     "C:/msys64/clang32/bin",
     "C:/msys64/clang64/bin",
@@ -105,8 +123,11 @@
     "C:/msys64/mingw64/bin",
     "C:/msys64/ucrt64/bin"
   ],
+  "cmake.automaticReconfigure": false,
   "cmake.buildDirectory": "${workspaceFolder}/build",
+  "cmake.configureOnEdit": false,
   "cmake.configureOnOpen": false,
+  "cmake.showConfigureWithDebuggerNotification": false,
   "codesnap.backgroundColor": "#eff1f5\t",
   "codesnap.roundedCorners": false,
   "codesnap.showWindowControls": false,
@@ -119,18 +140,20 @@
   "editor.cursorBlinking": "expand",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.detectIndentation": false,
   "editor.fontFamily": "'JetBrainsMono Nerd Font', \"segoe ui\", monospace",
   "editor.fontLigatures": false,
   "editor.fontSize": 18,
   "editor.fontVariations": true,
   "editor.gotoLocation.multipleDefinitions": "goto",
+  "editor.guides.bracketPairs": true,
+  "editor.guides.bracketPairsHorizontal": false,
   "editor.insertSpaces": false,
   "editor.lineHeight": 1.6,
   "editor.minimap.enabled": false,
   "editor.mouseWheelZoom": true,
   "editor.multiCursorModifier": "ctrlCmd",
   "editor.smoothScrolling": true,
-  "editor.tabSize": 2,
   "editor.unicodeHighlight.allowedCharacters": {
     "❮": true,
     "❯": true
@@ -158,7 +181,8 @@
   "files.associations": {
     "*.fdg": "json",
     "*.gs": "glsl",
-    "*.lock": "json"
+    "*.lock": "json",
+    "*.nix": "nix"
   },
   "files.autoSave": "onFocusChange",
   "files.exclude": {
@@ -182,8 +206,32 @@
   "gitlens.ai.model": "vscode",
   "gitlens.ai.vscode.model": "copilot:gpt-4.1",
   "http.proxyStrictSSL": false,
+  "idf.enableCCache": true,
+  "idf.hasWalkthroughBeenShown": true,
+  "indentRainbow.colors": [
+    "rgba(243, 139, 168,0.09)",
+    "rgba(250, 179, 135,0.09)",
+    "rgba(249, 226, 175,0.09)",
+    "rgba(166, 227, 161,0.09)",
+    "rgba(116, 199, 236,0.09)",
+    "rgba(203, 166, 247,0.09)"
+  ],
+  "indentRainbow.errorColor": "rgba(243, 139, 168,0.6)",
+  "indentRainbow.tabmixColor": "rgba(245, 194, 231,0.6)",
   "java.saveActions.organizeImports": false,
   "js/ts.updateImportsOnFileMove.enabled": "always",
+  "json.schemaDownload.trustedDomains": {
+    "https://developer.microsoft.com/json-schemas/": true,
+    "https://json-schema.org/": true,
+    "https://json.schemastore.org/": true,
+    "https://raw.githubusercontent.com/devcontainers/spec/": true,
+    "https://raw.githubusercontent.com/microsoft/vscode/": true,
+    "https://schemastore.azurewebsites.net/": true,
+    "https://www.schemastore.org/": true,
+    "https://zardui.com/": true
+  },
+  "jupyter.askForKernelRestart": false,
+  "latex-workshop.formatting.latex": "latexindent",
   "livePreview.hostIP": "192.168.1.5",
   "loccy.annotations.showMissingTranslationsWarning": false,
   "markdown.preview.fontSize": 18,
@@ -212,7 +260,17 @@
     }
   },
   "nixEnvSelector.useFlakes": true,
+  "platformio-ide.disablePIOHomeStartup": true,
+  "platformio-ide.useBuiltinPIOCore": false,
+  "platformio-ide.useBuiltinPython": false,
   "prettier.semi": true,
+  "qt-core.additionalQtPaths": [
+    {
+      "name": "Qt-6.11.0-linux-g++-x86_64_from_PATH",
+      "path": "/run/current-system/sw/bin/qtpaths"
+    }
+  ],
+  "qt-qml.doNotAskForQmllsDownload": true,
   "remote.autoForwardPortsSource": "hybrid",
   "scm.repositories.selectionMode": "single",
   "search.exclude": {
@@ -224,6 +282,15 @@
   },
   "search.followSymlinks": false,
   "security.workspace.trust.untrustedFiles": "open",
+  "sonarlint.connectedMode.connections.sonarcloud": [
+    {
+      "connectionId": "ahmedamrnabil",
+      "organizationKey": "ahmedamrnabil",
+      "region": "EU"
+    }
+  ],
+  "sqldeveloper.datagrid.fontFamily": "'Droid Sans Mono', monospace",
+  "sqldeveloper.telemetry.enabled": false,
   "tailwindCSS.classFunctions": ["clsx", "tw", "tw\\.[a-z-]+"],
   "tailwindCSS.colorDecorators": true,
   "terminal.integrated.cursorStyle": "line",
@@ -279,6 +346,7 @@
   "terminal.integrated.stickyScroll.enabled": false,
   "terminal.integrated.suggest.cdPath": "off",
   "terminal.integrated.suggest.enabled": false,
+  "typescript.experimental.useTsgo": true,
   "update.mode": "none",
   "update.showReleaseNotes": false,
   "vhdl-by-hgb.vhdl-formatter.case.keyword": "UpperCase",
@@ -291,6 +359,13 @@
   "workbench.activityBar.location": "top",
   "workbench.colorTheme": "Catppuccin Mocha",
   "workbench.editor.empty.hint": "hidden",
+  "workbench.editorAssociations": {
+    "*.copilotmd": "vscode.markdown.preview.editor",
+    "*.qrc": "qt-core.qrcEditor",
+    "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc": "default",
+    "{hexdiff}:/**/*.*": "hexEditor.hexedit"
+  },
+  "workbench.externalBrowser": "edge",
   "workbench.iconTheme": "material-icon-theme",
   "workbench.layoutControl.enabled": false,
   "workbench.list.smoothScrolling": true,
@@ -298,65 +373,15 @@
   "workbench.startupEditor": "none",
   "workbench.tree.indent": 15,
   "workbench.tree.renderIndentGuides": "always",
-  "idf.hasWalkthroughBeenShown": true,
-  "cmake.showConfigureWithDebuggerNotification": false,
-  "cmake.automaticReconfigure": false,
-  "cmake.configureOnEdit": false,
-  "typescript.experimental.useTsgo": true,
-  "idf.enableCCache": true,
-  "platformio-ide.disablePIOHomeStartup": true,
-  "platformio-ide.useBuiltinPIOCore": false,
-  "platformio-ide.useBuiltinPython": false,
-  "[latex]": {
-    "editor.defaultFormatter": "James-Yu.latex-workshop"
-  },
-  "latex-workshop.formatting.latex": "latexindent",
-  "[lua]": {
-    "editor.defaultFormatter": "sumneko.lua"
-  },
-  "workbench.editorAssociations": {
-    "*.copilotmd": "vscode.markdown.preview.editor",
-    "{hexdiff}:/**/*.*": "hexEditor.hexedit",
-    "{git,gitlens,chat-editing-snapshot-text-model,copilot,git-graph,git-graph-3}:/**/*.qrc": "default",
-    "*.qrc": "qt-core.qrcEditor"
-  },
-  "qt-core.additionalQtPaths": [
-    {
-      "name": "Qt-6.11.0-linux-g++-x86_64_from_PATH",
-      "path": "/run/current-system/sw/bin/qtpaths"
-    }
-  ],
-  "[qml]": {
-    "editor.defaultFormatter": "Delgan.qml-format"
-  },
-  "qt-qml.doNotAskForQmllsDownload": true,
-  "sqldeveloper.telemetry.enabled": false,
-  "sqldeveloper.datagrid.fontFamily": "'Droid Sans Mono', monospace",
-  "[sql]": {
-    "editor.defaultFormatter": "cweijan.vscode-postgresql-client2"
-  },
-  "claudeCode.preferredLocation": "panel",
-  "[toml]": {
-    "editor.defaultFormatter": "tamasfe.even-better-toml"
-  },
   "yaml.disableSchemaDetection": [
-    "**/.github/workflows/*.yml",
-    "**/.github/workflows/*.yaml",
-    "**/.gitea/workflows/*.yml",
-    "**/.gitea/workflows/*.yaml",
+    "**/.forgejo/workflows/*.yaml",
     "**/.forgejo/workflows/*.yml",
-    "**/.forgejo/workflows/*.yaml"
-  ],
-  "editor.guides.bracketPairs": true,
-  "editor.guides.bracketPairsHorizontal": false,
-  "indentRainbow.colors": [
-    "rgba(243, 139, 168,0.09)",
-    "rgba(250, 179, 135,0.09)",
-    "rgba(249, 226, 175,0.09)",
-    "rgba(166, 227, 161,0.09)",
-    "rgba(116, 199, 236,0.09)",
-    "rgba(203, 166, 247,0.09)"
-  ],
-  "indentRainbow.errorColor": "rgba(243, 139, 168,0.6)",
-  "indentRainbow.tabmixColor": "rgba(245, 194, 231,0.6)"
+    "**/.gitea/workflows/*.yaml",
+    "**/.gitea/workflows/*.yml",
+    "**/.github/workflows/*.yaml",
+    "**/.github/workflows/*.yml"
+],
+"[github-actions-workflow]": {
+	"editor.defaultFormatter": "redhat.vscode-yaml"
+}
 }
