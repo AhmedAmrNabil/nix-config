@@ -1,0 +1,35 @@
+name: Build packages
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        package:
+          - spotify-adblock
+          - wps-fonts
+          - flydigictl
+          - apple-fonts
+          - claude-desktop
+          - gpu-screen-recorder
+          - gpu-screen-recorder-notification
+          - gpu-screen-recorder-ui
+          - prismlauncher-9
+      max-parallel: 4
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+
+      - uses: cachix/cachix-action@v17
+        with:
+          name: ahmed-amr
+          authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
+
+      - name: Build ${{ matrix.package }}
+        run: nix build .#${{ matrix.package }}
