@@ -2,22 +2,83 @@ name: Build packages
 
 on:
   workflow_dispatch:
+    inputs:
+      all:
+        description: "Build all packages (ignores checkboxes below)"
+        type: boolean
+        default: false
+      wps-fonts:
+        type: boolean
+        default: false
+      flydigictl:
+        type: boolean
+        default: false
+      apple-fonts:
+        type: boolean
+        default: false
+      claude-desktop:
+        type: boolean
+        default: false
+      gpu-screen-recorder:
+        type: boolean
+        default: false
+      gpu-screen-recorder-notification:
+        type: boolean
+        default: false
+      gpu-screen-recorder-ui:
+        type: boolean
+        default: false
+      prismlauncher-9:
+        type: boolean
+        default: false
+      open-scq30:
+        type: boolean
+        default: false
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+    steps:
+      - id: set-matrix
+        run: |
+          declare -A checked=(
+            [wps-fonts]="${{ inputs.wps-fonts }}"
+            [flydigictl]="${{ inputs.flydigictl }}"
+            [apple-fonts]="${{ inputs.apple-fonts }}"
+            [claude-desktop]="${{ inputs.claude-desktop }}"
+            [gpu-screen-recorder]="${{ inputs.gpu-screen-recorder }}"
+            [gpu-screen-recorder-notification]="${{ inputs.gpu-screen-recorder-notification }}"
+            [gpu-screen-recorder-ui]="${{ inputs.gpu-screen-recorder-ui }}"
+            [prismlauncher-9]="${{ inputs.prismlauncher-9 }}"
+            [open-scq30]="${{ inputs.open-scq30 }}"
+          )
+
+          json="["
+          first=true
+          for pkg in "${!checked[@]}"; do
+            if [ "${{ inputs.all }}" = "true" ] || [ "${checked[$pkg]}" = "true" ]; then
+              if [ "$first" = false ]; then json="$json,"; fi
+              json="$json\"$pkg\""
+              first=false
+            fi
+          done
+          json="$json]"
+          echo "matrix=$json" >> "$GITHUB_OUTPUT"
+
+      - name: Fail if nothing selected
+        run: |
+          if [ '${{ steps.set-matrix.outputs.matrix }}' = "[]" ]; then
+            echo "::error::No packages selected and 'all' was not checked."
+            exit 1
+          fi
   build:
+    needs: setup
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package:
-          - wps-fonts
-          - flydigictl
-          - apple-fonts
-          - claude-desktop
-          - gpu-screen-recorder
-          - gpu-screen-recorder-notification
-          - gpu-screen-recorder-ui
-          - prismlauncher-9
-          - open-scq30
+        package: ${{ fromJson(needs.setup.outputs.matrix) }}
       max-parallel: 4
       fail-fast: false
 
