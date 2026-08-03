@@ -5,8 +5,12 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-local = {
-      url = "path:/home/btngana/coding/nixpkgs";
+      url = "path:/home/btngana/coding/nix/nixpkgs";
       flake = false;
+    };
+    btngana-forge = {
+      url = "path:/home/btngana/coding/nix/btngana-nix-forge";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
