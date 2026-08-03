@@ -50,6 +50,7 @@
       claude-desktop
       teams-for-linux
       uv
+      github-cli
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
