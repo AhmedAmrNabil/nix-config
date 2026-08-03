@@ -146,6 +146,13 @@
     CommandLineFlagSecurityWarningsEnabled = false;
   };
 
+  programs.coolercontrol.enable = true;
+  services.hardware.openrgb = {
+    enable = true;
+    package = pkgs.openrgb-with-all-plugins;
+    motherboard = "amd";
+  };
+
   # --------- Extra boot params ------------------
   boot.kernelParams = [
     "mem_sleep_default=deep"
