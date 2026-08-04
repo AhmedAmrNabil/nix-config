@@ -140,7 +140,6 @@
   "editor.cursorBlinking": "expand",
   "editor.cursorSmoothCaretAnimation": "on",
   "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.detectIndentation": false,
   "editor.fontFamily": "'JetBrainsMono Nerd Font', \"segoe ui\", monospace",
   "editor.fontLigatures": false,
   "editor.fontSize": 18,
@@ -250,16 +249,12 @@
         "home-manager": {
           "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").homeConfigurations.\"btngana@desktop-nixos\".options"
         },
-        // By default, this entry will be read from `import <nixpkgs> { }`.
-        // You can write arbitrary Nix expressions here, to produce valid "options" declaration result.
-        // Tip: for flake-based configuration, utilize `builtins.getFlake`
         "nixos": {
           "expr": "(builtins.getFlake \"/home/btngana/dotfiles\").nixosConfigurations.desktop-nixos.options"
         }
       }
     }
   },
-  "nixEnvSelector.useFlakes": true,
   "platformio-ide.disablePIOHomeStartup": true,
   "platformio-ide.useBuiltinPIOCore": false,
   "platformio-ide.useBuiltinPython": false,
@@ -380,8 +375,8 @@
     "**/.gitea/workflows/*.yml",
     "**/.github/workflows/*.yaml",
     "**/.github/workflows/*.yml"
-],
-"[github-actions-workflow]": {
-	"editor.defaultFormatter": "redhat.vscode-yaml"
-}
+  ],
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  }
 }
