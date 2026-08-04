@@ -1,6 +1,7 @@
 {
   pkgs,
   pkgsUnstable,
+  username,
   ...
 }:
 {
@@ -56,6 +57,7 @@
   networking.hostName = "desktop-nixos"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   networking.modemmanager.enable = false; # disable unused, speeds up boot
+  networking.firewall.checkReversePath = false;
 
   networking.firewall.allowedTCPPorts = [
     24800 # deskflow
@@ -136,6 +138,8 @@
       mangohud
       deskflow
       android-tools
+      proton-vpn
+      proton-vpn-cli
     ]
     ++ (with pkgsUnstable; [
       claude-code
@@ -164,6 +168,21 @@
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0085", ATTR{power/wakeup}="enabled"
     ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", ATTR{power/wakeup}="enabled"
   '';
+
+  # --------- Extra configuration ------------------
+  virtualisation = {
+    containers.enable = true;
+    podman = {
+      enable = true;
+      defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
+    };
+  };
+
+  users.users.${username} = {
+    extraGroups = [
+      "podman"
+    ];
+  };
 
   # --------- Swap ------------------
   swapDevices = [
