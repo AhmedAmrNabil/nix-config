@@ -51,6 +51,7 @@
       teams-for-linux
       uv
       github-cli
+      notion-app-enhanced
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
@@ -72,12 +73,10 @@
     ]
     ++ (with pkgsUnstable; [
       google-antigravity-no-fhs
-      google-antigravity-ide-no-fhs
       google-antigravity-cli
       helium
       open-scq30
       postman
-      jetbrains.idea
     ]);
 
   xdg.desktopEntries.reboot-to-windows = {
