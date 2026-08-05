@@ -2,6 +2,7 @@
   pkgs,
   pkgsUnstable,
   username,
+  config,
   ...
 }:
 {
@@ -119,31 +120,23 @@
   services.fwupd.enable = false;
 
   # --------- Packages ------------------
-  environment.systemPackages =
-    with pkgs;
-    [
-      nano
-      (lutris.override {
-        extraPkgs =
-          pkgs: with pkgs; [
-            wineWow64Packages.stable
-            winetricks
-            gamemode
-          ];
-        extraLibraries = pkgs: [
-          pkgs.gamemode
+  environment.systemPackages = with pkgs; [
+    nano
+    (lutris.override {
+      extraPkgs =
+        pkgs: with pkgs; [
+          wineWow64Packages.stable
+          winetricks
+          gamemode
         ];
-      })
-      scrcpy
-      mangohud
-      deskflow
-      android-tools
-      proton-vpn
-      proton-vpn-cli
-    ]
-    ++ (with pkgsUnstable; [
-      claude-code
-    ]);
+      extraLibraries = pkgs: [
+        pkgs.gamemode
+      ];
+    })
+    deskflow
+    proton-vpn
+    proton-vpn-cli
+  ];
 
   # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
   environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
@@ -183,6 +176,13 @@
       "podman"
     ];
   };
+
+  boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
+  boot.kernelModules = [ "v4l2loopback" ];
+
+  boot.extraModprobeConfig = ''
+    options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam","scrcpy Cam" exclusive_caps=1,1
+  '';
 
   # --------- Swap ------------------
   swapDevices = [

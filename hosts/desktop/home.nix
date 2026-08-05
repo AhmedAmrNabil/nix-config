@@ -52,6 +52,13 @@
       uv
       github-cli
       notion-app-enhanced
+      mangohud
+      android-tools
+      scrcpy
+      (pkgs.writeShellScriptBin "start-scrcpy-camera" ''
+        #bash
+        exec ${pkgs.scrcpy}/bin/scrcpy --video-source=camera --camera-id=0 --camera-size=1280x720 --v4l2-sink=/dev/video2 --no-audio --no-audio-playback "$@"
+      '')
       (pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
