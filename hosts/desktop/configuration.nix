@@ -19,7 +19,6 @@
     docker = {
       enable = true;
       storageDriver = "overlay2";
-      enableNvidia = true;
     };
     flydigictl.enable = true;
     gpu-screen-recorder = {
@@ -74,11 +73,6 @@
     25565 # minecraft
   ];
 
-  # loopback for ollama and open-webui
-  networking.hosts = {
-    "127.0.0.1" = [ "ollama.local" ];
-  };
-
   hardware.bluetooth.enable = true;
 
   # --------- Timezone and clock ------------------
@@ -93,27 +87,6 @@
     pkgs.platformio-core
     pkgs.openocd
   ];
-
-  # Enable local llm
-  services.ollama = {
-    enable = true;
-    package = pkgsUnstable.ollama-cuda;
-    environmentVariables = {
-      OLLAMA_CONTEXT_LENGTH = "65536"; # was 8192 — this is the context actually used via /v1
-      OLLAMA_NUM_PARALLEL = "1"; # KV cache = num_ctx x num_parallel; avoids VRAM blowup
-      OLLAMA_KV_CACHE_TYPE = "q8_0"; # halves KV-cache VRAM
-    };
-  };
-  services.open-webui = {
-    enable = true;
-    port = 9000;
-  };
-
-  # enable nginx reverse proxy for open-webui
-  services.nginx = {
-    enable = true;
-    virtualHosts."ollama.local".locations."/".proxyPass = "http://127.0.0.1:9000";
-  };
 
   # disable some services that are not needed
   systemd.services.Networkmanager-wait-online.enable = false;
@@ -134,8 +107,6 @@
       ];
     })
     deskflow
-    proton-vpn
-    proton-vpn-cli
   ];
 
   # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
@@ -143,7 +114,6 @@
     CommandLineFlagSecurityWarningsEnabled = false;
   };
 
-  programs.coolercontrol.enable = true;
   services.hardware.openrgb = {
     enable = true;
     package = pkgs.openrgb-with-all-plugins;
