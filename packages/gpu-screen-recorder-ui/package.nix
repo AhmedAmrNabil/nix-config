@@ -34,12 +34,12 @@
 
 stdenv.mkDerivation (finalAttrs: {
   pname = "gpu-screen-recorder-ui";
-  version = "1.12.6";
+  version = "1.13.5";
 
   src = fetchgit {
     url = "https://repo.dec05eba.com/gpu-screen-recorder-ui";
     tag = finalAttrs.version;
-    hash = "sha256-7NAZ2Nupi8mQElgJz3KZ3qiFshsCDcUoRztHC30YWMA=";
+    hash = "sha256-ObIN8qD+34nXZv6v6vLK3f6bezVSXqOd0xPGci52awU=";
   };
 
   nativeBuildInputs = [
@@ -80,7 +80,7 @@ stdenv.mkDerivation (finalAttrs: {
   mesonBuildType = "release";
 
   mesonFlags = [
-    # should be handled in the nixos module
+    # must be handled in the nixos module as extra file permissions are stripped in the nix store
     (lib.mesonBool "capabilities" false)
   ];
 
@@ -91,7 +91,7 @@ stdenv.mkDerivation (finalAttrs: {
       };
     in
     ''
-      wrapProgram "$out/bin/${finalAttrs.meta.mainProgram}" \
+      wrapProgram "$out/bin/gsr-ui" \
         --prefix LD_LIBRARY_PATH : "${lib.makeLibraryPath [ libglvnd ]}" \
         --prefix XDG_DATA_DIRS : "${gsettings-desktop-schemas}/share/gsettings-schemas/${gsettings-desktop-schemas.name}" \
         --prefix PATH : "${wrapperDir}" \
