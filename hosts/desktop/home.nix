@@ -102,6 +102,7 @@
     };
     Service = {
       Type = "simple";
+      Environment = "PATH=${pkgs.ffmpeg-full}/bin";
       WorkingDirectory = "/home/btngana/coding/test-service";
       ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
       Restart = "on-failure";
