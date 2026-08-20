@@ -82,7 +82,11 @@
       google-antigravity-no-fhs
       google-antigravity-cli
       helium
-      open-scq30
+      (open-scq30.overrideAttrs (old: {
+        preFixup = (old.preFixup or "") + ''
+          gappsWrapperArgs+=(--prefix XDG_DATA_DIRS : "${cosmic-icons}/share")
+        '';
+      }))
       postman
     ]);
 

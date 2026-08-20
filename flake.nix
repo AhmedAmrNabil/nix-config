@@ -85,6 +85,7 @@
 
       specialArgs = {
         inherit
+          self
           inputs
           pkgsLocal
           pkgsUnstable
@@ -165,6 +166,9 @@
         "${username}@laptop-nixos" = mkHome "laptop";
         "${username}@wsl-nixos" = mkHome "wsl";
       };
+
+      # for nix shell and nix run commands
+      legacyPackages.${system} = pkgs;
 
       # for building packages with nix build .#packageName
       packages.${system} =

@@ -28,7 +28,7 @@ rec {
   flydigictl = pkgs.callPackage ./flydigictl/package.nix { };
   apple-fonts = pkgs.callPackage ./apple-fonts/package.nix { };
   claude-desktop = pkgs.callPackage ./claude-desktop/package.nix { };
-  open-scq30 = pkgs.callPackage ./open-scq30/package.nix { };
+  # open-scq30 = pkgs.callPackage ./open-scq30/package.nix { };
 
   gpu-screen-recorder = pkgs.callPackage ./gpu-screen-recorder/package.nix { };
   gpu-screen-recorder-notification =
