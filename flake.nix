@@ -24,10 +24,7 @@
       url = "github:nix-community/NixOS-WSL/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland = {
-      url = "github:hyprwm/Hyprland";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
+    hyprland.url = "github:hyprwm/Hyprland";
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -206,10 +203,7 @@
             '';
           };
         };
-      apps.${system}.update-local-packages = {
-        type = "app";
-        program = "${self.packages.${system}.update-local-packages}/bin/update-local-packages";
-      };
+      apps.${system}.update-local-packages = self.packages.${system}.update-local-packages;
 
       devShells.${system}.default = pkgs.mkShell {
         name = "dotfiles";
