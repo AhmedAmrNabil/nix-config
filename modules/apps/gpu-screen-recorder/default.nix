@@ -1,62 +1,35 @@
 {
-  config,
   lib,
-  pkgs,
   ...
 }:
-
-let
-  cfg = config.apps.gpu-screen-recorder;
-  package = cfg.package.override {
-    inherit (config.security) wrapperDir;
-  };
-
-  uiPackage = cfg.ui.package.override {
-    gpu-screen-recorder = package;
-    inherit (config.security) wrapperDir;
-  };
-in
 {
-  options.apps.gpu-screen-recorder = {
-    enable = lib.mkEnableOption "the GPU Screen Recorder application";
+  flake.nixosModules.gpu-screen-recorder =
+    {
+      config,
+      pkgs,
+      ...
+    }:
+    {
+      environment.systemPackages = [
+        pkgs.gpu-screen-recorder
+        (pkgs.gpu-screen-recorder-ui.override {
+          inherit (config.security) wrapperDir;
+        })
+        pkgs.gpu-screen-recorder-notification
+      ];
 
-    package = lib.mkPackageOption pkgs "gpu-screen-recorder" { };
+      security.wrappers."gsr-kms-server" = {
+        owner = "root";
+        group = "root";
+        capabilities = "cap_sys_admin+ep";
+        source = lib.getExe' pkgs.gpu-screen-recorder "gsr-kms-server";
+      };
 
-    ui = {
-      enable = lib.mkEnableOption "the GPU Screen Recorder overlay UI";
-      package = lib.mkPackageOption pkgs "gpu-screen-recorder-ui" { };
-      notifPackage = lib.mkPackageOption pkgs "gpu-screen-recorder-notification" { };
+      security.wrappers."gsr-global-hotkeys" = {
+        owner = "root";
+        group = "root";
+        capabilities = "cap_setuid+ep";
+        source = lib.getExe' pkgs.gpu-screen-recorder-ui "gsr-global-hotkeys";
+      };
     };
-  };
-
-  config = lib.mkIf cfg.enable (
-    lib.mkMerge [
-      {
-        environment.systemPackages = [ cfg.package ];
-
-        security.wrappers."gsr-kms-server" = {
-          owner = "root";
-          group = "root";
-          capabilities = "cap_sys_admin+ep";
-          source = lib.getExe' package "gsr-kms-server";
-        };
-      }
-
-      (lib.mkIf cfg.ui.enable {
-        environment.systemPackages = [
-          cfg.ui.package
-          cfg.ui.notifPackage
-        ];
-
-        security.wrappers."gsr-global-hotkeys" = {
-          owner = "root";
-          group = "root";
-          capabilities = "cap_setuid+ep";
-          source = lib.getExe' uiPackage "gsr-global-hotkeys";
-        };
-
-      })
-    ]
-  );
-
 }

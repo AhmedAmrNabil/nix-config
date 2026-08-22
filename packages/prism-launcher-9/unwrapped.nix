@@ -9,7 +9,12 @@
   ghc_filesystem,
   jdk17,
   kdePackages,
-  libnbtplusplus,
+  libnbtplusplus ? fetchFromGitHub {
+    owner = "PrismLauncher";
+    repo = "libnbtplusplus";
+    rev = "687e43031df0dc641984b4256bcca50d5b3f7de3";
+    hash = "sha256-7itkptyjoRcXfGLwg1/jxajetZ3a4mDc66+w4X6yW8s=";
+  },
   ninja,
   stripJavaArchivesHook,
   tomlplusplus,

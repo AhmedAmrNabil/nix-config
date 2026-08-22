@@ -1,16 +1,5 @@
 {
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.core.hardware.nvidia;
-in
-{
-  options.core.hardware.nvidia = {
-    enable = lib.mkEnableOption "Nvidia configuration options";
-  };
-  config = lib.mkIf cfg.enable {
+  flake.nixosModules.nvidia = { config, ... }: {
     hardware.graphics = {
       enable = true;
       enable32Bit = true;

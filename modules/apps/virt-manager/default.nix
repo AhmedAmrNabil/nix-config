@@ -1,116 +1,97 @@
 {
-  config,
-  lib,
-  pkgs,
-  username,
-  ...
-}:
-let
-  inherit (lib) mkEnableOption mkIf;
-  cfg = config.apps.virt-manager;
-in
-{
-  options.apps.virt-manager = {
-    enable = mkEnableOption "Virtualization manager";
-    extraPrepareConfig = lib.mkOption {
-      type = lib.types.lines;
-      default = "";
-      description = "Extra config to add to prepare phase of virt-manager hook";
-    };
-    extraReleaseConfig = lib.mkOption {
-      type = lib.types.lines;
-      default = "";
-      description = "Extra config to add to release phase of virt-manager hook";
-    };
-  };
+  flake.nixosModules.virt-manager =
+    {
+      pkgs,
+      username,
+      ...
+    }:
+    {
+      programs.virt-manager.enable = true;
+      users.users.${username}.extraGroups = [ "libvirtd" ];
 
-  config = mkIf cfg.enable {
-    programs.virt-manager.enable = true;
-    users.users.${username}.extraGroups = [ "libvirtd" ];
-
-    virtualisation.libvirtd = {
-      enable = true;
-      onBoot = "ignore";
-      onShutdown = "shutdown";
-      extraConfig = ''
-        log_filters="3:qemu 1:libvirt"
-        log_outputs="2:file:/var/log/libvirt/libvirtd.log"
-      '';
-
-      qemu = {
-        # Runs QEMU as your user to avoid permission issues
-        runAsRoot = false;
-        swtpm.enable = true; # needed for Windows 11 TPM
-      };
-      hooks.qemu = {
-        "win11-passthrough" = pkgs.writeShellScript "win11-passthrough" ''
-          #bash
-          set -euo pipefail
-          GUEST="$1"
-          PHASE="$2"   # prepare / start / started / stopped / release / migrate / restore / reconnect / attach
-          DISPMGR="plasmalogin"
-
-          [[ "$GUEST" != "win11" ]] && exit 0
-
-          case "$PHASE" in
-            prepare)
-              systemctl stop "$DISPMGR.service"
-              while systemctl is-active --quiet "$DISPMGR.service"; do
-                sleep 1
-              done
-              sleep 2
-              modprobe -r nvidia_uvm
-              modprobe -r nvidia_drm
-              modprobe -r nvidia_modeset
-              modprobe -r nvidia
-              modprobe -r i2c_nvidia_gpu
-              modprobe vfio
-              modprobe vfio_pci
-              modprobe vfio_iommu_type1
-              ${cfg.extraPrepareConfig}
-              ;;
-            release)
-              ${cfg.extraReleaseConfig}
-              systemctl start home-btngana-crucial.automount
-              systemctl start home-btngana-Games.automount
-              modprobe -r vfio_pci
-              modprobe -r vfio
-              modprobe -r vfio_iommu_type1
-              modprobe i2c_nvidia_gpu
-              modprobe nvidia
-              modprobe nvidia_modeset
-              modprobe nvidia_drm
-              modprobe nvidia_uvm
-              systemctl start "$DISPMGR.service"
-              ;;
-          esac
+      virtualisation.libvirtd = {
+        enable = true;
+        onBoot = "ignore";
+        onShutdown = "shutdown";
+        extraConfig = ''
+          log_filters="3:qemu 1:libvirt"
+          log_outputs="2:file:/var/log/libvirt/libvirtd.log"
         '';
+
+        qemu = {
+          # Runs QEMU as your user to avoid permission issues
+          runAsRoot = false;
+          swtpm.enable = true; # needed for Windows 11 TPM
+        };
+        hooks.qemu = {
+          "win11-passthrough" = pkgs.writeShellScript "win11-passthrough" ''
+            #bash
+            set -euo pipefail
+            GUEST="$1"
+            PHASE="$2"   # prepare / start / started / stopped / release / migrate / restore / reconnect / attach
+            DISPMGR="plasmalogin"
+
+            [[ "$GUEST" != "win11" ]] && exit 0
+
+            case "$PHASE" in
+              prepare)
+                systemctl stop "$DISPMGR.service"
+                while systemctl is-active --quiet "$DISPMGR.service"; do
+                  sleep 1
+                done
+                sleep 2
+                modprobe -r nvidia_uvm
+                modprobe -r nvidia_drm
+                modprobe -r nvidia_modeset
+                modprobe -r nvidia
+                modprobe -r i2c_nvidia_gpu
+                modprobe vfio
+                modprobe vfio_pci
+                modprobe vfio_iommu_type1
+                systemctl stop home-btngana-Games.automount home-btngana-Games.mount
+                systemctl stop home-btngana-crucial.automount home-btngana-crucial.mount
+                ;;
+              release)
+                systemctl start home-btngana-crucial.automount
+                systemctl start home-btngana-Games.automount
+                modprobe -r vfio_pci
+                modprobe -r vfio
+                modprobe -r vfio_iommu_type1
+                modprobe i2c_nvidia_gpu
+                modprobe nvidia
+                modprobe nvidia_modeset
+                modprobe nvidia_drm
+                modprobe nvidia_uvm
+                systemctl start "$DISPMGR.service"
+                ;;
+            esac
+          '';
+        };
+      };
+
+      environment.systemPackages = with pkgs; [
+        dnsmasq
+        virtiofsd # for virtiofs shared folders
+      ];
+
+      boot.initrd.kernelModules = [
+        "vfio_pci"
+        "vfio"
+        "vfio_iommu_type1"
+      ];
+
+      boot.kernelModules = [
+        "vfio_pci"
+        "vfio"
+        "vfio_iommu_type1"
+      ];
+
+      boot.kernelParams = [
+        "amd_iommu=on"
+        "iommu=pt" # passthrough mode — reduces overhead for devices not being passed through
+      ];
+      environment.sessionVariables = {
+        LIBVIRT_DEFAULT_URI = "qemu:///system";
       };
     };
-
-    environment.systemPackages = with pkgs; [
-      dnsmasq
-      virtiofsd # for virtiofs shared folders
-    ];
-
-    boot.initrd.kernelModules = [
-      "vfio_pci"
-      "vfio"
-      "vfio_iommu_type1"
-    ];
-
-    boot.kernelModules = [
-      "vfio_pci"
-      "vfio"
-      "vfio_iommu_type1"
-    ];
-
-    boot.kernelParams = [
-      "amd_iommu=on"
-      "iommu=pt" # passthrough mode — reduces overhead for devices not being passed through
-    ];
-    environment.sessionVariables = {
-      LIBVIRT_DEFAULT_URI = "qemu:///system";
-    };
-  };
 }

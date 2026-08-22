@@ -1,25 +1,16 @@
 {
-  config,
   lib,
-  username,
   inputs,
   ...
 }:
-let
-  cfg = config.core.nix-cfg;
-in
 {
-  options.core.nix-cfg = {
-    enable = lib.mkEnableOption "Enable nix configuration options";
-  };
-
-  config = lib.mkIf cfg.enable {
+  flake.nixosModules.nix-cfg = { username, ... }: {
     nix.settings = {
       warn-dirty = false;
       use-xdg-base-directories = true;
       keep-going = true;
       trusted-users = [
-        "${username}"
+        username
         "@wheel"
       ];
       substituters = [

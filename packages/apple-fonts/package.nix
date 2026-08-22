@@ -82,9 +82,9 @@ stdenvNoCC.mkDerivation {
 
   meta = with lib; {
     description = "Fonts for Apple platforms, including San Francisco and New York typefaces";
-    homepage = "https://developer.apple.com/fonts/";
+    homepage = "https://developer.apple.com/fonts";
     license = licenses.unfree; # Apple proprietary font license
     platforms = platforms.all;
-    maintainers = [ ];
+    maintainers = with lib.maintainers; [ AhmedAmr ];
   };
 }

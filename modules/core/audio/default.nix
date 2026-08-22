@@ -1,16 +1,5 @@
 {
-  config,
-  lib,
-  ...
-}:
-let
-  cfg = config.core.audio;
-in
-{
-  options.core.audio = {
-    enable = lib.mkEnableOption "Enable audio configuration options";
-  };
-  config = lib.mkIf cfg.enable {
+  flake.nixosModules.audio = {
     services.pulseaudio.enable = false;
     security.rtkit.enable = true;
     services.pipewire = {
