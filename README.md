@@ -22,7 +22,7 @@ dotfiles/
 ├── config/                   # ⚙️ Non-Nix dotfiles & standalone configs (Hyprland, Mako icons...)
 ├── modules/                  # 🌲 Dendritic module tree (auto-imported by import-tree)
 │   ├── apps/                 # 🚀 App modules (Alacritty, Fish, VS Code, Waybar, QuickShell, Rofi...)
-│   ├── core/                 # ⚙️ System core modules (audio, boot, fonts, hardware, kernel, nix, users)
+│   ├── system/               # ⚙️ System modules (audio, boot, fonts, hardware, kernel, nix, users)
 │   ├── de/                   # 🖥️ Desktop environments (Hyprland, KDE Plasma 6)
 │   ├── hosts/                # 💻 Per-machine host definitions (desktop, laptop, wsl, iso)
 │   ├── lib/                  # 🛠️ Helper utilities (utils.nix)
