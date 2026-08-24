@@ -27,6 +27,7 @@ dotfiles/
 │   ├── hosts/                # 💻 Per-machine host definitions (desktop, laptop, wsl, iso)
 │   ├── lib/                  # 🛠️ Helper utilities (utils.nix)
 │   ├── scripts/              # 📜 System scripts (mountfs.sh, wallpapers.sh)
+│   ├── services/             # 🛎️ Service modules (docker, podman, tailscale,...)
 │   ├── nixpkgs.nix           # 📦 Nixpkgs instantiation & overlay configs
 │   ├── shared.nix            # 🔗 Shared options & directory path definitions
 │   └── systems.nix           # 🏗️ Machine configurations (nixosConfigurations & homeConfigurations)
