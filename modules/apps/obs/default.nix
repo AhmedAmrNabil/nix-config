@@ -2,7 +2,6 @@
   flake.nixosModules.obs =
     {
       pkgsUnstable,
-      config,
       ...
     }:
     {
@@ -13,7 +12,6 @@
             cudaSupport = true;
           }
         );
-        # see below, implemented the virtual camera option + scrcpy camera support
         enableVirtualCamera = false;
         plugins = with pkgsUnstable.obs-studio-plugins; [
           droidcam-obs
@@ -25,14 +23,13 @@
           obs-vkcapture
         ];
       };
-
-      # enabling virtual camera  + scrcpy camera support
+      # virtualCamera custom config
       security.polkit.enable = true;
-      boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-      boot.kernelModules = [ "v4l2loopback" ];
-
-      boot.extraModprobeConfig = ''
-        options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam","scrcpy Cam" exclusive_caps=1,1
-      '';
+      v4l2loopback.devices = [
+        {
+          name = "OBS Cam";
+          index = 1;
+        }
+      ];
     };
 }

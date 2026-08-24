@@ -3,27 +3,33 @@
     imports = with self.nixosModules; [
       ./_hardware-configuration.nix
       # apps
-      docker
       gpu-screen-recorder
       nh
       obs
       open-tablet-driver
-      podman
+      scrcpy
       steam
+
+      # services
+      docker
+      podman
       tailscale
       virt-manager
+      v4l2loopback
 
-      # core
+      # system
       audio
       boot
-      fonts
       ddcci
-      nvidia
+      fonts
       kernel
       nix-cfg
+      nvidia
       users
-      kde
+
+      # desktop environment
       hyprland
+      kde
     ];
   };
 
@@ -31,15 +37,16 @@
     imports = with self.homeModules; [
       alacritty
       cava
+      devenv
       foot
+      hyprland
       only-office
+      quickshell
       rofi
+      scrcpy
       spotify
       vscode
       yazi
-      quickshell
-      devenv
-      hyprland
     ];
   };
 }

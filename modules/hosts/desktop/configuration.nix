@@ -1,9 +1,7 @@
 {
   flake.nixosModules.desktop-nixos =
     {
-      config,
       pkgs,
-      username,
       ...
     }:
     {
@@ -68,12 +66,6 @@
         CommandLineFlagSecurityWarningsEnabled = false;
       };
 
-      services.hardware.openrgb = {
-        enable = true;
-        package = pkgs.openrgb-with-all-plugins;
-        motherboard = "amd";
-      };
-
       # --------- Extra boot params ------------------
       boot.kernelParams = [
         "mem_sleep_default=deep"
@@ -86,6 +78,13 @@
         ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", ATTR{power/wakeup}="enabled"
       '';
 
+      # -------- Extra Configuration -----------------
+      services.hardware.openrgb = {
+        enable = true;
+        package = pkgs.openrgb-with-all-plugins;
+        motherboard = "amd";
+      };
+
       # --------- Swap ------------------
       swapDevices = [
         {
@@ -97,93 +96,95 @@
       system.stateVersion = "25.05";
     };
 
-  flake.homeModules.desktop-nixos = { pkgs, pkgsUnstable, ... }: {
-    programs.nix-index.enable = true; # enable nix-index for faster package searching
+  flake.homeModules.desktop-nixos =
+    {
+      pkgs,
+      pkgsUnstable,
+      lib,
+      ...
+    }:
+    {
+      programs.nix-index.enable = true; # enable nix-index for faster package searching
 
-    home.shellAliases = {
-      "..." = "cd ../..";
-      clock = "tty-clock -tcDBC 4";
-    };
-
-    home.packages =
-      with pkgs;
-      [
-        element-desktop
-        handbrake
-        jdk25
-        kdePackages.kdialog
-        libnotify
-        localsend
-        microsoft-edge
-        obsidian
-        prismlauncher-9
-        transmission_4-qt
-        tty-clock
-        vlc
-        xournalpp
-        claude-desktop
-        teams-for-linux
-        uv
-        github-cli
-        notion-app-enhanced
-        mangohud
-        android-tools
-        scrcpy
-        (pkgs.writeShellScriptBin "start-scrcpy-camera" ''
-          #bash
-          exec ${pkgs.scrcpy}/bin/scrcpy --video-source=camera --camera-id=0 --camera-size=1280x720 --v4l2-sink=/dev/video2 --no-audio --no-audio-playback "$@"
-        '')
-        (pkgs.writeShellScriptBin "gdu-clean" ''
-          #bash
-          IGNORE=$(
-            findmnt --raw --noheadings --output TARGET,FSTYPE \
-              | awk '$2 == "fuseblk" {print $1}' \
-              | paste -sd "," -
-          )
-
-          IGNORE="$IGNORE,/run,/mnt"
-          exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
-        '')
-        (discord.override {
-          withVencord = true;
-          enableAutoscroll = true;
-          # workaround for keybinds not working in wayland
-          commandLineArgs = "--ozone-platform=x11";
-          vencord = pkgsUnstable.vencord;
-        })
-      ]
-      ++ (with pkgsUnstable; [
-        google-antigravity-no-fhs
-        google-antigravity-cli
-        helium
-        open-scq30
-        postman
-        inkscape
-      ]);
-
-    xdg.desktopEntries.reboot-to-windows = {
-      name = "Reboot to Windows";
-      comment = "Restart the system and boot into Windows";
-      icon = ../../../assets/windows-11.png;
-      exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
-      categories = [ "System" ];
-      terminal = false;
-    };
-
-    systemd.user.services.test-service = {
-      Unit = {
-        Description = "Test Service";
-        After = [ "network.target" ];
+      home.shellAliases = {
+        "..." = "cd ../..";
+        clock = "${lib.getExe pkgs.tty-clock} -tcDBC 4";
       };
-      Service = {
-        Type = "simple";
-        Environment = "PATH=${pkgs.ffmpeg-full}/bin";
-        WorkingDirectory = "/home/btngana/coding/test-service";
-        ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
-        Restart = "on-failure";
-        RestartSec = 5;
+
+      home.packages =
+        with pkgs;
+        [
+          element-desktop
+          handbrake
+          jdk25
+          kdePackages.kdialog
+          libnotify
+          localsend
+          microsoft-edge
+          obsidian
+          prismlauncher-9
+          transmission_4-qt
+          tty-clock
+          vlc
+          xournalpp
+          claude-desktop
+          teams-for-linux
+          uv
+          github-cli
+          notion-app-enhanced
+          mangohud
+          android-tools
+          (pkgs.writeShellScriptBin "gdu-clean" ''
+            #bash
+            IGNORE=$(
+              findmnt --raw --noheadings --output TARGET,FSTYPE \
+                | awk '$2 == "fuseblk" {print $1}' \
+                | paste -sd "," -
+            )
+
+            IGNORE="$IGNORE,/run,/mnt"
+            exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
+          '')
+          (discord.override {
+            withVencord = true;
+            enableAutoscroll = true;
+            # workaround for keybinds not working in wayland
+            commandLineArgs = "--ozone-platform=x11";
+            vencord = pkgsUnstable.vencord;
+          })
+        ]
+        ++ (with pkgsUnstable; [
+          google-antigravity-no-fhs
+          google-antigravity-cli
+          helium
+          open-scq30
+          postman
+          inkscape
+        ]);
+
+      xdg.desktopEntries.reboot-to-windows = {
+        name = "Reboot to Windows";
+        comment = "Restart the system and boot into Windows";
+        icon = ../../../assets/windows-11.png;
+        exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
+        categories = [ "System" ];
+        terminal = false;
       };
-      Install.WantedBy = [ "default.target" ];
+
+      systemd.user.services.test-service = {
+        Unit = {
+          Description = "Test Service";
+          After = [ "network.target" ];
+        };
+        Service = {
+          Type = "simple";
+          Environment = "PATH=${pkgs.ffmpeg-full}/bin";
+          WorkingDirectory = "/home/btngana/coding/test-service";
+          ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
+          Restart = "on-failure";
+          RestartSec = 5;
+        };
+        Install.WantedBy = [ "default.target" ];
+      };
     };
-  };
 }
