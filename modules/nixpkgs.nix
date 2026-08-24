@@ -8,6 +8,14 @@
 
       overlays = (import ../overlays) ++ [
         (final: prev: import ../packages { pkgs = final; })
+        (final: prev: {
+          inherit (prev.lixPackageSets.stable)
+            nixpkgs-review
+            nix-eval-jobs
+            nix-fast-build
+            colmena
+            ;
+        })
         inputs.antigravity-nix.overlays.default
         inputs.helium.overlays.default
       ];

@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.nixosModules.nix-cfg = { username, ... }: {
+  flake.nixosModules.nix-cfg = { username, pkgs, ... }: {
     nix.settings = {
       warn-dirty = false;
       use-xdg-base-directories = true;
@@ -46,5 +46,6 @@
     };
 
     nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
+    nix.package = pkgs.lixPackageSets.stable.lix;
   };
 }
