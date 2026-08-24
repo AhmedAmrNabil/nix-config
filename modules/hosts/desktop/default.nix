@@ -8,6 +8,7 @@
       nh
       obs
       open-tablet-driver
+      podman
       steam
       tailscale
       virt-manager

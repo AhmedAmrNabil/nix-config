@@ -86,28 +86,6 @@
         ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", ATTR{power/wakeup}="enabled"
       '';
 
-      # --------- Extra configuration ------------------
-      virtualisation = {
-        containers.enable = true;
-        podman = {
-          enable = true;
-          defaultNetwork.settings.dns_enabled = true; # Required for containers under podman-compose to be able to talk to each other.
-        };
-      };
-
-      users.users.${username} = {
-        extraGroups = [
-          "podman"
-        ];
-      };
-
-      boot.extraModulePackages = [ config.boot.kernelPackages.v4l2loopback ];
-      boot.kernelModules = [ "v4l2loopback" ];
-
-      boot.extraModprobeConfig = ''
-        options v4l2loopback devices=2 video_nr=1,2 card_label="OBS Cam","scrcpy Cam" exclusive_caps=1,1
-      '';
-
       # --------- Swap ------------------
       swapDevices = [
         {
@@ -180,12 +158,13 @@
         helium
         open-scq30
         postman
+        inkscape
       ]);
 
     xdg.desktopEntries.reboot-to-windows = {
       name = "Reboot to Windows";
       comment = "Restart the system and boot into Windows";
-      icon = "${../../../assets/windows-11.png}";
+      icon = ../../../assets/windows-11.png;
       exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
       categories = [ "System" ];
       terminal = false;
