@@ -1,8 +1,8 @@
-{ pkgs }:
-pkgs.stdenv.mkDerivation {
+{ stdenv, fetchgit }:
+stdenv.mkDerivation {
   name = "wpsoffice-fonts";
   version = "2.0";
-  src = pkgs.fetchgit {
+  src = fetchgit {
     url = "https://github.com/dv-anomaly/ttf-wps-fonts";
     rev = "8c980c24289cb08e03f72915970ce1bd6767e45a";
     sha256 = "sha256-x+grMnpEGLkrGVud0XXE8Wh6KT5DoqE6OHR+TS6TagI=";

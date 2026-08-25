@@ -7,7 +7,7 @@
       hasLocal = builtins.pathExists localPkgsPath;
 
       overlays = (import ../overlays) ++ [
-        (final: prev: import ../packages { pkgs = final; })
+        (final: prev: import ../packages { pkgs = prev; })
         (final: prev: {
           inherit (prev.lixPackageSets.stable)
             nixpkgs-review

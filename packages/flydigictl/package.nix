@@ -6,13 +6,9 @@
   libusb1,
   fetchFromGitHub,
 }:
-
-let
-  version = "0.0.1";
-in
-buildGoModule {
+buildGoModule (finalAttrs: {
   pname = "flydigictl";
-  inherit version;
+  version = "0.0.1";
 
   src = fetchFromGitHub {
     owner = "pipe01";
@@ -32,7 +28,7 @@ buildGoModule {
 
   ldflags = [
     "-X"
-    "github.com/pipe01/flydigictl/pkg/version.Version=${version}"
+    "github.com/pipe01/flydigictl/pkg/version.Version=${finalAttrs.version}"
   ];
 
   # Build both binaries
@@ -71,4 +67,4 @@ buildGoModule {
     maintainers = [ ];
     platforms = platforms.linux;
   };
-}
+})
