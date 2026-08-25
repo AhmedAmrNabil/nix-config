@@ -152,6 +152,7 @@
             commandLineArgs = "--ozone-platform=x11";
             vencord = pkgsUnstable.vencord;
           })
+          discover-overlay
         ]
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
