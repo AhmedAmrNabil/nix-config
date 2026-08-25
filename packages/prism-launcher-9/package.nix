@@ -22,7 +22,6 @@
   openal,
   pciutils,
   pipewire,
-  prismlauncher-unwrapped,
   stdenv,
   symlinkJoin,
   udev,
@@ -40,6 +39,7 @@
   ],
   msaClientID ? null,
   textToSpeechSupport ? stdenv.hostPlatform.isLinux,
+  callPackage
 }:
 
 assert lib.assertMsg (
@@ -51,7 +51,7 @@ assert lib.assertMsg (
 ) "textToSpeechSupport only has an effect on Linux.";
 
 let
-  prismlauncher' = prismlauncher-unwrapped.override { inherit msaClientID gamemodeSupport; };
+  prismlauncher' = callPackage ./unwrapped.nix { inherit msaClientID gamemodeSupport; };
 in
 
 symlinkJoin {

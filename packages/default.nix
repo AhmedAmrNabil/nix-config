@@ -14,9 +14,7 @@ rec {
     inherit gpu-screen-recorder-notification;
   };
 
-  prismlauncher-9-unwrapped = pkgs.callPackage ./prism-launcher-9/unwrapped.nix { };
-  prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/wrapper.nix {
-    prismlauncher-unwrapped = prismlauncher-9-unwrapped;
+  prismlauncher-9 = pkgs.callPackage ./prism-launcher-9/package.nix {
     jdks = [
       pkgs.jdk17
       pkgs.jdk25
