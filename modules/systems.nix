@@ -65,7 +65,7 @@ in
   };
   flake.nixosConfigurations = {
     desktop-nixos = mkSystem "x86_64-linux" [ self.nixosModules.desktop-nixos ] { };
-    laptop-nixos = mkSystem  "x86_64-linux" [ self.nixosModules.laptop-nixos ] { };
+    laptop-nixos = mkSystem "x86_64-linux" [ self.nixosModules.laptop-nixos ] { };
     wsl-nixos = mkSystem "x86_64-linux" [ self.nixosModules.wsl-nixos ] { };
     iso-nixos = mkSystem "x86_64-linux" [
       self.nixosModules.iso

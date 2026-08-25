@@ -1,4 +1,8 @@
 {
+  homePath,
+  ...
+}:
+{
   flake.nixosModules.users =
     {
       pkgs,
@@ -10,7 +14,7 @@
       users.users.${username} = {
         isNormalUser = true;
         description = "User ${username}";
-        home = "/home/${username}";
+        home = homePath;
         extraGroups = [
           "wheel"
           "networkmanager"

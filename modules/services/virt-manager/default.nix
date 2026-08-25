@@ -7,7 +7,7 @@
     }:
     {
       programs.virt-manager.enable = true;
-      users.users.${username}.extraGroups = [ "libvirtd" ];
+      users.users.${username}.extraGroups = [ "libvirtd" "kvm" ];
 
       virtualisation.libvirtd = {
         enable = true;
