@@ -153,6 +153,7 @@
             vencord = pkgsUnstable.vencord;
           })
           discover-overlay
+          claude-code
         ]
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
