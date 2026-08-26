@@ -101,6 +101,7 @@
       pkgs,
       pkgsUnstable,
       lib,
+      dotfilesDir,
       ...
     }:
     {
@@ -109,6 +110,7 @@
       home.shellAliases = {
         "..." = "cd ../..";
         clock = "${lib.getExe pkgs.tty-clock} -tcDBC 4";
+        build-iso = "nix build ${dotfilesDir}#nixosConfigurations.iso-nixos.config.system.build.isoImage";
       };
 
       home.packages =
