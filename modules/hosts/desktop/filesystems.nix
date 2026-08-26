@@ -1,4 +1,3 @@
-{ homePath, ... }:
 let
   ntfsOptions = [
     "windows_names"
@@ -13,7 +12,7 @@ let
   ];
 in
 {
-  flake.nixosModules.desktop-nixos = {
+  flake.nixosModules.desktop-nixos = { homeDir, ... }: {
     # add zstd compression to file systems
     fileSystems = {
       "/".options = [ "compress=zstd" ];
@@ -27,28 +26,28 @@ in
     };
 
     # Mounting windows hdd for media and games:
-    fileSystems."${homePath}/hdd" = {
+    fileSystems."${homeDir}/hdd" = {
       device = "/dev/disk/by-uuid/01DAB93F51B44DA0";
       fsType = "ntfs";
       options = ntfsOptions;
     };
 
     # Bind mount Videos and Downloads from hdd to home
-    fileSystems."${homePath}/Videos" = {
-      device = "${homePath}/hdd/Videos";
+    fileSystems."${homeDir}/Videos" = {
+      device = "${homeDir}/hdd/Videos";
       fsType = "none";
       options = [ "bind" ];
-      depends = [ "${homePath}/hdd" ];
+      depends = [ "${homeDir}/hdd" ];
     };
 
-    fileSystems."${homePath}/Downloads" = {
-      device = "${homePath}/hdd/Downloads";
+    fileSystems."${homeDir}/Downloads" = {
+      device = "${homeDir}/hdd/Downloads";
       fsType = "none";
       options = [ "bind" ];
-      depends = [ "${homePath}/hdd" ];
+      depends = [ "${homeDir}/hdd" ];
     };
 
-    fileSystems."${homePath}/crucial" = {
+    fileSystems."${homeDir}/crucial" = {
       device = "/dev/disk/by-uuid/01DD0394B2474040";
       fsType = "ntfs";
       options = ntfsOptions ++ [
@@ -57,8 +56,8 @@ in
       ];
     };
 
-    fileSystems."${homePath}/Games" = {
-      device = "${homePath}/crucial/Games";
+    fileSystems."${homeDir}/Games" = {
+      device = "${homeDir}/crucial/Games";
       fsType = "none";
       options = [
         "bind"
@@ -67,13 +66,13 @@ in
         "x-systemd.automount"
         "noauto"
       ];
-      depends = [ "${homePath}/crucial" ];
+      depends = [ "${homeDir}/crucial" ];
     };
 
     # fix steam compatdata to be on linux instead of ntfs partiton
     systemd.tmpfiles.rules = [
-      "L ${homePath}/crucial/SteamLibrary/steamapps/compatdata - - - - ${homePath}/.steam/steam/steamapps/compatdata"
-      "L ${homePath}/hdd/SteamLibrary/steamapps/compatdata - - - - ${homePath}/.steam/steam/steamapps/compatdata2"
+      "L ${homeDir}/crucial/SteamLibrary/steamapps/compatdata - - - - ${homeDir}/.steam/steam/steamapps/compatdata"
+      "L ${homeDir}/hdd/SteamLibrary/steamapps/compatdata - - - - ${homeDir}/.steam/steam/steamapps/compatdata2"
     ];
   };
 }

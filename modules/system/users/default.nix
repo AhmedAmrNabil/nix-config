@@ -1,5 +1,4 @@
 {
-  homePath,
   ...
 }:
 {
@@ -7,6 +6,7 @@
     {
       pkgs,
       username,
+      homeDir,
       ...
     }:
     {
@@ -14,7 +14,7 @@
       users.users.${username} = {
         isNormalUser = true;
         description = "User ${username}";
-        home = homePath;
+        home = homeDir;
         extraGroups = [
           "wheel"
           "networkmanager"

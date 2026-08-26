@@ -10,6 +10,9 @@
       hyprlandPackages = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system};
     in
     {
+      imports = [
+        inputs.hyprland.nixosModules.default
+      ];
       programs.hyprland = {
         enable = true;
         withUWSM = true;

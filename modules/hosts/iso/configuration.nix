@@ -1,6 +1,6 @@
-{ self, ... }:
+{ self, inputs, ... }:
 {
-  flake.nixosModules.iso =
+  flake.nixosModules.iso-nixos =
     {
       pkgs,
       modulesPath,
@@ -8,12 +8,15 @@
       username,
       pkgsUnstable,
       pkgsLocal,
+      homeDir,
+      dotfilesDir,
       ...
     }:
     {
       imports = [
         # Include the results of the hardware scan.
         "${modulesPath}/installer/cd-dvd/installation-cd-minimal.nix"
+        inputs.home-manager.nixosModules.home-manager
       ];
       nixpkgs.hostPlatform = "x86_64-linux";
       boot.kernelPackages = lib.mkForce pkgs.linuxPackages_7_1;
@@ -37,7 +40,8 @@
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = {
-          inherit username pkgsUnstable pkgsLocal;
+          inherit username homeDir dotfilesDir;
+          inherit pkgsUnstable pkgsLocal;
         };
         users.${username} = {
           home.file."mountfs.sh" = {
@@ -45,7 +49,7 @@
             executable = true;
           };
           imports = [
-            self.homeModules.iso
+            self.homeModules.iso-nixos
           ];
           home.stateVersion = "25.11";
         };

@@ -6,7 +6,7 @@
     }:
     {
       # --------- Hostname and networking ------------------
-      networking.hostName = "desktop-nixos"; # Define your hostname.
+      # Hostname is defined in mkSystem, so it can be set per-host.
       networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
       networking.modemmanager.enable = false; # disable unused, speeds up boot
       networking.firewall.checkReversePath = false;

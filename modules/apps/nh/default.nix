@@ -1,7 +1,8 @@
-{ configPath, ... }: {
+{
   flake.nixosModules.nh =
     {
       pkgs,
+      dotfilesDir,
       ...
     }:
     {
@@ -9,7 +10,7 @@
         pkgs.nh
       ];
       environment.sessionVariables = {
-        NH_FLAKE = configPath;
+        NH_FLAKE = dotfilesDir;
       };
       environment.shellAliases = {
         nrs = "nh os switch";

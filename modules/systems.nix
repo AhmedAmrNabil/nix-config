@@ -2,16 +2,32 @@
   inputs,
   self,
   withSystem,
+  lib,
   ...
 }:
 let
-  username = "btngana";
-  homePath = "/home/${username}";
-  configPath = "/home/${username}/dotfiles";
+  defaultHost = {
+    arch = "x86_64-linux";
+    username = "btngana";
+    homeDir = "/home/btngana";
+    dotfilesDir = "/home/btngana/dotfiles";
+    hasStandaloneHome = true;
+  };
 
-  mkSystem =
-    system: extraModules: extraSpecialArgs:
-    withSystem system (
+  hosts = {
+    desktop-nixos = defaultHost;
+    laptop-nixos = defaultHost;
+    wsl-nixos = defaultHost;
+    iso-nixos = defaultHost // {
+      username = "nixos";
+      hasStandaloneHome = false;
+    };
+  };
+in
+{
+  flake.nixosConfigurations = builtins.mapAttrs (
+    name: host:
+    withSystem host.arch (
       {
         pkgs,
         pkgsUnstable,
@@ -19,25 +35,27 @@ let
         ...
       }:
       inputs.nixpkgs.lib.nixosSystem {
-        inherit system;
+        system = host.arch;
 
         specialArgs = {
-          inherit username;
+          inherit (host) username homeDir dotfilesDir;
           inherit pkgsUnstable pkgsLocal;
-        }
-        // extraSpecialArgs;
+        };
 
         modules = [
-          { nixpkgs.pkgs = pkgs; }
-          inputs.hyprland.nixosModules.default
-        ]
-        ++ extraModules;
+          {
+            nixpkgs.pkgs = pkgs;
+            networking.hostName = name;
+          }
+          self.nixosModules.${name}
+        ];
       }
-    );
+    )
+  ) hosts;
 
-  mkHome =
-    system: extraModules:
-    withSystem system (
+  flake.homeConfigurations = lib.mapAttrs' (name: host: {
+    name = "${host.username}@${name}";
+    value = withSystem host.arch (
       {
         pkgs,
         pkgsUnstable,
@@ -47,35 +65,14 @@ let
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
-          inherit username;
+          inherit (host) username homeDir dotfilesDir;
           inherit pkgsUnstable pkgsLocal;
         };
         modules = [
-          inputs.spicetify-nix.homeManagerModules.default
-          inputs.noctalia.homeModules.default
           self.homeModules.default
-        ]
-        ++ extraModules;
+          self.homeModules.${name}
+        ];
       }
     );
-in
-{
-  _module.args = {
-    inherit configPath homePath;
-  };
-  flake.nixosConfigurations = {
-    desktop-nixos = mkSystem "x86_64-linux" [ self.nixosModules.desktop-nixos ] { };
-    laptop-nixos = mkSystem "x86_64-linux" [ self.nixosModules.laptop-nixos ] { };
-    wsl-nixos = mkSystem "x86_64-linux" [ self.nixosModules.wsl-nixos ] { };
-    iso-nixos = mkSystem "x86_64-linux" [
-      self.nixosModules.iso
-      inputs.home-manager.nixosModules.home-manager
-    ] { username = "nixos"; };
-  };
-
-  flake.homeConfigurations = {
-    "${username}@desktop-nixos" = mkHome "x86_64-linux" [ self.homeModules.desktop-nixos ];
-    "${username}@wsl-nixos" = mkHome "x86_64-linux" [ self.homeModules.wsl-nixos ];
-    "${username}@laptop-nixos" = mkHome "x86_64-linux" [ self.homeModules.laptop-nixos ];
-  };
+  }) (lib.filterAttrs (name: host: host.hasStandaloneHome == true) hosts);
 }

@@ -1,5 +1,5 @@
 { self, ... }: {
-  flake.nixosModules.iso = {
+  flake.nixosModules.iso-nixos = {
     imports = with self.nixosModules; [
       kde
       fonts
@@ -8,7 +8,7 @@
     ];
   };
 
-  flake.homeModules.iso = {
+  flake.homeModules.iso-nixos = {
     imports = with self.homeModules; [
       bash
       bat

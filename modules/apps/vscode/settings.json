@@ -377,5 +377,7 @@
   "[github-actions-workflow]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
-  "githubPullRequests.terminalLinksHandler": "github"
+  "githubPullRequests.terminalLinksHandler": "github",
+  "tinymist.formatterMode": "typstfmt",
+  "terminal.integrated.mouseWheelScrollSensitivity": 3
 }
