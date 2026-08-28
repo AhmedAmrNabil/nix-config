@@ -14,7 +14,7 @@
       docker
       podman
       tailscale
-      virt-manager
+      # virt-manager
       v4l2loopback
 
       # system
@@ -28,20 +28,20 @@
       users
 
       # desktop environment
-      hyprland
+      # hyprland
       kde
     ];
   };
 
   flake.homeModules.desktop-nixos = {
     imports = with self.homeModules; [
-      alacritty
+      # alacritty
       cava
       devenv
       foot
-      hyprland
+      # hyprland
       only-office
-      quickshell
+      # quickshell
       rofi
       scrcpy
       spotify

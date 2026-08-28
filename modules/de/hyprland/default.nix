@@ -12,13 +12,12 @@
     {
       imports = [
         inputs.hyprland.nixosModules.default
+        self.nixosModules.hyprland-ddcci
       ];
       programs.hyprland = {
         enable = true;
         withUWSM = true;
-        # set the flake package
         package = hyprlandPackages.hyprland;
-        # make sure to also set the portal package, so that they are in sync
         portalPackage = hyprlandPackages.xdg-desktop-portal-hyprland;
       };
 
