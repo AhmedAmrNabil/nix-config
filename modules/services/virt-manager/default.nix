@@ -7,7 +7,10 @@
     }:
     {
       programs.virt-manager.enable = true;
-      users.users.${username}.extraGroups = [ "libvirtd" "kvm" ];
+      users.users.${username}.extraGroups = [
+        "libvirtd"
+        "kvm"
+      ];
 
       virtualisation.libvirtd = {
         enable = true;
@@ -22,6 +25,9 @@
           # Runs QEMU as your user to avoid permission issues
           runAsRoot = false;
           swtpm.enable = true; # needed for Windows 11 TPM
+          vhostUserPackages = with pkgs; [
+            virtiofsd
+          ];
         };
         hooks.qemu = {
           "win11-passthrough" = pkgs.writeShellScript "win11-passthrough" ''
@@ -71,16 +77,10 @@
 
       environment.systemPackages = with pkgs; [
         dnsmasq
-        virtiofsd # for virtiofs shared folders
-      ];
-
-      boot.initrd.kernelModules = [
-        "vfio_pci"
-        "vfio"
-        "vfio_iommu_type1"
       ];
 
       boot.kernelModules = [
+        "kvm-amd"
         "vfio_pci"
         "vfio"
         "vfio_iommu_type1"
