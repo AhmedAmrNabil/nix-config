@@ -59,6 +59,7 @@
           ];
         })
         deskflow
+        nix-output-monitor
       ];
 
       # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
