@@ -47,6 +47,6 @@
 
     nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
     nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
-    nix.package = pkgs.lixPackageSets.stable.lix;
+    # nix.package = pkgs.lixPackageSets.stable.lix;
   };
 }
