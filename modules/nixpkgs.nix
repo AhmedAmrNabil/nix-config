@@ -7,7 +7,6 @@
       hasLocal = builtins.pathExists localPkgsPath;
 
       overlays = [
-        self.overlays.packages
         self.overlays.default
         inputs.antigravity-nix.overlays.default
         inputs.helium.overlays.default

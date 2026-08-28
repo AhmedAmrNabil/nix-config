@@ -32,6 +32,8 @@ in
         pkgs,
         pkgsUnstable,
         pkgsLocal,
+        self',
+        inputs',
         ...
       }:
       inputs.nixpkgs.lib.nixosSystem {
@@ -39,7 +41,7 @@ in
 
         specialArgs = {
           inherit (host) username homeDir dotfilesDir;
-          inherit pkgsUnstable pkgsLocal;
+          inherit pkgsUnstable pkgsLocal self' inputs';
         };
 
         modules = [
@@ -60,13 +62,15 @@ in
         pkgs,
         pkgsUnstable,
         pkgsLocal,
+        self',
+        inputs',
         ...
       }:
       inputs.home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
         extraSpecialArgs = {
           inherit (host) username homeDir dotfilesDir;
-          inherit pkgsUnstable pkgsLocal;
+          inherit pkgsUnstable pkgsLocal self' inputs';
         };
         modules = [
           self.homeModules.default

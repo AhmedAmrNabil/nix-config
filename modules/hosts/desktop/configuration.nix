@@ -100,6 +100,7 @@
   flake.homeModules.desktop-nixos =
     {
       pkgs,
+      self',
       pkgsUnstable,
       lib,
       dotfilesDir,
@@ -125,12 +126,10 @@
           localsend
           microsoft-edge
           obsidian
-          prismlauncher-9
           transmission_4-qt
           tty-clock
           vlc
           xournalpp
-          claude-desktop
           teams-for-linux
           uv
           github-cli
@@ -165,6 +164,15 @@
           open-scq30
           postman
           inkscape
+        ])
+        ++ (with self'.packages; [
+          claude-desktop
+          (prismlauncher-9.override {
+            jdks = [
+              pkgs.jdk17
+              pkgs.jdk25
+            ];
+          })
         ]);
 
       xdg.desktopEntries.reboot-to-windows = {

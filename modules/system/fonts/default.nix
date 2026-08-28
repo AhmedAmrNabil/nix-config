@@ -2,6 +2,7 @@
   flake.nixosModules.fonts =
     {
       pkgs,
+      self',
       ...
     }:
     {
@@ -11,7 +12,7 @@
         nerd-fonts.jetbrains-mono
         noto-fonts-color-emoji
         vista-fonts
-        apple-fonts
+        self'.packages.apple-fonts
       ];
 
       # Optional: Enable fontconfig tweaks
