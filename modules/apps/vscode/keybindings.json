@@ -3384,7 +3384,15 @@
     "key": "ctrl+shift+alt+i",
     "command": "-workbench.action.chat.openagent",
     "when": "config.chat.agent.enabled && !chatSetupDisabled && !chatSetupHidden"
-  }
+},
+{
+    "key": "shift+enter",
+    "command": "workbench.action.terminal.sendSequence",
+    "args": {
+        "text": "\u001b\r"
+    },
+    "when": "terminalFocus"
+}
 ]
 
 // Here are other available commands:
