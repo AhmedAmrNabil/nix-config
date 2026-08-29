@@ -125,7 +125,6 @@
           libnotify
           localsend
           microsoft-edge
-          obsidian
           transmission_4-qt
           tty-clock
           vlc
@@ -166,6 +165,7 @@
           inkscape
         ])
         ++ (with self'.packages; [
+          obsidian
           claude-desktop
           (prismlauncher-9.override {
             jdks = [
