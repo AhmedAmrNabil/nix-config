@@ -1,4 +1,4 @@
-@import "dotfiles/home/apps/rofi/minimal.rasi"
+@import "dotfiles/modules/apps/rofi/minimal.rasi"
 
 listview {
     columns:                     4;
