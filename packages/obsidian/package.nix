@@ -59,14 +59,16 @@ let
     srcs.${stdenv.hostPlatform.system} or (throw "Unsupported system: ${stdenv.hostPlatform.system}");
 
   desktopItem = makeDesktopItem {
-    name = "obsidian";
+    name = "md.obsidian.Obsidian";
     desktopName = "Obsidian";
-    startupWMClass = "md.Obsidian";
-    comment = "Knowledge base";
+    exec = "obsidian %U";
+    terminal = false;
+    type = "Application";
     icon = "obsidian";
-    exec = "obsidian %u";
-    categories = [ "Office" ];
+    startupWMClass = "md.Obsidian";
+    comment = "Obsidian";
     mimeTypes = [ "x-scheme-handler/obsidian" ];
+    categories = [ "Office" ];
   };
 
   linux = stdenv.mkDerivation {
@@ -96,14 +98,14 @@ let
         --replace-fail "supportFetchAPI: true," "supportFetchAPI: true, corsEnabled: true,"
       asar pack app-src resources/app.asar
 
-      mkdir -p "$out/opt/obsidian"
-      cp -a resources "$out/opt/obsidian/"
+      mkdir -p "$out/opt/Obsidian"
+      cp -a resources "$out/opt/Obsidian/"
 
       mkdir -p $out/bin
       makeWrapper ${lib.getExe electron} $out/bin/obsidian \
         --inherit-argv0 \
         --set ELECTRON_FORCE_IS_PACKAGED 1 \
-        --add-flags $out/opt/obsidian/resources/app.asar \
+        --add-flags $out/opt/Obsidian/resources/app.asar \
         --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform=wayland --enable-wayland-ime=true --wayland-text-input-version=3}}" \
         --add-flags ${lib.escapeShellArg commandLineArgs}
 
