@@ -14,8 +14,9 @@
         settings = {
           color_theme = "${config.home.homeDirectory}/.config/btop/themes/catppuccin.theme";
           shown_boxes = "cpu mem net proc gpu0";
+          update_ms = 200;
         };
-        themes.catppuccin = builtins.readFile "${catppuccinBtop}";
+        themes.catppuccin = builtins.readFile catppuccinBtop;
       };
     };
 }
