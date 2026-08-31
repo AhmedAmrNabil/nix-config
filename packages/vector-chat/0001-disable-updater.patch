@@ -1,0 +1,11 @@
+--- a/src-tauri/tauri.conf.json
++++ b/src-tauri/tauri.conf.json
+@@ -39,7 +39,7 @@
+   "bundle": {
+     "active": true,
+     "targets": "all",
+-    "createUpdaterArtifacts": true,
++    "createUpdaterArtifacts": false,
+     "category": "SocialNetworking",
+     "macOS": {
+       "entitlements": "./Entitlements.plist",
