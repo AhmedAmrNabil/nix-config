@@ -59,7 +59,6 @@
           ];
         })
         deskflow
-        nix-output-monitor
       ];
 
       # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
@@ -174,6 +173,11 @@
             ];
           })
         ]);
+
+      programs.nix-your-shell = {
+        enable = true;
+        nix-output-monitor.enable = true;
+      };
 
       xdg.desktopEntries.reboot-to-windows = {
         name = "Reboot to Windows";

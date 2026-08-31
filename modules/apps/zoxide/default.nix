@@ -1,15 +1,8 @@
 {
-  flake.homeModules.zoxide =
-    {
-      config,
-      ...
-    }:
-    {
-      programs.zoxide = {
-        enable = true;
-        enableBashIntegration = config.programs.bash.enable;
-        enableFishIntegration = config.programs.fish.enable;
-        options = [ "--cmd cd" ];
-      };
+  flake.homeModules.zoxide = {
+    programs.zoxide = {
+      enable = true;
+      options = [ "--cmd cd" ];
     };
+  };
 }

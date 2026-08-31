@@ -2,7 +2,6 @@
   flake.homeModules.eza =
     {
       pkgs,
-      config,
       ...
     }:
     {
@@ -14,8 +13,6 @@
           "--color=always"
           "--group-directories-first"
         ];
-        enableFishIntegration = config.programs.fish.enable;
-        enableBashIntegration = config.programs.bash.enable;
         git = true;
       };
       programs.fish.plugins = [

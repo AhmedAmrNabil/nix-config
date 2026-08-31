@@ -14,6 +14,9 @@
 
       programs.home-manager.enable = true;
 
+      home.shell.enableFishIntegration = true;
+      home.shell.enableBashIntegration = true;
+
       imports = with self.homeModules; [
         bash
         bat

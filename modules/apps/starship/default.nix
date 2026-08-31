@@ -1,9 +1,7 @@
 {
-  flake.homeModules.starship = { config, ... }: {
+  flake.homeModules.starship = {
     programs.starship = {
       enable = true;
-      enableBashIntegration = config.programs.bash.enable;
-      enableFishIntegration = config.programs.fish.enable;
       enableTransience = true;
       settings = {
         format = "$username$hostname$shell$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
