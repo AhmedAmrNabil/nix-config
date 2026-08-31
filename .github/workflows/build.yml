@@ -3,82 +3,49 @@ name: Build packages
 on:
   workflow_dispatch:
     inputs:
-      all:
-        description: "Build all packages (ignores checkboxes below)"
-        type: boolean
-        default: false
-      wps-fonts:
-        type: boolean
-        default: false
-      flydigictl:
-        type: boolean
-        default: false
-      apple-fonts:
-        type: boolean
-        default: false
-      claude-desktop:
-        type: boolean
-        default: false
-      gpu-screen-recorder:
-        type: boolean
-        default: false
-      gpu-screen-recorder-notification:
-        type: boolean
-        default: false
-      gpu-screen-recorder-ui:
-        type: boolean
-        default: false
-      prismlauncher-9:
-        type: boolean
-        default: false
-      open-scq30:
-        type: boolean
-        default: false
+      packages:
+        description: "Comma-separated package names (leave empty = build all)"
+        type: string
+        default: ""
 
 jobs:
-  setup:
+  discover:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      packages: ${{ steps.set-matrix.outputs.packages }}
     steps:
+      - uses: actions/checkout@v7
+
+      - uses: cachix/install-nix-action@v31
+
       - id: set-matrix
         run: |
-          declare -A checked=(
-            [wps-fonts]="${{ inputs.wps-fonts }}"
-            [flydigictl]="${{ inputs.flydigictl }}"
-            [apple-fonts]="${{ inputs.apple-fonts }}"
-            [claude-desktop]="${{ inputs.claude-desktop }}"
-            [gpu-screen-recorder]="${{ inputs.gpu-screen-recorder }}"
-            [gpu-screen-recorder-notification]="${{ inputs.gpu-screen-recorder-notification }}"
-            [gpu-screen-recorder-ui]="${{ inputs.gpu-screen-recorder-ui }}"
-            [prismlauncher-9]="${{ inputs.prismlauncher-9 }}"
-            [open-scq30]="${{ inputs.open-scq30 }}"
-          )
+          if [ -n "${{ inputs.packages }}" ]; then
+            # Turn "pkg1, pkg2, pkg3" into a JSON array
+            packages=$(echo '${{ inputs.packages }}' \
+              | tr ',' '\n' \
+              | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' \
+              | jq -R . \
+              | jq -s -c .)
+          else
+            packages=$(nix eval --json .#packages.x86_64-linux --apply 'builtins.attrNames')
+          fi
 
-          json="["
-          first=true
-          for pkg in "${!checked[@]}"; do
-            if [ "${{ inputs.all }}" = "true" ] || [ "${checked[$pkg]}" = "true" ]; then
-              if [ "$first" = false ]; then json="$json,"; fi
-              json="$json\"$pkg\""
-              first=false
-            fi
-          done
-          json="$json]"
-          echo "matrix=$json" >> "$GITHUB_OUTPUT"
-
+          echo "packages=$packages" >> "$GITHUB_OUTPUT"
+          echo "Selected packages: $packages"
       - name: Fail if nothing selected
         run: |
-          if [ '${{ steps.set-matrix.outputs.matrix }}' = "[]" ]; then
-            echo "::error::No packages selected and 'all' was not checked."
+          if [ '${{ steps.set-matrix.outputs.packages }}' = "[]" ]; then
+            echo "::error::No packages selected."
             exit 1
           fi
+
   build:
-    needs: setup
+    needs: discover
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        package: ${{ fromJson(needs.setup.outputs.matrix) }}
+        package: ${{ fromJson(needs.discover.outputs.packages) }}
       max-parallel: 4
       fail-fast: false
 
@@ -93,4 +60,4 @@ jobs:
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Build ${{ matrix.package }}
-        run: nix build .#${{ matrix.package }}
+        run: nix build .#${{ matrix.package }} -L
