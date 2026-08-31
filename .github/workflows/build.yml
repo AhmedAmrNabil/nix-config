@@ -54,10 +54,11 @@ jobs:
 
       - uses: cachix/install-nix-action@v31
 
+      - name: Build ${{ matrix.package }}
+        run: nix build .#${{ matrix.package }} -L
+
       - uses: cachix/cachix-action@v17
         with:
           name: ahmed-amr
           authToken: ${{ secrets.CACHIX_AUTH_TOKEN }}
-
-      - name: Build ${{ matrix.package }}
-        run: nix build .#${{ matrix.package }} -L
+          pathsToPush: result
