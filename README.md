@@ -32,7 +32,7 @@ This repository follows the **dendritic pattern** using [`flake-parts`](https://
 │   ├── shared.nix            # 🔗 Shared options & directory path definitions
 │   └── systems.nix           # 🏗️ Machine configurations (nixosConfigurations & homeConfigurations)
 ├── overlays/                 # 🔄 Custom Nixpkgs overlays (microsoft-edge, open-scq30, xournalpp)
-└── packages/                 # 📦 Custom Nix derivations (see <a href="./packages/README.md">packages/README.md</a>)
+└── packages/                 # 📦 Custom Nix derivations (see <a href="https://github.com/AhmedAmrNabil/nix-config/blob/main/packages/README.md">packages/README.md</a>)
 </code></pre>
 
 ## 📦 What's Included
