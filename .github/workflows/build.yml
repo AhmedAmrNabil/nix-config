@@ -9,13 +9,14 @@ on:
         default: ""
   push:
     paths:
-      - 'packages/**'
+      - "packages/**"
 
 jobs:
   discover:
     runs-on: ubuntu-latest
     outputs:
       packages: ${{ steps.set-matrix.outputs.packages }}
+      has_packages: ${{ steps.set-matrix.outputs.has_packages }}
     steps:
       - uses: actions/checkout@v7
         with:
@@ -45,15 +46,18 @@ jobs:
 
           echo "packages=$packages" >> "$GITHUB_OUTPUT"
           echo "Selected packages: $packages"
-      - name: Fail if nothing selected
+      - name: Warn if nothing selected
         run: |
           if [ '${{ steps.set-matrix.outputs.packages }}' = "[]" ]; then
-            echo "::error::No packages selected."
-            exit 1
+            echo "::warning::No Nix package files modified or selected. Skipping build stage."
+            echo "has_packages=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "has_packages=true" >> "$GITHUB_OUTPUT"
           fi
 
   build:
     needs: discover
+    if: needs.discover.outputs.has_packages == 'true'
     runs-on: ubuntu-latest
     strategy:
       matrix:
