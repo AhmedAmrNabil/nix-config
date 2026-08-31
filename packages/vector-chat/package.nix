@@ -26,13 +26,13 @@
 }:
 rustPlatform.buildRustPackage (finalAttrs: {
   pname = "vector-chat";
-  version = "0.4.3";
+  version = "0.4.4";
 
   src = fetchFromGitHub {
     owner = "VectorPrivacy";
     repo = "Vector";
     rev = "v${finalAttrs.version}";
-    sha256 = "sha256-+oPHSF5zz+A8OpoG0ziXk3BM/ttFKVISby8EQDuDxLs=";
+    hash = "sha256-OT72notDnlBKa04Cg1b0ByY14oP7d2DyDj2hEZM4T10=";
   };
 
   patches = [
@@ -42,8 +42,13 @@ rustPlatform.buildRustPackage (finalAttrs: {
   npmDeps = fetchNpmDeps {
     name = "${finalAttrs.pname}-${finalAttrs.version}-npm-deps";
     inherit (finalAttrs) src;
-    hash = "sha256-yobGKq7PTv673PK38l45Bui0RPuLsHkRDAatRR62JDY=";
+    hash = "sha256-RaBKediUP1ZeRyyqNQNIHf7sfd0iGIMWQtLW7GuwlwA=";
   };
+
+  cargoHash = "sha256-sLhrMAxAhuw1iBsM/CnhB3VWnjV7CiaDHZQJFnb8ygA=";
+
+  cargoRoot = "src-tauri";
+  buildAndTestSubdir = finalAttrs.cargoRoot;
 
   nativeBuildInputs = [
     cargo-tauri.hook
@@ -88,11 +93,6 @@ rustPlatform.buildRustPackage (finalAttrs: {
 
   buildNoDefaultFeatures = true;
   buildFeatures = (lib.optional withTor "tor") ++ (lib.optional withWhisper "whisper");
-
-  cargoHash = "sha256-6ifA5tyEyobjhp5kEGvI/sdVrfWPidTsn7fGVoXraaE=";
-
-  cargoRoot = "src-tauri";
-  buildAndTestSubdir = finalAttrs.cargoRoot;
 
   # skipping docs tests
   cargoTestFlags = [
