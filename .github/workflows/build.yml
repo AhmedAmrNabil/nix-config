@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
         with:
-          fetch-depth: 2
+          fetch-depth: 0
 
       - uses: cachix/install-nix-action@v31
 
@@ -34,7 +34,13 @@ jobs:
               | jq -R . \
               | jq -s -c .)
           elif [ "${{ github.event_name }}" = "push" ]; then
-            changed_dirs=$(git diff --name-only HEAD~1 HEAD | grep '^packages/.*\.nix$' | cut -d'/' -f2 | sort -u || true)
+            before="${{ github.event.before }}"
+            if [ -z "$(git cat-file -t "$before" 2>/dev/null)" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then
+              # first push to the branch / before-sha not available — fall back to just this commit
+              changed_dirs=$(git diff-tree --no-commit-id --name-only -r HEAD | grep '^packages/.*\.nix$' | cut -d'/' -f2 | sort -u || true)
+            else
+              changed_dirs=$(git diff --name-only "$before" HEAD | grep '^packages/.*\.nix$' | cut -d'/' -f2 | sort -u || true)
+            fi
             if [ -n "$changed_dirs" ]; then
               packages=$(echo "$changed_dirs" | jq -R . | jq -s -c .)
             else
