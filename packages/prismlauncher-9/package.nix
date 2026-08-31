@@ -5,8 +5,7 @@
   gamemode,
   glfw3-minecraft,
   jdk17,
-  jdk21,
-  jdk8,
+  jdk25,
   kdePackages,
   lib,
   libGL,
@@ -33,9 +32,8 @@
   controllerSupport ? stdenv.hostPlatform.isLinux,
   gamemodeSupport ? stdenv.hostPlatform.isLinux,
   jdks ? [
-    jdk21
+    jdk25
     jdk17
-    jdk8
   ],
   msaClientID ? null,
   textToSpeechSupport ? stdenv.hostPlatform.isLinux,
