@@ -7,10 +7,11 @@
     {
       config,
       self',
+      pkgsUnstable,
       ...
     }:
     {
-      environment.systemPackages = with self'.packages; [
+      environment.systemPackages = with pkgsUnstable; [
         gpu-screen-recorder
         (gpu-screen-recorder-ui.override {
           inherit (config.security) wrapperDir;
