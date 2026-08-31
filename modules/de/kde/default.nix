@@ -23,6 +23,7 @@
 
       environment.systemPackages = [
         kdePackages.sddm-kcm
+        kdePackages.kdialog
         kdePackages.partitionmanager
         pkgs.unrar
       ];

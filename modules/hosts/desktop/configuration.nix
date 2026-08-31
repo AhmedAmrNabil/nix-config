@@ -120,7 +120,6 @@
           element-desktop
           handbrake
           jdk25
-          kdePackages.kdialog
           libnotify
           localsend
           microsoft-edge
@@ -131,7 +130,6 @@
           teams-for-linux
           uv
           github-cli
-          notion-app-enhanced
           mangohud
           android-tools
           (pkgs.writeShellScriptBin "gdu-clean" ''
@@ -154,6 +152,7 @@
           })
           discover-overlay
           claude-code
+          awscli2
         ]
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
@@ -166,12 +165,7 @@
         ++ (with self'.packages; [
           obsidian
           claude-desktop
-          (prismlauncher-9.override {
-            jdks = [
-              pkgs.jdk17
-              pkgs.jdk25
-            ];
-          })
+          prismlauncher-9
         ]);
 
       programs.nix-your-shell = {
