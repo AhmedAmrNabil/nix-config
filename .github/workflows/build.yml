@@ -33,7 +33,7 @@ jobs:
               | jq -R . \
               | jq -s -c .)
           elif [ "${{ github.event_name }}" = "push" ]; then
-            changed_dirs=$(git diff --name-only HEAD~1 HEAD | grep '^packages/' | cut -d'/' -f2 | sort -u || true)
+            changed_dirs=$(git diff --name-only HEAD~1 HEAD | grep '^packages/.*\.nix$' | cut -d'/' -f2 | sort -u || true)
             if [ -n "$changed_dirs" ]; then
               packages=$(echo "$changed_dirs" | jq -R . | jq -s -c .)
             else
