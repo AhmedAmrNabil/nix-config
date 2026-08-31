@@ -28,7 +28,16 @@ nix.settings = {
 		"ahmed-amr.cachix.org-1:gwUGJSgbW4JiorIqExv1r9uujfyS5Blc8S6L34gxUl0="
 	];
 };
+```
 
+#### One-off, without touching your Nix config
+
+If you just want to pull from the cache for a single command, pass the substituter and key inline. Use the `extra-` variants so you keep `cache.nixos.org` and your other substituters instead of replacing them:
+
+```bash
+nix build github:AhmedAmrNabil/nix-config#package-name \
+  --extra-substituters "https://ahmed-amr.cachix.org" \
+  --extra-trusted-public-keys "ahmed-amr.cachix.org-1:gwUGJSgbW4JiorIqExv1r9uujfyS5Blc8S6L34gxUl0="
 ```
 
 ## Usage
