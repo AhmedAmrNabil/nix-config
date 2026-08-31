@@ -6,32 +6,31 @@
 }:
 
 let
-  version = "8.0.1";
   baseUrl = "https://devimages-cdn.apple.com/design/resources/download/";
 in
-stdenvNoCC.mkDerivation {
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "apple-fonts";
-  inherit version;
+  version = "8.0.1";
 
   srcs = [
     (fetchurl {
       url = "${baseUrl}SF-Pro.dmg";
-      name = "SF-Pro-${version}.dmg";
-      hash = "sha256-YxGk8IQ6TS5hagsFx3US0x0uqVBFnPUmzbW5CZageU8=";
+      name = "SF-Pro-${finalAttrs.version}.dmg";
+      hash = "sha256-qQlPDem3idc1RO5Q/FKgiE1Kn3/PYt5Sl04yBPOnSmI=";
     })
     (fetchurl {
       url = "${baseUrl}SF-Compact.dmg";
-      name = "SF-Compact-${version}.dmg";
-      hash = "sha256-/lF6UYS+KQ5m/om4tLbqGFSPztGuFTlJmnEmXjMXJJ8=";
+      name = "SF-Compact-${finalAttrs.version}.dmg";
+      hash = "sha256-LIkAOWe+WaaGeqXeEgZjUtmmtEt4XPK5/4jvDXf/KPw=";
     })
     (fetchurl {
       url = "${baseUrl}SF-Mono.dmg";
-      name = "SF-Mono-${version}.dmg";
+      name = "SF-Mono-${finalAttrs.version}.dmg";
       hash = "sha256-bUoLeOOqzQb5E/ZCzq0cfbSvNO1IhW1xcaLgtV2aeUU=";
     })
     (fetchurl {
       url = "${baseUrl}NY.dmg";
-      name = "NY-${version}.dmg";
+      name = "NY-${finalAttrs.version}.dmg";
       hash = "sha256-HC7ttFJswPMm+Lfql49aQzdWR2osjFYHJTdgjtuI+PQ=";
     })
   ];
@@ -48,7 +47,6 @@ stdenvNoCC.mkDerivation {
     mkdir -p fonts licenses tmp
 
     for archive in $srcs; do
-      # $srcs entries are store paths like /nix/store/...-SF-Pro-${version}.dmg
       echo "Processing $archive"
       7z e "$archive" -y -otmp/
       pushd tmp/
@@ -87,4 +85,4 @@ stdenvNoCC.mkDerivation {
     platforms = platforms.all;
     maintainers = with lib.maintainers; [ AhmedAmr ];
   };
-}
+})
