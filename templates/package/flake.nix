@@ -2,7 +2,7 @@
   description = "A Simple nix package flake";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/0dd31db7e6dbf9ce05697c4545f6fe01accec994";
+    nixpkgs.url = "github:nixos/nixpkgs/c5c4a43b0e8056328ec4529f735cabdb8f1942bb";
     flake-parts.url = "github:hercules-ci/flake-parts";
   };
 
