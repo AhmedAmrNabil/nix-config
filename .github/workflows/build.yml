@@ -7,6 +7,9 @@ on:
         description: "Comma-separated package names (leave empty = build all)"
         type: string
         default: ""
+  push:
+    paths:
+      - 'packages/**'
 
 jobs:
   discover:
@@ -15,6 +18,8 @@ jobs:
       packages: ${{ steps.set-matrix.outputs.packages }}
     steps:
       - uses: actions/checkout@v7
+        with:
+          fetch-depth: 2
 
       - uses: cachix/install-nix-action@v31
 
@@ -27,6 +32,13 @@ jobs:
               | sed 's/^[[:space:]]*//;s/[[:space:]]*$//' \
               | jq -R . \
               | jq -s -c .)
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            changed_dirs=$(git diff --name-only HEAD~1 HEAD | grep '^packages/' | cut -d'/' -f2 | sort -u || true)
+            if [ -n "$changed_dirs" ]; then
+              packages=$(echo "$changed_dirs" | jq -R . | jq -s -c .)
+            else
+              packages="[]"
+            fi
           else
             packages=$(nix eval --json .#packages.x86_64-linux --apply 'builtins.attrNames')
           fi
