@@ -38,13 +38,13 @@ let
 in
 llvmPackages_22.libcxxStdenv.mkDerivation (finalAttrs: {
   pname = "lito";
-  version = "0.7.0";
+  version = "0.7.1";
 
   src = fetchFromGitHub {
     owner = "litocpp";
     repo = "lito";
     tag = "v${finalAttrs.version}";
-    hash = "sha256-rHHKrq9EWVWlh62HAftym+HqbxFHWxGpw2/YCfEVeYo=";
+    hash = "sha256-buJ/qt7n7hGgN0cjc6SFf70mf/0sbmv0F++30VLjokU=";
   };
 
   nativeBuildInputs = [
@@ -57,10 +57,6 @@ llvmPackages_22.libcxxStdenv.mkDerivation (finalAttrs: {
   buildInputs = [
     zstd
   ];
-
-  preBuild = ''
-    export CXXFLAGS="''${CXXFLAGS//-Wp,-D_FORTIFY_SOURCE=3/}"
-  '';
 
   cmakeFlags = [
     (lib.cmakeBool "FETCHCONTENT_FULLY_DISCONNECTED" true)
