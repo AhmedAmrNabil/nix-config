@@ -166,6 +166,7 @@
           obsidian
           claude-desktop
           prismlauncher-9
+          notion-app
         ]);
 
       programs.nix-your-shell = {
