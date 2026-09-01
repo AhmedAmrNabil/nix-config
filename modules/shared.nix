@@ -36,7 +36,6 @@
       };
 
       home.packages = with pkgs; [
-        comma
         fzf
         gdu
         jq

@@ -1,4 +1,4 @@
-{
+{ inputs, ... }: {
   flake.nixosModules.desktop-nixos =
     {
       pkgs,
@@ -106,13 +106,17 @@
       ...
     }:
     {
-      programs.nix-index.enable = true; # enable nix-index for faster package searching
-
       home.shellAliases = {
         "..." = "cd ../..";
         clock = "${lib.getExe pkgs.tty-clock} -tcDBC 4";
         build-iso = "nix build ${dotfilesDir}#nixosConfigurations.iso-nixos.config.system.build.isoImage";
       };
+
+      imports = [
+        inputs.nix-index-database.homeModules.default
+      ];
+
+      programs.nix-index-database.comma.enable = true;
 
       home.packages =
         with pkgs;
@@ -153,6 +157,7 @@
           discover-overlay
           claude-code
           awscli2
+          nix-output-monitor
         ]
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
@@ -167,11 +172,11 @@
           claude-desktop
           prismlauncher-9
           notion-app
+          lito
         ]);
 
       programs.nix-your-shell = {
         enable = true;
-        nix-output-monitor.enable = true;
       };
 
       xdg.desktopEntries.reboot-to-windows = {
