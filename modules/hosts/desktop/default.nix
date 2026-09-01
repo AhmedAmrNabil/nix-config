@@ -35,6 +35,7 @@
 
   flake.homeModules.desktop-nixos = {
     imports = with self.homeModules; [
+      kde
       # alacritty
       cava
       devenv

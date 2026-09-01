@@ -1,4 +1,3 @@
-
 {
   flake.nixosModules.kde =
     {
@@ -46,6 +45,20 @@
       security.pam.services.${username}.kwallet = {
         enable = true;
         package = kdePackages.kwallet-pam;
+      };
+    };
+
+  flake.homeModules.kde =
+    {
+      config,
+      lib,
+      ...
+    }:
+    {
+      home.activation = {
+        kde-fix-icons = lib.hm.dag.entryAfter [ "reloadSystemd" ] ''
+          rm -rf ${config.home.homeDirectory}/.cache/ksycoca*
+        '';
       };
     };
 }
