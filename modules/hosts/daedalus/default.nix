@@ -16,5 +16,8 @@
   };
 
   flake.homeModules.daedalus = {
+  	imports = [
+  	  inputs.vscode-server.homeModules.default	
+  	];
   };
 }

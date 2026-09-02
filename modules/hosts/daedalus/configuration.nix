@@ -84,5 +84,7 @@
       programs.nix-your-shell = {
         enable = true;
       };
+
+      services.vscode-server.enable = true;
     };
 }

@@ -39,6 +39,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     determinate.url = "github:DeterminateSystems/determinate";
+	  vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
   outputs =
