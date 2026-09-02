@@ -18,6 +18,7 @@ let
     desktop-nixos = defaultHost;
     laptop-nixos = defaultHost;
     wsl-nixos = defaultHost;
+    daedalus = defaultHost;
     iso-nixos = defaultHost // {
       username = "nixos";
       hasStandaloneHome = false;

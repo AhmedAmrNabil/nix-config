@@ -29,11 +29,9 @@
         micro
         starship
         zoxide
+        devenv
+        yazi
       ];
-
-      home.shellAliases = {
-        restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
-      };
 
       home.packages = with pkgs; [
         fzf
@@ -42,13 +40,6 @@
         killall
         nixd
         nixfmt
-        nodejs_22
-        pnpm
-        python3
-        usbutils
-        pciutils
-        wayland-utils
-        wl-clipboard
       ];
     };
 }

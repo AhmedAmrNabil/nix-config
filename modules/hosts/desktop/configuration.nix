@@ -160,6 +160,13 @@
           claude-code
           awscli2
           nix-output-monitor
+          nodejs_22
+          pnpm
+          python3
+          usbutils
+          pciutils
+          wayland-utils
+          wl-clipboard
         ]
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
@@ -188,6 +195,10 @@
         exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
         categories = [ "System" ];
         terminal = false;
+      };
+
+      home.shellAliases = {
+        restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
       };
 
       systemd.user.services.test-service = {

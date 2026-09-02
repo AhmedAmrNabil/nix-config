@@ -40,7 +40,6 @@
       kde
       # alacritty
       cava
-      devenv
       foot
       # hyprland
       only-office
@@ -49,7 +48,6 @@
       scrcpy
       spotify
       vscode
-      yazi
     ];
   };
 }
