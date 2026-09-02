@@ -1,6 +1,6 @@
 {
   flake.homeModules.yazi =
-    { config, pkgs, ... }:
+    { config, pkgs, pkgsUnstable, ... }:
     let
       yazi-plugins = pkgs.fetchFromGitHub {
         owner = "yazi-rs";
@@ -24,6 +24,7 @@
     {
       programs.yazi = {
         enable = true;
+        package = pkgsUnstable.yazi;
         shellWrapperName = "y";
         theme = {
           flavor = {
