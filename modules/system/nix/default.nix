@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.nixosModules.nix-cfg = { username, pkgs, ... }: {
+  flake.nixosModules.nix-cfg = { username, ... }: {
     nix.settings = {
       warn-dirty = false;
       use-xdg-base-directories = true;
@@ -21,6 +21,7 @@
         "https://cuda-maintainers.cachix.org"
         "https://ahmed-amr.cachix.org"
         "https://ngi-forge.cachix.org"
+        "https://install.determinate.systems"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -29,6 +30,7 @@
         "cuda-maintainers.cachix.org-1:0dq3bujKpuEPMCX6U4WylrUDZ9JyUG0VpVZa7CNfq5E="
         "ahmed-amr.cachix.org-1:gwUGJSgbW4JiorIqExv1r9uujfyS5Blc8S6L34gxUl0="
         "ngi-forge.cachix.org-1:PK0qK+LhWt4GQVpUtPapyXWxJSM1GhtmPW6CRCoygz0="
+        "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
       ];
       trusted-substituters = [ "https://hyprland.cachix.org" ];
 
@@ -37,6 +39,9 @@
         "nix-command"
         "flakes"
       ];
+
+      # Determinate nix parallel evaluation
+      eval-cores = 0; # Evaluate across all cores
     };
 
     nix.optimise.automatic = true;
@@ -47,6 +52,5 @@
 
     nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
     nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
-    nix.package = pkgs.lixPackageSets.stable.lix;
   };
 }

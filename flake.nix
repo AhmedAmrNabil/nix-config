@@ -38,6 +38,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    determinate.url = "github:DeterminateSystems/determinate";
   };
 
   outputs =

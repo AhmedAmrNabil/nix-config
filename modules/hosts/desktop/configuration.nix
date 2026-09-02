@@ -5,7 +5,7 @@
       ...
     }:
     {
-      # --------- Hostname and networking ------------------
+      # --------- Networking ------------------
       # Hostname is defined in mkSystem, so it can be set per-host.
       networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
       networking.modemmanager.enable = false; # disable unused, speeds up boot
@@ -24,6 +24,8 @@
         24800 # deskflow
         25565 # minecraft
       ];
+
+      services.cloudflare-warp.enable = true;
 
       hardware.bluetooth.enable = true;
 
