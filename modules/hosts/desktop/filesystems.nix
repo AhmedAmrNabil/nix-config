@@ -74,5 +74,11 @@ in
       "L ${homeDir}/crucial/SteamLibrary/steamapps/compatdata - - - - ${homeDir}/.steam/steam/steamapps/compatdata"
       "L ${homeDir}/hdd/SteamLibrary/steamapps/compatdata - - - - ${homeDir}/.steam/steam/steamapps/compatdata2"
     ];
+
+    specialisation.no-hdd.configuration = {
+      fileSystems."${homeDir}/hdd".enable = false;
+      fileSystems."${homeDir}/Videos".enable = false;
+      fileSystems."${homeDir}/Downloads".enable = false;
+    };
   };
 }
