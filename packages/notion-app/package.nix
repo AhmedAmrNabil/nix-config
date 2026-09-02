@@ -56,8 +56,8 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-wuJUMrJx9dJ1rZPeOlZbDavURb7l6ioBpC4NNuzUXJk=";
-    fetcherVersion = 3;
+    hash = "sha256-taYYWo1gX3E2/NFpIxb/xzS8z4h/jbOVfVDra8gJAFY=";
+    fetcherVersion = 4;
   };
 
   desktopItems = [
