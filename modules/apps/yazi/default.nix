@@ -16,12 +16,12 @@
       };
       yazi-catpuccin-flavour = pkgs.fetchgit {
         url = "https://github.com/yazi-rs/flavors";
-        rev = "0f9204b";
+        rev = "20b47bfd78880c2674899597fd26bc01b21ff48c";
         sparseCheckout = [
           "catppuccin-mocha.yazi"
           "catppuccin-latte.yazi"
         ];
-        hash = "sha256-cVm41Oy1vA/8yU9LkFxIggIi9HQtpe31bxBk0SArJVw=";
+        hash = "sha256-0hLrmyygATJFzyzX7Rpr2Ab+vzGe3DAc9RwIRL0yBWc=";
       };
     in
     {

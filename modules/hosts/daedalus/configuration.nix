@@ -10,7 +10,7 @@
     {
       imports = [ "${modulesPath}/virtualisation/amazon-image.nix" ];
       ec2.hvm = true;
-      ec2.efi = true;
+      ec2.efi = false;
       system.autoUpgrade = {
         enable = true;
         flake = "${dotfilesDir}#daedalus";
@@ -23,6 +23,7 @@
           "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDJ+WAmsc1SMShL55nTIeaWfW2Y74hkGaXm71biK6zMG ahmedamr24680@gmail.com"
         ];
       };
+      documentation.nixos.enable = false;
 
       # --------- Networking ------------------
       # Hostname is defined in mkSystem, so it can be set per-host.
