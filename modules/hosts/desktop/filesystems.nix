@@ -4,7 +4,6 @@ let
     "uid=1000"
     "gid=100"
     "umask=022"
-    "big_writes"
     "exec"
     "rw"
     "nofail"
@@ -36,14 +35,26 @@ in
     fileSystems."${homeDir}/Videos" = {
       device = "${homeDir}/hdd/Videos";
       fsType = "none";
-      options = [ "bind" ];
+      options = [
+        "bind"
+        "nofail"
+        "x-systemd.device-timeout=3s"
+        "x-systemd.automount"
+        "noauto"
+      ];
       depends = [ "${homeDir}/hdd" ];
     };
 
     fileSystems."${homeDir}/Downloads" = {
       device = "${homeDir}/hdd/Downloads";
       fsType = "none";
-      options = [ "bind" ];
+      options = [
+        "bind"
+        "nofail"
+        "x-systemd.device-timeout=3s"
+        "x-systemd.automount"
+        "noauto"
+      ];
       depends = [ "${homeDir}/hdd" ];
     };
 
