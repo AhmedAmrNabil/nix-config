@@ -25,6 +25,16 @@
       };
       documentation.nixos.enable = false;
 
+      # seting up tailscale exit node
+      services.tailscale = {
+        extraSetFlags = [ "--advertise-exit-node" ]; # Enable Tailscale SSH
+      };
+
+      boot.kernel.sysctl = {
+        "net.ipv4.ip_forward" = 1;
+        "net.ipv6.conf.all.forwarding" = 1;
+      };
+
       # --------- Networking ------------------
       # Hostname is defined in mkSystem, so it can be set per-host.
 
