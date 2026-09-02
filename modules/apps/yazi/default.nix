@@ -5,23 +5,20 @@
       yazi-plugins = pkgs.fetchFromGitHub {
         owner = "yazi-rs";
         repo = "plugins";
-        rev = "main";
-        hash = "sha256-bqGN6JxbU+/o7TlM/Cm9Qj/s1McA4pB5QWArGZPcme4=";
+        rev = "4dc7f1b6458c2578f4494f10d468c68c1082214f";
+        hash = "sha256-BSAOkL4H4LVMbTRFv4kzGGRpLgtKkfNTEsDH2EQ219Q=";
       };
       starship-plugin = pkgs.fetchFromGitHub {
         owner = "Rolv-Apneseth";
         repo = "starship.yazi";
-        rev = "main";
+        rev = "ea92cf49380466f07231c952b409831e6afd2156";
         hash = "sha256-CPRVJVunBLwFLCoj+XfoIIwrrwHxqoElbskCXZgFraw=";
       };
-      yazi-catpuccin-flavour = pkgs.fetchgit {
-        url = "https://github.com/yazi-rs/flavors";
+      yazi-catpuccin-flavour = pkgs.fetchFromGitHub {
+        owner = "yazi-rs";
+        repo = "flavors";
         rev = "20b47bfd78880c2674899597fd26bc01b21ff48c";
-        sparseCheckout = [
-          "catppuccin-mocha.yazi"
-          "catppuccin-latte.yazi"
-        ];
-        hash = "sha256-0hLrmyygATJFzyzX7Rpr2Ab+vzGe3DAc9RwIRL0yBWc=";
+        hash = "sha256-NGnfrQdsnQITKCZ0oh6DCxeCR2ozJoPAZetsi3ghHAI=";
       };
     in
     {
