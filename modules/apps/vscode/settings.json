@@ -17,6 +17,12 @@
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-containers"
   },
+  "[elm]": {
+    "editor.defaultFormatter": "elmTooling.elm-ls-vscode"
+  },
+  "[github-actions-workflow]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
   "[glsl]": {
     "editor.defaultFormatter": "raczzalan.webgl-glsl-editor"
   },
@@ -201,6 +207,7 @@
   "git.openRepositoryInParentFolders": "always",
   "github.copilot.nextEditSuggestions.enabled": true,
   "githubPullRequests.pullBranch": "never",
+  "githubPullRequests.terminalLinksHandler": "github",
   "gitlens.ai.gitkraken.model": "gemini:gemini-2.0-flash",
   "http.proxyStrictSSL": false,
   "idf.enableCCache": true,
@@ -265,6 +272,7 @@
   ],
   "qt-qml.doNotAskForQmllsDownload": true,
   "remote.autoForwardPortsSource": "hybrid",
+  "remote.SSH.useLocalServer": false,
   "scm.repositories.selectionMode": "single",
   "search.exclude": {
     "**/.git/objects/**": true,
@@ -295,6 +303,7 @@
   "terminal.integrated.gpuAcceleration": "on",
   "terminal.integrated.lineHeight": 1,
   "terminal.integrated.minimumContrastRatio": 1,
+  "terminal.integrated.mouseWheelScrollSensitivity": 3,
   "terminal.integrated.profiles.windows": {
     "arch (WSL)": {
       "path": "C:\\Windows\\System32\\wsl.exe"
@@ -339,6 +348,7 @@
   "terminal.integrated.stickyScroll.enabled": false,
   "terminal.integrated.suggest.cdPath": "off",
   "terminal.integrated.suggest.enabled": false,
+  "tinymist.formatterMode": "typstfmt",
   "typescript.experimental.useTsgo": true,
   "update.mode": "none",
   "update.showReleaseNotes": false,
@@ -374,10 +384,7 @@
     "**/.github/workflows/*.yaml",
     "**/.github/workflows/*.yml"
   ],
-  "[github-actions-workflow]": {
-    "editor.defaultFormatter": "redhat.vscode-yaml"
-  },
-  "githubPullRequests.terminalLinksHandler": "github",
-  "tinymist.formatterMode": "typstfmt",
-  "terminal.integrated.mouseWheelScrollSensitivity": 3
+  "remote.SSH.remotePlatform": {
+    "daedalus": "linux"
+  }
 }
