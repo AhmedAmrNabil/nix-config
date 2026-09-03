@@ -10,15 +10,16 @@
       networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
       networking.modemmanager.enable = false; # disable unused, speeds up boot
 
-      networking.firewall.allowedTCPPorts = [
-        25565 # minecraft
-        80 # http
-        443 # https
-      ];
-
-      networking.firewall.allowedUDPPorts = [
-        25565 # minecraft
-      ];
+      # Netlify servers ip's are blocked from the ISP for some reason
+      # this is a workaround to make them accessible
+      networking.extraHosts = ''
+        75.2.60.5 kops.sigs.k8s.io
+        75.2.60.5 docs.kargo.io
+        75.2.60.5 flakehub.com
+        75.2.60.5 search.nixos.org
+        75.2.60.5 flake.parts
+        75.2.60.5 nix.dev
+      '';
 
       services.cloudflare-warp.enable = true;
 
