@@ -9,19 +9,14 @@
       # Hostname is defined in mkSystem, so it can be set per-host.
       networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
       networking.modemmanager.enable = false; # disable unused, speeds up boot
-      networking.firewall.checkReversePath = false;
 
       networking.firewall.allowedTCPPorts = [
-        24800 # deskflow
         25565 # minecraft
         80 # http
         443 # https
       ];
 
       networking.firewall.allowedUDPPorts = [
-        53 # dns
-        67 # dhcp
-        24800 # deskflow
         25565 # minecraft
       ];
 
@@ -36,49 +31,19 @@
       # --------- Services ------------------
       services.openssh.enable = true;
 
-      # Enable platformio udev rules for esp32 development
-      services.udev.packages = [
-        pkgs.platformio-core
-        pkgs.openocd
-      ];
-
       # disable some services that are not needed
-      systemd.services.Networkmanager-wait-online.enable = false;
+      systemd.services.NetworkManager-wait-online.enable = false;
       services.fwupd.enable = false;
 
       # --------- Packages ------------------
       environment.systemPackages = with pkgs; [
         nano
-        (lutris.override {
-          extraPkgs =
-            pkgs: with pkgs; [
-              wineWow64Packages.stable
-              winetricks
-              gamemode
-            ];
-          extraLibraries = pkgs: [
-            pkgs.gamemode
-          ];
-        })
-        deskflow
       ];
 
       # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
       environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
         CommandLineFlagSecurityWarningsEnabled = false;
       };
-
-      # --------- Extra boot params ------------------
-      boot.kernelParams = [
-        "mem_sleep_default=deep"
-      ];
-      services.udev.extraRules = ''
-        ACTION=="add", SUBSYSTEM=="usb", KERNEL=="usb1", ATTR{power/wakeup}="enabled"
-        ACTION=="add", SUBSYSTEM=="usb", KERNEL=="usb3", ATTR{power/wakeup}="enabled"
-        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1ea7", ATTR{idProduct}=="0907", ATTR{power/wakeup}="enabled"
-        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="1532", ATTR{idProduct}=="0085", ATTR{power/wakeup}="enabled"
-        ACTION=="add", SUBSYSTEM=="usb", ATTR{idVendor}=="045e", ATTR{idProduct}=="028e", ATTR{power/wakeup}="enabled"
-      '';
 
       # -------- Extra Configuration -----------------
       services.hardware.openrgb = {
@@ -181,7 +146,6 @@
           claude-desktop
           prismlauncher-9
           notion-app
-          lito
         ]);
 
       programs.nix-your-shell = {
