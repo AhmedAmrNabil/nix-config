@@ -21,6 +21,13 @@
         75.2.60.5 nix.dev
       '';
 
+      networking.firewall.allowedTCPPorts = [
+        53317 # localsend
+      ];
+      networking.firewall.allowedUDPPorts = [
+        53317 # localsend
+      ];
+
       services.cloudflare-warp.enable = true;
 
       hardware.bluetooth.enable = true;
@@ -52,6 +59,8 @@
         package = pkgs.openrgb-with-all-plugins;
         motherboard = "amd";
       };
+
+      documentation.nixos.enable = false;
 
       # --------- Swap ------------------
       swapDevices = [
@@ -166,20 +175,20 @@
         restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
       };
 
-      systemd.user.services.test-service = {
-        Unit = {
-          Description = "Test Service";
-          After = [ "network.target" ];
-        };
-        Service = {
-          Type = "simple";
-          Environment = "PATH=${pkgs.ffmpeg-full}/bin";
-          WorkingDirectory = "/home/btngana/coding/test-service";
-          ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
-          Restart = "on-failure";
-          RestartSec = 5;
-        };
-        Install.WantedBy = [ "default.target" ];
-      };
+      # systemd.user.services.test-service = {
+      #   Unit = {
+      #     Description = "Test Service";
+      #     After = [ "network.target" ];
+      #   };
+      #   Service = {
+      #     Type = "simple";
+      #     Environment = "PATH=${pkgs.ffmpeg-full}/bin";
+      #     WorkingDirectory = "/home/btngana/coding/test-service";
+      #     ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
+      #     Restart = "on-failure";
+      #     RestartSec = 5;
+      #   };
+      #   Install.WantedBy = [ "default.target" ];
+      # };
     };
 }
