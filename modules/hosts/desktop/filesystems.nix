@@ -7,7 +7,7 @@ let
     "exec"
     "rw"
     "nofail"
-    "x-systemd.device-timeout=3s"
+    "x-systemd.device-timeout=30s"
   ];
 in
 {
@@ -38,9 +38,6 @@ in
       options = [
         "bind"
         "nofail"
-        "x-systemd.device-timeout=3s"
-        "x-systemd.automount"
-        "noauto"
       ];
       depends = [ "${homeDir}/hdd" ];
     };
@@ -51,9 +48,6 @@ in
       options = [
         "bind"
         "nofail"
-        "x-systemd.device-timeout=3s"
-        "x-systemd.automount"
-        "noauto"
       ];
       depends = [ "${homeDir}/hdd" ];
     };
