@@ -11,13 +11,12 @@
       kernel
       nix-cfg
       users
-      inputs.determinate.nixosModules.default
     ];
   };
 
   flake.homeModules.daedalus = {
-  	imports = [
-  	  inputs.vscode-server.homeModules.default	
-  	];
+    imports = [
+      inputs.vscode-server.homeModules.default
+    ];
   };
 }

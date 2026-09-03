@@ -46,6 +46,10 @@
       eval-cores = 0; # Evaluate across all cores
     };
 
+    imports = [
+      inputs.determinate.nixosModules.default
+    ];
+
     nix.optimise.automatic = true;
     nix.gc = {
       automatic = true;

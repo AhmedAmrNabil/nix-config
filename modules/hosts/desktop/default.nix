@@ -1,4 +1,4 @@
-{ self,inputs, ... }: {
+{ self, ... }: {
   flake.nixosModules.desktop-nixos = {
     imports = with self.nixosModules; [
       ./_hardware-configuration.nix
@@ -30,8 +30,6 @@
       # desktop environment
       # hyprland
       kde
-
-      inputs.determinate.nixosModules.default
     ];
   };
 
