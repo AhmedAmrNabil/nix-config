@@ -55,10 +55,15 @@
       ...
     }:
     {
+      # fix kde app launcher not showing new applications added by home-manager rebuild
       home.activation = {
-        kde-fix-icons = lib.hm.dag.entryAfter [ "reloadSystemd" ] ''
+        kde-fix-icons = lib.hm.dag.entryAfter [ "installPackages" ] ''
           rm -rf ${config.home.homeDirectory}/.cache/ksycoca*
         '';
       };
+
+      # fix laggy kde
+      # see: https://github.com/NixOS/nixpkgs/issues/363068#issuecomment-5209282821
+      xdg.dataFile."plasma/desktoptheme/default/translucent/colors".text = "";
     };
 }
