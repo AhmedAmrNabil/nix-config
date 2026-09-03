@@ -5,6 +5,7 @@
       enableTransience = true;
       settings = {
         format = "$username$hostname$shell$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
+        follow_symlinks = false;
         directory = {
           style = "blue";
           truncation_length = 100;

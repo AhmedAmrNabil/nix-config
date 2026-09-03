@@ -33,6 +33,10 @@
           };
         };
 
+        general = {
+          detectVersion = false;
+        };
+
         display = {
           separator = "   ";
           temp.unit = "C";
@@ -104,6 +108,7 @@
           {
             type = "terminal";
             keyColor = "bright_blue";
+            format = "{1}";
           }
           {
             type = "shell";
