@@ -22,6 +22,7 @@
         "https://ahmed-amr.cachix.org"
         "https://ngi-forge.cachix.org"
         "https://install.determinate.systems"
+        "https://nix-gaming.cachix.org"
       ];
       trusted-public-keys = [
         "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
@@ -31,6 +32,7 @@
         "ahmed-amr.cachix.org-1:gwUGJSgbW4JiorIqExv1r9uujfyS5Blc8S6L34gxUl0="
         "ngi-forge.cachix.org-1:PK0qK+LhWt4GQVpUtPapyXWxJSM1GhtmPW6CRCoygz0="
         "cache.flakehub.com-3:hJuILl5sVK4iKm86JzgdXW12Y2Hwd5G07qKtHTOcDCM="
+        "nix-gaming.cachix.org-1:nbjlureqMbRAxR1gJ/f3hxemL9svXaZF/Ees8vCUUs4="
       ];
       trusted-substituters = [ "https://hyprland.cachix.org" ];
 
