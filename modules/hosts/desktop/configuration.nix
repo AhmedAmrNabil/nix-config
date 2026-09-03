@@ -21,13 +21,6 @@
         75.2.60.5 nix.dev
       '';
 
-      networking.firewall.allowedTCPPorts = [
-        53317 # localsend
-      ];
-      networking.firewall.allowedUDPPorts = [
-        53317 # localsend
-      ];
-
       services.cloudflare-warp.enable = true;
 
       hardware.bluetooth.enable = true;
@@ -47,6 +40,8 @@
       environment.systemPackages = with pkgs; [
         nano
       ];
+
+      programs.localsend.enable = true;
 
       # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
       environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
@@ -102,7 +97,6 @@
           handbrake
           jdk25
           libnotify
-          localsend
           microsoft-edge
           transmission_4-qt
           tty-clock
