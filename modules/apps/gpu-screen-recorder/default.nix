@@ -1,35 +1,8 @@
 {
-  lib,
-  ...
-}:
-{
-  flake.nixosModules.gpu-screen-recorder =
-    {
-      config,
-      pkgsUnstable,
-      ...
-    }:
-    {
-      environment.systemPackages = with pkgsUnstable; [
-        gpu-screen-recorder
-        (gpu-screen-recorder-ui.override {
-          inherit (config.security) wrapperDir;
-        })
-        gpu-screen-recorder-notification
-      ];
-
-      security.wrappers."gsr-kms-server" = {
-        owner = "root";
-        group = "root";
-        capabilities = "cap_sys_admin+ep";
-        source = lib.getExe' pkgsUnstable.gpu-screen-recorder "gsr-kms-server";
-      };
-
-      security.wrappers."gsr-global-hotkeys" = {
-        owner = "root";
-        group = "root";
-        capabilities = "cap_setuid+ep";
-        source = lib.getExe' pkgsUnstable.gpu-screen-recorder-ui "gsr-global-hotkeys";
-      };
+  flake.nixosModules.gpu-screen-recorder = {
+    programs.gpu-screen-recorder = {
+      enable = true;
+      ui.enable = true;
     };
+  };
 }
