@@ -38,7 +38,7 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    determinate.url = "github:DeterminateSystems/determinate";
+    determinate.url = "https://flakehub.com/f/DeterminateSystems/determinate/*";
     vscode-server.url = "github:nix-community/nixos-vscode-server";
   };
 
