@@ -19,6 +19,7 @@
         75.2.60.5 search.nixos.org
         75.2.60.5 flake.parts
         75.2.60.5 nix.dev
+        75.2.60.5 status.nixos.org
       '';
 
       services.cloudflare-warp.enable = true;
