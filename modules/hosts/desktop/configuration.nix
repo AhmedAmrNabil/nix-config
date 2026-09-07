@@ -76,8 +76,36 @@
       pkgsUnstable,
       lib,
       dotfilesDir,
+      inputs',
       ...
     }:
+    let
+      ns = pkgs.writeShellApplication {
+        name = "ns";
+        text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
+        runtimeInputs = [ inputs'.nix-search-tv.packages.default ];
+      };
+
+      discord = pkgs.discord.override {
+        withVencord = true;
+        enableAutoscroll = true;
+        # workaround for keybinds not working in wayland
+        commandLineArgs = "--ozone-platform=x11";
+        vencord = pkgsUnstable.vencord;
+      };
+
+      gdu-clean = pkgs.writeShellScriptBin "gdu-clean" ''
+        #bash
+        IGNORE=$(
+          findmnt --raw --noheadings --output TARGET,FSTYPE \
+            | awk '$2 == "fuseblk" {print $1}' \
+            | paste -sd "," -
+        )
+
+        IGNORE="$IGNORE,/run,/mnt"
+        exec ${lib.getExe pkgs.gdu} --ignore-dirs "$IGNORE" "$@"
+      '';
+    in
     {
       home.shellAliases = {
         "..." = "cd ../..";
@@ -108,24 +136,6 @@
           github-cli
           mangohud
           android-tools
-          (pkgs.writeShellScriptBin "gdu-clean" ''
-            #bash
-            IGNORE=$(
-              findmnt --raw --noheadings --output TARGET,FSTYPE \
-                | awk '$2 == "fuseblk" {print $1}' \
-                | paste -sd "," -
-            )
-
-            IGNORE="$IGNORE,/run,/mnt"
-            exec ${pkgs.gdu}/bin/gdu --ignore-dirs "$IGNORE" $@
-          '')
-          (discord.override {
-            withVencord = true;
-            enableAutoscroll = true;
-            # workaround for keybinds not working in wayland
-            commandLineArgs = "--ozone-platform=x11";
-            vencord = pkgsUnstable.vencord;
-          })
           discover-overlay
           claude-code
           awscli2
@@ -151,7 +161,12 @@
           claude-desktop
           prismlauncher-9
           notion-app
-        ]);
+        ])
+        ++ [
+          ns
+          discord
+          gdu-clean
+        ];
 
       programs.nix-your-shell = {
         enable = true;
@@ -169,21 +184,5 @@
       home.shellAliases = {
         restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
       };
-
-      # systemd.user.services.test-service = {
-      #   Unit = {
-      #     Description = "Test Service";
-      #     After = [ "network.target" ];
-      #   };
-      #   Service = {
-      #     Type = "simple";
-      #     Environment = "PATH=${pkgs.ffmpeg-full}/bin";
-      #     WorkingDirectory = "/home/btngana/coding/test-service";
-      #     ExecStart = "/home/btngana/coding/test-service/.devenv/state/venv/bin/python /home/btngana/coding/test-service/service.py";
-      #     Restart = "on-failure";
-      #     RestartSec = 5;
-      #   };
-      #   Install.WantedBy = [ "default.target" ];
-      # };
     };
 }
