@@ -2,7 +2,7 @@
   flake.homeModules.only-office = { pkgs, lib, ... }: {
     home.packages = with pkgs; [
       onlyoffice-desktopeditors
-      pkgs.vista-fonts
+      vista-fonts
     ];
     home.activation.copyFontsLocalShare = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       fontDir="$HOME/.local/share/fonts"
