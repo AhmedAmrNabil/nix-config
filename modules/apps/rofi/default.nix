@@ -8,11 +8,8 @@
       rofi
     ];
 
-    xdg.configFile."rofi/themes" = lib.mkForce {
-      source = config.lib.utils.mkMutableSymlink ./themes;
-      recursive = true;
+    xdg.configFile."rofi" = lib.mkForce {
+      source = config.lib.utils.mkMutableSymlink ./config;
     };
-
-    xdg.configFile."rofi/config.rasi".source = config.lib.utils.mkMutableSymlink ./config.rasi;
   };
 }
