@@ -2,7 +2,6 @@
   flake.nixosModules.laptop-nixos = {
     imports = with self.nixosModules; [
       ./_hardware-configuration.nix
-      nh
       tailscale
       audio
       boot
@@ -17,6 +16,7 @@
   flake.homeModules.laptop-nixos = {
     imports = with self.homeModules; [
       foot
+      nh
       vscode
       spotify
       rofi

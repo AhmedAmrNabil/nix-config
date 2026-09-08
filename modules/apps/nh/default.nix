@@ -1,21 +1,18 @@
 {
-  flake.nixosModules.nh =
+  flake.homeModules.nh =
     {
-      pkgs,
       dotfilesDir,
       ...
     }:
     {
-      environment.systemPackages = [
-        pkgs.nh
-      ];
-      environment.sessionVariables = {
-        NH_FLAKE = dotfilesDir;
+      programs.nh = {
+        enable = true;
+        flake = dotfilesDir;
       };
-      environment.shellAliases = {
+
+      home.shellAliases = {
         nrs = "nh os switch";
         hrs = "nh home switch";
-        wsl-nix-clean = "nh clean all --keep 1";
       };
     };
 }

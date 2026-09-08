@@ -4,7 +4,6 @@
       ./_hardware-configuration.nix
       # apps
       gpu-screen-recorder
-      nh
       obs
       open-tablet-driver
       scrcpy
@@ -39,6 +38,7 @@
       # alacritty
       cava
       foot
+      nh
       # hyprland
       only-office
       # quickshell

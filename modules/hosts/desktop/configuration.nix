@@ -28,7 +28,7 @@
 
       # --------- Timezone and clock ------------------
       time.timeZone = "Africa/Cairo";
-      time.hardwareClockInLocalTime = true;
+      time.hardwareClockInLocalTime = false;
 
       # --------- Services ------------------
       services.openssh.enable = true;

@@ -7,12 +7,6 @@
 
 { self, ... }: {
   flake.nixosModules.wsl-nixos = { pkgs, username, ... }: {
-    core = {
-      nix-cfg.enable = true;
-      users.enable = true;
-    };
-    apps.nh.enable = true;
-
     imports = with self.nixosModules; [
       nh
       nix-cfg
@@ -44,5 +38,11 @@
     # Before changing this value read the documentation for this option
     # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
     system.stateVersion = "25.05"; # Did you read the comment?
+  };
+
+  flake.homeModules.wsl-nixos = {
+    imports = with self.homeModules; [
+      nh
+    ];
   };
 }
