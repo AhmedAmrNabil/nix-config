@@ -1,4 +1,4 @@
-{
+{ inputs, ... }: {
   flake.nixosModules.kde =
     {
       pkgs,
@@ -52,9 +52,14 @@
     {
       config,
       lib,
+      inputs',
       ...
     }:
     {
+      imports = [
+        inputs.plasma-manager.homeModules.plasma-manager
+      ];
+
       # fix kde app launcher not showing new applications added by home-manager rebuild
       home.activation = {
         kde-fix-icons = lib.hm.dag.entryAfter [ "installPackages" ] ''
@@ -65,5 +70,19 @@
       # fix laggy kde
       # see: https://github.com/NixOS/nixpkgs/issues/363068#issuecomment-5209282821
       xdg.dataFile."plasma/desktoptheme/default/translucent/colors".text = "";
+
+      programs.plasma = {
+        enable = true;
+        configFile = {
+          # speedup alt+tab window switcher
+          kwinrc.TabBox.DelayTime = 0;
+          dolphinrc.IconsMode.DefaultSize = 112;
+          dolphinrc.IconsMode.PreviewSize = 112;
+        };
+      };
+
+      home.packages = [
+        inputs'.plasma-manager.packages.rc2nix
+      ];
     };
 }
