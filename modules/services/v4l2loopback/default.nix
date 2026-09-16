@@ -8,17 +8,30 @@
     let
       cfg = config.hardware.v4l2loopback;
       enabledDevices = lib.attrValues (lib.filterAttrs (_: d: d.enable) cfg.devices);
-      devicesCount = lib.length enabledDevices;
-      videoNumbers = lib.concatStringsSep "," (map (device: toString device.index) enabledDevices);
-      cardLabels = lib.concatStringsSep "," (map (device: device.name) enabledDevices);
-      exclusiveCaps = lib.concatStringsSep "," (
-        map (device: if device.exclusiveCaps then "1" else "0") enabledDevices
+
+      explicitDevices = lib.filter (d: d.index != null) enabledDevices;
+      autoDevices = lib.filter (d: d.index == null) enabledDevices;
+      usedIndices = map (d: d.index) explicitDevices;
+
+      searchBound = lib.length enabledDevices + (lib.foldl' lib.max 0 usedIndices);
+      availableIndices = lib.filter (i: !(lib.elem i usedIndices)) (lib.range 0 searchBound);
+
+      autoAssignedDevices = lib.zipListsWith (d: i: d // { index = i; }) autoDevices (
+        lib.take (lib.length autoDevices) availableIndices
       );
 
-      indexes = map (device: device.index) enabledDevices;
-      uniqueIndexes = lib.unique indexes;
-      duplicates = lib.filter (i: lib.count (x: x == i) indexes > 1) uniqueIndexes;
-      devicesWithDup = lib.filter (d: lib.elem d.index duplicates) enabledDevices;
+      finalDevices = explicitDevices ++ autoAssignedDevices;
+      devicesCount = lib.length finalDevices;
+      videoNumbers = lib.concatStringsSep "," (map (device: toString device.index) finalDevices);
+      cardLabels = lib.concatStringsSep "," (map (device: device.name) finalDevices);
+      exclusiveCaps = lib.concatStringsSep "," (
+        map (device: if device.exclusiveCaps then "1" else "0") finalDevices
+      );
+
+      indicies = map (device: device.index) finalDevices;
+      uniqueIndices = lib.unique indicies;
+      duplicates = lib.filter (i: lib.count (x: x == i) indicies > 1) uniqueIndices;
+      devicesWithDup = lib.filter (d: lib.elem d.index duplicates) finalDevices;
     in
     {
       options.hardware.v4l2loopback = {
@@ -43,9 +56,9 @@
                   };
 
                   index = lib.mkOption {
-                    type = lib.types.int;
-                    default = 0;
-                    description = "The index of the virtual camera created by v4l2loopback.";
+                    type = lib.types.nullOr lib.types.int;
+                    default = null;
+                    description = "The index of the virtual camera created by v4l2loopback. leave as null to automatically assign the next available index.";
                   };
 
                   exclusiveCaps = lib.mkOption {
