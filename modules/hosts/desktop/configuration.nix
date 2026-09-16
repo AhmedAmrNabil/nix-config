@@ -80,12 +80,14 @@
       ...
     }:
     let
+      # Quick nixpkgs search from the CLI (wraps nix-search-tv)
       ns = pkgs.writeShellApplication {
         name = "ns";
         text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
         runtimeInputs = [ inputs'.nix-search-tv.packages.default ];
       };
 
+      # Discord with Vencord and autoscroll
       discord = pkgs.discord.override {
         withVencord = true;
         enableAutoscroll = true;
@@ -94,6 +96,7 @@
         vencord = pkgsUnstable.vencord;
       };
 
+      # gdu wrapper that skips mounted fs and /run and /mnt
       gdu-clean = pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
         IGNORE=$(
@@ -122,37 +125,46 @@
       home.packages =
         with pkgs;
         [
+          # cli utils
           fzf
           gdu
           jq
           killall
-          nixd
-          nixfmt
-          element-desktop
-          handbrake
-          jdk25
-          libnotify
-          microsoft-edge
-          transmission_4-qt
           tty-clock
-          vlc
-          xournalpp
-          teams-for-linux
-          uv
-          github-cli
-          mangohud
-          android-tools
-          discover-overlay
-          claude-code
-          awscli2
-          nix-output-monitor
-          nodejs_22
-          pnpm
-          python3
           usbutils
           pciutils
           wayland-utils
           wl-clipboard
+
+          # nix utils
+          nixd
+          nixfmt
+          nix-output-monitor
+
+          # development
+          jdk25
+          nodejs_22
+          pnpm
+          python3
+          uv
+          github-cli
+          awscli2
+          claude-code
+          android-tools
+
+          # gui apps
+          element-desktop
+          handbrake
+          libnotify
+          microsoft-edge
+          transmission_4-qt
+          vlc
+          xournalpp
+          teams-for-linux
+
+          # gaming
+          mangohud
+          discover-overlay
         ]
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
