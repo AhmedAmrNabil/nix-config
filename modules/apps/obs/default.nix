@@ -25,11 +25,14 @@
       };
       # virtualCamera custom config
       security.polkit.enable = true;
-      v4l2loopback.devices = [
-        {
-          name = "OBS Cam";
-          index = 1;
-        }
-      ];
+      hardware.v4l2loopback = {
+        enable = true;
+        devices = {
+          "obs-cam" = {
+            name = "OBS Cam";
+            index = 1;
+          };
+        };
+      };
     };
 }

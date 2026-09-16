@@ -6,61 +6,68 @@
       ...
     }:
     let
-      cfg = config.v4l2loopback;
-      devicesCount = lib.length cfg.devices;
-      videoNumbers = lib.concatStringsSep "," (map (device: toString device.index) cfg.devices);
-      cardLabels = lib.concatStringsSep "," (map (device: device.name) cfg.devices);
-      exclusiveCaps = lib.concatStringsSep "," (map (device: toString device.exclusiveCaps) cfg.devices);
+      cfg = config.hardware.v4l2loopback;
+      enabledDevices = lib.attrValues (lib.filterAttrs (_: d: d.enable) cfg.devices);
+      devicesCount = lib.length enabledDevices;
+      videoNumbers = lib.concatStringsSep "," (map (device: toString device.index) enabledDevices);
+      cardLabels = lib.concatStringsSep "," (map (device: device.name) enabledDevices);
+      exclusiveCaps = lib.concatStringsSep "," (
+        map (device: if device.exclusiveCaps then "1" else "0") enabledDevices
+      );
 
-      indexes = map (device: device.index) cfg.devices;
+      indexes = map (device: device.index) enabledDevices;
       uniqueIndexes = lib.unique indexes;
       duplicates = lib.filter (i: lib.count (x: x == i) indexes > 1) uniqueIndexes;
-      devicesWithDup = lib.filter (d: lib.elem d.index duplicates) cfg.devices;
+      devicesWithDup = lib.filter (d: lib.elem d.index duplicates) enabledDevices;
     in
     {
-      options.v4l2loopback = {
-        devices = lib.mkOption {
-          type = lib.types.listOf (
-            lib.types.submodule {
-              options = {
-                name = lib.mkOption {
-                  type = lib.types.str;
-                  default = "Virtual Camera";
-                  description = ''
-                    The name of the virtual camera created by v4l2loopback.
-                  '';
-                };
-                index = lib.mkOption {
-                  type = lib.types.int;
-                  default = 0;
-                  description = ''
-                    The index of the virtual camera created by v4l2loopback.
-                  '';
-                };
+      options.hardware.v4l2loopback = {
+        enable = lib.mkEnableOption "v4l2loopback virtual cameras";
 
-                exclusiveCaps = lib.mkOption {
-                  type = lib.types.bool;
-                  default = true;
-                  description = ''
-                    Whether the virtual camera should have exclusive capabilities.
-                  '';
+        devices = lib.mkOption {
+          type = lib.types.attrsOf (
+            lib.types.submodule (
+              { name, ... }:
+              {
+                options = {
+                  enable = lib.mkOption {
+                    type = lib.types.bool;
+                    default = true;
+                    description = "Whether this virtual camera device is enabled.";
+                  };
+
+                  name = lib.mkOption {
+                    type = lib.types.str;
+                    default = name;
+                    description = "The name of the virtual camera created by v4l2loopback.";
+                  };
+
+                  index = lib.mkOption {
+                    type = lib.types.int;
+                    default = 0;
+                    description = "The index of the virtual camera created by v4l2loopback.";
+                  };
+
+                  exclusiveCaps = lib.mkOption {
+                    type = lib.types.bool;
+                    default = true;
+                    description = "Whether the virtual camera should have exclusive capabilities.";
+                  };
                 };
-              };
-            }
+              }
+            )
           );
-          default = [ ];
-          description = ''
-            Names of the virtual cameras created by v4l2loopback.
-          '';
+          default = { };
+          description = "Virtual cameras to create with v4l2loopback, keyed by an attribute name.";
         };
       };
 
-      config = lib.mkIf (devicesCount > 0) {
+      config = lib.mkIf (cfg.enable && devicesCount > 0) {
         assertions = [
           {
             assertion = duplicates == [ ];
             message = ''
-              v4l2loopback.devices: indexes must be unique.
+              hardware.v4l2loopback.devices: indexes must be unique.
               Duplicate index(es): ${lib.concatStringsSep ", " (map toString duplicates)}
               Conflicting devices: ${
                 lib.concatMapStringsSep ", " (d: ''"${d.name}" (index ${toString d.index})'') devicesWithDup

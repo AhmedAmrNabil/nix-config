@@ -3,12 +3,15 @@ let
 in
 {
   flake.nixosModules.scrcpy = {
-    v4l2loopback.devices = [
-      {
-        name = "scrcpy Cam";
-        index = scrcpyCameraIdx;
-      }
-    ];
+    hardware.v4l2loopback = {
+      enable = true;
+      devices = {
+        "scrcpy-cam" = {
+          name = "scrcpy Cam";
+          index = scrcpyCameraIdx;
+        };
+      };
+    };
   };
 
   flake.homeModules.scrcpy =
