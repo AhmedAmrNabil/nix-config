@@ -12,13 +12,17 @@
     imports = with self.homeModules; [
       bash
       bat
+      btop
+      direnv
       eza
       fastfetch
       fish
+      git
       micro
       starship
       zoxide
-      foot
+      devenv
+      yazi
     ];
   };
 }

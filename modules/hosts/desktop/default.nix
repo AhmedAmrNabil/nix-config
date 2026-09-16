@@ -46,6 +46,20 @@
       scrcpy
       spotify
       vscode
+
+      bash
+      bat
+      btop
+      direnv
+      eza
+      fastfetch
+      fish
+      git
+      micro
+      starship
+      zoxide
+      devenv
+      yazi
     ];
   };
 }

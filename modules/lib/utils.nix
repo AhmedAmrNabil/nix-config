@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.homeModules.default = { config, dotfilesDir, ... }: {
+  flake.homeModules.utils = { config, dotfilesDir, ... }: {
     #  credits to ncfavier for this util function
     config.lib.utils = {
       inherit dotfilesDir;

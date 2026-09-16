@@ -51,6 +51,14 @@
           imports = [
             self.homeModules.iso-nixos
           ];
+          home.packages = with pkgs; [
+            fzf
+            gdu
+            jq
+            killall
+            nixd
+            nixfmt
+          ];
           home.stateVersion = "25.11";
         };
       };

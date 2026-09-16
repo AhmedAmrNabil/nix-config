@@ -42,7 +42,12 @@ in
 
         specialArgs = {
           inherit (host) username homeDir dotfilesDir;
-          inherit pkgsUnstable pkgsLocal self' inputs';
+          inherit
+            pkgsUnstable
+            pkgsLocal
+            self'
+            inputs'
+            ;
         };
 
         modules = [
@@ -71,11 +76,24 @@ in
         inherit pkgs;
         extraSpecialArgs = {
           inherit (host) username homeDir dotfilesDir;
-          inherit pkgsUnstable pkgsLocal self' inputs';
+          inherit
+            pkgsUnstable
+            pkgsLocal
+            self'
+            inputs'
+            ;
         };
         modules = [
-          self.homeModules.default
           self.homeModules.${name}
+          self.homeModules.utils
+          {
+            home.username = host.username;
+            home.homeDirectory = host.homeDir;
+            home.stateVersion = "25.11";
+            programs.home-manager.enable = true;
+            home.shell.enableFishIntegration = true;
+            home.shell.enableBashIntegration = true;
+          }
         ];
       }
     );

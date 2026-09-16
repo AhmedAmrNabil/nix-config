@@ -20,6 +20,20 @@
       vscode
       spotify
       rofi
+
+      bash
+      bat
+      btop
+      direnv
+      eza
+      fastfetch
+      fish
+      git
+      micro
+      starship
+      zoxide
+      devenv
+      yazi
     ];
   };
 }

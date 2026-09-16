@@ -1,4 +1,4 @@
-{ self, ... }: {
+{
   flake.nixosModules.laptop-nixos =
     {
       pkgs,
@@ -98,6 +98,12 @@
         [
           vlc
           localsend
+          fzf
+          gdu
+          jq
+          killall
+          nixd
+          nixfmt
         ]
         ++ (with pkgsUnstable; [
           (discord.override {

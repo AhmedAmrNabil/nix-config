@@ -122,6 +122,12 @@
       home.packages =
         with pkgs;
         [
+          fzf
+          gdu
+          jq
+          killall
+          nixd
+          nixfmt
           element-desktop
           handbrake
           jdk25

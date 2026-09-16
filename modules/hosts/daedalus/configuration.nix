@@ -89,6 +89,12 @@
         github-cli
         awscli2
         nix-output-monitor
+        fzf
+        gdu
+        jq
+        killall
+        nixd
+        nixfmt
       ];
 
       programs.nix-your-shell = {

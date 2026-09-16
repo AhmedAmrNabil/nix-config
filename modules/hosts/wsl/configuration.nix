@@ -40,9 +40,30 @@
     system.stateVersion = "25.05"; # Did you read the comment?
   };
 
-  flake.homeModules.wsl-nixos = {
+  flake.homeModules.wsl-nixos = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      fzf
+      gdu
+      jq
+      killall
+      nixd
+      nixfmt
+    ];
     imports = with self.homeModules; [
       nh
+      bash
+      bat
+      btop
+      direnv
+      eza
+      fastfetch
+      fish
+      git
+      micro
+      starship
+      zoxide
+      devenv
+      yazi
     ];
   };
 }
