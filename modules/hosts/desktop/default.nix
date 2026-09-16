@@ -34,32 +34,31 @@
 
   flake.homeModules.desktop-nixos = {
     imports = with self.homeModules; [
-      kde
       # alacritty
+      bash
+      bat
+      btop
       cava
+      devenv
+      direnv
+      eza
+      fastfetch
+      fish
       foot
-      nh
+      git
       # hyprland
+      kde
+      micro
+      nh
       only-office
       # quickshell
       rofi
       scrcpy
       spotify
-      vscode
-
-      bash
-      bat
-      btop
-      direnv
-      eza
-      fastfetch
-      fish
-      git
-      micro
       starship
-      zoxide
-      devenv
+      vscode
       yazi
+      zoxide
     ];
   };
 }
