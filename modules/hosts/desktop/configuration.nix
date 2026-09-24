@@ -40,7 +40,11 @@
       # --------- Packages ------------------
       environment.systemPackages = with pkgs; [
         nano
+        simple-mtpfs
+        libmtp
       ];
+
+      services.gvfs.enable = true;
 
       programs.localsend.enable = true;
 

@@ -35,6 +35,7 @@
         khelpcenter
         kinfocenter
         qrca
+        kio-extras
       ];
 
       services.displayManager.autoLogin = {
