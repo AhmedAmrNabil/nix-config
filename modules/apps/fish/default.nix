@@ -13,6 +13,12 @@
         shellInit = ''
           fish_config theme choose "catppuccin"
         '';
+        plugins = [
+          {
+            name = "bass";
+            src = pkgs.fishPlugins.bass.src;
+          }
+        ];
       };
 
       xdg.configFile."fish/themes/catppuccin.theme".source = "${catppuccinFish}";

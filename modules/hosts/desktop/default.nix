@@ -4,6 +4,7 @@
       ./_hardware-configuration.nix
       # apps
       gpu-screen-recorder
+      distrobox
       obs
       open-tablet-driver
       scrcpy
@@ -41,6 +42,7 @@
       cava
       devenv
       direnv
+      distrobox
       eza
       fastfetch
       fish
