@@ -24,6 +24,7 @@
       fonts
       kernel
       nix-cfg
+      nix-ld
       nvidia
       users
 
