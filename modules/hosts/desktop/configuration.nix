@@ -2,6 +2,7 @@
   flake.nixosModules.desktop-nixos =
     {
       pkgs,
+      pkgsUnstable,
       ...
     }:
     {
@@ -22,6 +23,24 @@
         75.2.60.5 status.nixos.org
       '';
 
+      networking.firewall.interfaces.tailscale0 = {
+        allowedTCPPortRanges = [
+          # Kde connect port ranges
+          {
+            from = 1714;
+            to = 1764;
+          }
+        ];
+
+        allowedUDPPortRanges = [
+          # Kde connect port ranges
+          {
+            from = 1714;
+            to = 1764;
+          }
+        ];
+      };
+
       services.cloudflare-warp.enable = true;
 
       hardware.bluetooth.enable = true;
@@ -38,11 +57,18 @@
       services.fwupd.enable = false;
 
       # --------- Packages ------------------
-      environment.systemPackages = with pkgs; [
-        nano
-        simple-mtpfs
-        libmtp
-      ];
+      environment.systemPackages =
+        with pkgs;
+        [
+          nano
+        ]
+        ++ (with pkgsUnstable; [
+          cudaPackages.cuda_nvcc
+        ]);
+
+      environment.sessionVariables = {
+        CUDA_HOME = "${pkgsUnstable.cudaPackages.cuda_nvcc}";
+      };
 
       services.gvfs.enable = true;
 
@@ -139,6 +165,7 @@
           pciutils
           wayland-utils
           wl-clipboard
+          xhost
 
           # nix utils
           nixd
@@ -149,7 +176,7 @@
           jdk25
           nodejs_22
           pnpm
-          python3
+          # python3
           uv
           github-cli
           awscli2
