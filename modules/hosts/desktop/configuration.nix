@@ -23,24 +23,6 @@
         75.2.60.5 status.nixos.org
       '';
 
-      networking.firewall.interfaces.tailscale0 = {
-        allowedTCPPortRanges = [
-          # Kde connect port ranges
-          {
-            from = 1714;
-            to = 1764;
-          }
-        ];
-
-        allowedUDPPortRanges = [
-          # Kde connect port ranges
-          {
-            from = 1714;
-            to = 1764;
-          }
-        ];
-      };
-
       services.cloudflare-warp.enable = true;
 
       hardware.bluetooth.enable = true;
