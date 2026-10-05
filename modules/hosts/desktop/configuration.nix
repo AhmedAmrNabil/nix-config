@@ -88,16 +88,33 @@
       pkgsUnstable,
       lib,
       dotfilesDir,
-      inputs',
       ...
     }:
     let
       # Quick nixpkgs search from the CLI (wraps nix-search-tv)
-      # ns = pkgs.writeShellApplication {
-      #   name = "ns";
-      #   text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
-      #   runtimeInputs = [ inputs'.nix-search-tv.packages.default ];
-      # };
+      ns = pkgs.writeShellApplication {
+        name = "ns";
+        text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
+        runtimeInputs = [
+          (pkgs.buildGoModule {
+            pname = "nix-search-tv";
+            version = inputs.nix-search-tv.shortRev or inputs.nix-search-tv.dirtyShortRev or "unknown";
+            src = inputs.nix-search-tv.outPath;
+
+            vendorHash = "sha256-SSKDo4A8Nhvylghrw6d7CdHpZ7jObEr5V3r0Y9cH80Y=";
+
+            subPackages = [ "cmd/nix-search-tv" ];
+
+            env.GOEXPERIMENT = "jsonv2";
+
+            meta = {
+              description = "A tool integrating television and nix-search packages";
+              homepage = "https://github.com/3timeslazy/nix-search-tv";
+              mainProgram = "nix-search-tv";
+            };
+          })
+        ];
+      };
 
       # Discord with Vencord and autoscroll
       discord = pkgs.discord.override {
@@ -195,7 +212,7 @@
           notion-app
         ])
         ++ [
-          # ns
+          ns
           discord
           gdu-clean
         ];
