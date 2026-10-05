@@ -192,6 +192,7 @@
           claude-desktop
           prismlauncher-9
           cisco-packet-tracer_9
+          notion-app
         ])
         ++ [
           # ns
