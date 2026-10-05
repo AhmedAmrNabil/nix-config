@@ -172,8 +172,5 @@ stdenv.mkDerivation (finalAttrs: {
     platforms = [ "x86_64-linux" ];
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     mainProgram = "notion-app";
-
-    # broken with lastest nixpkgs unstable, won't fix for now
-    broken = true;
   };
 })
