@@ -12,7 +12,7 @@
         nerd-fonts.jetbrains-mono
         noto-fonts-color-emoji
         vista-fonts
-        self'.packages.apple-fonts
+        # self'.packages.apple-fonts
       ];
 
       # Optional: Enable fontconfig tweaks

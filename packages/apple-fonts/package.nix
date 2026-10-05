@@ -16,12 +16,12 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     (fetchurl {
       url = "${baseUrl}SF-Pro.dmg";
       name = "SF-Pro-${finalAttrs.version}.dmg";
-      hash = "sha256-qQlPDem3idc1RO5Q/FKgiE1Kn3/PYt5Sl04yBPOnSmI=";
+      hash = "sha256-loqzuLH5LC2K9h6waA9cIiTE541ZuYa/AEUCp/wBKRg=";
     })
     (fetchurl {
       url = "${baseUrl}SF-Compact.dmg";
       name = "SF-Compact-${finalAttrs.version}.dmg";
-      hash = "sha256-LIkAOWe+WaaGeqXeEgZjUtmmtEt4XPK5/4jvDXf/KPw=";
+      hash = "sha256-wdDjROut1m62LwP4I3hMzknxeH9WVj+wmPygH8VUE1w=";
     })
     (fetchurl {
       url = "${baseUrl}SF-Mono.dmg";
@@ -41,7 +41,6 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   dontUnpack = true;
 
   installPhase = ''
-    #bash
     runHook preInstall
 
     mkdir -p fonts licenses tmp
@@ -51,14 +50,13 @@ stdenvNoCC.mkDerivation (finalAttrs: {
       7z e "$archive" -y -otmp/
       pushd tmp/
 
-      7z x -txar *.pkg -y
+      # The DMG yields a raw APFS image with the Xar pkg embedded in it
+      7z x *_Apple_APFS -y
 
       _fontname=$(grep -o -e "THE APPLE .* FONT" Resources/English.lproj/License.rtf | head -n 1)
       cp Resources/English.lproj/License.rtf "$PWD/../licenses/LICENSE.''${_fontname// /-}"
 
       pushd *.pkg/
-      _fntver=$(grep -o -e ' version=".*">' PackageInfo)
-      _fntver="''${_fntver:10:-2}"
       7z x Payload -y
       7z x 'Payload~' -y
       cp Library/Fonts/* "$PWD/../../fonts/"
@@ -67,7 +65,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
       popd  # back to workdir
       rm -rf tmp/{*,.*} 2>/dev/null || true
 
-      echo "Extracted $(basename $archive) version $_fntver"
+      echo "Extracted $(basename $archive)"
     done
 
     rmdir tmp/
@@ -84,5 +82,8 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     license = licenses.unfree; # Apple proprietary font license
     platforms = platforms.all;
     maintainers = with lib.maintainers; [ AhmedAmr ];
+
+    # broken since latest update to the font on apple fonts, wont fix for now
+    broken = true;
   };
 })
