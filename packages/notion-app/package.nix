@@ -56,7 +56,7 @@ stdenv.mkDerivation (finalAttrs: {
 
   pnpmDeps = fetchPnpmDeps {
     inherit (finalAttrs) pname version src;
-    hash = "sha256-taYYWo1gX3E2/NFpIxb/xzS8z4h/jbOVfVDra8gJAFY=";
+    hash = "sha256-YZoXkv5KrCDMRKjsoX6uc4RuV/NUXfUyFIyfKjW4Y/8=";
     fetcherVersion = 4;
   };
 
@@ -172,5 +172,8 @@ stdenv.mkDerivation (finalAttrs: {
     platforms = [ "x86_64-linux" ];
     sourceProvenance = with sourceTypes; [ binaryNativeCode ];
     mainProgram = "notion-app";
+
+    # broken with lastest nixpkgs unstable, won't fix for now
+    broken = true;
   };
 })

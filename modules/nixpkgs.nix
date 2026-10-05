@@ -15,11 +15,17 @@
       pkgs = import inputs.nixpkgs {
         inherit system overlays;
         config.allowUnfree = true;
+        config.permittedInsecurePackages = [
+          "electron-41.10.7"
+        ];
       };
 
       pkgsUnstable = import inputs.nixpkgs-unstable {
         inherit system overlays;
         config.allowUnfree = true;
+        config.permittedInsecurePackages = [
+          "electron-41.10.7"
+        ];
       };
 
       pkgsLocal =
