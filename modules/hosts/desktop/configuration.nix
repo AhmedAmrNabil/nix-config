@@ -93,11 +93,11 @@
     }:
     let
       # Quick nixpkgs search from the CLI (wraps nix-search-tv)
-      ns = pkgs.writeShellApplication {
-        name = "ns";
-        text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
-        runtimeInputs = [ inputs'.nix-search-tv.packages.default ];
-      };
+      # ns = pkgs.writeShellApplication {
+      #   name = "ns";
+      #   text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
+      #   runtimeInputs = [ inputs'.nix-search-tv.packages.default ];
+      # };
 
       # Discord with Vencord and autoscroll
       discord = pkgs.discord.override {
@@ -191,11 +191,10 @@
           obsidian
           claude-desktop
           prismlauncher-9
-          notion-app
           cisco-packet-tracer_9
         ])
         ++ [
-          ns
+          # ns
           discord
           gdu-clean
         ];

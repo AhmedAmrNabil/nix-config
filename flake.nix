@@ -33,7 +33,7 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-    import-tree.url = "github:vic/import-tree";
+    import-tree.url = "github:denful/import-tree";
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -55,6 +55,9 @@
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [ "x86_64-linux" ];
       debug = true;
-      imports = (import-tree ./modules).imports ++ [ inputs.home-manager.flakeModules.home-manager ];
+      imports = [
+        (import-tree ./modules)
+        inputs.home-manager.flakeModules.home-manager
+      ];
     };
 }
