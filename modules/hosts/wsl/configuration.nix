@@ -5,12 +5,12 @@
 # NixOS-WSL specific options are documented on the NixOS-WSL repository:
 # https://github.com/nix-community/NixOS-WSL
 
-{ self, ... }: {
+{ self,inputs, ... }: {
   flake.nixosModules.wsl-nixos = { pkgs, username, ... }: {
     imports = with self.nixosModules; [
-      nh
       nix-cfg
       users
+      inputs.nixos-wsl.nixosModules.default
     ];
 
     wsl.enable = true;
