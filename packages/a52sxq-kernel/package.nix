@@ -30,7 +30,7 @@
   rootSolution ? "resukisu",
   withSusfs ? true,
 
-  buildDate ? "2025-10-06",
+  buildDate ? "2026-10-07",
   author ? "btngana",
   localVersion ? "-${author}-qgki",
   buildUser ? "btngana",
@@ -93,10 +93,10 @@ let
     {
       resukisu = {
         url = "https://github.com/Baka-SU/BakaSU.git";
-        rev = "f1dd81dc96d7f3f6691e6ac8b50fba9ae8a2f17c";
+        rev = "v4.2.0-rc3";
         submoduleDir = "KernelSU";
         displayName = "ReSukiSU";
-        hash = "sha256-+zVGawLN/1fbWRrpuPO1Uw3S94DtrzDdJxs2Nr4ce8c=";
+        hash = "sha256-6NccB7oobZCyB0AKhztVTdkv+aRAEWW86EfTZnYrV9M=";
       };
       ksu-next = {
         url = "https://github.com/KernelSU-Next/KernelSU-Next.git";
