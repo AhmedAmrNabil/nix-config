@@ -96,7 +96,7 @@ let
         rev = "f1dd81dc96d7f3f6691e6ac8b50fba9ae8a2f17c";
         submoduleDir = "KernelSU";
         displayName = "ReSukiSU";
-        hash = "sha256-01JrGqrXZ40U0iPEJaPVn3QrK5GCMvQwfUwCfP0RUjQ=";
+        hash = "sha256-+zVGawLN/1fbWRrpuPO1Uw3S94DtrzDdJxs2Nr4ce8c=";
       };
       ksu-next = {
         url = "https://github.com/KernelSU-Next/KernelSU-Next.git";
@@ -117,6 +117,8 @@ let
         url = rootConfig.url;
         rev = rootConfig.rev;
         hash = rootConfig.hash;
+        leaveDotGit = true;
+        deepClone = true;
       };
 
   # ── Tools the old script downloaded at runtime, now fixed-output fetches ────
