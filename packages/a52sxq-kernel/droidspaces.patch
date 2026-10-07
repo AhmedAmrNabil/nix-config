@@ -1,0 +1,122 @@
+commit 6e36ef3e093f5b43200bb863b8cfd3cd61ee06c4
+Author: AhmedAmrNabil <ahmedamr24680@gmail.com>
+Date:   Wed Oct 7 03:37:19 2026 +0300
+
+    build: add GKI kernel configurations for DroidSpaces support and adjust KABI structures
+
+diff --git a/arch/arm64/configs/gki_config b/arch/arm64/configs/gki_config
+new file mode 100644
+index 000000000..134f692de
+--- /dev/null
++++ b/arch/arm64/configs/gki_config
+@@ -0,0 +1,51 @@
++# Kernel configurations for full DroidSpaces support for GKI
++# Copyright (C) 2026 ravindu644 <droidcasts@protonmail.com>
++
++# IPC
++CONFIG_SYSVIPC=y
++CONFIG_POSIX_MQUEUE=y
++
++# Namespaces
++CONFIG_IPC_NS=y
++CONFIG_PID_NS=y
++
++# HW Access Support
++CONFIG_DEVTMPFS=y
++
++# Networking (Enhanced NAT support)
++CONFIG_NETFILTER_XT_MATCH_ADDRTYPE=y
++
++# --- Below configs are optional but recommended ---
++
++# Fix for docker unsafe procfs error
++CONFIG_USER_NS=y
++
++# IPv6 in NAT mode (NAT66)
++CONFIG_IP6_NF_NAT=y
++CONFIG_IP6_NF_TARGET_MASQUERADE=y
++
++# UFW support
++CONFIG_NETFILTER_XT_TARGET_REJECT=y
++CONFIG_NETFILTER_XT_TARGET_LOG=y
++CONFIG_NETFILTER_XT_MATCH_RECENT=y
++
++# Fail2ban support
++CONFIG_IP_SET=y
++CONFIG_IP_SET_HASH_IP=y
++CONFIG_IP_SET_HASH_NET=y
++CONFIG_NETFILTER_XT_SET=y
++
++# Enable xattr, posix acl support on tmpfs
++# For NixOS support
++CONFIG_TMPFS_POSIX_ACL=y
++CONFIG_TMPFS_XATTR=y
++
++# Resource limits: --cpus and --pids-limit. CONFIG_MEMCG is already on in GKI.
++# These two BREAK the kABI and no patch covers them: they resize scheduler and
++# cgroup structures, which changes the CRC of thousands of exported symbols.
++# Stock vendor modules then refuse to load and the device bootloops.
++# Leave them commented out unless you rebuild EVERY kernel module from the
++# same source and flash vendor_boot, vendor_dlkm and system_dlkm together
++# with the new boot.img, all at once.
++# CONFIG_CFS_BANDWIDTH=y
++# CONFIG_CGROUP_PIDS=y
+\ No newline at end of file
+diff --git a/include/linux/sched.h b/include/linux/sched.h
+index 2bbd5e3e7..d2b159b79 100755
+--- a/include/linux/sched.h
++++ b/include/linux/sched.h
+@@ -1084,8 +1084,8 @@ struct task_struct {
+ 	struct nameidata		*nameidata;
+ 
+ #ifdef CONFIG_SYSVIPC
+-	struct sysv_sem			sysvsem;
+-	struct sysv_shm			sysvshm;
++	// struct sysv_sem			sysvsem;
++	// struct sysv_shm			sysvshm;
+ #endif
+ #ifdef CONFIG_DETECT_HUNG_TASK
+ 	/* hung task detection */
+@@ -1485,9 +1485,14 @@ struct task_struct {
+ 	ANDROID_KABI_RESERVE(3);
+ 	ANDROID_KABI_RESERVE(4);
+ 	ANDROID_KABI_RESERVE(5);
++#ifdef CONFIG_SYSVIPC
++	ANDROID_KABI_USE(6, struct sysv_sem sysvsem);
++	_ANDROID_KABI_REPLACE(ANDROID_KABI_RESERVE(7); ANDROID_KABI_RESERVE(8), struct sysv_shm sysvshm);
++#else
+ 	ANDROID_KABI_RESERVE(6);
+ 	ANDROID_KABI_RESERVE(7);
+ 	ANDROID_KABI_RESERVE(8);
++#endif
+ 
+ 	/*
+ 	 * New fields for task_struct should be added above here, so that
+diff --git a/include/linux/sched/user.h b/include/linux/sched/user.h
+index 573b448e0..49d597028 100755
+--- a/include/linux/sched/user.h
++++ b/include/linux/sched/user.h
+@@ -23,7 +23,7 @@ struct user_struct {
+ #endif
+ #ifdef CONFIG_POSIX_MQUEUE
+ 	/* protected by mq_lock	*/
+-	unsigned long mq_bytes;	/* How many bytes can be allocated to mqueue? */
++	// unsigned long mq_bytes;	/* How many bytes can be allocated to mqueue? */
+ #endif
+ 	unsigned long locked_shm; /* How many pages of mlocked shm ? */
+ 	unsigned long unix_inflight;	/* How many files in flight in unix sockets */
+@@ -41,8 +41,14 @@ struct user_struct {
+ 	/* Miscellaneous per-user rate limit */
+ 	struct ratelimit_state ratelimit;
+ 
++#if defined(CONFIG_POSIX_MQUEUE)
++	ANDROID_KABI_USE(1, unsigned long mq_bytes);
++	ANDROID_KABI_RESERVE(2);
++	ANDROID_OEM_DATA_ARRAY(1, 2);
++#else
+ 	ANDROID_KABI_RESERVE(1);
+ 	ANDROID_KABI_RESERVE(2);
++#endif
+ };
+ 
+ extern int uids_sysfs_init(void);

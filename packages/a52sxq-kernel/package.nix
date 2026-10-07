@@ -24,6 +24,7 @@
   elfutils,
   zlib,
   writableTmpDirAsHomeHook,
+  breakpointHook,
 
   romType ? "aosp",
   withRoot ? true,
@@ -203,6 +204,11 @@ fixedStdenv.mkDerivation {
   version = buildDate;
   inherit src;
 
+  patches = [
+    ./droidspaces.patch
+    ./branding.patch
+  ];
+
   nativeBuildInputs = [
     git
     magiskboot
@@ -221,6 +227,7 @@ fixedStdenv.mkDerivation {
     pkg-config
     which
     writableTmpDirAsHomeHook
+    breakpointHook
   ];
 
   buildInputs = [
@@ -245,6 +252,7 @@ fixedStdenv.mkDerivation {
     DEFCONFIG = "vendor/a52sxq_kor_single_defconfig";
     KBUILD_BUILD_USER = buildUser;
     KBUILD_BUILD_HOST = buildHost;
+    COMPILER_DISPLAY = "Clang ${lib.getVersion llvmPackages.clang}";
   };
 
   buildPhase = ''
@@ -275,7 +283,7 @@ fixedStdenv.mkDerivation {
     ls firmware/tsp_stm/fts5cu56a_a52sxq* >/dev/null 2>&1 \
       || die "TSP firmware not found in firmware/tsp_stm"
 
-    for p in @ROM_DISPLAY@ @ROOT_DISPLAY@ @BUILD_DATE@; do
+    for p in @ROM_DISPLAY@ @ROOT_DISPLAY@ @BUILD_DATE@ @COMPILER@ @KERNEL_VERSION@; do
       grep -q "$p" "$update_binary" || die "placeholder $p missing from update-binary"
     done
 
@@ -316,12 +324,13 @@ fixedStdenv.mkDerivation {
     export KBUILD_BUILD_TIMESTAMP="$(date -u -d "@$SOURCE_DATE_EPOCH")"
 
     out_dir=$PWD/out
-    kflags="-C $PWD O=$out_dir ARCH=arm64 CC=clang HOSTCC=gcc HOSTCXX=g++ LLVM=1 LLVM_IAS=1 GIT_BIN=git CROSS_COMPILE=aarch64-linux-gnu- KBUILD_BUILD_USER=$KBUILD_BUILD_USER KBUILD_BUILD_HOST=$KBUILD_BUILD_HOST CONFIG_SECTION_MISMATCH_WARN_ONLY=y"
+    mkdir -p $out_dir
+    kflags="-C $PWD O=$out_dir ARCH=arm64 CC=clang HOSTCC=gcc HOSTCXX=g++ LLVM=1 LLVM_IAS=1 GIT_BIN=git CROSS_COMPILE=aarch64-linux-gnu- CONFIG_SECTION_MISMATCH_WARN_ONLY=y"
 
-    ./scripts/config --file "arch/arm64/configs/$DEFCONFIG" --set-str CONFIG_LOCALVERSION "$KERNEL_LOCALVERSION"
+    ./scripts/kconfig/merge_config.sh -m -O "$out_dir" "arch/arm64/configs/$DEFCONFIG" arch/arm64/configs/gki_config
 
-    make $kflags "$DEFCONFIG"
-    # no tty in the sandbox: take defaults for any symbol the defconfig doesn't set
+    ./scripts/config --file "$out_dir/.config" --set-str CONFIG_LOCALVERSION "$KERNEL_LOCALVERSION"
+
     make $kflags olddefconfig
     make $kflags -j"$NIX_BUILD_CORES"
 
@@ -415,10 +424,15 @@ fixedStdenv.mkDerivation {
 
     cp -r "$template/META-INF" "$work/zip/META-INF"
     chmod -R u+w "$work/zip"
+
+    kernelversion=$(make $kflags -s kernelversion)
+
     sed -i \
       -e "s|@ROM_DISPLAY@|$ROM_DISPLAY|g" \
       -e "s|@ROOT_DISPLAY@|$ROOT_DISPLAY|g" \
       -e "s|@BUILD_DATE@|$BUILD_DATE|g" \
+      -e "s|@COMPILER@|$COMPILER_DISPLAY|g" \
+      -e "s|@KERNEL_VERSION@|$kernelversion|g" \
       "$work/zip/META-INF/com/google/android/update-binary"
 
     find "$work/zip" -exec touch -h -d "@$SOURCE_DATE_EPOCH" {} +

@@ -1,0 +1,48 @@
+commit f6a998a130b8c8ffe147daea2c30130023b9de9c
+Author: AhmedAmrNabil <ahmedamr24680@gmail.com>
+Date:   Wed Oct 7 04:35:44 2026 +0300
+
+    build: update UI print statements in update-binary for better formatting and dynamic kernel information
+
+diff --git a/toolchain/template-zip-file/META-INF/com/google/android/update-binary b/toolchain/template-zip-file/META-INF/com/google/android/update-binary
+index 12c3b900a..270a88ac6 100644
+--- a/toolchain/template-zip-file/META-INF/com/google/android/update-binary
++++ b/toolchain/template-zip-file/META-INF/com/google/android/update-binary
+@@ -80,27 +80,25 @@ abort() {
+ }
+ 
+ ui_print " ";
+-ui_print "    __                                    ";
+-ui_print "   / /_  ____  ____  ___                  ";
+-ui_print "  / __ \/ __ \/ __ \/ _ \                 ";
+-ui_print " / /_/ / /_/ / / / /  __/__    _          ";
+-ui_print "/_.___/\____/_/_/_/\___// /_  (_)___  ___ ";
+-ui_print "  / __ \`__ \/ __ \`/ ___/ __ \/ / __ \/ _ \\";
+-ui_print " / / / / / / /_/ / /__/ / / / / / / /  __/";
+-ui_print "/_/ /_/ /_/\__,_/\___/_/ /_/_/_/ /_/\___/ ";
+-ui_print "                                          ";
++ui_print "    __    __                               "
++ui_print "   / /_  / /_____  ____ _____ _____  ____ _"
++ui_print "  / __ \/ __/ __ \/ __ \`/ __ \`/ __ \/ __ \`/"
++ui_print " / /_/ / /_/ / / / /_/ / /_/ / / / / /_/ / "
++ui_print "/_.___/\__/_/ /_/\__, /\__,_/_/ /_/\__,_/  "
++ui_print "                /____/                     "
+ ui_print "##########################################";
+ ui_print " ";
+ ui_print "Device:     Samsung Galaxy A52s 5G";
+ ui_print "Codename:   a52sxq";
+ ui_print "Root:       @ROOT_DISPLAY@";
+ ui_print "ROM:        @ROM_DISPLAY@";
+-ui_print "Kernel:     Linux 5.4.289";
+-ui_print "Compiler:   Clang 19";
++ui_print "Kernel:     Linux @KERNEL_VERSION@";
++ui_print "Compiler:   @COMPILER@";
+ ui_print "Build date: @BUILD_DATE@";
+ ui_print " ";
+ ui_print "Special thanks to salvogiangri, Simon1511,";
+-ui_print "Frax3r, RisenID, and saadelasfur!";
++ui_print "bone-machine, Frax3r, RisenID,";
++ui_print "and saadelasfur!";
+ ui_print " ";
+ ui_print "##########################################";
+ ui_print " ";
