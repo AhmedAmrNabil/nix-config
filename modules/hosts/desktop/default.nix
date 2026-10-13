@@ -3,8 +3,9 @@
     imports = with self.nixosModules; [
       ./_hardware-configuration.nix
       # apps
-      gpu-screen-recorder
       distrobox
+      gpu-screen-recorder
+      microsoft-edge
       obs
       open-tablet-driver
       scrcpy
@@ -52,9 +53,11 @@
       # hyprland
       kde
       micro
+      microsoft-edge
       nh
       only-office
       # quickshell
+      reboot-to-windows
       rofi
       scrcpy
       spotify

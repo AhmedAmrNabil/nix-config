@@ -3,6 +3,7 @@
     imports = with self.nixosModules; [
       ./_hardware-configuration.nix
       tailscale
+      microsoft-edge
       audio
       boot
       fonts
@@ -16,7 +17,9 @@
   flake.homeModules.laptop-nixos = {
     imports = with self.homeModules; [
       foot
+      microsoft-edge
       nh
+      reboot-to-windows
       vscode
       spotify
       rofi

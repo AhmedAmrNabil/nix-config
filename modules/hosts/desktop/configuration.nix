@@ -52,15 +52,6 @@
         CUDA_HOME = "${pkgsUnstable.cudaPackages.cuda_nvcc}";
       };
 
-      services.gvfs.enable = true;
-
-      programs.localsend.enable = true;
-
-      # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
-      environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
-        CommandLineFlagSecurityWarningsEnabled = false;
-      };
-
       # -------- Extra Configuration -----------------
       services.hardware.openrgb = {
         enable = true;
@@ -68,6 +59,7 @@
         motherboard = "amd";
       };
 
+      programs.localsend.enable = true;
       documentation.nixos.enable = false;
 
       # --------- Swap ------------------
@@ -119,6 +111,7 @@
       # Discord with Vencord and autoscroll
       discord = pkgs.discord.override {
         withVencord = true;
+        withOpenASAR = true;
         enableAutoscroll = true;
         # workaround for keybinds not working in wayland
         commandLineArgs = "--ozone-platform=x11";
@@ -187,7 +180,6 @@
           element-desktop
           handbrake
           libnotify
-          microsoft-edge
           transmission_4-qt
           vlc
           xournalpp
@@ -220,19 +212,6 @@
 
       programs.nix-your-shell = {
         enable = true;
-      };
-
-      xdg.desktopEntries.reboot-to-windows = {
-        name = "Reboot to Windows";
-        comment = "Restart the system and boot into Windows";
-        icon = ../../../assets/windows-11.png;
-        exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
-        categories = [ "System" ];
-        terminal = false;
-      };
-
-      home.shellAliases = {
-        restart-windows = "sudo systemctl reboot --boot-loader-entry=auto-windows";
       };
     };
 }

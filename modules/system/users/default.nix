@@ -22,6 +22,7 @@
           "dialout"
           "audio"
           "video"
+          "kvm"
         ];
         shell = pkgs.fish;
       };

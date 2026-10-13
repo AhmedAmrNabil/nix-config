@@ -57,16 +57,10 @@
         micro
         git
         efibootmgr
-        microsoft-edge
         kdePackages.print-manager
       ];
 
       hardware.bluetooth.enable = true;
-
-      # this is out of place but it is the only way to disable the annoying security warning when launching edge with custom flags
-      environment.etc."opt/edge/policies/managed/policies.json".text = builtins.toJSON {
-        CommandLineFlagSecurityWarningsEnabled = false;
-      };
 
       zramSwap = {
         enable = true;
@@ -91,6 +85,17 @@
       pkgsUnstable,
       ...
     }:
+    let
+      # Discord with Vencord and autoscroll
+      discord = pkgs.discord.override {
+        withVencord = true;
+        withOpenASAR = true;
+        enableAutoscroll = true;
+        # workaround for keybinds not working in wayland
+        commandLineArgs = "--ozone-platform=x11";
+        vencord = pkgsUnstable.vencord;
+      };
+    in
     {
 
       home.packages =
@@ -105,22 +110,9 @@
           nixd
           nixfmt
         ]
-        ++ (with pkgsUnstable; [
-          (discord.override {
-            withOpenASAR = true;
-            withVencord = true;
-            enableAutoscroll = true;
-          })
-        ]);
-
-      xdg.desktopEntries.reboot-to-windows = {
-        name = "Reboot to Windows";
-        comment = "Restart the system and boot into Windows";
-        icon = ../../../assets/windows-11.png;
-        exec = "pkexec systemctl reboot --boot-loader-entry=auto-windows";
-        categories = [ "System" ];
-        terminal = false;
-      };
+        ++ [
+          discord
+        ];
     };
 
 }

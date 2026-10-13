@@ -1,3 +1,4 @@
+{ lib, ... }:
 let
   overlayDir = ../overlays;
   overlays = map (f: import (overlayDir + "/${f}")) (
@@ -5,5 +6,5 @@ let
   );
 in
 {
-  flake.overlays.default = final: prev: builtins.foldl' (acc: o: acc // (o final prev)) prev overlays;
+  flake.overlays.default = lib.composeManyExtensions overlays;
 }

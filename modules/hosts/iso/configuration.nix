@@ -19,7 +19,7 @@
         inputs.home-manager.nixosModules.home-manager
       ];
       nixpkgs.hostPlatform = "x86_64-linux";
-      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_7_1;
+      boot.kernelPackages = lib.mkForce pkgs.linuxPackages_latest;
       boot.loader.timeout = lib.mkForce 10;
       boot.zfs.forceImportRoot = false;
       boot.supportedFilesystems = {
