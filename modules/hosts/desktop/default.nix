@@ -65,6 +65,7 @@
       vscode
       yazi
       zoxide
+      zsh
     ];
   };
 }

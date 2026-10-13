@@ -93,6 +93,7 @@ in
             programs.home-manager.enable = true;
             home.shell.enableFishIntegration = true;
             home.shell.enableBashIntegration = true;
+            home.shell.enableZshIntegration = true;
           }
         ];
       }

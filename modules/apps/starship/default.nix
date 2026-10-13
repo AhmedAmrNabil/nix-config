@@ -32,6 +32,7 @@
         shell = {
           fish_indicator = "";
           bash_indicator = " ";
+          zsh_indicator = " ";
           style = "bright-black";
           format = "[$indicator]($style)";
           disabled = false;

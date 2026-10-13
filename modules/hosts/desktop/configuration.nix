@@ -143,6 +143,9 @@
       ];
 
       programs.nix-index-database.comma.enable = true;
+      programs.nix-your-shell = {
+        enable = true;
+      };
 
       home.packages =
         with pkgs;
@@ -209,9 +212,5 @@
           discord
           gdu-clean
         ];
-
-      programs.nix-your-shell = {
-        enable = true;
-      };
     };
 }
