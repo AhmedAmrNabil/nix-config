@@ -170,6 +170,7 @@
           nixd
           nixfmt
           nix-output-monitor
+          mcp-nixos
 
           # development
           jdk25
