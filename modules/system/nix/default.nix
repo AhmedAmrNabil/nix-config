@@ -5,6 +5,11 @@
 }:
 {
   flake.nixosModules.nix-cfg = { username, ... }: {
+
+    imports = [
+      inputs.determinate.nixosModules.default
+    ];
+
     nix.settings = {
       warn-dirty = false;
       use-xdg-base-directories = true;
@@ -41,14 +46,11 @@
         "nix-command"
         "flakes"
       ];
+      nix-path = [ "nixpkgs=flake:nixpkgs" ];
 
       # Determinate nix parallel evaluation
       eval-cores = 0; # Evaluate across all cores
     };
-
-    imports = [
-      inputs.determinate.nixosModules.default
-    ];
 
     nix.optimise.automatic = true;
     nix.gc = {
@@ -57,6 +59,5 @@
     };
 
     nix.registry = lib.mapAttrs (_: flake: { inherit flake; }) inputs;
-    nix.nixPath = [ "nixpkgs=flake:nixpkgs" ];
   };
 }
