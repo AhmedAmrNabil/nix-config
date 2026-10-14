@@ -14,25 +14,12 @@
         rev = "ea92cf49380466f07231c952b409831e6afd2156";
         hash = "sha256-CPRVJVunBLwFLCoj+XfoIIwrrwHxqoElbskCXZgFraw=";
       };
-      yazi-catpuccin-flavour = pkgs.fetchFromGitHub {
-        owner = "yazi-rs";
-        repo = "flavors";
-        rev = "20b47bfd78880c2674899597fd26bc01b21ff48c";
-        hash = "sha256-NGnfrQdsnQITKCZ0oh6DCxeCR2ozJoPAZetsi3ghHAI=";
-      };
     in
     {
       programs.yazi = {
         enable = true;
         package = pkgsUnstable.yazi;
         shellWrapperName = "y";
-        theme = {
-          flavor = {
-            dark = "catppuccin-mocha";
-            light = "catppuccin-latte";
-          };
-        };
-
         extraPackages = with pkgs; [
           glow
           ouch
@@ -82,11 +69,6 @@
               hide_flags = true;
             };
           };
-        };
-
-        flavors = {
-          catppuccin-mocha = "${yazi-catpuccin-flavour}/catppuccin-mocha.yazi";
-          catppuccin-latte = "${yazi-catpuccin-flavour}/catppuccin-latte.yazi";
         };
 
         keymap = {

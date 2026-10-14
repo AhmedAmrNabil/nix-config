@@ -74,7 +74,7 @@
           }
         ];
 
-        initExtra = ''
+        initContent = ''
           # Better case-insensitive and partial completion
           zstyle ':completion:*' matcher-list \
             'm:{a-zA-Z}={A-Za-z}' \
@@ -88,7 +88,6 @@
 
       programs.fzf = {
         enable = true;
-        enableZshIntegration = true;
       };
 
       # Additional command completions

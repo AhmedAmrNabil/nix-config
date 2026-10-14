@@ -8,6 +8,7 @@
     {
       imports = with self.nixosModules; [
         # apps
+        catppuccin
         distrobox
         gpu-screen-recorder
         microsoft-edge
@@ -161,6 +162,7 @@
         bash
         bat
         btop
+        catppuccin
         cava
         devenv
         direnv
@@ -182,6 +184,7 @@
         scrcpy
         spotify
         starship
+        tmux
         vscode
         yazi
         zoxide
@@ -196,21 +199,22 @@
       };
 
       programs.nix-index-database.comma.enable = true;
-      programs.nix-your-shell = {
+      programs.nix-your-shell.enable = true;
+      programs.fzf = {
         enable = true;
+        tmux.enableShellIntegration = true;
       };
 
       home.packages =
         with pkgs;
         [
           # cli utils
-          fzf
           gdu
           jq
           killall
+          pciutils
           tty-clock
           usbutils
-          pciutils
           wayland-utils
           wl-clipboard
           xhost
