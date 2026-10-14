@@ -9,6 +9,7 @@
     {
       programs.tmux = {
         enable = true;
+        secureSocket = false;
       };
 
       xdg.configFile."tmux/tmux.conf".source =
