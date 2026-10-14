@@ -1,5 +1,17 @@
 { inputs, ... }:
 {
+  flake.nixosModules.catppuccin = {
+    imports = [ inputs.catppuccin.nixosModules.catppuccin ];
+    catppuccin = {
+      enable = true;
+      autoEnable = false;
+      flavor = "mocha";
+      accent = "blue";
+      cache.enable = true;
+      fish.enable = true;
+    };
+  };
+
   flake.homeModules.catppuccin = {
     imports = [ inputs.catppuccin.homeModules.catppuccin ];
     catppuccin = {
@@ -7,18 +19,8 @@
       autoEnable = true;
       flavor = "mocha";
       accent = "blue";
+      vscode.profiles.default.enable = false;
+      micro.transparent = true;
     };
-    catppuccin.vscode.profiles.default.enable = false;
-    catppuccin.micro.transparent = true;
-  };
-
-  flake.nixosModules.catppuccin = {
-    imports = [ inputs.catppuccin.nixosModules.catppuccin ];
-    catppuccin = {
-      enable = true;
-      flavor = "mocha";
-      accent = "blue";
-    };
-    catppuccin.cache.enable = true;
   };
 }
