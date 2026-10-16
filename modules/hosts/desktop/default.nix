@@ -136,7 +136,6 @@
       # Discord with Vencord and autoscroll
       discord = pkgs.discord.override {
         withVencord = true;
-        withOpenASAR = true;
         enableAutoscroll = true;
         # workaround for keybinds not working in wayland
         commandLineArgs = "--ozone-platform=x11";
