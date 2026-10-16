@@ -31,7 +31,7 @@
   rootSolution ? "resukisu",
   withSusfs ? true,
 
-  buildDate ? "2026-10-07",
+  buildDate ? "2026-10-16",
   author ? "btngana",
   localVersion ? "-${author}-qgki",
   buildUser ? "btngana",
@@ -65,29 +65,58 @@ let
 
   targetBranch =
     if !withRoot then
-      (if romType == "oneui" then "main" else "aosp")
+      romType
     else
       lib.concatStringsSep "-" ([ rootSolution ] ++ lib.optional withSusfs "susfs" ++ [ romType ]);
 
-  branchHashes = {
-    aosp = "sha256-Uy0v8fDVOhtQW7gP705T84YWJFTDRC6WNAj6zMt48RQ=";
-    resukisu-aosp = "sha256-P32UD4fsL02e47Bx/dU6IO/x5C+/D4ccL2L2rAi4N+4=";
-    ksu-next-aosp = "sha256-Ynp+qb2tsK6Jdc9LkNk7zIVDyzySOoZrjJnSPJQjNPI=";
-    resukisu-susfs-aosp = "sha256-2Xjyw7u9hNSUPZaTI8C3dZ6+jn1pOkS/HC94/z0by7o=";
-    ksu-next-susfs-aosp = "sha256-zWmJoJaeiYheLS4lSzYGW8nqpYiytDsdhMKr9j5P6I8=";
+  branches = {
+    aosp = {
+      rev = "aosp";
+      hash = "sha256-Uy0v8fDVOhtQW7gP705T84YWJFTDRC6WNAj6zMt48RQ=";
+    };
+    resukisu-aosp = {
+      rev = "2aeb277c2e67f19d88e8c634d3c8cb8cd82be656";
+      hash = "sha256-P32UD4fsL02e47Bx/dU6IO/x5C+/D4ccL2L2rAi4N+4=";
+    };
+    ksu-next-aosp = {
+      rev = "ksu-next-aosp";
+      hash = "sha256-Ynp+qb2tsK6Jdc9LkNk7zIVDyzySOoZrjJnSPJQjNPI=";
+    };
+    resukisu-susfs-aosp = {
+      rev = "0044380eaa6917c41e1dd0eff772bb897b386842";
+      hash = "sha256-VktXSdhv8YOxiJCVjZzTHv9XFGA9wZzonioFgOgUjnU=";
+    };
+    ksu-next-susfs-aosp = {
+      rev = "";
+      hash = "sha256-zWmJoJaeiYheLS4lSzYGW8nqpYiytDsdhMKr9j5P6I8=";
+    };
 
-    main = "sha256-juTzS21vv/kEBojhskYgGrpAqe9/25rsFCc/pnm3wxE="; # oneui
-    resukisu-oneui = "sha256-DJMsXVWLXM4QrzVnjbwZG8PM9F2cNuvifHbmYpqMjXM=";
-    ksu-next-oneui = "sha256-qaz994u73N9Bmnn58I8CkkOEhIIj1I3PZaSQpzQTTu8=";
-    resukisu-susfs-oneui = "sha256-FGM7tjsZ084G6hbfJ/68gWcvq+zhqKfv0spP9CM+NOc=";
-    ksu-next-susfs-oneui = "sha256-u0dx4KWbY2ASmCREyh2Tx/jxtIYe8cugukdGC/80PD4=";
+    oneui = {
+      rev = "main";
+      hash = "sha256-juTzS21vv/kEBojhskYgGrpAqe9/25rsFCc/pnm3wxE=";
+    };
+    resukisu-oneui = {
+      rev = "resukisu-oneui";
+      hash = "sha256-DJMsXVWLXM4QrzVnjbwZG8PM9F2cNuvifHbmYpqMjXM=";
+    };
+    ksu-next-oneui = {
+      rev = "ksu-next-oneui";
+      hash = "sha256-qaz994u73N9Bmnn58I8CkkOEhIIj1I3PZaSQpzQTTu8=";
+    };
+    resukisu-susfs-oneui = {
+      rev = "resukisu-susfs-oneui";
+      hash = "sha256-FGM7tjsZ084G6hbfJ/68gWcvq+zhqKfv0spP9CM+NOc=";
+    };
+    ksu-next-susfs-oneui = {
+      rev = "ksu-next-susfs-oneui";
+      hash = "sha256-u0dx4KWbY2ASmCREyh2Tx/jxtIYe8cugukdGC/80PD4=";
+    };
   };
 
   src = fetchFromGitHub {
-    owner = "bone-machine";
+    owner = "AhmedAmrNabil";
     repo = "android_kernel_samsung_sm7325_a52s_5g";
-    rev = targetBranch; # or a specific commit hash
-    hash = branchHashes.${targetBranch};
+    inherit (branches.${targetBranch}) hash rev;
   };
 
   rootConfig =
@@ -97,7 +126,7 @@ let
         rev = "v4.2.0-rc3";
         submoduleDir = "KernelSU";
         displayName = "ReSukiSU";
-        hash = "sha256-6NccB7oobZCyB0AKhztVTdkv+aRAEWW86EfTZnYrV9M=";
+        hash = "sha256-yMeByxRnaOpB9qwIrk1emKKHWiRbN3WJTlqY/rnTAFQ=";
       };
       ksu-next = {
         url = "https://github.com/KernelSU-Next/KernelSU-Next.git";
