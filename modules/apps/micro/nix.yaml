@@ -1,0 +1,132 @@
+filetype: nix
+
+detect:
+    filename: "\\.nix$"
+
+# Port of the TextMate grammar used by bat (Wout Mertens' Nix.tmLanguage).
+# Later rules paint over earlier ones, so order matters.
+# Custom groups (fall back to `identifier` if the colorscheme lacks them):
+#   identifier.value      values / plain variables (shown as default text color)
+#   identifier.attribute  option/attr names  (bat: entity.other.attribute-name)
+#   identifier.param      function params    (bat: variable.parameter.function)
+#   identifier.function   builtin functions  (bat: support.function)
+#   constant.language     true/false/null/builtins
+#   constant.string.path  unquoted paths     (bat: string.unquoted.path)
+#   symbol.operator       = , ? // ++ == ...  (bat: keyword.operator)
+#   symbol.punctuation    ; : @ brackets ${ } (bat: punctuation)
+
+rules:
+    # 1. every identifier / dotted path starts as a plain value
+    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_'-]*"
+
+    # 2. keywords, constants, builtins, numbers (painted over identifiers)
+    - statement: "\\b(if|then|else|let|in|with|assert|rec|inherit)\\b"
+    - constant.language: "\\b(builtins|true|false|null)\\b"
+    - identifier.function: "\\b(scopedImport|import|isNull|abort|throw|baseNameOf|dirOf|removeAttrs|map|toString|derivationStrict|derivation)\\b"
+    - constant.number: "\\b[0-9]+(\\.[0-9]+)?\\b"
+    - symbol.operator: "\\bor\\b"
+
+    # 3. identifiers containing - or ' (import-tree, foo-null, x'): \b matched a
+    #    keyword/builtin/number inside them above, so repaint them as plain values
+    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_]*['-][A-Za-z0-9_'-]*"
+
+    # 4. attribute names / option paths:  services.foo.enable =
+    - identifier.attribute: "\\b[A-Za-z_][A-Za-z0-9_'-]*(\\.([A-Za-z_][A-Za-z0-9_'-]*))*\\s*="
+    # `a == b` is a comparison, not an attribute: undo
+    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_'-]*(\\.([A-Za-z_][A-Za-z0-9_'-]*))*\\s*=="
+
+    # 5. function parameters (heuristics, no lookahead available)
+    - identifier.param: "\\{[^{}=;\"]*\\}\\s*(@\\s*[A-Za-z_][A-Za-z0-9_'-]*\\s*)?:"
+    - identifier.param: "^\\s*[A-Za-z_][A-Za-z0-9_'-]*\\s*[,?]"
+    - identifier.param: "^\\s*,\\s*[A-Za-z_][A-Za-z0-9_'-]*"
+    - identifier.param: "\\b[A-Za-z_][A-Za-z0-9_'-]*\\s*@"
+    - identifier.param: "@\\s*[A-Za-z_][A-Za-z0-9_'-]*"
+    - identifier.param: "\\b[A-Za-z_][A-Za-z0-9_'-]*\\s*:(\\s|$)"
+
+    # 5b. operators and punctuation
+    - symbol.operator: "(==|!=|<=|>=|&&|\\|\\||->|//|\\+\\+|\\|>|\\.\\.\\.)"
+    - symbol.operator: "[=,?!]"
+    - symbol.punctuation: "[;:@]"
+    - symbol.operator: "\\s(\\+|-|\\*|/|<|>)\\s"
+    - symbol.punctuation: "[(){}\\[\\]]"
+
+    # 6. unquoted paths, <search/paths> and URLs
+    - constant.string.path: "[A-Za-z0-9._+-]*(/[A-Za-z0-9._+-]+)+"
+    - constant.string: "<[A-Za-z0-9._+-]+(/[A-Za-z0-9._+-]+)*>"
+    - constant.string.url: "\\b([A-Za-z][A-Za-z0-9+.-]*://|(github|gitlab|sourcehut|git\\+[a-z]+|path|tarball|nixpkgs|flake):)[A-Za-z0-9%/?:@&=+$,_.!~*'#-]+"
+
+    # 7. inherit a b c;   /  inherit (x) a b;
+    #    (the start token takes the region group, so the group is `statement`
+    #     and the names are repainted inside)
+    - statement:
+        start: "\\binherit\\b"
+        end: ";"
+        rules:
+            - identifier.attribute: "[A-Za-z_][A-Za-z0-9_'-]*"
+            - identifier.value: "\\([^)]*\\)"
+            - symbol.punctuation: "[()]"
+
+    # 8. ${ interpolation } outside strings
+    - symbol.punctuation:
+        start: "\\$\\{"
+        end: "\\}"
+        rules:
+            - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_'-]*"
+            - constant.language: "\\b(builtins|true|false|null)\\b"
+            - statement: "\\b(if|then|else|let|in|with|rec)\\b"
+            - constant.number: "\\b[0-9]+\\b"
+            - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_]*['-][A-Za-z0-9_'-]*"
+            - symbol.operator: "[.?!]"
+            - constant.string:
+                start: "\""
+                end: "\""
+                skip: "\\\\."
+                rules: []
+
+    # 9. "double quoted" strings
+    - constant.string:
+        start: "\""
+        end: "\""
+        skip: "\\\\."
+        rules:
+            - constant.specialChar: "\\\\."
+            - symbol.punctuation:
+                start: "\\$\\{"
+                end: "\\}"
+                rules:
+                    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_'-]*"
+                    - constant.language: "\\b(builtins|true|false|null)\\b"
+                    - statement: "\\b(if|then|else|let|in|with|rec)\\b"
+                    - constant.number: "\\b[0-9]+\\b"
+                    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_]*['-][A-Za-z0-9_'-]*"
+                    - symbol.operator: "[.?!]"
+
+    # 10. ''indented strings''  (escapes: ''$  '''  ''\x)
+    - constant.string:
+        start: "''"
+        end: "''"
+        skip: "''(\\$|'|\\\\.)"
+        rules:
+            - constant.specialChar: "''(\\$|'|\\\\.)"
+            - symbol.punctuation:
+                start: "\\$\\{"
+                end: "\\}"
+                rules:
+                    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_'-]*"
+                    - constant.language: "\\b(builtins|true|false|null)\\b"
+                    - statement: "\\b(if|then|else|let|in|with|rec)\\b"
+                    - constant.number: "\\b[0-9]+\\b"
+                    - identifier.value: "\\b[A-Za-z_][A-Za-z0-9_]*['-][A-Za-z0-9_'-]*"
+                    - symbol.operator: "[.?!]"
+
+    # 11. comments (regions win over the rules above)
+    - comment:
+        start: "/\\*"
+        end: "\\*/"
+        rules:
+            - todo: "(TODO|FIXME|BUG|XXX|HACK|!!!):?"
+    - comment:
+        start: "#"
+        end: "$"
+        rules:
+            - todo: "(TODO|FIXME|BUG|XXX|HACK|!!!):?"
