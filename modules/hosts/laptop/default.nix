@@ -78,6 +78,7 @@
     in
     {
       imports = with self.homeModules; [
+        shell
         foot
         microsoft-edge
         nh
@@ -85,20 +86,9 @@
         vscode
         spotify
         rofi
-
-        bash
-        bat
         btop
-        direnv
-        eza
-        fastfetch
-        fish
         git
         micro
-        starship
-        zoxide
-        devenv
-        yazi
       ];
 
       home.packages =
@@ -106,7 +96,6 @@
         [
           vlc
           localsend
-          fzf
           gdu
           jq
           killall

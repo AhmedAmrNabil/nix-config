@@ -42,7 +42,6 @@
 
   flake.homeModules.wsl-nixos = { pkgs, ... }: {
     home.packages = with pkgs; [
-      fzf
       gdu
       jq
       killall
@@ -50,20 +49,11 @@
       nixfmt
     ];
     imports = with self.homeModules; [
+      shell
       nh
-      bash
-      bat
       btop
-      direnv
-      eza
-      fastfetch
-      fish
       git
       micro
-      starship
-      zoxide
-      devenv
-      yazi
     ];
   };
 }

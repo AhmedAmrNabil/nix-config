@@ -57,7 +57,6 @@
             self.homeModules.iso-nixos
           ];
           home.packages = with pkgs; [
-            fzf
             gdu
             jq
             killall
@@ -84,19 +83,10 @@
 
   flake.homeModules.iso-nixos = {
     imports = with self.homeModules; [
-      bash
-      bat
+      shell
       btop
-      direnv
-      eza
-      fastfetch
-      fish
       git
       micro
-      starship
-      zoxide
-      devenv
-      yazi
     ];
   };
 }

@@ -86,14 +86,9 @@
         '';
       };
 
-      programs.fzf = {
-        enable = true;
-      };
-
       # Additional command completions
       home.packages = with pkgs; [
         zsh-completions
       ];
     };
-
 }

@@ -157,18 +157,12 @@
     in
     {
       imports = with self.homeModules; [
+        shell
         # alacritty
-        bash
-        bat
         btop
         catppuccin
         cava
-        devenv
-        direnv
         distrobox
-        eza
-        fastfetch
-        fish
         foot
         git
         # hyprland
@@ -182,12 +176,8 @@
         rofi
         scrcpy
         spotify
-        starship
         tmux
         vscode
-        yazi
-        zoxide
-        zsh
         inputs.nix-index-database.homeModules.default
       ];
 
@@ -198,24 +188,6 @@
       };
 
       programs.nix-index-database.comma.enable = true;
-      programs.nix-your-shell.enable = true;
-      programs.fzf = {
-        enable = true;
-        tmux.enableShellIntegration = true;
-        defaultOptions = [
-          "--height=40%"
-          "--layout=reverse"
-          "--border"
-        ];
-        # Ctrl-T: files and dirs
-        fileWidget.options = [
-          "--preview 'test -d {}; and eza --tree --level=2 --color=always {}; or bat --color=always --line-range=:200 {}'"
-        ];
-        # Alt-C: dirs only
-        changeDirWidget.options = [
-          "--preview 'eza --tree --level=2 --color=always {}'"
-        ];
-      };
 
       home.packages =
         with pkgs;
