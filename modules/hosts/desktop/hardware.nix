@@ -3,7 +3,8 @@ let
     "windows_names"
     "uid=1000"
     "gid=100"
-    "umask=022"
+    "umask=000"
+    "user"
     "exec"
     "rw"
     "nofail"
@@ -36,6 +37,12 @@ in
       boot.initrd.kernelModules = [ ];
       boot.kernelModules = [ "kvm-amd" ];
       boot.extraModulePackages = [ ];
+
+      fileSystems."${homeDir}/btrfs-games" = {
+        device = "/dev/disk/by-uuid/a53efdab-6327-40ff-a0ff-0a5fcd2e5331";
+        fsType = "btrfs";
+        options = [ "compress=zstd" ];
+      };
 
       fileSystems."/" = {
         device = "/dev/disk/by-uuid/2b9d4cde-3908-427c-936f-ff16eebf8045";
@@ -121,7 +128,7 @@ in
       };
 
       fileSystems."${homeDir}/crucial" = {
-        device = "/dev/disk/by-uuid/01DD0394B2474040";
+        device = "/dev/disk/by-uuid/01DD5E86A5852D20";
         fsType = "ntfs";
         options = ntfsOptions ++ [
           "x-systemd.automount"
