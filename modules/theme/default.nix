@@ -1,7 +1,10 @@
 { inputs, ... }:
 {
-  flake.nixosModules.catppuccin = {
+  flake.nixosModules.catppuccin = { inputs', ... }: {
     imports = [ inputs.catppuccin.nixosModules.catppuccin ];
+    environment.systemPackages = [
+      inputs'.catppuccin.packages.default
+    ];
     catppuccin = {
       enable = true;
       autoEnable = false;
