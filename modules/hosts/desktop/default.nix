@@ -193,6 +193,7 @@
         with pkgs;
         [
           # cli utils
+          ffmpeg_8-full
           gdu
           jq
           killall
@@ -215,19 +216,16 @@
           pnpm
           # python3
           uv
-          github-cli
-          awscli2
-          claude-code
           android-tools
 
           # gui apps
           element-desktop
           handbrake
-          libnotify
           transmission_4-qt
           vlc
           xournalpp
           teams-for-linux
+          heroic
 
           # gaming
           mangohud
@@ -246,7 +244,6 @@
           claude-desktop
           prismlauncher-9
           cisco-packet-tracer_9
-          notion-app
         ])
         ++ [
           ns
