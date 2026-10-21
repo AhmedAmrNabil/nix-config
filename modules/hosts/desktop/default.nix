@@ -58,6 +58,12 @@
 
       services.cloudflare-warp.enable = true;
 
+      # https://emudhra.we-have-a-problem.com
+      security.pki.caCertificateBlacklist = [
+        "Comodo AAA Services root"
+        "emSign ECC Root CA - G3"
+      ];
+
       hardware.bluetooth.enable = true;
 
       # --------- Timezone and clock ------------------
