@@ -78,18 +78,9 @@
       services.fwupd.enable = false;
 
       # --------- Packages ------------------
-      environment.systemPackages =
-        with pkgs;
-        [
-          nano
-        ]
-        ++ (with pkgsUnstable; [
-          cudaPackages.cuda_nvcc
-        ]);
-
-      environment.sessionVariables = {
-        CUDA_HOME = "${pkgsUnstable.cudaPackages.cuda_nvcc}";
-      };
+      environment.systemPackages = with pkgs; [
+        nano
+      ];
 
       # -------- Extra Configuration -----------------
       services.hardware.openrgb = {

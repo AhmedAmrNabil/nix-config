@@ -11,14 +11,14 @@ rev="$(
         .value.original.type == "github"
         and .value.original.owner == "nixos"
         and .value.original.repo == "nixpkgs"
-        and .value.original.ref == "nixos-26.05"
+        and .value.original.ref == "nixpkgs-unstable"
       )
     | .value.locked.rev
     ' flake.lock
 )"
 
 if [[ -z "$rev" || "$rev" == "null" ]]; then
-    echo "Could not find nixpkgs nixos-26.05 in flake.lock" >&2
+    echo "Could not find nixpkgs nixos-unstable in flake.lock" >&2
     exit 1
 fi
 

@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.nix-ld =
+  flake.nixosModules.cuda =
     {
       pkgsUnstable,
       config,
@@ -10,8 +10,6 @@
         enable = true;
         libraries = with pkgsUnstable; [
           stdenv.cc.cc.lib
-          glib
-          openssl
           zlib
 
           # Graphics & dynamically matched NVIDIA driver
@@ -20,6 +18,8 @@
           config.hardware.nvidia.package # Always matches your kernel's nvidia
 
           # # Common Python / ML / OpenCV / Audio dependencies
+          # openssl
+          # glib
           # util-linux
           # libxml2
           # xorg.libX11
