@@ -15,6 +15,9 @@
         xserver.enable = true;
       };
 
+      # remove newly added plasma6 applications in 26.11 that I don't use
+      programs.kde-pim.enable = false;
+
       security.polkit.enable = true;
       powerManagement.enable = true;
 

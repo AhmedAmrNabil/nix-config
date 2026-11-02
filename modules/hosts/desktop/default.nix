@@ -2,7 +2,6 @@
   flake.nixosModules.desktop-nixos =
     {
       pkgs,
-      pkgsUnstable,
       ...
     }:
     {
@@ -61,7 +60,7 @@
       # https://emudhra.we-have-a-problem.com
       security.pki.caCertificateBlacklist = [
         "Comodo AAA Services root"
-        "emSign ECC Root CA - G3"
+        # "emSign ECC Root CA - G3"
       ];
 
       hardware.bluetooth.enable = true;
@@ -134,8 +133,10 @@
       discord = pkgs.discord.override {
         withVencord = true;
         enableAutoscroll = true;
-        # workaround for keybinds not working in wayland
-        commandLineArgs = "--ozone-platform=x11";
+        # workaround for keybindings not working in wayland
+        # edit 1: removed cuz discord update broke it
+        # waititng for discord to fix it
+        # commandLineArgs = "--ozone-platform=x11";
         vencord = pkgsUnstable.vencord;
       };
 
@@ -243,7 +244,7 @@
           cisco-packet-tracer_9
         ])
         ++ [
-          ns
+          # ns
           discord
           gdu-clean
         ];

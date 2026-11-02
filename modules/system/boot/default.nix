@@ -6,7 +6,6 @@
       efi.canTouchEfiVariables = true;
       timeout = 0;
     };
-    boot.initrd.verbose = false;
     boot.consoleLogLevel = 3;
     boot.kernelParams = [
       "udev.log_priority=3"

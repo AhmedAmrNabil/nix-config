@@ -1,5 +1,5 @@
 {
-  flake.nixosModules.cuda =
+  flake.nixosModules.nix-ld =
     {
       pkgsUnstable,
       config,
