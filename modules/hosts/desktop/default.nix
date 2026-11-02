@@ -129,15 +129,20 @@
         ];
       };
 
+      pkgsDiscord = import inputs.nixpkgs-discord {
+        inherit (pkgs.stdenv.hostPlatform) system;
+        config.allowUnfree = true;
+      };
+
       # Discord with Vencord and autoscroll
-      discord = pkgs.discord.override {
+      discord = pkgsDiscord.discord.override {
         withVencord = true;
         enableAutoscroll = true;
         # workaround for keybindings not working in wayland
         # edit 1: removed cuz discord update broke it
         # waititng for discord to fix it
-        # commandLineArgs = "--ozone-platform=x11";
-        vencord = pkgsUnstable.vencord;
+        commandLineArgs = "--ozone-platform=x11";
+        vencord = pkgsDiscord.vencord;
       };
 
       # gdu wrapper that skips mounted fs and /run and /mnt
