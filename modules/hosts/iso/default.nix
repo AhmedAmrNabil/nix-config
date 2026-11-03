@@ -21,6 +21,7 @@
         fonts
         users
         nvidia
+        catppuccin
       ];
 
       nixpkgs.hostPlatform = "x86_64-linux";
@@ -87,6 +88,7 @@
       btop
       git
       micro
+      catppuccin
     ];
   };
 }

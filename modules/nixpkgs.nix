@@ -18,6 +18,9 @@
         config.permittedInsecurePackages = [
           "electron-41.10.7"
         ];
+        config.problems.handlers = {
+          "gtk+".broken = "warn"; # or "ignore"
+        };
       };
 
       pkgsUnstable = import inputs.nixpkgs-unstable {
@@ -26,6 +29,9 @@
         config.permittedInsecurePackages = [
           "electron-41.10.7"
         ];
+        config.problems.handlers = {
+          "gtk+".broken = "warn"; # or "ignore"
+        };
       };
 
       pkgsLocal =
