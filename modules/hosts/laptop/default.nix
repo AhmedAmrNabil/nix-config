@@ -15,6 +15,7 @@
         nix-cfg
         users
         kde
+        catppuccin
       ];
 
       # Enable networking
@@ -89,19 +90,22 @@
         btop
         git
         micro
+        catppuccin
       ];
 
       home.packages =
         with pkgs;
         [
           vlc
-          localsend
           gdu
           jq
           killall
           nixd
           nixfmt
         ]
+        ++ (with pkgsUnstable; [
+          google-antigravity-cli
+        ])
         ++ [
           discord
         ];
