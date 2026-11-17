@@ -104,42 +104,6 @@
       ...
     }:
     let
-      # Quick nixpkgs search from the CLI (wraps nix-search-tv)
-      ns = pkgs.writeShellApplication {
-        name = "ns";
-        text = builtins.readFile (inputs.nix-search-tv.outPath + "/nixpkgs.sh");
-        runtimeInputs = [
-          (pkgs.buildGoModule {
-            pname = "nix-search-tv";
-            version = inputs.nix-search-tv.shortRev or inputs.nix-search-tv.dirtyShortRev or "unknown";
-            src = inputs.nix-search-tv.outPath;
-
-            vendorHash = "sha256-SSKDo4A8Nhvylghrw6d7CdHpZ7jObEr5V3r0Y9cH80Y=";
-
-            subPackages = [ "cmd/nix-search-tv" ];
-
-            env.GOEXPERIMENT = "jsonv2";
-
-            meta = {
-              description = "A tool integrating television and nix-search packages";
-              homepage = "https://github.com/3timeslazy/nix-search-tv";
-              mainProgram = "nix-search-tv";
-            };
-          })
-        ];
-      };
-
-      # Discord with Vencord and autoscroll
-      discord = pkgs.discord.override {
-        withVencord = true;
-        enableAutoscroll = true;
-        # workaround for keybindings not working in wayland
-        # edit 1: removed cuz discord update broke it
-        # waititng for discord to fix it
-        commandLineArgs = "--ozone-platform=x11";
-        vencord = pkgs.vencord;
-      };
-
       # gdu wrapper that skips mounted fs and /run and /mnt
       gdu-clean = pkgs.writeShellScriptBin "gdu-clean" ''
         #bash
@@ -188,8 +152,7 @@
       programs.nix-index-database.comma.enable = true;
 
       home.packages =
-        with pkgs;
-        [
+        (with pkgs; [
           # cli utils
           ffmpeg_8-full
           gdu
@@ -228,7 +191,7 @@
           # gaming
           mangohud
           discover-overlay
-        ]
+        ])
         ++ (with pkgsUnstable; [
           google-antigravity-no-fhs
           google-antigravity-cli
@@ -242,10 +205,10 @@
           claude-desktop
           prismlauncher-9
           cisco-packet-tracer_9
+          # uses custom discord override with vencord and autoscroll
+          discord 
         ])
         ++ [
-          # ns
-          discord
           gdu-clean
         ];
     };
