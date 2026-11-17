@@ -124,6 +124,7 @@
         btop
         catppuccin
         cava
+        discord
         distrobox
         foot
         git
@@ -205,8 +206,6 @@
           claude-desktop
           prismlauncher-9
           cisco-packet-tracer_9
-          # uses custom discord override with vencord and autoscroll
-          discord 
         ])
         ++ [
           gdu-clean

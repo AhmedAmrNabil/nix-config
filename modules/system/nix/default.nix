@@ -4,7 +4,7 @@
   ...
 }:
 {
-  flake.nixosModules.nix-cfg = { username, ... }: {
+  flake.nixosModules.nix-cfg = { username, homeDir, ... }: {
 
     imports = [
       inputs.determinate.nixosModules.default
@@ -51,6 +51,10 @@
       # Determinate nix parallel evaluation
       eval-cores = 0; # Evaluate across all cores
     };
+
+    nix.extraOptions = ''
+      !include ${homeDir}/.config/nix/nix.conf
+    '';
 
     nix.optimise.automatic = true;
     nix.gc = {
