@@ -4,7 +4,7 @@
       enable = true;
       enableTransience = true;
       settings = {
-        format = "$username$hostname$shell$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
+        format = "$username$hostname$env_var$shell$directory$git_branch$git_state$git_status$cmd_duration$fill$time$line_break$python$nix_shell$character";
         follow_symlinks = false;
         directory = {
           style = "blue";
@@ -85,12 +85,21 @@
           style_user = "242";
           style_root = "red";
         };
+        env_var.CONTAINER_ID = {
+          variable = "CONTAINER_ID";
+          format = "[ $env_value]($style) ";
+          style = "yellow";
+        };
       };
     };
 
-    programs.fish.functions.starship_transient_prompt_func = ''
-      starship module directory
-      starship module character
-    '';
+    programs.fish.functions = {
+      starship_transient_prompt_func = ''
+        for m in username hostname env_var shell directory character
+          starship module $m
+        end
+      '';
+      starship_transient_rprompt_func = "starship module time";
+    };
   };
 }
