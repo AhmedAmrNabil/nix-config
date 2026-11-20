@@ -39,21 +39,28 @@
         };
         containers = {
           ros = {
-            # to run gui apps inside the container
-            # add this env var before using it
-            # export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu
-            # I need to find a way to automate this later but
-            # to get vscode desktop entry:
-            #  distrobox-export --bin /usr/local/bin/code-ros
-            additional_packages = "git";
+            # if gui apps show blackscreen try this env var
+            # LD_LIBRARY_PATH=/usr/local/lib/nvidia-compat
+            # if it still doesnt work try this env var
+            # LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu:$LD_LIBRARY_PATH <app>
+            additional_packages = "ros-noetic-moveit ros-noetic-ruckig";
             additional_flags = "--device nvidia.com/gpu=all";
             image = "docker.io/osrf/ros:noetic-desktop-full";
             home = "${home}/ros-home";
+            exported_bins = "/usr/local/bin/code-ros";
             init_hooks = [
               "ln -sfn ${code-ros} /usr/local/bin/code-ros"
               "ln -sfn ${home}/.nix-profile/bin/fish /usr/local/bin/fish"
               "grep -qx /usr/local/bin/fish /etc/shells || echo /usr/local/bin/fish >> /etc/shells"
               "chsh -s /usr/local/bin/fish ${config.home.username}"
+              # fix nvidia shit
+              "mkdir -p /usr/local/lib/nvidia-compat"
+              "ln -sfn /usr/lib/x86_64-linux-gnu/libdrm.so.2 /usr/local/lib/nvidia-compat/libdrm.so.2"
+              "ln -sfn /usr/lib/x86_64-linux-gnu/libdbus-1.so.3 /usr/local/lib/nvidia-compat/libdbus-1.so.3"
+              "ln -sfn /usr/lib/x86_64-linux-gnu/libX11.so.6 /usr/local/lib/nvidia-compat/libX11.so.6"
+              "ln -sfn /usr/lib/x86_64-linux-gnu/libxcb.so.1 /usr/local/lib/nvidia-compat/libxcb.so.1"
+              "ln -sfn /usr/lib/x86_64-linux-gnu/libXau.so.6 /usr/local/lib/nvidia-compat/libXau.so.6"
+              "ln -sfn /usr/lib/x86_64-linux-gnu/libXdmcp.so.6 /usr/local/lib/nvidia-compat/libXdmcp.so.6"
             ];
             volume = lib.concatStringsSep " " [
               "${home}/.config:${home}/ros-home/.config"
@@ -63,3 +70,24 @@
       };
     };
 }
+
+# source devel/setup.bash
+# export DISABLE_ROS1_EOL_WARNINGS=1
+
+# if [ -n "$CONTAINER_ID" ]; then
+#   wrap_dir="$(direnv_layout_dir)/ros-wrappers"
+#   mkdir -p "$wrap_dir"
+
+#   for cmd in rviz rqt gazebo gzclient gzserver roslaunch rosrun; do
+#     cat > "$wrap_dir/$cmd" <<EOF
+# #!/usr/bin/env bash
+# # drop this wrapper dir from PATH so we call the real binary, not ourselves
+# PATH=\${PATH//$wrap_dir:/}
+# export LD_LIBRARY_PATH=/usr/local/lib/nvidia-compat\${LD_LIBRARY_PATH:+:\$LD_LIBRARY_PATH}
+# exec $cmd "\$@"
+# EOF
+#     chmod +x "$wrap_dir/$cmd"
+#   done
+
+#   PATH_add "$wrap_dir"
+# fi
